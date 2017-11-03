@@ -14,7 +14,7 @@
             <slot></slot>
             <span class="help-block">{{errorMessage}}</span>
         </div>
-        
+        <!-- TODO 支持inline样式 -->
     </div>
 </template>
 <script>
