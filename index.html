@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>logo</title>
+    <link href='./src/assets/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='./src/assets/css/vue-index.css' rel='stylesheet'>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" class="container" v-cloak>
+
+
+
+      <div class="row">
+        <!-- 消除外边距 -->
+        <div class="col-md-12">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">布局组件</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <!-- 第一个 -->
+            <div role="tabpanel" class="tab-pane active" id="home">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 style="margin-bottom:15px;text-align:center; ">CF武器列表</h3>
+
+
+                  <!-- Form表单 -->
+                  <ht-form ref="wuqiku" info-type="info" :horizontal="true">
+                    <ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
+                      <input type="text" name="lanzuan" v-model="lanzuan" class="form-control" placeholder="请输入武器价格">
+                    </ht-form-group>
+
+                    <ht-form-group label="9A91-S：" label-width="20" name="aaa" min="91" max="200" max-message="您输入的值超出了范围">
+                      <input type="text" name="aaa" v-model="aaa" class="form-control" placeholder="请输入武器价格">
+                    </ht-form-group>
+
+                    <ht-form-group label="黄金警棍啊：" label-width="20" name="jinggun" maxlength="10" maxlength-message="最多输入10个字符" minlength="3" :require="true">
+                      <input type="text" name="jinggun" v-model="jinggun" class="form-control" placeholder="请输入武器价格">
+                    </ht-form-group>
+
+                    <ht-form-group label="M240B-苍雷：" label-width="20" name="canglei" minlength="10">
+                      <textarea rows="5" cols="15" v-model="canglei" class="form-control" name="canglei"></textarea>
+                    </ht-form-group>
+
+                    <ht-form-group label="破天狂龙：" label-width="20" name="kuanglong" pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])" pattern-message="破天狂龙邀请你请输入正确的邮箱格式">
+                      <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
+                    </ht-form-group>
+
+                    <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
+                      <select class="form-control" name="weiya">
+                        <option value="">请选择</option>
+                        <option value="FR-F2 寒冰">FR-F2 寒冰</option>
+                          <option value="绿色烟雾弹">绿色烟雾弹</option>
+                          <option value="金砖">金砖</option>
+                          <option value="碳合金小刀">碳合金小刀</option>
+                      </select>
+                    </ht-form-group>
+
+                    <hr>
+                    <div class="text-right col-md-12">
+                      <button type="button" class="btn btn-default" @click="cancelCheckForm('wuqiku')">取消</button>
+                      <button type="button" class="btn btn-large btn-primary" @click="submitForm('wuqiku')">保存</button>
+                    </div>
+
+                  </ht-form>
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+            </div>
+            <!-- 第二个 -->
+            <div role="tabpanel" class="tab-pane" id="profile" style="padding-top: 15px;">
+              <pr-list ref="pianduan">
+                <!-- <input type="text" slot v-model="age" message="6" min="33">
+                <select slot name="" id="">
+                <option value="1">沙漠之鹰</option>
+                <option value="2">黄金沙鹰</option>
+                <option value="3">天枰座</option>
+                <option value="4">毛瑟手枪</option>
+                </select> -->
+                <!-- <b>6666666</b> -->
+                <pr slot min="1" length="2" :has-error="false" message="昵索的对">配置啊啊啊啊啊啊啊啊啊啊</pr>
+                <pr slot min="32" length="50" message="something wrong!">显示相关的内容</pr>
+                <pr slot="red" min="3333" length="3333" message="something3333!">333333333333333</pr>
+              </pr-list>
+
+              <button type="button" class="btn btn-success" @click="likai('pianduan')">一了百了</button>
+              <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button>
+              <!-- Modal提示框 -->
+              <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
+                <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p>
+                <app></app>
+              </ht-modal>
+            </div>
+
+            <!-- 第三个 -->
+            <div role="tabpanel" class="tab-pane" id="messages">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script src='./src/assets/js/jquery1.9.1.js'></script>
+    <script src='./src/assets/js/bootstrap.js'></script>
+    <script src="./dist/build.js"></script>
+  </body>
+
+</html>
