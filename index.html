@@ -83,14 +83,6 @@
             <!-- 第二个 -->
             <div role="tabpanel" class="tab-pane" id="profile" style="padding-top: 15px;">
               <pr-list ref="pianduan">
-                <!-- <input type="text" slot v-model="age" message="6" min="33">
-                <select slot name="" id="">
-                <option value="1">沙漠之鹰</option>
-                <option value="2">黄金沙鹰</option>
-                <option value="3">天枰座</option>
-                <option value="4">毛瑟手枪</option>
-                </select> -->
-                <!-- <b>6666666</b> -->
                 <pr slot min="1" length="2" :has-error="false" message="昵索的对">配置啊啊啊啊啊啊啊啊啊啊</pr>
                 <pr slot min="32" length="50" message="something wrong!">显示相关的内容</pr>
                 <pr slot="red" min="3333" length="3333" message="something3333!">333333333333333</pr>
@@ -107,6 +99,15 @@
 
             <!-- 第三个 -->
             <div role="tabpanel" class="tab-pane" id="messages">
+
+              <ht-table ajaxurl="http://localhost:3001/users/allUser" :search-data="searchData">
+                <!--内部组件-->
+                <column slot name="名称" data-key="name"></column>
+                <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
+                <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
+                <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
+                <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
+              </ht-table>
             </div>
 
           </div>

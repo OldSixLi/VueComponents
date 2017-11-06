@@ -1,11 +1,20 @@
-import Vue from 'vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
+
 import App from './App.vue';
 import Pr from './test/P.vue';
 import PrList from './test/PrList.vue';
 import HtModal from './ht/HtModal.vue';
-import HtFormItem from './ht/HtFormItem.vue';
 import HtFormGroup from './ht/HtFormGroup.vue';
 import HtForm from './ht/HtForm.vue';
+import HtTable from './ht/HtTable.vue';
+import Column from './ht/Column.vue';
+
+Vue.use(VueRouter);
+Vue.use(VueResource);
+Vue.component('app', App);
+window.Vue = Vue;
 
 new Vue({
   el: '#app',
@@ -19,7 +28,10 @@ new Vue({
     jinggun: 213,
     canglei: 8888888888888888,
     kuanglong: '321@qq.com',
-    linghu: "1"
+    linghu: "1",
+    searchData: {
+      currentPage: 1
+    }
   },
   methods: {
     modalControl: function() {
@@ -27,7 +39,6 @@ new Vue({
     },
     likai: function(formName) {
       // console.log(event.target)
-
       this.$refs[formName].check();
     },
     submitForm: function(formName) {
@@ -47,12 +58,14 @@ new Vue({
     }
   },
   components: {
-    App,
+    // App,
     Pr,
     PrList,
     HtModal,
-    HtFormItem,
     HtForm,
-    HtFormGroup
+    HtFormGroup,
+    HtTable,
+    Column
+
   }
 })
