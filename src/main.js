@@ -38,7 +38,7 @@ new Vue({
     // 分页控件参数:
     pageOptions: {
       currentPage: 1,
-      totalPage: 20,
+      totalPage: 1,
       showItem: 5,
       // prevText: "上一页",
       // nextText: "下一页",

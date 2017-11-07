@@ -23,15 +23,15 @@
         <div class="col-md-12">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a></li>
+            <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">布局组件</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a></li>
+            <li role="presentation" class="active"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a></li>
           </ul>
 
           <!-- Tab panes -->
           <div class="tab-content">
             <!-- 第一个 -->
-            <div role="tabpanel" class="tab-pane active" id="home">
+            <div role="tabpanel" class="tab-pane" id="home">
               <div class="row">
                 <div class="col-md-6">
 
@@ -105,7 +105,7 @@
             </div>
 
             <!-- 第三个 -->
-            <div role="tabpanel" class="tab-pane" id="messages">
+            <div role="tabpanel" class="tab-pane active" id="messages">
 
               <ht-table ajaxurl="http://localhost:3001/users/allUser" :search-data="searchData">
                 <!--内部组件-->

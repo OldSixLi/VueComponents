@@ -34,11 +34,13 @@
                         <span v-for="singleKey in y.dataKey.split(',')" class="hide"> 
                                             {{x.params.push(x[singleKey])}}
                                         </span>
-                        <span v-html="render(x.params,y.filter)"> </span>
+                        <span v-html="renderHtml(x.params,y.filter)"> </span>
                         </span>
                         <!-- End:结束多参数判断 -->
+
+                        
                         <!-- Else当前的参数为单个参数，直接进行处理 -->
-                        <span v-else v-html="render(x[y.dataKey],y.filter)"> </span>
+                        <span v-else v-html="renderHtml(x[y.dataKey],y.filter)"> </span>
                     </td>
                 </tr>
                 <!-- 当前搜索结果为空时，提示没有搜索结果 -->
@@ -54,15 +56,19 @@
             <div class="cssload-loader"></div>
         </div>
         <!-- 分页控件模块 -->
-        <div class="pull-right page">
+         <div class="pull-right page">
             <ul class="pagination" v-show="valuelist!=null&&valuelist.length>0"></ul>
-        </div>
+        </div>  
+
+        <!-- <ht-page :param="pageOption"></ht-page> -->
         <!-- 搜索参数 -->
         <span class="hide">{{searchDatas}}</span>
     </div>
 </template>
 <script>
+// import HtPage from './HtPage.vue';
     export default {
+        
         name: "HtTable",
         props: {
             //对外获取的数据
@@ -88,14 +94,18 @@
                 nameurl: "李三丰",
                 showLoading: false,
                 loadingHeight: "300",
-                errorInfo: "未获取到数据"
+                errorInfo: "未获取到数据",
+                pageOption:{
+                    currentPage:1,totalPage:0
+                }
             }
-        },
-        mounted: function() {
-            
-        },filter: {
+        }, 
+        filter: {
           toGender: function (value) {
             return value == "M" ? "男" : "女";
+          },toImg:function(value){
+            return "<img src='" + value + "'/>";
+         
           }
         },
         methods: {
@@ -121,28 +131,35 @@
                     dataType: "json",
                     success: function (data) {
                         if (data != null && data != "") {
-                            try {
-                                if (data.success) {
+                            // try {
+                                
+                            // } catch (error) {
+                            //     console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
+                            //     console.log(error);
+                            //     console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+                            //     self.valuelist = [];
+                            //     self.showLoading = false;
+                            // }
+
+
+
+                            if (data.success) {
                                     self.valuelist = data.bean.data ? data.bean.data : [];
                                     for (var i = 0; i < self.valuelist.length; i++) {
                                         var element = self.valuelist[i];
                                         element["params"] = [];
                                     }
                                     // BootStrap分页控件的声明
-                                    if (self.valuelist.length > 0) {
-                                        var $page = $(self.$el.children[2]).find("ul");
-                                        self.initPageDiv($page, pageindex, data.bean.pageCount, 5, $page, function() {
-                                            self.searchData.currentPage = $page.data("page");
-                                        });
-                                    }
+                                    // if (self.valuelist.length > 0) {
+                                        // var $page = $(self.$el.children[2]).find("ul");
+                                        // self.initPageDiv($page, pageindex, data.bean.pageCount, 5, $page, function() {
+                                        //     self.searchData.currentPage = $page.data("page");
+                                        // });
+                                    // }
                                 } else {
                                     self.valuelist = [];
                                     self.errorInfo = data.message;
                                 }
-                            } catch (error) {
-                                self.valuelist = [];
-                                self.showLoading = false;
-                            }
                         }
                     },
                     error: function (response) {
@@ -154,11 +171,14 @@
                     }
                 });
             },
-            render: function (tdData, rule) {
+            renderHtml: function (tdData, rule) {
                 if (!rule) {
                     return tdData;
                 } else {
                     var filter = rule;
+                    if(this[filter]){
+                        return this[filter](tdData);
+                    }
                     return window.HtmlFun && window.HtmlFun[filter] ? Object.prototype.toString.call(tdData) == '[object Array]' ? window.HtmlFun[filter].apply(this, tdData) : window.HtmlFun[filter](tdData) : tdData;
                 }
             },
@@ -229,7 +249,10 @@
                 }
                 _this.rule.push(obj);
             });
-        }
+        },
+        // component:{
+        //     HtPage
+        // }
     }
 </script>
 <style scoped>

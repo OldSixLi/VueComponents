@@ -50,9 +50,7 @@
     props: {
       //对外获取的数据
       param: {
-        type: Object,
-        default:{
-        }
+        type: Object, required: true
       }
     },
     data: function() {
