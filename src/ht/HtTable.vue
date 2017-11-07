@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <!-- 搜索结果进行处理 -->
-                <tr v-for="(x,index) in valuelist" :key="index" v-show="!showLoading&&valuelist!=null&&valuelist.length>0">
+                <tr v-for="(x,index) in valuelist"  v-show="!showLoading&&valuelist!=null&&valuelist.length>0">
                     <td v-show="!!showindex">
                         {{index+1}}
                     </td>

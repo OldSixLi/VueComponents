@@ -34,9 +34,11 @@
             <div role="tabpanel" class="tab-pane active" id="home">
               <div class="row">
                 <div class="col-md-6">
+
+
+
+                  <!-- 标题 -->
                   <h3 style="margin-bottom:15px;text-align:center; ">CF武器列表</h3>
-
-
                   <!-- Form表单 -->
                   <ht-form ref="wuqiku" info-type="info" :horizontal="true">
                     <ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
@@ -77,7 +79,12 @@
 
                   </ht-form>
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <b>分页组件:</b>
+                  <ht-page :param="pageOptions"></ht-page>
+
+                  <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button>
+                </div>
               </div>
             </div>
             <!-- 第二个 -->
