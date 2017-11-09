@@ -1,5 +1,6 @@
 <template>
-<div >
+<div>
+      <transition name="fade">
     <div class="modal fade"  :class="isShow?'in':''" :style="{display:isShow?'block':'none'}"   id="" >
         <div class="modal-dialog">
             <div class="modal-content">
@@ -19,6 +20,7 @@
         </div>
         
     </div>
+    </transition>
     <!-- <div class="modal-backdrop fade in" v-if="isShow"></div> -->
     </div>
 </template>
@@ -58,5 +60,11 @@
     }
 </script>
 <style scoped>
-     
+    .fade-enter-active, .fade-leave-active{
+        transition: all 0.5s ease;
+    }
+    .fade-enter, .fade-leave-active{
+        opacity: 0 ;
+    }
+
 </style>

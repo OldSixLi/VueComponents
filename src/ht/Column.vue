@@ -2,7 +2,7 @@
 // 时间:2017年11月6日09:38:08 
 
 <template>
-    <span style="display: none"></span>
+    <span style="display: none;"></span>
 </template>
 <script>
     export default {

@@ -1,21 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-
+//测试组件
 import App from './App.vue';
 import Pr from './test/P.vue';
 import PrList from './test/PrList.vue';
+//ht组件
 import HtModal from './ht/HtModal.vue';
 import HtFormGroup from './ht/HtFormGroup.vue';
 import HtForm from './ht/HtForm.vue';
 import HtTable from './ht/HtTable.vue';
 import Column from './ht/Column.vue';
 import HtPage from './ht/HtPage.vue';
+//布局组件
+import Panel from './layout/Panel.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.component('app', App);
 Vue.component('ht-page', HtPage);
+Vue.component('panel', Panel);
 
 window.Vue = Vue;
 
@@ -38,7 +42,7 @@ new Vue({
     // 分页控件参数:
     pageOptions: {
       currentPage: 1,
-      totalPage: 1,
+      totalPage: 10,
       showItem: 5,
       // prevText: "上一页",
       // nextText: "下一页",
@@ -87,6 +91,9 @@ new Vue({
     },
     cancelCheckForm: function(formName) {
       this.$refs[formName].clearValidate();
+    },
+    test(id, name) {
+      alert('不知道好不好使啊')
     }
   },
   components: {
@@ -98,6 +105,54 @@ new Vue({
     HtFormGroup,
     HtTable,
     Column
-
   }
 });
+
+//声明HtmlFun
+/**
+ * 当前对象为将参数转化为Html的方法集合
+ * @returns
+ */
+window.HtmlFun = {
+  //扩展
+  extend: function(obj) {
+    if (obj) {
+      HtmlFun = $.extend(HtmlFun, obj);
+    }
+  },
+  toGender: function(value) {
+    return value == "M" ? "男" : "女";
+  },
+  /**
+   * 时间戳转化为正常时间 
+   * @param {any} shijianchuo  时间戳 精确到毫秒
+   * @returns 正常时间
+   */
+  toNormalTime: function(shijianchuo) {
+    var time = new Date(parseInt(shijianchuo));
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y + '-' + this.add0(m) + '-' + this.add0(d) + ' ' + this.add0(h) + ':' + this.add0(mm) + ':' + this.add0(s);
+  },
+  /**
+   * 转化为图片代码
+   * @returns
+   */
+  toImg: function(value) {
+    var str = "<img src='http://localhost:3001" + value + "'/>";
+    return str;
+  },
+  testMultiParams: function(id, name, problem) {
+    return '<a href="javascript:;" onclick="HtmlFun.test(\'' + id + '\',\'' + name + '\',\'' + problem + '\')">弹出</a>';
+  },
+  add0: function(m) {
+    return m < 10 ? '0' + m : m;
+  },
+  test(id, name, problem) {
+    alert('id是' + id + '\r\n名称是：' + name + '\r\n问题是：' + problem);
+  }　　
+}

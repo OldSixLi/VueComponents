@@ -35,55 +35,57 @@
               <div class="row">
                 <div class="col-md-6">
 
+                  <panel title="表单组件">
 
+                    <!-- 标题 -->
+                    <h3 style="margin-bottom:15px;text-align:center; ">CF武器列表</h3>
+                    <!-- Form表单 -->
+                    <ht-form ref="wuqiku" info-type="info" :horizontal="true">
+                      <ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
+                        <input type="text" name="lanzuan" v-model="lanzuan" class="form-control" placeholder="请输入武器价格">
+                      </ht-form-group>
 
-                  <!-- 标题 -->
-                  <h3 style="margin-bottom:15px;text-align:center; ">CF武器列表</h3>
-                  <!-- Form表单 -->
-                  <ht-form ref="wuqiku" info-type="info" :horizontal="true">
-                    <ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
-                      <input type="text" name="lanzuan" v-model="lanzuan" class="form-control" placeholder="请输入武器价格">
-                    </ht-form-group>
+                      <ht-form-group label="9A91-S：" label-width="20" name="aaa" min="91" max="200" max-message="您输入的值超出了范围">
+                        <input type="text" name="aaa" v-model="aaa" class="form-control" placeholder="请输入武器价格">
+                      </ht-form-group>
 
-                    <ht-form-group label="9A91-S：" label-width="20" name="aaa" min="91" max="200" max-message="您输入的值超出了范围">
-                      <input type="text" name="aaa" v-model="aaa" class="form-control" placeholder="请输入武器价格">
-                    </ht-form-group>
+                      <ht-form-group label="黄金警棍啊：" label-width="20" name="jinggun" maxlength="10" maxlength-message="最多输入10个字符" minlength="3" :require="true">
+                        <input type="text" name="jinggun" v-model="jinggun" class="form-control" placeholder="请输入武器价格">
+                      </ht-form-group>
 
-                    <ht-form-group label="黄金警棍啊：" label-width="20" name="jinggun" maxlength="10" maxlength-message="最多输入10个字符" minlength="3" :require="true">
-                      <input type="text" name="jinggun" v-model="jinggun" class="form-control" placeholder="请输入武器价格">
-                    </ht-form-group>
+                      <ht-form-group label="M240B-苍雷：" label-width="20" name="canglei" minlength="10">
+                        <textarea rows="5" cols="15" v-model="canglei" class="form-control" name="canglei"></textarea>
+                      </ht-form-group>
 
-                    <ht-form-group label="M240B-苍雷：" label-width="20" name="canglei" minlength="10">
-                      <textarea rows="5" cols="15" v-model="canglei" class="form-control" name="canglei"></textarea>
-                    </ht-form-group>
+                      <ht-form-group label="破天狂龙：" label-width="20" name="kuanglong" pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])" pattern-message="破天狂龙邀请你请输入正确的邮箱格式">
+                        <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
+                      </ht-form-group>
 
-                    <ht-form-group label="破天狂龙：" label-width="20" name="kuanglong" pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])" pattern-message="破天狂龙邀请你请输入正确的邮箱格式">
-                      <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
-                    </ht-form-group>
-
-                    <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
-                      <select class="form-control" name="weiya">
+                      <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
+                        <select class="form-control" name="weiya">
                         <option value="">请选择</option>
                         <option value="FR-F2 寒冰">FR-F2 寒冰</option>
                           <option value="绿色烟雾弹">绿色烟雾弹</option>
                           <option value="金砖">金砖</option>
                           <option value="碳合金小刀">碳合金小刀</option>
                       </select>
-                    </ht-form-group>
+                      </ht-form-group>
 
-                    <hr>
-                    <div class="text-right col-md-12">
-                      <button type="button" class="btn btn-default" @click="cancelCheckForm('wuqiku')">取消</button>
-                      <button type="button" class="btn btn-large btn-primary" @click="submitForm('wuqiku')">保存</button>
-                    </div>
+                      <hr>
+                      <div class="text-right col-md-12">
+                        <button type="button" class="btn btn-default" @click="cancelCheckForm('wuqiku')">取消</button>
+                        <button type="button" class="btn btn-large btn-primary" @click="submitForm('wuqiku')">保存</button>
+                      </div>
 
-                  </ht-form>
+                    </ht-form>
+                  </panel>
                 </div>
                 <div class="col-md-6">
-                  <b>分页组件:</b>
-                  <ht-page :param="pageOptions"></ht-page>
-
-                  <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button>
+                  <panel title="分页组件">
+                    <ht-page :param="pageOptions"></ht-page>
+                    <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button>
+                    <!-- <div slot="footer">底部的内容</div> -->
+                  </panel>
                 </div>
               </div>
             </div>
@@ -107,16 +109,23 @@
             <!-- 第三个 -->
             <div role="tabpanel" class="tab-pane active" id="messages">
 
-              <ht-table ajaxurl="http://localhost:3001/users/allUser" :search-data="searchData">
-                <!--内部组件-->
-                <column slot name="名称" data-key="name"></column>
-                <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
-                <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
-                <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
-                <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
-              </ht-table>
+              <!-- <div class="panel panel-default" style="margin-top:20px;"> -->
+              <!-- <div class="panel-heading">表格组件应用示例</div> -->
+              <panel title="表格组件">
+                <span slot="header" class="pull-right"><b>2017年11月8日11:25:07 生成</b></span>
+                <panel title="人员列表">
+                  <ht-table slot="outer" ajaxurl="http://localhost:3001/users/allUser" :search-data="searchData" class="">
+                    <!--内部组件-->
+                    <column slot name="名称" data-key="name"></column>
+                    <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
+                    <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
+                    <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
+                    <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
+                  </ht-table>
+                </panel>
+              </panel>
+              <!-- </div> -->
             </div>
-
           </div>
         </div>
       </div>
@@ -125,6 +134,13 @@
     <script src='./src/assets/js/jquery1.9.1.js'></script>
     <script src='./src/assets/js/bootstrap.js'></script>
     <script src="./dist/build.js"></script>
+    <script>
+      HtmlFun.extend({
+        test: function() {
+          alert('搜索')
+        }
+      });
+    </script>
   </body>
 
 </html>
