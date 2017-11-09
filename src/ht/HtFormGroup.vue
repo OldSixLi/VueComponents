@@ -7,7 +7,7 @@
         <slot v-if="!isHorizontal"></slot>
         <span class="help-block" v-if="!isHorizontal">{{errorMessage}}</span>
         <!-- 横向布局样式 -->
-        <label class="control-label text-right" :for="name" :style="{'width':labelWidth+'%','line-height':'30px'}" v-if="isHorizontal">
+        <label class="control-label text-right" :for="name" :style="{'width':labelWidth+'%'}" v-if="isHorizontal">
             {{label}}
         </label>
         <div class="control-block" :style="{'width':(99-labelWidth)+'%'}" v-if="isHorizontal">
@@ -178,10 +178,7 @@
         }
     }
 </script>
-<style scoped>
-    .form-group {
-        width: 100%;
-    }
+<style scoped> 
     .control-label {
         display: inline-block;
         /* line-height: 30px; */

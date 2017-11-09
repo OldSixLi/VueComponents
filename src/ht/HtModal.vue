@@ -1,27 +1,27 @@
-<template>
-<div>
-      <transition name="fade">
-    <div class="modal fade"  :class="isShow?'in':''" :style="{display:isShow?'block':'none'}"   id="" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close()">×</button>
-                    <h4 class="modal-title text-left">{{title}}</h4>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <slot></slot>
+<template >
+    <div>
+        <!--  -->
+        <transition name="fade">
+            <div class="modal fade" :class="{'in':isShow}" v-show="isShow" style="" id="">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close()">×</button>
+                            <h4 class="modal-title text-left">{{title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <slot></slot>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-default" data-dismiss="modal" @click="close()">关闭</a>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a class="btn btn-default" data-dismiss="modal" @click="close()">关闭</a>
-                </div>
             </div>
-        </div>
-        
-    </div>
-    </transition>
-    <!-- <div class="modal-backdrop fade in" v-if="isShow"></div> -->
+        </transition>
+        <!-- <div class="modal-backdrop fade in" v-if="isShow"></div> -->
     </div>
 </template>
 <script>
@@ -42,29 +42,57 @@
             //组件内数据部分
             return {}
         },
-        computed: {
-        },
+        computed: {},
         mounted: function() {
             // 组件生成时调用
-            var _self = this; 
+            var _self = this;
         },
         methods: {
-            close:function(){
+            close: function() {
                 this.$emit('states')
             },
-            toggleState:function(){
+            toggleState: function() {
                 alert('状态切换');
-                this.isShow=!this.isShow;
+                this.isShow = !this.isShow;
             }
         }
     }
 </script>
 <style scoped>
-    .fade-enter-active, .fade-leave-active{
+    .in {
+        display: block;
+    }
+    /* 完成状态 */
+    .fade-enter-active,
+    .fade-leave-active {
+        transform: translate(0, 0);
         transition: all 0.5s ease;
     }
-    .fade-enter, .fade-leave-active{
-        opacity: 0 ;
+    /* 初始状态 */
+    .fade-enter,
+    .fade-leave-active {
+        opacity: 0;
+        transform: translate(0, -25%);
     }
-
+    .modal {
+        overflow-y: auto;
+    }
+    /* 
+    .fade{
+        display: block;
+    } */
+    /* .fade.in {
+            -webkit-animation: cssAnimation .5s 1 ease forwards;
+            -moz-animation: cssAnimation .5s 1 ease forwards;
+            -o-animation: cssAnimation .5s 1 ease forwards;
+          }
+          
+          @keyframes cssAnimation {
+            from {
+              transform: translate(0, -25%);
+            }
+            to {
+              transform: translate(0, 0);
+            }
+          }  */
 </style>

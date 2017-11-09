@@ -14,12 +14,15 @@ import Column from './ht/Column.vue';
 import HtPage from './ht/HtPage.vue';
 //布局组件
 import Panel from './layout/Panel.vue';
+import InfoBlock from './layout/InfoBlock.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.component('app', App);
 Vue.component('ht-page', HtPage);
 Vue.component('panel', Panel);
+Vue.component('info-block', InfoBlock);
+
 
 window.Vue = Vue;
 
@@ -39,6 +42,7 @@ new Vue({
     searchData: {
       currentPage: 1
     },
+    show: true,
     // 分页控件参数:
     pageOptions: {
       currentPage: 1,

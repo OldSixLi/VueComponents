@@ -10,6 +10,16 @@
       [v-cloak] {
         display: none;
       }
+      
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: all 0.5s ease;
+      }
+      
+      .fade-enter,
+      .fade-leave-active {
+        opacity: 0
+      }
     </style>
   </head>
 
@@ -23,15 +33,15 @@
         <div class="col-md-12">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a></li>
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">布局组件</a></li>
-            <li role="presentation" class="active"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a></li>
+            <li role="presentation" class=""><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a></li>
           </ul>
 
           <!-- Tab panes -->
           <div class="tab-content">
             <!-- 第一个 -->
-            <div role="tabpanel" class="tab-pane" id="home">
+            <div role="tabpanel" class="tab-pane active" id="home">
               <div class="row">
                 <div class="col-md-6">
 
@@ -40,7 +50,7 @@
                     <!-- 标题 -->
                     <h3 style="margin-bottom:15px;text-align:center; ">CF武器列表</h3>
                     <!-- Form表单 -->
-                    <ht-form ref="wuqiku" info-type="info" :horizontal="true">
+                    <ht-form ref="wuqiku" info-type="info">
                       <ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
                         <input type="text" name="lanzuan" v-model="lanzuan" class="form-control" placeholder="请输入武器价格">
                       </ht-form-group>
@@ -72,7 +82,7 @@
                       </ht-form-group>
 
                       <hr>
-                      <div class="text-right col-md-12">
+                      <div class="text-right">
                         <button type="button" class="btn btn-default" @click="cancelCheckForm('wuqiku')">取消</button>
                         <button type="button" class="btn btn-large btn-primary" @click="submitForm('wuqiku')">保存</button>
                       </div>
@@ -86,9 +96,27 @@
                     <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button>
                     <!-- <div slot="footer">底部的内容</div> -->
                   </panel>
+                  <panel title="Modal提示框">
+                    <div class="text-center">
+                      <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button></div>
+                    <!-- Modal提示框 -->
+                    <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
+                      <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p>
+                      <app></app>
+                    </ht-modal>
+                  </panel>
+
+                  <panel title="动画效果" style="background-color: #ddd;">
+                    <info-block img-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1850315340,2462974064&fm=27&gp=0.jpg" title="张三丰" intro="武学宗师" word="问问问问问问问问问问问问问问问问问问问问问问问问问问问问问问问问" style="width:32%;margin-right:1%;"></info-block>
+                    <info-block img-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1850315340,2462974064&fm=27&gp=0.jpg" title="张三丰" intro="武学宗师" word="问问问问问问问问" style="width:32%;margin-right:1%;"></info-block>
+                    <info-block img-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1850315340,2462974064&fm=27&gp=0.jpg" title="张三丰" intro="武学宗师" word="问问问问问问问问" style="width:32%;margin-right:1%;"></info-block>
+
+                  </panel>
+
                 </div>
               </div>
             </div>
+
             <!-- 第二个 -->
             <div role="tabpanel" class="tab-pane" id="profile" style="padding-top: 15px;">
               <pr-list ref="pianduan">
@@ -96,21 +124,11 @@
                 <pr slot min="32" length="50" message="something wrong!">显示相关的内容</pr>
                 <pr slot="red" min="3333" length="3333" message="something3333!">333333333333333</pr>
               </pr-list>
-
               <button type="button" class="btn btn-success" @click="likai('pianduan')">一了百了</button>
-              <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button>
-              <!-- Modal提示框 -->
-              <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
-                <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p>
-                <app></app>
-              </ht-modal>
             </div>
 
             <!-- 第三个 -->
-            <div role="tabpanel" class="tab-pane active" id="messages">
-
-              <!-- <div class="panel panel-default" style="margin-top:20px;"> -->
-              <!-- <div class="panel-heading">表格组件应用示例</div> -->
+            <div role="tabpanel" class="tab-pane " id="messages">
               <panel title="表格组件">
                 <span slot="header" class="pull-right"><b>2017年11月8日11:25:07 生成</b></span>
                 <panel title="人员列表">
@@ -124,7 +142,7 @@
                   </ht-table>
                 </panel>
               </panel>
-              <!-- </div> -->
+
             </div>
           </div>
         </div>
