@@ -1,10 +1,13 @@
+//说明:个人信息展示面板
+//时间:2017年11月10日09:01:09
+
 <template>
   <div class="img-info-block">
     <div class="content">
       <img class="img" :src="imgSrc" alt="头像">
       <p class="title">{{title}}</p>
       <p class="intro">{{intro}}</p>
-      <p class="word">{{word}}
+      <p class="word" :title="word">{{word}}
         <slot></slot>
       </p>
     </div>

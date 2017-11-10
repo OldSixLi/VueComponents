@@ -88,13 +88,13 @@
         }
         if (_self.totalPage <= _self.showItem) {
           //如果总页数小于显示条数
-          for (var index = 1; index <= _self.totalPage; index++) {
+          for (let index = 1; index <= _self.totalPage; index++) {
             pageList.push(index);
           }
         } else {
           //总页数大于显示条数
           if (_self.currentPage <= Math.ceil(_self.showItem / 2)) {
-            for (var index = 1; index <= _self.showItem; index++) {
+            for (let index = 1; index <= _self.showItem; index++) {
               pageList.push(index);
             }
           }
@@ -102,12 +102,12 @@
             if ((_self.totalPage - _self.currentPage) >= Math.floor(_self.showItem / 2)) {
               for (
                 //NOTE 此处一个为floor,一个为ceil 是为了控制showItem 奇偶数的问题
-                var index = _self.currentPage - Math.floor(_self.showItem / 2); index < _self.currentPage + Math.ceil(_self.showItem / 2); index++) {
+                let index = _self.currentPage - Math.floor(_self.showItem / 2); index < _self.currentPage + Math.ceil(_self.showItem / 2); index++) {
                 pageList.push(index);
               }
             } else {
               for (
-                var index = _self.totalPage - _self.showItem + 1; index <= _self.totalPage; index++) {
+                let index = _self.totalPage - _self.showItem + 1; index <= _self.totalPage; index++) {
                 pageList.push(index);
               }
             }

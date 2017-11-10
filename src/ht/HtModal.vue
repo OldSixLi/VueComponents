@@ -1,8 +1,7 @@
 <template >
-    <div>
-        <!--  -->
+    <div> 
         <transition name="fade">
-            <div class="modal fade" :class="{'in':isShow}" v-show="isShow" style="" id="">
+            <div class="modal fade" :class="{'in':isShow}" v-show="isShow">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -37,16 +36,7 @@
                 type: Boolean,
                 default: false
             }
-        },
-        data: function() {
-            //组件内数据部分
-            return {}
-        },
-        computed: {},
-        mounted: function() {
-            // 组件生成时调用
-            var _self = this;
-        },
+        },   
         methods: {
             close: function() {
                 this.$emit('states')
@@ -76,23 +66,5 @@
     }
     .modal {
         overflow-y: auto;
-    }
-    /* 
-    .fade{
-        display: block;
-    } */
-    /* .fade.in {
-            -webkit-animation: cssAnimation .5s 1 ease forwards;
-            -moz-animation: cssAnimation .5s 1 ease forwards;
-            -o-animation: cssAnimation .5s 1 ease forwards;
-          }
-          
-          @keyframes cssAnimation {
-            from {
-              transform: translate(0, -25%);
-            }
-            to {
-              transform: translate(0, 0);
-            }
-          }  */
+    } 
 </style>

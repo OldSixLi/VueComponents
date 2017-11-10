@@ -12,6 +12,7 @@ import HtForm from './ht/HtForm.vue';
 import HtTable from './ht/HtTable.vue';
 import Column from './ht/Column.vue';
 import HtPage from './ht/HtPage.vue';
+import HtSearch from './ht/HtSearch.vue';
 //布局组件
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
@@ -22,10 +23,11 @@ Vue.component('app', App);
 Vue.component('ht-page', HtPage);
 Vue.component('panel', Panel);
 Vue.component('info-block', InfoBlock);
+Vue.component('ht-search', HtSearch);
 
 
 window.Vue = Vue;
-
+$(function() { $("[data-toggle='popover']").popover(); });
 new Vue({
   el: '#app',
   data: {
@@ -42,6 +44,7 @@ new Vue({
     searchData: {
       currentPage: 1
     },
+    searchWord: "李老六",
     show: true,
     // 分页控件参数:
     pageOptions: {
@@ -61,8 +64,6 @@ new Vue({
       var num = parseInt(Math.random() * 20 + 1);
       this.pageOptions.currentPage = num;
       this.pageOptions.totalPage = parseInt(Math.random() * (40 - 30) + 30);
-
-
       /**
        * 生成随机数（不包含起止点）
        * 
@@ -98,6 +99,13 @@ new Vue({
     },
     test(id, name) {
       alert('不知道好不好使啊')
+    },
+    search: function(value) {
+      console.log(
+        new Date().getHours() +
+        ':' + new Date().getMinutes() +
+        ':' + new Date().getSeconds() + "的值是:" +
+        value);
     }
   },
   components: {

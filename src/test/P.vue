@@ -35,7 +35,7 @@
             getRule: function() {
             },
             alerts: function() {
-                alert("点击事件")
+                // alert("点击事件")
             },
             check(){
                 console.log(this.$el)
