@@ -2,46 +2,42 @@
 // 时间:2017年11月7日11:30:40
 
 <template>
-<p style="margin:15px 0;width:100%;" class="text-right ht-page">
-  <nav aria-label="Page navigation" :data-option="lists" class="page-nav">
-    <ul class="pagination">
-      <li v-if="currentPage!=1&&totalPage>0" @click="currentPage--;pageClick()">
-        <a href="javascript:;" aria-label="Previous" :title="'上一页:第'+(currentPage-1)+'页'">
-          <span aria-hidden="true">{{prevText}}</span>
-        </a>
-      </li>
-      <!-- 额外添加首页和省略号 -->
-      <li @click="currentPage=1;pageClick()" v-if="(pageList[0]-1)>0"><a href="javascript:;" title="第1页">1</a></li>
-      <li @click="currentPage=2;pageClick()" v-if="(pageList[0]-1)==2"><a href="javascript:;" title="第2页">2</a></li>
-      <li  v-if="(pageList[0]-1)>2"><a href="javascript:;">...</a></li>
-      <!-- END:额外添加首页和省略号 -->
-
-      <li v-for="(x,index) in pageList" :key="index" :class="{'active':x==currentPage}" @click="currentPage=x;pageClick()">
-        <a href="javascript:;" :title="'第'+x+'页'">{{x}}</a>
-      </li>
-
-      <!-- 额外添加尾页和省略号 -->
-      <li  v-if="(totalPage-pageList[pageList.length-1])>2">
-        <a href="javascript:;">...</a>
-      </li>
-      <li @click="currentPage=totalPage-1;pageClick()" v-if="(totalPage-pageList[pageList.length-1])==2">
-        <a href="javascript:;" :title="'第'+(totalPage-1)+'页'">{{totalPage-1}}</a>
-      </li>
-      <li @click="currentPage=totalPage;pageClick()" v-if="(totalPage-pageList[pageList.length-1])>0">
-        <a href="javascript:;" :title="'第'+totalPage+'页'">{{totalPage}}</a>
-      </li>
-      <!-- END:额外添加尾页和省略号 -->
-      
-      <li v-if="currentPage<totalPage" @click="currentPage++;pageClick()">
-        <a href="javascript:;" aria-label="Next" :title="'下一页:第'+(currentPage+1)+'页'">
-          <span aria-hidden="true">{{nextText}}</span>
-        </a>
-      </li> 
-    </ul>
-  </nav>
-
-  <input v-if="showSkip&&totalPage>0" type="text" class="form-control page-input" style="width:50px;" v-model.trim="PageNum" placeholder="页码">
-  <button v-if="showSkip&&totalPage>0" type="button" @click="toPage(PageNum)" class="btn btn-primary btn-skip">跳转</button>
+  <p style="margin:15px 0;width:100%;" class="text-right ht-page">
+    <nav aria-label="Page navigation" :data-option="lists" class="page-nav">
+      <ul class="pagination">
+        <li v-if="currentPage!=1&&totalPage>0" @click="currentPage--;pageClick()">
+          <a href="javascript:;" aria-label="Previous" :title="'上一页:第'+(currentPage-1)+'页'">
+            <span aria-hidden="true">{{prevText}}</span>
+          </a>
+        </li>
+        <!-- 额外添加首页和省略号 -->
+        <li @click="currentPage=1;pageClick()" v-if="(pageList[0]-1)>0"><a href="javascript:;" title="第1页">1</a></li>
+        <li @click="currentPage=2;pageClick()" v-if="(pageList[0]-1)==2"><a href="javascript:;" title="第2页">2</a></li>
+        <li v-if="(pageList[0]-1)>2"><a href="javascript:;">...</a></li>
+        <!-- END:额外添加首页和省略号 -->
+        <li v-for="(x,index) in pageList" :key="index" :class="{'active':x==currentPage}" @click="currentPage=x;pageClick()">
+          <a href="javascript:;" :title="'第'+x+'页'">{{x}}</a>
+        </li>
+        <!-- 额外添加尾页和省略号 -->
+        <li v-if="(totalPage-pageList[pageList.length-1])>2">
+          <a href="javascript:;">...</a>
+        </li>
+        <li @click="currentPage=totalPage-1;pageClick()" v-if="(totalPage-pageList[pageList.length-1])==2">
+          <a href="javascript:;" :title="'第'+(totalPage-1)+'页'">{{totalPage-1}}</a>
+        </li>
+        <li @click="currentPage=totalPage;pageClick()" v-if="(totalPage-pageList[pageList.length-1])>0">
+          <a href="javascript:;" :title="'第'+totalPage+'页'">{{totalPage}}</a>
+        </li>
+        <!-- END:额外添加尾页和省略号 -->
+        <li v-if="currentPage<totalPage" @click="currentPage++;pageClick()">
+          <a href="javascript:;" aria-label="Next" :title="'下一页:第'+(currentPage+1)+'页'">
+            <span aria-hidden="true">{{nextText}}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <input v-if="showSkip&&totalPage>0" type="text" class="form-control page-input" style="width:50px;" v-model.trim="PageNum" placeholder="页码">
+    <button v-if="showSkip&&totalPage>0" type="button" @click="toPage(PageNum)" class="btn btn-primary btn-skip">跳转</button>
   </p>
 </template>
 <script>
@@ -50,39 +46,38 @@
     props: {
       //对外获取的数据
       param: {
-        type: Object, required: true
+        type: Object,
+        required: true
       }
     },
     data: function() {
       //组件内数据部分
       return {
-        PageNum:"",
+        PageNum: "",
         currentPage: this.param.currentPage || 1,
         totalPage: this.param.totalPage || 0,
         showItem: this.param.showItem || 9,
         clickFun: this.param.click || function() {},
-        prevText:this.param.prevText||"«",
-        nextText:this.param.nextText||"»",
+        prevText: this.param.prevText || "«",
+        nextText: this.param.nextText || "»",
         //是否显示跳页按钮
-        showSkip:this.param.showSkip==undefined?true:this.param.showSkip
+        showSkip: this.param.showSkip == undefined ? true : this.param.showSkip
         // pageList:[]//列表数据项
       }
     },
-    mounted: function() {
-    },
+    mounted: function() {},
     computed: {
-      lists:function(){
-        this.currentPage=this.param.currentPage;
-        this.totalPage= this.param.totalPage || 0;
-        this.showItem= this.param.showItem || 9;
-        this.clickFun= this.param.click || function() {};
-        this.prevText=this.param.prevText||"«";
-        this.nextText=this.param.nextText||"»";
+      lists: function() {
+        this.currentPage = this.param.currentPage;
+        this.totalPage = this.param.totalPage || 0;
+        this.showItem = this.param.showItem || 9;
+        this.clickFun = this.param.click || function() {};
+        this.prevText = this.param.prevText || "«";
+        this.nextText = this.param.nextText || "»";
       },
       pageList: function() {
-        var _self = this; 
-        var pageList = [];  
-
+        var _self = this;
+        var pageList = [];
         if (_self.currentPage > _self.totalPage) {
           _self.currentPage = _self.totalPage;
         }
@@ -112,53 +107,52 @@
               }
             }
           }
-        } 
+        }
         return pageList;
       }
     },
     watch: {
-      param:function(){
-        this.currentPage=this.param.currentPage;
+      param: function() {
+        this.currentPage = this.param.currentPage;
       }
     },
     methods: {
       toPage: function(index) {
-        if(index==""||index=="0"){
-          index="1";
+        if (index == "" || index == "0") {
+          index = "1";
         }
         //组件内部实现跳转到某页码的方法 
-        if(!isNaN(index)) {
-          if((index-0)!=this.currentPage){
-            this.currentPage=(index-0)>this.totalPage?this.totalPage:(index-0);
-            this.PageNum=(index-0)>this.totalPage?this.totalPage:(index-0);
+        if (!isNaN(index)) {
+          if ((index - 0) != this.currentPage) {
+            this.currentPage = (index - 0) > this.totalPage ? this.totalPage : (index - 0);
+            this.PageNum = (index - 0) > this.totalPage ? this.totalPage : (index - 0);
             this.clickFun(this.currentPage);
           }
-          this.PageNum=index;
-        }else{
-          this.PageNum="";
+          this.PageNum = index;
+        } else {
+          this.PageNum = "";
         }
       },
-      pageClick:function(){
+      pageClick: function() {
         this.clickFun(this.currentPage);
-      } 
+      }
     }
   }
 </script>
 <style scoped>
-   .page-nav{
-     display: inline-block; 
-     
-   }
-   .page-nav>ul{
-      margin: 0;
-   }
-   .page-input{
-      display: inline-block;
-      margin-left: 15px;
-      padding: 6px 6px;
-      vertical-align: top;
-   }
-   .btn-skip{
-      vertical-align: top;
-   }
+  .page-nav {
+    display: inline-block;
+  }
+  .page-nav>ul {
+    margin: 0;
+  }
+  .page-input {
+    display: inline-block;
+    margin-left: 15px;
+    padding: 6px 6px;
+    vertical-align: top;
+  }
+  .btn-skip {
+    vertical-align: top;
+  }
 </style>

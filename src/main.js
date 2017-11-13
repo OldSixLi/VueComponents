@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
+import $ from 'jquery'
+// import VueRouter from 'vue-router';
+// import VueResource from 'vue-resource';
 //测试组件
 import App from './App.vue';
 import Pr from './test/P.vue';
@@ -17,19 +18,21 @@ import HtSearch from './ht/HtSearch.vue';
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
 
-Vue.use(VueRouter);
-Vue.use(VueResource);
-Vue.component('app', App);
-Vue.component('ht-page', HtPage);
-Vue.component('panel', Panel);
-Vue.component('info-block', InfoBlock);
-Vue.component('ht-search', HtSearch);
+import router from './router/index.js';
+
+//引入全局组件
+import globals from './global.js';
+
+import './assets/css/bootstrap.min.css'
+import './assets/js/bootstrap.js'
 
 
 window.Vue = Vue;
-$(function() { $("[data-toggle='popover']").popover(); });
+// Vue.config.productionTip = false;//取消输出
+
 new Vue({
   el: '#app',
+  router,
   data: {
     showModal: false,
     age: 45,
@@ -58,6 +61,7 @@ new Vue({
       }
     }
   },
+  template: '<app></app>',
   methods: {
 
     changePage: function() {

@@ -23,6 +23,14 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        loader: "style-loader!css-loader",
+
+      },
+      {
+        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+        loader: 'file-loader?limit=8192&name=[path][name].[ext]'
+      }, {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
@@ -33,7 +41,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': path.resolve('src'),
+      'assets': path.resolve(__dirname, '../src/assets'),
+      'jquery': "jquery/src/jquery"
     }
   },
   devServer: {
@@ -43,7 +54,15 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "windows.jQuery": "jquery"
+    })
+  ]
+
 }
 
 if (process.env.NODE_ENV === 'production') {
