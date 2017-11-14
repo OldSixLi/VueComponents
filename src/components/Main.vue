@@ -38,12 +38,12 @@
                                         </ht-form-group>
                                         <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
                                             <select class="form-control" name="weiya">
-                            <option value="">请选择</option>
-                            <option value="FR-F2 寒冰">FR-F2 寒冰</option>
-                              <option value="绿色烟雾弹">绿色烟雾弹</option>
-                              <option value="金砖">金砖</option>
-                              <option value="碳合金小刀">碳合金小刀</option>
-                          </select>
+                                                <option value="">请选择</option>
+                                                    <option value="FR-F2 寒冰">FR-F2 寒冰</option>
+                                                    <option value="绿色烟雾弹">绿色烟雾弹</option>
+                                                    <option value="金砖">金砖</option>
+                                                    <option value="碳合金小刀">碳合金小刀</option>
+                                                </select>
                                         </ht-form-group>
                                         <hr>
                                         <div class="text-right">
@@ -57,10 +57,10 @@
                                     <!-- NOTE 此处不能使用@searchs="search()",否则传递过来的参数默认为undefined -->
                                     <ht-search placeholder="请输入用户名称" @search="search" v-model="searchWord" type="success"></ht-search>
                                     <b>searchWord:</b> {{searchWord}}
-                                </panel>
-                                <panel>
-                                    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-placement="top" title="下载地址" data-content="<a style='' class='local-down'>你好</a><a class='baidu-down'>百度</a>" data-html="true">可消失的弹出框</a>
-                                    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-placement="top" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">可消失的弹出框2</a>
+                                </panel> 
+                                <panel title="日期组件">
+                                    <ht-date v-model="timepicker"></ht-date>
+                                    {{timepicker}}
                                 </panel>
                             </div>
                             <div class="col-md-6">
@@ -74,8 +74,8 @@
                                         <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button></div>
                                     <!-- Modal提示框 -->
                                     <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
-                                        <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p>
-                                        <app></app>
+                                        <!-- <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p> -->
+                                        <img src="/src/assets/img/usericon/usericon_2.jpg" alt="" class="img-responsive">
                                     </ht-modal>
                                 </panel>
                                 <!-- 人物列表 -->
@@ -121,6 +121,7 @@
 </template>
 <script>
     import router from './../router/index.js';
+    import HtDate from './../ht/HtDate.vue';
     export default {
         name: "Main",
         props: {
@@ -154,7 +155,8 @@
           click: function(currentPage) {
             console.log("当前方法显示的页数是:" + currentPage);
           }
-        }
+        },
+        timepicker:"2017/11/14 11:50:10"
       }
         },
         mounted: function() {
@@ -208,7 +210,9 @@
                     ':' + new Date().getSeconds() + "的值是:" +
                     value);
             }
-        },
+        },components: {
+            HtDate
+        }
     }
 </script>
 <style scoped>

@@ -67,4 +67,8 @@
     .modal {
         overflow-y: auto;
     } 
+    .modal-body{
+        overflow-x: hidden;
+    }
+     
 </style>

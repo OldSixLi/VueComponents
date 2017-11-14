@@ -1,31 +1,12 @@
 import Vue from 'vue';
-import $ from 'jquery'
-// import VueRouter from 'vue-router';
-// import VueResource from 'vue-resource';
-//测试组件
-import App from './App.vue';
-import Pr from './test/P.vue';
-import PrList from './test/PrList.vue';
-//ht组件
-import HtModal from './ht/HtModal.vue';
-import HtFormGroup from './ht/HtFormGroup.vue';
-import HtForm from './ht/HtForm.vue';
-import HtTable from './ht/HtTable.vue';
-import Column from './ht/Column.vue';
-import HtPage from './ht/HtPage.vue';
-import HtSearch from './ht/HtSearch.vue';
-//布局组件
-import Panel from './layout/Panel.vue';
-import InfoBlock from './layout/InfoBlock.vue';
-
+import $ from 'jquery';
+//路由
 import router from './router/index.js';
-
 //引入全局组件
 import globals from './global.js';
-
-import './assets/css/bootstrap.min.css'
-import './assets/js/bootstrap.js'
-
+//引入样式
+import './assets/css/bootstrap.min.css';
+import './assets/js/bootstrap.js';
 
 window.Vue = Vue;
 // Vue.config.productionTip = false;//取消输出
@@ -114,13 +95,13 @@ new Vue({
   },
   components: {
     // App,
-    Pr,
-    PrList,
-    HtModal,
-    HtForm,
-    HtFormGroup,
-    HtTable,
-    Column
+    // Pr,
+    // PrList,
+    // HtModal,
+    // HtForm,
+    // HtFormGroup,
+    // HtTable,
+    // Column
   }
 });
 

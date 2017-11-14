@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <ul class="list-group" style="width: 20%;position: absolute;padding-right:15px;">
+    <li class="list-group-item"><router-link to="/">初始页</router-link></li>
       <li class="list-group-item">
         <router-link to="/welcome">欢迎</router-link>
       </li>
       <li class="list-group-item">
         <router-link to="/main">主页面</router-link>
       </li>
-      <li class="list-group-item">Morbi leo risus</li>
+      
       <li class="list-group-item">Porta ac consectetur ac</li>
       <li class="list-group-item">Vestibulum at eros</li>
     </ul>
