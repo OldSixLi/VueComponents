@@ -73,11 +73,12 @@
                                     <div class="text-center">
                                         <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button></div>
                                     <!-- Modal提示框 -->
-                                    <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
+                                    
+                                </panel>
+                                <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
                                         <!-- <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p> -->
                                         <img src="/src/assets/img/usericon/usericon_2.jpg" alt="" class="img-responsive">
                                     </ht-modal>
-                                </panel>
                                 <!-- 人物列表 -->
                                 <panel title="动画效果" style="background-color: #ddd;">
                                     <info-block img-src="/src/assets/img/usericon/xun.jpg" title="陈奕迅" intro="Eason,歌手,演员" word="拦路雨偏似雪花饮泣的你冻吗这风褛我给你磨到有襟花连调了职也不怕怎么始终牵挂苦心选中今天想车你回家原谅我不再送花伤口应要结疤花瓣铺满心里坟场才害怕如若你非我不嫁彼此终必火化一生一世等一天需要代价谁都只得那双手靠拥抱亦难任你拥有要拥有必先懂失去怎接受曾沿着雪路浪游为何为好事泪流谁能凭爱意要富士山私有何不把悲哀感觉假设是来自你虚构试管里找不到它染污眼眸前尘硬化像石头随缘地抛下便逃走我绝不罕有往街里绕过一周我便化乌有"

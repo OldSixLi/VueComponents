@@ -22,6 +22,12 @@ Array.prototype.sum = function() {
 };
 
 
+
+router.beforeEach((to, from, next) => {
+  alert('开始');
+  next();
+})
+
 new Vue({
   el: '#app',
   router,
@@ -60,7 +66,7 @@ new Vue({
       price: 38
     }]
   },
-  // template: '<app></app>',
+  template: '<app></app>',
   methods: {
     getPerson: function() {
       var _self = this;
@@ -145,6 +151,9 @@ new Vue({
   },
   mounted() {
     this.getPerson();
+  },
+  beforeRouteEnter(to, from, next) {
+    alert("要切换了")
   }
 
 });

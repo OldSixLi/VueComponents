@@ -39,7 +39,7 @@ router.get('/person', function(req, res, next) {
     var obj = JSON.parse(data);
     setTimeout(function() {
       res.json(obj);
-    }, 5000);
+    }, 0);
   } catch (error) {　　
     res.json([]);
     console.log(error);　　
