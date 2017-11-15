@@ -36,7 +36,7 @@
         </li>
       </ul>
     </nav>
-    <input v-if="showSkip&&totalPage>0" type="text" class="form-control page-input" style="width:50px;" v-model.trim="PageNum" placeholder="页码">
+    <input v-if="showSkip&&totalPage>0" type="text" class="form-control page-input" style="width:50px;" v-model.trim="PageNum" placeholder="页码" @keypress.enter="toPage(PageNum)">
     <button v-if="showSkip&&totalPage>0" type="button" @click="toPage(PageNum)" class="btn btn-primary btn-skip">跳转</button>
   </p>
 </template>

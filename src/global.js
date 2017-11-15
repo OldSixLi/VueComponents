@@ -17,9 +17,15 @@ import HtTable from './ht/HtTable.vue';
 import Column from './ht/Column.vue';
 import HtPage from './ht/HtPage.vue';
 import HtSearch from './ht/HtSearch.vue';
+import HtDate from './ht/HtDate.vue';
+import HtRadio from './ht/HtRadio.vue';
+import HtCheckbox from './ht/HtCheckbox.vue';
+
+
 //布局组件
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
+
 
 
 Vue.use(VueRouter);
@@ -36,3 +42,6 @@ Vue.component('ht-form', HtForm);
 Vue.component('ht-form-group', HtFormGroup);
 Vue.component('ht-table', HtTable);
 Vue.component('column', Column);
+Vue.component('ht-date', HtDate);
+Vue.component('ht-radio', HtRadio);
+Vue.component('ht-checkbox', HtCheckbox);

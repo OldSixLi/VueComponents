@@ -53,5 +53,21 @@
     }
 </script>
 <style scoped>
-     
+    .col-md-3:hover img{
+        -webkit-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1) 10ms;
+        -moz-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1) 10ms;
+        -o-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1) 10ms;
+        transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1) 10ms;
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg); 
+    }
+
+   .col-md-3 img {
+        -webkit-transition: all 2s cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -moz-transition: all 2s cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -o-transition: all 2s cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        transition: all 2s cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
 </style>

@@ -179,7 +179,7 @@
     }
 </script>
 <style scoped> 
-    .control-label {
+   .form-horizontal .control-label {
         display: inline-block;
         /* line-height: 30px; */
         width: 25%;

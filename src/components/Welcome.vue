@@ -1,22 +1,10 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <!-- 消除外边距 -->
-      <div class="col-md-4 col-sm-4">
-        <!--在此处编辑内容-->
-        <img src="/src/assets/img/logo.png">
-        <h1>你好啊</h1>
-        <h2>路由页面</h2>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <!--在此处编辑内容-->
-        <h2>欢迎页面</h2>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <!--在此处编辑内容-->
-      </div>
+    <div class="row"><!-- 消除外边距 -->
+    <div class="col-md-12">
+      <h1 class="text-center">欢迎来到此页面</h1>
+      <img src="/src/assets/img/19696025--0--6c1b6af_r.jpg" alt="" class="img-responsive">
     </div>
-  </div>
+    </div>
 </template>
 <script>
   import router from './../router/index.js';

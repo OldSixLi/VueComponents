@@ -11,6 +11,17 @@ import './assets/js/bootstrap.js';
 window.Vue = Vue;
 // Vue.config.productionTip = false;//取消输出
 
+Array.prototype.sum = function() {
+  if (this.length != 0) {
+    return this.reduce(function(partial, value) {
+      return partial + value;
+    });
+  } else {
+    return 0;
+  }
+};
+
+
 new Vue({
   el: '#app',
   router,
@@ -40,11 +51,43 @@ new Vue({
       click: function(currentPage) {
         console.log("当前方法显示的页数是:" + currentPage);
       }
-    }
+    },
+    timepicker: "2017-11-08",
+    radio: "2",
+    totalPrice: [38, 108],
+    PersonsList: [{
+      name: "猎狐者",
+      price: 38
+    }, {
+      name: "飞虎队",
+      price: 58
+    }, {
+      name: "灵狐者",
+      price: 108
+    }, {
+      name: "夜玫瑰",
+      price: 18
+    }, {
+      name: "刀锋战士",
+      price: 36
+    }, {
+      name: "潘多拉",
+      price: 19
+    }]
   },
-  template: '<app></app>',
+  // template: '<app></app>',
   methods: {
-
+    //不推荐使用JQ操作DOM  但是此处只是展示效果
+    alerts: function alerts(e) {
+      $("#clickRecord").append('<p><b>@click</b>事件：每次<b>点击</b>都会增加内容，当前点击的值为：' + this.radio + '，可以根据此来进行相关操作</p>');
+    },
+    change: function change() {
+      $("#changeRecord").append('<p><b>@change</b>事件：如果值发生改变，提示当前改变后的值为：' + this.radio + '可以根据此进行相关操作</p>');
+      return false;
+    },
+    daterSelect: function(val) {
+      alert('当前选择的日期为' + val);
+    },
     changePage: function() {
       var num = parseInt(Math.random() * 20 + 1);
       this.pageOptions.currentPage = num;
@@ -102,8 +145,19 @@ new Vue({
     // HtFormGroup,
     // HtTable,
     // Column
+  },
+  computed: {
+    endDate: function() {
+      var date = new Date(this.timepicker).setDate(new Date(this.timepicker).getDate() + 7);
+      var time = new Date(parseInt(date))
+      return time.getFullYear() + '-' + ((time.getMonth() + 1) > 9 ? (time.getMonth() + 1) : '0' + (time.getMonth() + 1)) + '-' + (time.getDate() > 9 ? time.getDate() : '0' + time.getDate());
+    }
   }
+
 });
+
+
+
 
 //声明HtmlFun
 /**

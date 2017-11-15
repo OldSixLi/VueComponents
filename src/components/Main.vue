@@ -20,7 +20,7 @@
                                     <!-- 标题 -->
                                     <h3 style="margin-bottom:15px;text-align:center;">CF武器列表</h3>
                                     <!-- Form表单 -->
-                                    <ht-form ref="wuqiku" info-type="info" :horizontal="true">
+                                    <ht-form ref="wuqiku" info-type="all" :horizontal="true">
                                         <ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
                                             <input type="text" name="lanzuan" v-model="lanzuan" class="form-control" placeholder="请输入武器价格">
                                         </ht-form-group>

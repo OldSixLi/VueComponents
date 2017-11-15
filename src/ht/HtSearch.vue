@@ -8,7 +8,6 @@
                 'btn-info':type=='info',
                 'btn-warning':type=='warning',
                 'btn-danger':type=='danger', 
-           
             }" type="button" @click="searchClick"><span class="glyphicon glyphicon-search"></span>&nbsp;搜索</button>
         </span>
     </div>

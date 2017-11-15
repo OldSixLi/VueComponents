@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ul class="list-group" style="width: 20%;position: absolute;padding-right:15px;">
+    <ul class="list-group" style="width: 20%;position: fixed;padding-right:15px;">
     <li class="list-group-item"><router-link to="/">初始页</router-link></li>
       <li class="list-group-item">
         <router-link to="/welcome">欢迎</router-link>

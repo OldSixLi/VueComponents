@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>logo</title>
-    <link href='./src/assets/css/bootstrap.min.css' rel='stylesheet'>
+    <!-- <link href='./src/assets/css/bootstrap.min.css' rel='stylesheet'> -->
     <link href='./src/assets/css/vue-index.css' rel='stylesheet'>
     <style>
       [v-cloak] {
@@ -93,18 +93,43 @@
                     <ht-search placeholder="请输入用户名称" @search="search" v-model="searchWord" type="success"></ht-search>
                     <b>searchWord:</b> {{searchWord}}
                   </panel>
+                  <panel title="单选按钮组件">
+                    <ht-radio v-model="radio" label="1" @click="alerts()" @change="change()">灵狐者</ht-radio>
+                    <ht-radio v-model="radio" label="2" @click="alerts()" @change="change()">猎狐者</ht-radio>
+                    <ht-radio v-model="radio" label="3" @click="alerts()" @change="change()">夜玫瑰</ht-radio>
+                    <ht-radio v-model="radio" label="4" @click="alerts()" @change="change()">曼陀罗</ht-radio>
 
-                  <panel>
-
-                    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-placement="top" title="下载地址" data-content="<a style='' class='local-down'>你好</a><a class='baidu-down'>百度</a>" data-html="true">可消失的弹出框</a>
-
-                    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-placement="top" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">可消失的弹出框2</a>
+                    <p>当前选项的值是:{{radio}}</p>
+                    <div id="clickRecord" class="col-md-6"></div>
+                    <div id="changeRecord" class="col-md-6"></div>
                   </panel>
+                  <panel title="复选框组件">
+                    <label v-for="x in PersonsList">
+                      <ht-checkbox v-model="totalPrice" :label='x.price'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+                    </label>
+
+                    <p> 总共花费了 {{totalPrice.sum()}}元</p>
+                  </panel>
+
                 </div>
                 <div class="col-md-6">
+                  <panel title="日期组件">
+                    <p><b>起止日期(时间限定一周之内)</b></p>
+                    <div style="font-size: 0;">
+                      <div style="display: inline-block;width:48%;">
+                        <ht-date v-model="timepicker" @select="daterSelect"></ht-date>
+                      </div>
+                      <span style="display: inline-block;width:4%;text-align: center;font-size: 14px;line-height: 38px;vertical-align: top;">至</span>
+                      <div style="display: inline-block;width:48%;">
+                        <ht-date :min-date="timepicker" :max-date="endDate"></ht-date>
+                      </div>
+                    </div>
+                    <p class="text-muted"><b>注:</b>此处利用第一个ht-date的值(timepicker)为基础,第二个ht-date组件中prop属性'min-date'的值设置为timepicker,而'max-date'值通过Vue computed属性进行实时计算,在timepicker的基础上加7天</p>
+                  </panel>
                   <panel title="分页组件">
+                    <button type="button" slot="header" class="btn-link pull-right" @click="changePage" style="outline: none;">随机生成总页数与页码</button>
                     <ht-page :param="pageOptions"></ht-page>
-                    <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button>
+
                     <!-- <div slot="footer">底部的内容</div> -->
                   </panel>
 
@@ -113,8 +138,7 @@
                       <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button></div>
                     <!-- Modal提示框 -->
                     <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
-                      <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p>
-                      <app></app>
+                      <img src="/src/assets/img/usericon/usericon_2.jpg" alt="" class="img-responsive">
                     </ht-modal>
                   </panel>
 
@@ -170,9 +194,9 @@
     <script src="./dist/build.js"></script>
     <script>
       HtmlFun.extend({
-        test: function() {
-          alert('搜索')
-        }
+        // test: function() {
+        //   alert('搜索')
+        // }
       });
     </script>
   </body>
