@@ -95,16 +95,6 @@ new Vue({
       var num = parseInt(Math.random() * 20 + 1);
       this.pageOptions.currentPage = num;
       this.pageOptions.totalPage = parseInt(Math.random() * (40 - 30) + 30);
-      /**
-       * 生成随机数（不包含起止点）
-       * 
-       * @param {any} start 起点
-       * @param {any} end 终点
-       */
-      function radomNum(start, end) {
-        end = start > end ? [start, start = end][0] : end; //保证End最大  
-        return
-      }
     },
     modalControl: function() {
       this.showModal = !this.showModal;
