@@ -1,9 +1,16 @@
-# logo
+# Vue组件封装及Vue-router使用
 
-> A Vue.js project
+> 封装了工作中常用到的HTML组件以及其他布局组件.
 
-## Build Setup
-
+##NOTE
+### 在'\node_modules\webpack-dev-server\lib\Server.js'中,需要修改文件
+####加入以下代码
+```javascript
+ const ma = require('./../../../route-nodejs/index.js'); 
+ //... express about
+ app.use('/ma', ma);
+```
+## 安装步骤
 ``` bash
 # install dependencies
 npm install

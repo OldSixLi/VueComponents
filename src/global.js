@@ -21,12 +21,9 @@ import HtDate from './ht/HtDate.vue';
 import HtRadio from './ht/HtRadio.vue';
 import HtCheckbox from './ht/HtCheckbox.vue';
 
-
 //布局组件
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
-
-
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

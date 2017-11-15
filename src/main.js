@@ -54,29 +54,32 @@ new Vue({
     },
     timepicker: "2017-11-08",
     radio: "2",
-    totalPrice: [38, 108],
+    totalPrice: [58],
     PersonsList: [{
       name: "猎狐者",
       price: 38
-    }, {
-      name: "飞虎队",
-      price: 58
-    }, {
-      name: "灵狐者",
-      price: 108
-    }, {
-      name: "夜玫瑰",
-      price: 18
-    }, {
-      name: "刀锋战士",
-      price: 36
-    }, {
-      name: "潘多拉",
-      price: 19
     }]
   },
   // template: '<app></app>',
   methods: {
+    getPerson: function() {
+      var _self = this;
+      $.ajax({
+        type: "GET",
+        url: "/ma/person",
+        dataType: "json",
+        success: function(data) {
+          if (data != null && data != "") {
+            _self.PersonsList = data;
+          } else {
+            _self.PersonsList = [];
+          }
+        },
+        error: function(response) {
+          alert("获取人物列表失败,请重试");
+        }
+      });
+    },
     //不推荐使用JQ操作DOM  但是此处只是展示效果
     alerts: function alerts(e) {
       $("#clickRecord").append('<p><b>@click</b>事件：每次<b>点击</b>都会增加内容，当前点击的值为：' + this.radio + '，可以根据此来进行相关操作</p>');
@@ -134,17 +137,14 @@ new Vue({
         ':' + new Date().getMinutes() +
         ':' + new Date().getSeconds() + "的值是:" +
         value);
+    },
+    getjson() {
+      $.getJSON("url",
+        function(data, textStatus, jqXHR) {
+
+        }
+      );
     }
-  },
-  components: {
-    // App,
-    // Pr,
-    // PrList,
-    // HtModal,
-    // HtForm,
-    // HtFormGroup,
-    // HtTable,
-    // Column
   },
   computed: {
     endDate: function() {
@@ -152,6 +152,9 @@ new Vue({
       var time = new Date(parseInt(date))
       return time.getFullYear() + '-' + ((time.getMonth() + 1) > 9 ? (time.getMonth() + 1) : '0' + (time.getMonth() + 1)) + '-' + (time.getDate() > 9 ? time.getDate() : '0' + time.getDate());
     }
+  },
+  mounted() {
+    this.getPerson();
   }
 
 });
