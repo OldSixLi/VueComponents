@@ -35,7 +35,35 @@ this.ajax();
                 <p slot="footer"><a target="_blank" href="https://segmentfault.com/q/1010000007031477">参考地址</a></p>
             </panel>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <panel title="Router回调执行顺序">
+                <b>执行顺序</b>
+                <ol>
+                    <li>main.js:开始beforeEach(全局)</li>
+                    <li>router.js:开始beforeEnter(单个路由回调)</li>
+                    <li>Welcome.vue:开始beforeRouteEnter(组件内回调)</li>
+                    <li>main.js:开始beforeResolve(全局)</li>
+                    <li>main.js:开始afterEach(全局)</li>
+                </ol>
+
+                <h2>完整的导航解析流程</h2>
+                <ol>
+                    <li>导航被触发。</li>
+                    <li>在失活的组件里调用离开守卫。</li>
+                    <li>调用全局的 beforeEach 守卫。</li>
+                    <li>在重用的组件里调用 beforeRouteUpdate 守卫。</li>
+                    <li>在路由配置里调用 beforeEnter。</li>  
+                    <li>解析异步路由组件。</li>
+                    <li>在被激活的组件里调用 beforeRouteEnter。</li>
+                    <li>调用全局的 beforeResolve 守卫 (2.5+)</li>
+                    <li>导航被确认。</li>
+                    <li>调用全局的 afterEach 钩子。</li>
+                    <li>触发 DOM 更新。</li>
+                    <li>用创建好的实例调用 beforeRouteEnter 守卫中传给 next 的回调函数。</li>
+                </ol> 
+                <p slot="footer"><a target="_blank" href="https://router.vuejs.org/zh-cn/advanced/navigation-guards.html">参考地址</a></p>
+            </panel>
+        </div>
     </div>
 </template>
 <script>

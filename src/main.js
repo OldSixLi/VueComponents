@@ -21,12 +21,24 @@ Array.prototype.sum = function() {
   }
 };
 
-
-
+//最先开始执行 全局前置守卫
 router.beforeEach((to, from, next) => {
-  alert('开始');
+  console.log("开始beforeEach");
   next();
+});
+// 和上个区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用。
+//全局解析守卫
+router.beforeResolve((to, from, next) => {
+  console.log("开始beforeResolve");
+  next();
+});
+// 全局后置钩子
+router.afterEach((to, from) => {
+  // 不会接受 next 函数也不会改变导航本身
+  console.log("开始afterEach");
 })
+
+
 
 new Vue({
   el: '#app',
@@ -82,7 +94,10 @@ new Vue({
           }
         },
         error: function(response) {
-          alert("获取人物列表失败,请重试");
+          console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
+          console.log("获取人物列表失败,请重试");
+          console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+
         }
       });
     },

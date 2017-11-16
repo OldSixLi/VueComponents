@@ -14,7 +14,7 @@
         </li>
         <li class="list-group-item"><router-link to="/know" class="btn btn-link">知识点</router-link></li>
         <li class="list-group-item">
-        <button type="button" class="btn btn-link" @click="isShow=false">隐藏</button>
+        <a   class="btn btn-link" @click="isShow=false"><<隐藏</a>
          </li>
       </ul>
       
@@ -23,8 +23,11 @@
       'margin-left':isShow?'20%':'0',
       'width':isShow?'80%':'100%',
       }">
-      <a @click="isShow=true" v-show="!isShow" style="position: absolute;top:10px;cursor: pointer;left:5px;z-index: 100;">>>展开</a>
-      <router-view></router-view>
+      <a @click="isShow=true" v-show="!isShow" style="position: fixed;top:10px;cursor: pointer;left:5px;z-index: 100;">>>展开</a>
+      <transition name="routerFade" mode="">
+         <router-view></router-view>
+      </transition>
+     
     </div>
   </div>
 </template>
@@ -55,7 +58,19 @@
         transform: translate(-20%,0);
     }
     .btn-link{
-    outline: none;
+      outline: none;
+    }
+
+    .routerFade-enter-active,.routerFade-leave-active{
+        transform: scale(1);
+        opacity: 1;
+        transition: all .8s ease;
+    }
+
+    .routerFade-enter,.routerFade-leave-active{
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all .3s ease;
     }
   /* #app {
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
