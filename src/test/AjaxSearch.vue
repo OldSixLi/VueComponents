@@ -178,6 +178,7 @@
             }
         },
         created() {
+            // https://segmentfault.com/q/1010000007444595
     // 点击其他不在的区域触发事件
     document.addEventListener('click', (e) => {
       console.log(this.$el.contains(e.target));
