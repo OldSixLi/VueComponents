@@ -176,7 +176,16 @@
             blurFn:function(){
                 this.resultList=[];
             }
-        }
+        },
+        created() {
+    // 点击其他不在的区域触发事件
+    document.addEventListener('click', (e) => {
+      console.log(this.$el.contains(e.target));
+      if (!this.$el.contains(e.target)){
+          this.resultList = []; 
+      }
+    })
+  }
     }
 </script>
 <style scoped>
