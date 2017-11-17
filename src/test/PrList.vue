@@ -10,7 +10,7 @@
             >
         {{x}}
         </b>
-        <button type="button" class="btn btn-default" @click="check()">验证</button>
+        <button type="button" class="btn btn-default" @click="check()">PrList验证Pr</button>
     </p>
 </template>
 <script>

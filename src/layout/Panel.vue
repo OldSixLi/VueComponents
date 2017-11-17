@@ -49,4 +49,7 @@
      .panel-body:empty {
          padding: 0;
      }
+     .panel-body{
+        word-break:break-all;
+     }
 </style>

@@ -9,6 +9,8 @@ import VueResource from 'vue-resource';
 import App from './App.vue';
 import Pr from './test/P.vue';
 import PrList from './test/PrList.vue';
+import AjaxSearch from './test/AjaxSearch.vue';
+
 //ht组件
 import HtModal from './ht/HtModal.vue';
 import HtFormGroup from './ht/HtFormGroup.vue';
@@ -42,3 +44,4 @@ Vue.component('column', Column);
 Vue.component('ht-date', HtDate);
 Vue.component('ht-radio', HtRadio);
 Vue.component('ht-checkbox', HtCheckbox);
+Vue.component('ajax-search', AjaxSearch);

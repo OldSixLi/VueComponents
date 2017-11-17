@@ -7,7 +7,6 @@
       <img src="/src/assets/img/19696025--0--6c1b6af_r.jpg" alt="" class="img-responsive">
     </div>
   </div>
-  
 </template>
 <script>
   import router from './../router/index.js';

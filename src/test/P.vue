@@ -41,9 +41,10 @@
                 console.log(this.$el)
                if(this.$el.innerText.length>this.length){
                    this.hasError=true;
-                   this.message="这个玩意出错了";
+                   this.message="当前值不符合验证规则";
                }else{
-                   
+                   this.hasError=true;
+                   this.message="当前值通过验证";
                }
             }
         }
