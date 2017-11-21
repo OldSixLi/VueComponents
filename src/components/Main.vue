@@ -295,7 +295,7 @@
     .fade-leave-active {
         opacity: 0
     }
-/* 动画效果 */
+	/* 动画效果 */
     .cssload-loader {
 	position: absolute;
 	left: 50%;

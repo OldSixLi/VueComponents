@@ -14,6 +14,21 @@
                 <p class="text-warning">注意:需要在transition标签中添加name="fade" 才可以使用.fade-enter-active等样式</p>
                 <p slot="footer" ><a href="https://segmentfault.com/q/1010000007738500" target="_blank">参考地址</a></p>
             </panel>
+
+            <panel title="Vue.js键盘事件">
+                <pre>
+&lt;div id=&quot;box&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup=&quot;show($event)&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup.13=&quot;show()&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup.enter=&quot;show2()&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup.up=&quot;show3()&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup.down=&quot;show4()&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup.left=&quot;show5()&quot;&gt;
+  &lt;input type=&quot;text&quot; @keyup.right=&quot;show6()&quot;&gt;
+&lt;/div&gt;
+                </pre>
+<p slot="footer" ><a href="http://www.jb51.net/article/111485.htm" target="_blank">参考地址</a></p>
+            </panel>
         </div>
         <div class="col-md-4">
             <panel title="vue如何让自定义函数挂到全局">
@@ -33,6 +48,28 @@ Vue.use(xxxx);
 this.ajax();
 </pre>
                 <p slot="footer"><a target="_blank" href="https://segmentfault.com/q/1010000007031477">参考地址</a></p>
+            </panel>
+
+
+            
+            <panel title="Vue 改变数组中对象的属性不重新渲染View的解决方案">
+                HTML代码
+                   <pre>
+//循环内部(hover 事件)
+@mouseenter.stop=&quot;handleMouseIn(index)&quot;
+@mouseleave.stop=&quot;handleMouseOut(index)&quot;
+         </pre>
+
+         JS代码
+         <pre>
+//Object.assign() 只是一级属性复制，比浅拷贝多深拷贝了一层而已。用的时候，还是要注意这个问题的。
+this.$data.items = Object.assign({}, this.$data.items);
+//或
+this.$set(this.$data.items[index], '_isHover', true);
+         </pre>
+                <p slot="footer">
+                    
+                    <a target="_blank" href="https://www.cnblogs.com/tugenhua0707/p/7440400.html">参考地址</a></p>
             </panel>
         </div>
         <div class="col-md-4">

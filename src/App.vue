@@ -13,6 +13,7 @@
           <router-link to="/main" class="btn btn-link">组件页面</router-link>
         </li>
         <li class="list-group-item"><router-link to="/know" class="btn btn-link">知识点</router-link></li>
+        <li class="list-group-item"><router-link to="/music" class="btn btn-link">网易云</router-link></li>
         <li class="list-group-item">
         <a   class="btn btn-link" @click="isShow=false"><<隐藏</a>
          </li>
@@ -46,6 +47,9 @@
 <style>
   @import './assets/css/bootstrap.min.css';
   @import './assets/css/vue-index.css';
+  body,*{
+        font-family: "MicroSoft YaHei";
+  }
    /* 完成状态 */
     .fade-enter-active,
     .fade-leave-active {
