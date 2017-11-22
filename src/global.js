@@ -26,6 +26,7 @@ import HtCheckbox from './ht/HtCheckbox.vue';
 //布局组件
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
+import Loading from './layout/Loading.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -45,3 +46,4 @@ Vue.component('ht-date', HtDate);
 Vue.component('ht-radio', HtRadio);
 Vue.component('ht-checkbox', HtCheckbox);
 Vue.component('ajax-search', AjaxSearch);
+Vue.component('loading', Loading);

@@ -1,14 +1,13 @@
 <template>
     <div class="container">
         <div class="row">
-            <!-- 消除外边距 -->
+            <!-- 列表部分 -->
             <div class="col-md-9 col-sm-9">
                 <h2 class="text-center">搜索</h2>
                 <div class="panel panel-default">
                     <div class="panel-heading" style="padding-bottom: 0;">
                         <b class="search-title">音乐搜索 <span v-show="totalCount">({{totalCount}}个结果)</span></b>
                         <span class="search-block">
-                            <!-- <ht-search @search="musicSearch" v-model="word"></ht-search> -->
                              <ajax-search @suggestClick="suggestClick" @search="musicSearch" v-model="word"></ajax-search>
                         </span>
                     </div>
@@ -20,7 +19,7 @@
                                     <th width='25%'>歌曲</th>
                                     <th width='25%'>歌手</th>
                                     <th width='25%'>专辑</th>
-                                    <th width='17%'>发布时间</th>
+                                    <th width='17%' class="text-center">时长</th>
                                 </tr>
                             </thead>
                             <tbody id="databody">
@@ -29,7 +28,17 @@
                                     <td><a href="javascript:;" @click='songDetail(x.id)' :title="x.name">{{x.name}}</a></td>
                                     <td><a :href="x.artists[0].id" :title="x.artists[0].name">{{ x.artists[0].name }}</a></td>
                                     <td><a :href="x.album.id" :title="x.album.name">{{ x.album.name}}</a> </td>
-                                    <td>{{shijian(x.album.publishTime)}}</td>
+                                    <!-- 此处是针对时长的计算 -->
+                                    <td class="text-center">
+                                        {{
+                                            (Math.floor((Math.floor(x.duration/1000))/60)>9?
+                                            Math.floor((Math.floor(x.duration/1000))/60):
+                                            ('0'+Math.floor((Math.floor(x.duration/1000))/60)))
+                                            +':'+
+                                            ((Math.floor(x.duration/1000)%60)>9?
+                                            (Math.floor(x.duration/1000)%60):
+                                            ('0'+(Math.floor(x.duration/1000)%60)))
+                                        }}</td>
                                 </tr>
                                 <tr v-show="!songList.length">
                                     <td colspan="20" class="text-center">
@@ -56,21 +65,12 @@
                                 <h4 v-show="dataObj.name">作者:{{dataObj.author}}</h4>
                                 <p>
                                     <a :href="dataObj.url" class="btn btn-default" role="button" v-show="dataObj.name" target="_blank"><span class="glyphicon glyphicon-headphones"></span> 点此试听</a>
-                                    <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name+'.mp3'"><span class="glyphicon glyphicon-save"></span> 点此下载</a>
+                                    <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name"><span class="glyphicon glyphicon-save"></span> 点此下载</a>
                                 </p>
                             </div>
                         </div>
                         <div style="position: relative; height: 400px;" v-show="showLoad">
-                            <div class="cssload-loader">
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                                <div class="cssload-side"></div>
-                            </div>
+                            <loading></loading>
                         </div>
                     </div>
                 </div> 
@@ -80,15 +80,12 @@
 </template>
 <script>
     export default {
-        name: "Music",
-        props: {
-            //对外获取的数据
-        },
+        name: "Music", 
         data: function() {
             //组件内数据部分
             return {
                 songList: [],
-                word: "趁早",
+                word: "陈粒",
                 pageOption: {
                     currentPage: 1,
                     totalPage: 0,
@@ -109,8 +106,7 @@
             }
         },
         mounted: function() {
-            //请求第一页的内容
-            this.getSongList(1)
+            this.getSongList(1);
         },
         methods: {
             suggestClick: function(state, result) {
@@ -132,7 +128,8 @@
                     this.dataObj.songImg = result.songImg;
                     this.dataObj.url = result.url;
                     this.dataObj.showDetail=true;
-                }},
+                }
+            },
             //获取歌曲详情
             songDetail(id) {
                 var _self = this;
@@ -206,7 +203,7 @@
                         _self.dataObj = dataObj;
                         _self.dataObj.id = id;
                         _self.showLoad = false;
-                    }, 0);
+                    }, 2000);
                 });
             },
             //按钮点击 搜索歌曲 
@@ -294,515 +291,5 @@
         width: 49%;
         line-height: 34px;
         vertical-align: top;
-    }
-    /* 动画效果 */
-    .cssload-loader {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 66.284271247462px;
-        height: 66.284271247462px;
-        margin-left: -33.142135623731px;
-        margin-top: -33.142135623731px;
-        border-radius: 100%;
-        animation-name: cssload-loader;
-        -o-animation-name: cssload-loader;
-        -ms-animation-name: cssload-loader;
-        -webkit-animation-name: cssload-loader;
-        -moz-animation-name: cssload-loader;
-        animation-iteration-count: infinite;
-        -o-animation-iteration-count: infinite;
-        -ms-animation-iteration-count: infinite;
-        -webkit-animation-iteration-count: infinite;
-        -moz-animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        -o-animation-timing-function: linear;
-        -ms-animation-timing-function: linear;
-        -webkit-animation-timing-function: linear;
-        -moz-animation-timing-function: linear;
-        animation-duration: 4.6s;
-        -o-animation-duration: 4.6s;
-        -ms-animation-duration: 4.6s;
-        -webkit-animation-duration: 4.6s;
-        -moz-animation-duration: 4.6s;
-    }
-    .cssload-loader .cssload-side {
-        display: block;
-        width: 8px;
-        height: 28px;
-        background-color: rgb(4, 99, 128);
-        margin: 3px;
-        position: absolute;
-        border-radius: 50%;
-        animation-duration: 1.73s;
-        -o-animation-duration: 1.73s;
-        -ms-animation-duration: 1.73s;
-        -webkit-animation-duration: 1.73s;
-        -moz-animation-duration: 1.73s;
-        animation-iteration-count: infinite;
-        -o-animation-iteration-count: infinite;
-        -ms-animation-iteration-count: infinite;
-        -webkit-animation-iteration-count: infinite;
-        -moz-animation-iteration-count: infinite;
-        animation-timing-function: ease;
-        -o-animation-timing-function: ease;
-        -ms-animation-timing-function: ease;
-        -webkit-animation-timing-function: ease;
-        -moz-animation-timing-function: ease;
-    }
-    .cssload-loader .cssload-side:nth-child(1),
-    .cssload-loader .cssload-side:nth-child(5) {
-        transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        animation-name: cssload-rotate0;
-        -o-animation-name: cssload-rotate0;
-        -ms-animation-name: cssload-rotate0;
-        -webkit-animation-name: cssload-rotate0;
-        -moz-animation-name: cssload-rotate0;
-    }
-    .cssload-loader .cssload-side:nth-child(3),
-    .cssload-loader .cssload-side:nth-child(7) {
-        transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        animation-name: cssload-rotate90;
-        -o-animation-name: cssload-rotate90;
-        -ms-animation-name: cssload-rotate90;
-        -webkit-animation-name: cssload-rotate90;
-        -moz-animation-name: cssload-rotate90;
-    }
-    .cssload-loader .cssload-side:nth-child(2),
-    .cssload-loader .cssload-side:nth-child(6) {
-        transform: rotate(45deg);
-        -o-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-        -moz-transform: rotate(45deg);
-        animation-name: cssload-rotate45;
-        -o-animation-name: cssload-rotate45;
-        -ms-animation-name: cssload-rotate45;
-        -webkit-animation-name: cssload-rotate45;
-        -moz-animation-name: cssload-rotate45;
-    }
-    .cssload-loader .cssload-side:nth-child(4),
-    .cssload-loader .cssload-side:nth-child(8) {
-        transform: rotate(135deg);
-        -o-transform: rotate(135deg);
-        -ms-transform: rotate(135deg);
-        -webkit-transform: rotate(135deg);
-        -moz-transform: rotate(135deg);
-        animation-name: cssload-rotate135;
-        -o-animation-name: cssload-rotate135;
-        -ms-animation-name: cssload-rotate135;
-        -webkit-animation-name: cssload-rotate135;
-        -moz-animation-name: cssload-rotate135;
-    }
-    .cssload-loader .cssload-side:nth-child(1) {
-        top: 33.142135623731px;
-        left: 66.284271247462px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(2) {
-        top: 56.213203431093px;
-        left: 56.213203431093px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(3) {
-        top: 66.284271247462px;
-        left: 33.142135623731px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(4) {
-        top: 56.213203431093px;
-        left: 10.071067816369px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(5) {
-        top: 33.142135623731px;
-        left: 0px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(6) {
-        top: 10.071067816369px;
-        left: 10.071067816369px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(7) {
-        top: 0px;
-        left: 33.142135623731px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    .cssload-loader .cssload-side:nth-child(8) {
-        top: 10.071067816369px;
-        left: 56.213203431093px;
-        margin-left: -4px;
-        margin-top: -14px;
-        animation-delay: 0;
-        -o-animation-delay: 0;
-        -ms-animation-delay: 0;
-        -webkit-animation-delay: 0;
-        -moz-animation-delay: 0;
-    }
-    @keyframes cssload-rotate0 {
-        0% {
-            transform: rotate(0deg);
-        }
-        60% {
-            transform: rotate(180deg);
-        }
-        100% {
-            transform: rotate(180deg);
-        }
-    }
-    @-o-keyframes cssload-rotate0 {
-        0% {
-            -o-transform: rotate(0deg);
-        }
-        60% {
-            -o-transform: rotate(180deg);
-        }
-        100% {
-            -o-transform: rotate(180deg);
-        }
-    }
-    @-ms-keyframes cssload-rotate0 {
-        0% {
-            -ms-transform: rotate(0deg);
-        }
-        60% {
-            -ms-transform: rotate(180deg);
-        }
-        100% {
-            -ms-transform: rotate(180deg);
-        }
-    }
-    @-webkit-keyframes cssload-rotate0 {
-        0% {
-            -webkit-transform: rotate(0deg);
-        }
-        60% {
-            -webkit-transform: rotate(180deg);
-        }
-        100% {
-            -webkit-transform: rotate(180deg);
-        }
-    }
-    @-moz-keyframes cssload-rotate0 {
-        0% {
-            -moz-transform: rotate(0deg);
-        }
-        60% {
-            -moz-transform: rotate(180deg);
-        }
-        100% {
-            -moz-transform: rotate(180deg);
-        }
-    }
-    @keyframes cssload-rotate90 {
-        0% {
-            transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
-        60% {
-            transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-        100% {
-            transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
-    @-o-keyframes cssload-rotate90 {
-        0% {
-            -o-transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
-        60% {
-            -o-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-        100% {
-            -o-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
-    @-ms-keyframes cssload-rotate90 {
-        0% {
-            -ms-transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
-        60% {
-            -ms-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-        100% {
-            -ms-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
-    @-webkit-keyframes cssload-rotate90 {
-        0% {
-            -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
-        60% {
-            -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-        100% {
-            -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
-    @-moz-keyframes cssload-rotate90 {
-        0% {
-            -moz-transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
-        60% {
-            -moz-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-        100% {
-            -moz-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
-    @keyframes cssload-rotate45 {
-        0% {
-            transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        60% {
-            transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-        100% {
-            transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-    }
-    @-o-keyframes cssload-rotate45 {
-        0% {
-            -o-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        60% {
-            -o-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-        100% {
-            -o-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-    }
-    @-ms-keyframes cssload-rotate45 {
-        0% {
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        60% {
-            -ms-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-        100% {
-            -ms-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-    }
-    @-webkit-keyframes cssload-rotate45 {
-        0% {
-            -webkit-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        60% {
-            -webkit-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-        100% {
-            -webkit-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-    }
-    @-moz-keyframes cssload-rotate45 {
-        0% {
-            -moz-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        60% {
-            -moz-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-        100% {
-            -moz-transform: rotate(225deg);
-            transform: rotate(225deg);
-        }
-    }
-    @keyframes cssload-rotate135 {
-        0% {
-            transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-        60% {
-            transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-        100% {
-            transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-    }
-    @-o-keyframes cssload-rotate135 {
-        0% {
-            -o-transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-        60% {
-            -o-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-        100% {
-            -o-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-    }
-    @-ms-keyframes cssload-rotate135 {
-        0% {
-            -ms-transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-        60% {
-            -ms-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-        100% {
-            -ms-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-    }
-    @-webkit-keyframes cssload-rotate135 {
-        0% {
-            -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-        60% {
-            -webkit-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-        100% {
-            -webkit-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-    }
-    @-moz-keyframes cssload-rotate135 {
-        0% {
-            -moz-transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-        60% {
-            -moz-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-        100% {
-            -moz-transform: rotate(315deg);
-            transform: rotate(315deg);
-        }
-    }
-    @keyframes cssload-loader {
-        0% {
-            transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-o-keyframes cssload-loader {
-        0% {
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -o-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-ms-keyframes cssload-loader {
-        0% {
-            -ms-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -ms-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-webkit-keyframes cssload-loader {
-        0% {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-moz-keyframes cssload-loader {
-        0% {
-            -moz-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -moz-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
     }
 </style>

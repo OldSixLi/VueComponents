@@ -51,10 +51,10 @@
                     type: "GET",
                     url: "http://localhost:9999/search/suggest",
                     data: {
-                        keywords: event.target.value,
-                        timestamp: Date.parse(new Date())
+                        keywords: event.target.value
                     },
                     dataType: "json",
+                    // async:false,
                     success: function(data) {
                         if (data.code == 200) {
                             _self.resultList = data.result.songs; //歌曲列表

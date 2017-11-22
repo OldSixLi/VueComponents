@@ -1,7 +1,7 @@
 # Vue组件封装及Vue-router使用
 
 > 封装了工作中常用到的HTML组件以及其他布局组件.
-
+<!--下载Syncing,然后token GIST:34c57c6c659830cdd39a02e54982b9d019a48243  -->
 ## NOTE
 ### 在'\node_modules\webpack-dev-server\lib\Server.js'中,需要修改文件
 #### 加入以下代码
