@@ -1,6 +1,7 @@
 //开发过程中遇到的需要注意的知识点
 <template>
-    <div class="row">
+<div class="container">
+    <div class="row ">
         <h2 class="text-center">知识点</h2>
         <div class="col-md-4">
             <panel title="<trasition>标签使用">
@@ -29,7 +30,25 @@
                 </pre>
 <p slot="footer" ><a href="http://www.jb51.net/article/111485.htm" target="_blank">参考地址</a></p>
             </panel>
+            <panel title="Vue组件失去焦点事件"><p>原理就是判断当前点击的元素是否属于当前组件</p>
+                <pre>
+created() {
+    // https://segmentfault.com/q/1010000007444595
+    // 点击其他不在的区域触发事件
+    document.addEventListener('click', (e) => {
+        console.log(this.$el.contains(e.target));
+        if (!this.$el.contains(e.target)) {
+        //组件外点击事件
+        }
+    });
+}
+                </pre>
+            </panel>
+
         </div>
+
+
+
         <div class="col-md-4">
             <panel title="vue如何让自定义函数挂到全局">
                 <pre>
@@ -100,8 +119,28 @@ this.$set(this.$data.items[index], '_isHover', true);
                 </ol> 
                 <p slot="footer"><a target="_blank" href="https://router.vuejs.org/zh-cn/advanced/navigation-guards.html">参考地址</a></p>
             </panel>
+
+            <panel title="nodejs router.post请求中req.body无法获取数据">
+                <p>Latest versions of Express (4.x) has unbundled the middleware from the core framework. If you need body parser, you need to install it separately</p>
+                <pre>
+npm install body-parser --save
+                </pre>
+                <p>and then do this in your code</p>
+                <pre>
+var bodyParser = require('body-parser')
+var app = express()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+                </pre>
+<p slot="footer"><a target="_blank" href="https://stackoverflow.com/questions/9177049/express-js-req-body-undefined">参考地址</a></p>
+                
+            </panel>
         </div>
-    </div>
+    </div></div>
 </template>
 <script>
     export default {

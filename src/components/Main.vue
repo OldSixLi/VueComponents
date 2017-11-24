@@ -20,7 +20,7 @@
 									<!-- 标题 -->
 									<h3 style="margin-bottom:15px;text-align:center;">CF武器列表</h3>
 									<!-- Form表单 -->
-									<ht-form ref="wuqiku" info-type="all" :horizontal="true">
+									<ht-form ref="wuqiku" info-type="info" :horizontal="true">
 										<ht-form-group label="M4A1-蓝钻：" label-width="20" name="lanzuan" :require="true" require-message="请输入武器价格">
 											<input type="text" name="lanzuan" v-model="lanzuan" class="form-control" placeholder="请输入武器价格">
 										</ht-form-group>
@@ -38,12 +38,17 @@
 										</ht-form-group>
 										<ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
 											<select class="form-control" name="weiya">
-	                                                        <option value="">请选择</option>
-	                                                            <option value="FR-F2 寒冰">FR-F2 寒冰</option>
-	                                                            <option value="绿色烟雾弹">绿色烟雾弹</option>
-	                                                            <option value="金砖">金砖</option>
-	                                                            <option value="碳合金小刀">碳合金小刀</option>
-	                                                        </select>
+													<option value="">请选择</option>
+													<option value="FR-F2 寒冰">FR-F2 寒冰</option>
+													<option value="绿色烟雾弹">绿色烟雾弹</option>
+													<option value="金砖">金砖</option>
+													<option value="碳合金小刀">碳合金小刀</option>
+												</select>
+										</ht-form-group>
+										<ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
+											<label v-for="x in formPersonsList">
+	                          <ht-checkbox v-model="formTotalPrice" :label='x.price' name='cfWuqi'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+	                        </label>
 										</ht-form-group>
 										<hr>
 										<div class="text-right">
@@ -52,21 +57,28 @@
 										</div>
 									</ht-form>
 								</panel>
-								<!-- 搜索组件 -->
-								<panel title="搜索组件">
-									<!-- NOTE 此处不能使用@searchs="search()",否则传递过来的参数默认为undefined -->
-									<ht-search placeholder="请输入用户名称" @search="search" v-model="searchWord" type="success"></ht-search>
-									<b>searchWord:</b> {{searchWord}}
 								</panel>
-								<panel title="日期组件">
-									<ht-date v-model="timepicker"></ht-date>
-									{{timepicker}}
+								<panel title="单选按钮组件">
+									<ht-radio v-model="radio" label="1" @click="alerts()" @change="change()" name="cfPerson">灵狐者</ht-radio>
+									<ht-radio v-model="radio" label="2" @click="alerts()" @change="change()" name="cfPerson">猎狐者</ht-radio>
+									<ht-radio v-model="radio" label="3" @click="alerts()" @change="change()" name="cfPerson">夜玫瑰</ht-radio>
+									<ht-radio v-model="radio" label="4" @click="alerts()" @change="change()" name="cfPerson">曼陀罗</ht-radio>
+									<p>当前选项的值是:{{radio}}</p>
+									<div id="clickRecord" class="col-md-6"></div>
+									<div id="changeRecord" class="col-md-6"></div>
+								</panel>
+								<panel title="复选框组件">
+									<label v-for="x in PersonsList">
+	                      <ht-checkbox v-model="totalPrice" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+	                    </label>
+									<p> 总共花费了 {{totalPrice.sum()}}元</p>
 								</panel>
 							</div>
 							<div class="col-md-6">
 								<panel title="分页组件">
+									<button type="button" slot="header" class="btn-link pull-right" @click="changePage" style="outline: none;">随机生成总页数与页码</button>
 									<ht-page :param="pageOptions"></ht-page>
-									<button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button>
+									<!-- <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button> -->
 									<!-- <div slot="footer">底部的内容</div> -->
 								</panel>
 								<panel title="Modal提示框">
@@ -134,8 +146,9 @@
 						<panel title="表格组件">
 							<span slot="header" class="pull-right"><b>2017年11月8日11:25:07 生成</b></span>
 							<panel title="人员列表">
-								<ht-table slot="outer" ajaxurl="http://localhost:3001/users/allUser" :search-data="searchData" class="">
+								<ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
 									<!--内部组件-->
+									<!-- http://localhost:3001/users/allUser -->
 									<column slot name="名称" data-key="name"></column>
 									<column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
 									<column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
@@ -195,13 +208,70 @@
 						console.log("当前方法显示的页数是:" + currentPage);
 					}
 				},
-				timepicker: "2017/11/14 11:50:10"
+				timepicker: "2017/11/14",
+				radio: "2",
+				totalPrice: [58],
+				PersonsList: [{
+					name: "猎狐者",
+					price: 38
+				}],
+				formPersonsList: [{
+					"name": "猎狐者",
+					"price": 38
+				}, {
+					"name": "飞虎队",
+					"price": 58
+				}, {
+					"name": "灵狐者",
+					"price": 108
+				}, {
+					"name": "夜玫瑰",
+					"price": 18
+				}, {
+					"name": "刀锋战士",
+					"price": 36
+				}, {
+					"name": "潘多拉",
+					"price": 19
+				}],
+				formTotalPrice: [19]
 			}
 		},
 		mounted: function() {
-			//组件生成时调用
+			this.getPerson();
 		},
 		methods: {
+			getPerson: function() {
+				var _self = this;
+				$.ajax({
+					type: "GET",
+					url: "/ma/person",
+					dataType: "json",
+					success: function(data) {
+						if (data != null && data != "") {
+							_self.PersonsList = data;
+						} else {
+							_self.PersonsList = [];
+						}
+					},
+					error: function(response) {
+						console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
+						console.log("获取人物列表失败,请重试");
+						console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+					}
+				});
+			},
+			//不推荐使用JQ操作DOM  但是此处只是展示效果
+			alerts: function alerts(e) {
+				$("#clickRecord").append('<p><b>@click</b>事件：每次<b>点击</b>都会增加内容，当前点击的值为：' + this.radio + '，可以根据此来进行相关操作</p>');
+			},
+			change: function change() {
+				$("#changeRecord").append('<p><b>@change</b>事件：如果值发生改变，提示当前改变后的值为：' + this.radio + '可以根据此进行相关操作</p>');
+				return false;
+			},
+			daterSelect: function(val) {
+				alert('当前选择的日期为' + val);
+			},
 			suggestClick: function(state, result) {
 				if (state == 'begin') {
 					this.song.showDetail = false;

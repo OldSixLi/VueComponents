@@ -76,7 +76,27 @@ new Vue({
     PersonsList: [{
       name: "猎狐者",
       price: 38
-    }]
+    }],
+    formPersonsList: [{
+      "name": "猎狐者",
+      "price": 38
+    }, {
+      "name": "飞虎队",
+      "price": 58
+    }, {
+      "name": "灵狐者",
+      "price": 108
+    }, {
+      "name": "夜玫瑰",
+      "price": 18
+    }, {
+      "name": "刀锋战士",
+      "price": 36
+    }, {
+      "name": "潘多拉",
+      "price": 19
+    }],
+    formTotalPrice: [19]
   },
   template: '<app></app>',
   methods: {
@@ -97,7 +117,6 @@ new Vue({
           console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
           console.log("获取人物列表失败,请重试");
           console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
-
         }
       });
     },
@@ -125,16 +144,22 @@ new Vue({
       this.$refs[formName].check();
     },
     submitForm: function(formName) {
-      this.$refs[formName].checkItem(function(isPass, errorList) {
-        if (isPass) {
-          console.log("通过");
-        } else {
-          console.error("通不过");
-          console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
-          console.info("用户自定义处理错误" + errorList.join('&&&&&'));
-          console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
-        }
-      });
+      //2017年11月22日18:34:25 新增 组件回调函数中提供验证通过后的
+      //
+      this.$refs[formName].checkItem(
+        //回调函数的参数:
+        //isPass:是否通过验证
+        //errorList:错误列表
+        //result:验证通过的结果
+        function(isPass, errorList, result) {
+          if (isPass) {
+            console.log("通过");
+            console.log(JSON.stringify(result));
+          } else {
+            console.error("通不过");
+            console.info("用户自定义处理错误:>" + errorList.join('&&&&&'));
+          }
+        });
     },
     cancelCheckForm: function(formName) {
       this.$refs[formName].clearValidate();

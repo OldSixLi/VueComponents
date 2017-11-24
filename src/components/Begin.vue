@@ -1,5 +1,7 @@
 <template>
+ 
     <div class="container">
+        
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">初始页</h1>
@@ -34,7 +36,7 @@
                 <a><img src="/src/assets/img/usericon/userIcon (6).jpg" class="img-responsive  img-thumbnail"></a>
             </div>
         </div>
-    </div>
+    </div> 
 </template>
 <script>
     export default {

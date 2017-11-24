@@ -19,14 +19,14 @@ var app = express();
 var router = express.Router();
 var fs = require("fs");
 var Q = require('promise');
+var fs = require('fs');
 
-// router.use(bodyParser.urlencoded({ extended: false }));
-//NOTE:在接收POST数据时,因为URL中并不存在参数,需要使用此方法转化数据,获取参数
-app.use(bodyParser.json({ limit: '1mb', uploadDir: "../image" })); //body-parser 解析json格式数据
-// app.use(express.bodyParser({}));
-app.use(bodyParser.urlencoded({ //此项必须在 bodyParser.json 下面,为参数编码
-  extended: true
-}));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 router.all('/', function(req, res, next) {
   res.send("此接口不返回任何有效信息");
 });
@@ -44,7 +44,21 @@ router.get('/person', function(req, res, next) {
     res.json([]);
     console.log(error);　　
   }
+});
 
+router.post('/users', function(req, res, next) {
+  try {　　
+    // var currentPage = request.params.currentPage;
+    var currentPage = req.body.currentPage || 1;
+    var dirPath = path.resolve(__dirname, './../json/users' + currentPage + '.json');
+    var data = fs.readFileSync(dirPath, "utf-8");
+    var obj = JSON.parse(data);
+    setTimeout(function() {
+      res.json(obj);
+    }, 0);
+  } catch (error) {
+    console.log(error);　　
+  }
 });
 
 module.exports = router;

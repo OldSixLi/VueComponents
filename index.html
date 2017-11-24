@@ -82,6 +82,11 @@
                       </select>
                       </ht-form-group>
 
+                      <ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
+                        <label v-for="x in formPersonsList">
+                          <ht-checkbox v-model="formTotalPrice" :label='x.price' name='cfWuqi'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+                        </label>
+                      </ht-form-group>
                       <hr>
                       <div class="text-right">
                         <button type="button" class="btn btn-default" @click="cancelCheckForm('wuqiku')">取消</button>
@@ -98,10 +103,10 @@
                     <b>searchWord:</b> {{searchWord}}
                   </panel>
                   <panel title="单选按钮组件">
-                    <ht-radio v-model="radio" label="1" @click="alerts()" @change="change()">灵狐者</ht-radio>
-                    <ht-radio v-model="radio" label="2" @click="alerts()" @change="change()">猎狐者</ht-radio>
-                    <ht-radio v-model="radio" label="3" @click="alerts()" @change="change()">夜玫瑰</ht-radio>
-                    <ht-radio v-model="radio" label="4" @click="alerts()" @change="change()">曼陀罗</ht-radio>
+                    <ht-radio v-model="radio" label="1" @click="alerts()" @change="change()" name="cfPerson">灵狐者</ht-radio>
+                    <ht-radio v-model="radio" label="2" @click="alerts()" @change="change()" name="cfPerson">猎狐者</ht-radio>
+                    <ht-radio v-model="radio" label="3" @click="alerts()" @change="change()" name="cfPerson">夜玫瑰</ht-radio>
+                    <ht-radio v-model="radio" label="4" @click="alerts()" @change="change()" name="cfPerson">曼陀罗</ht-radio>
 
                     <p>当前选项的值是:{{radio}}</p>
                     <div id="clickRecord" class="col-md-6"></div>
@@ -109,7 +114,7 @@
                   </panel>
                   <panel title="复选框组件">
                     <label v-for="x in PersonsList">
-                      <ht-checkbox v-model="totalPrice" :label='x.price'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+                      <ht-checkbox v-model="totalPrice" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
                     </label>
 
                     <p> 总共花费了 {{totalPrice.sum()}}元</p>
@@ -138,13 +143,16 @@
                   </panel>
 
                   <panel title="Modal提示框">
-                    <div class="text-center">
-                      <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button></div>
-                    <!-- Modal提示框 -->
-                    <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
-                      <img src="/src/assets/img/usericon/usericon_2.jpg" alt="" class="img-responsive">
-                    </ht-modal>
+                    <div class="text-center" style="position: relative;">
+                      <button type="button" class="btn btn-success " @click="modalControl()">显示modal</button>
+                      <!-- Modal提示框 -->
+                      <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
+                        <img src="/src/assets/img/usericon/usericon_2.jpg" alt="" class="img-responsive">
+                      </ht-modal>
+                    </div>
+
                   </panel>
+
 
                   <!-- 人物列表 -->
                   <panel title="动画效果" style="background-color: #ddd;">

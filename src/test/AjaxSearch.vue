@@ -177,7 +177,7 @@
                 if (!this.$el.contains(e.target)) {
                     this.resultList = [];
                 }
-            })
+            });
         }
     }
 </script>

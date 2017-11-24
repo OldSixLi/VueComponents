@@ -1,5 +1,5 @@
 <template >
-    <div> 
+    <!-- <div>  -->
         <transition name="fade">
             <div class="modal fade" :class="{'in':isShow}" v-show="isShow">
                 <div class="modal-dialog">
@@ -21,7 +21,7 @@
             </div>
         </transition>
         <!-- <div class="modal-backdrop fade in" v-if="isShow"></div> -->
-    </div>
+    <!-- </div> -->
 </template>
 <script>
     export default {
