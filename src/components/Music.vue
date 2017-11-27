@@ -85,7 +85,7 @@
             //组件内数据部分
             return {
                 songList: [],
-                word: "陈粒",
+                word: "二手玫瑰",
                 pageOption: {
                     currentPage: 1,
                     totalPage: 0,

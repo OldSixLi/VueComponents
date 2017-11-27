@@ -28,6 +28,9 @@ import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
 import Loading from './layout/Loading.vue';
 
+//NOTE 指令
+import './directive/randomImg.js';
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.component('app', App);

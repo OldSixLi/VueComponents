@@ -9,8 +9,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-          <router-link to="/" class="navbar-brand icon"><img src="/src/assets/img/ma/horse.png" alt="" style="width: 45px;height: 45px;"></router-link>
+          <router-link to="/" class="navbar-brand icon img-href"><img src="/src/assets/img/ma/horse.png"  class="img-title"> </router-link> 
         </div>
+        
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
@@ -40,7 +41,7 @@
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/OldSixLi" target="_blank">Github</a></li>
+            <li><a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img src="/src/assets/img/github.png" class="img-title"> </a></li>
              
           </ul>
         </div>
@@ -127,5 +128,8 @@
   }
   .icon {
     padding: 5px 10px 0;
+  }
+  .img-title{
+    width:45px;height:45px; 
   }
 </style>

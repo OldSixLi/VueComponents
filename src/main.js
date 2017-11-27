@@ -2,8 +2,9 @@ import Vue from 'vue';
 import $ from 'jquery';
 //路由
 import router from './router/index.js';
-//引入全局组件
+//引入全局组件和指令
 import globals from './global.js';
+
 //引入样式
 import './assets/css/bootstrap.min.css';
 import './assets/js/bootstrap.js';
