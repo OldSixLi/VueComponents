@@ -237,7 +237,7 @@ window.HtmlFun = {
    * @returns
    */
   toImg: function(value) {
-    var str = "<img src='http://localhost:3001" + value + "'/>";
+    var str = "<img src=" + value + "/>";
     return str;
   },
   testMultiParams: function(id, name, problem) {

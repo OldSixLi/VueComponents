@@ -90,6 +90,14 @@ this.$set(this.$data.items[index], '_isHover', true);
                     
                     <a target="_blank" href="https://www.cnblogs.com/tugenhua0707/p/7440400.html">参考地址</a></p>
             </panel>
+
+            <panel title="text-indent和图片缩进的问题"> 
+                <p>
+                    text-indent 有个很奇怪的属性，就是其内部元素遇到 float 或者 display: block 后就不继承外部这个缩进的属性了，也就是说，只要给图片加上 float 或者 display: block 的 CSS 属性后，图片的缩进会自动失效。
+                </p>
+                <p slot="footer">
+                    <a target="_blank" href="https://lms.im/css/text-indent-and-picture-indentation.html">参考地址</a></p>
+            </panel>
         </div>
         <div class="col-md-4">
             <panel title="Router回调执行顺序">
