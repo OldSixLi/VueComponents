@@ -105,7 +105,7 @@
 					<div role="tabpanel" class="tab-pane" id="profile">
 						<div class="row">
 							<div class="col-md-2">
-								<img  v-random-img > 
+								<!-- <img  v-random-img >  -->
 								<panel title="随便测试的组件">
 									<pr-list ref="pianduan">
 										<pr slot min="1" length="2" :has-error="false" message="昵索的对">父组件获取到这句话并进行校验</pr>
@@ -139,9 +139,11 @@
 									</div>
 								</div>
 								<!-- 生成随机图片 -->
-								<img  v-random-img > 
+								<img id="img1"  v-random-img.square="'100%'" > 
 							</div>
-							<div class="col-md-2"><img  v-random-img > </div>
+							<div class="col-md-2">
+								<!-- <img  v-random-img> -->
+							 </div>
 						</div>
 					</div>
 					<!-- 第三个 -->
