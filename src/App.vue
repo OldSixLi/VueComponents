@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="">
+  <div id="app">
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -11,8 +11,6 @@
         </button>
           <router-link to="/" class="navbar-brand icon img-href"><img src="/src/assets/img/ma/horse.png"  class="img-title"> </router-link> 
         </div>
-        
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active">
@@ -30,49 +28,22 @@
                 <li>
                   <router-link to="/main">组件展示</router-link>
                 </li>
-                <!-- <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li> -->
+                <li>
+                  <router-link to="/point">指令</router-link>
+                </li>
               </ul>
             </li>
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img src="/src/assets/img/github.png" class="img-title"> </a></li>
-             
+            <li style="line-height: 50px;">{{name}}　　</li>
+            <li>
+              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img src="/src/assets/img/github.png" class="img-title"> </a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <!-- 原来的左侧菜单 -->
-    <!-- <transition  name="fade">
-        <ul class="list-group text-right"  
-        style="width: 20%;position: fixed;padding-right:15px;"  v-show="isShow">
-          <li class="list-group-item">
-            <router-link to="/" class="btn btn-link">初始页</router-link>
-          </li>
-          <li class="list-group-item">
-            <router-link to="/welcome" class="btn btn-link">欢迎</router-link>
-          </li>
-          <li class="list-group-item">
-            <router-link to="/main" class="btn btn-link">组件页面</router-link>
-          </li>
-          <li class="list-group-item"><router-link to="/know" class="btn btn-link">知识点</router-link></li>
-          <li class="list-group-item"><router-link to="/music" class="btn btn-link">网易云</router-link></li>
-          <li class="list-group-item">
-          <a   class="btn btn-link" @click="isShow=false"><<隐藏</a>
-           </li>
-        </ul>
-        
-      </transition> -->
-    <!-- :style="{
-        'margin-left':isShow?'20%':'0',
-        'width':isShow?'80%':'100%',
-        }" -->
     <div style="transition:all .5s;">
       <a @click="isShow=true" v-show="!isShow" style="position: fixed;top:10px;cursor: pointer;left:5px;z-index: 100;">>>展开</a>
       <transition name="routerFade" mode="">
@@ -83,11 +54,17 @@
 </template>
 
 <script>
+import store from './store/index';
   export default {
-    name: 'app',
+    name: 'app',store,
     data() {
       return {
         isShow: true
+      }
+    },
+    computed: {
+      name(){
+        return  store.state.name;
       }
     }
   }

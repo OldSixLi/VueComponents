@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import $ from 'jquery';
+import Vuex from 'vuex';
+
 //路由
 import router from './router/index.js';
+import store from './store/index';
 //引入全局组件和指令
 import globals from './global.js';
 
@@ -40,10 +43,10 @@ router.afterEach((to, from) => {
 })
 
 
-
 new Vue({
   el: '#app',
   router,
+  store,
   data: {
     showModal: false,
     age: 45,
@@ -192,6 +195,10 @@ new Vue({
   },
   mounted() {
     this.getPerson();
+    store.commit('addNum');
+    console.log("↓↓↓↓↓↓↓↓↓↓Vuex输出的内容↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
+    console.log(store.state.count);
+    console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
   },
   beforeRouteEnter(to, from, next) {
     alert("要切换了")

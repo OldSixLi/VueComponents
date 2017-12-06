@@ -64,8 +64,12 @@
                                 <h4 v-show="dataObj.name">名称:{{dataObj.name}}</h4>
                                 <h4 v-show="dataObj.name">作者:{{dataObj.author}}</h4>
                                 <p>
-                                    <a :href="dataObj.url" class="btn btn-default" role="button" v-show="dataObj.name" target="_blank"><span class="glyphicon glyphicon-headphones"></span> 点此试听</a>
-                                    <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name"><span class="glyphicon glyphicon-save"></span> 点此下载</a>
+                                    <a :href="dataObj.url" class="btn btn-default" role="button" v-show="dataObj.name" target="_blank">
+                                        <span class="glyphicon glyphicon-headphones"></span> 点此试听
+                                    </a>
+                                    <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name">
+                                        <span class="glyphicon glyphicon-save"></span> 点此下载
+                                    </a>
                                 </p>
                             </div>
                         </div>

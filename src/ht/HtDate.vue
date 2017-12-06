@@ -53,7 +53,6 @@
                 //选择完毕后通知父组件
                 $(_self.$refs.dateInput).datetimepicker()    
                 .on('hide', function(e) {
-                    console.log(e);
                     _self.setTime = $(e.target).find('.settime-input').val();
                     _self.$emit('input', $(e.target).find('.settime-input').val());
                     _self.$emit('select', $(e.target).find('.settime-input').val());

@@ -139,10 +139,11 @@
 									</div>
 								</div>
 								<!-- 生成随机图片 -->
-								<img id="img1"  v-random-img.square="'100%'" > 
+								
 							</div>
 							<div class="col-md-2">
-								<!-- <img  v-random-img> -->
+								{{$store.name}}
+								<button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局sote中的名称</button>
 							 </div>
 						</div>
 					</div>
@@ -171,6 +172,7 @@
 <script>
 	import router from './../router/index.js';
 	import HtDate from './../ht/HtDate.vue';
+	import store from './../store/index';
 	export default {
 		name: "Main",
 		props: {
@@ -246,6 +248,14 @@
 			this.getPerson();
 		},
 		methods: {
+			/**
+			 * 修改Vuex中属性的方法 
+			 * 要求必须使用commit修改属性,这样数据流更加清晰和容易维护
+			 * @returns
+			 */
+			changeName(){
+                store.commit('changeName');
+            },
 			getPerson: function() {
 				var _self = this;
 				$.ajax({
@@ -260,9 +270,7 @@
 						}
 					},
 					error: function(response) {
-						console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
-						console.log("获取人物列表失败,请重试");
-						console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+						console.log("Mian.vue获取人物列表失败,请重试");
 					}
 				});
 			},
@@ -314,7 +322,6 @@
 				this.showModal = !this.showModal;
 			},
 			likai: function(formName) {
-				// console.log(event.target)
 				this.$refs[formName].check();
 			},
 			submitForm: function(formName) {

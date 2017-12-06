@@ -11,6 +11,7 @@ import Main from './../components/Main.vue';
 import Begin from './../components/Begin.vue';
 import Know from './../components/Know.vue';
 import Music from './../components/Music.vue';
+import Point from './../components/Point.vue';
 
 Vue.use(Router);
 
@@ -78,6 +79,11 @@ export default new Router({
       path: "/know",
       name: "know",
       component: Know,
+    },
+    {
+      path: "/point",
+      name: "point",
+      component: Point,
     }
   ]
 });
