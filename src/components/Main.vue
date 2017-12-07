@@ -38,17 +38,21 @@
 										</ht-form-group>
 										<ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
 											<select class="form-control" name="weiya">
-													<option value="">请选择</option>
-													<option value="FR-F2 寒冰">FR-F2 寒冰</option>
-													<option value="绿色烟雾弹">绿色烟雾弹</option>
-													<option value="金砖">金砖</option>
-													<option value="碳合金小刀">碳合金小刀</option>
-												</select>
+												<option value="">请选择</option>
+												<option value="FR-F2 寒冰">FR-F2 寒冰</option>
+												<option value="绿色烟雾弹">绿色烟雾弹</option>
+												<option value="金砖">金砖</option>
+												<option value="碳合金小刀">碳合金小刀</option>
+											</select>
 										</ht-form-group>
 										<ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
 											<label v-for="x in formPersonsList">
-	                          <ht-checkbox v-model="formTotalPrice" :label='x.price' name='cfWuqi'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
-	                        </label>
+												<ht-checkbox v-model="formTotalPrice" :label='x.price' name='cfWuqi'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+											</label>
+										</ht-form-group>
+										<ht-form-group label="付款方式：" label-width="20" name="payWay" :require="true" require-message="请选择付款方式">
+											<ht-radio v-model="payWay" label="1" name="payWay">微信</ht-radio>
+											<ht-radio v-model="payWay" label="2" name="payWay">支付宝</ht-radio>
 										</ht-form-group>
 										<hr>
 										<div class="text-right">
@@ -199,6 +203,7 @@
 				canglei: 8888888888888888,
 				kuanglong: '321@qq.com',
 				linghu: "1",
+				payWay:"1",
 				searchData: {
 					currentPage: 1
 				},

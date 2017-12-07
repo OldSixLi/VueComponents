@@ -7,7 +7,7 @@ import $ from 'jquery';
 Vue.directive('randomImg', {
   bind: function(el, binding, vnode, oldVnode) {
     el.tagName.toUpperCase() == "IMG" || console.error("指令 v-random-img 必须应用在 img 标签上");
-    var randomNum = parseInt(Math.random() * 10) + 1;
+    let randomNum = parseInt(Math.random() * 10) + 1;
     let name = randomNum;
     binding.modifiers && binding.modifiers.square && (name = 'square' + randomNum);
     el.style.width = '100%';
