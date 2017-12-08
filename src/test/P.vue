@@ -12,7 +12,6 @@
         props: {
             //对外获取的数据
             min: String,
-            
             length: String,
              
         },

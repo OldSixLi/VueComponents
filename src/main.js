@@ -195,10 +195,6 @@ new Vue({
   },
   mounted() {
     this.getPerson();
-    store.commit('addNum');
-    console.log("↓↓↓↓↓↓↓↓↓↓Vuex输出的内容↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
-    console.log(store.state.count);
-    console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
   },
   beforeRouteEnter(to, from, next) {
     alert("要切换了")

@@ -5,11 +5,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+
 //测试组件
 import App from './App.vue';
 import Pr from './test/P.vue';
 import PrList from './test/PrList.vue';
 import AjaxSearch from './test/AjaxSearch.vue';
+import Al from './test/Al.vue';
 
 //ht组件
 import HtModal from './ht/HtModal.vue';
@@ -30,9 +32,12 @@ import Loading from './layout/Loading.vue';
 
 //NOTE 指令
 import './directive/randomImg.js';
+import './directive/popover.js';
+import './directive/btnDelay.js';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+
 Vue.component('app', App);
 Vue.component('ht-page', HtPage);
 Vue.component('panel', Panel);
@@ -50,3 +55,4 @@ Vue.component('ht-radio', HtRadio);
 Vue.component('ht-checkbox', HtCheckbox);
 Vue.component('ajax-search', AjaxSearch);
 Vue.component('loading', Loading);
+Vue.component('al', Al);

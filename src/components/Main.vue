@@ -118,8 +118,11 @@
 									</pr-list>
 									<button type="button" class="btn btn-success" @click="likai('pianduan')">自定义BUTTON</button>
 								</panel>
+
+								
+
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<div class="panel panel-default" style="margin-top: 15px;">
 									<div class="panel-heading">搜索建议组件</div>
 									<div class="panel-body">
@@ -142,17 +145,21 @@
 										</panel>
 									</div>
 								</div>
-								<!-- 生成随机图片 -->
 								
 							</div>
-							<div class="col-md-2">
-								{{$store.name}}
+							<div class="col-md-4"> 
 								<button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局sote中的名称</button>
+								 
+								 <panel title=".sync使用">
+									<textarea type="text" v-model="inputMsg" class="form-control"></textarea>
+									<p>封装组件如下</p>
+									<al :message.sync="inputMsg"></al>
+								 </panel>
 							 </div>
 						</div>
 					</div>
 					<!-- 第三个 -->
-					<div role="tabpanel" class="tab-pane " id="messages">
+					<div role="tabpanel" class="tab-pane" id="messages">
 						<panel title="表格组件">
 							<span slot="header" class="pull-right"><b>2017年11月8日11:25:07 生成</b></span>
 							<panel title="人员列表">
@@ -185,6 +192,7 @@
 		data: function() {
 			//组件内数据部分
 			return {
+				inputMsg:"你们好",
 				song: {
 					id: "",
 					name: "",
@@ -253,6 +261,7 @@
 			this.getPerson();
 		},
 		methods: {
+			
 			/**
 			 * 修改Vuex中属性的方法 
 			 * 要求必须使用commit修改属性,这样数据流更加清晰和容易维护
