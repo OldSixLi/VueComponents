@@ -24,7 +24,7 @@
                     <td>数据1</td>
                     <td>数据2</td>
                     <td>
-                        
+                        <router-link to="/user/info/1" class="btn btn-link">用户1</router-link>
                     </td>
                 </tr>
                 <tr>

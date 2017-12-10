@@ -93,13 +93,15 @@ export default new Router({
       component: User,
       children: [{
           path: 'info/:id',
-          component: UserInfo
+          component: UserInfo,
+          name: "userinfo"
         },
         {
           // 当 /user/:id/posts 匹配成功
           // UserPosts 会被渲染在 User 的 <router-view> 中
           path: 'list',
-          component: UserList
+          component: UserList,
+          name: "userlist"
         }
       ]
     }
