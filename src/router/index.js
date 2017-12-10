@@ -12,7 +12,9 @@ import Begin from './../components/Begin.vue';
 import Know from './../components/Know.vue';
 import Music from './../components/Music.vue';
 import Point from './../components/Point.vue';
-
+import User from './../components/User.vue';
+import UserInfo from './../components/UserInfo.vue';
+import UserList from './../components/UserList.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -84,6 +86,22 @@ export default new Router({
       path: "/point",
       name: "point",
       component: Point,
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: User,
+      children: [{
+          path: 'info/:id',
+          component: UserInfo
+        },
+        {
+          // 当 /user/:id/posts 匹配成功
+          // UserPosts 会被渲染在 User 的 <router-view> 中
+          path: 'list',
+          component: UserList
+        }
+      ]
     }
   ]
 });

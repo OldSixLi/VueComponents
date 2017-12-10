@@ -30,6 +30,7 @@ import Loading from './layout/Loading.vue';
 
 //NOTE 指令
 import './directive/randomImg.js';
+import './directive/tooltip.js';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

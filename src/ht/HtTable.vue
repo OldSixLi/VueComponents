@@ -28,18 +28,18 @@
                             'width':y.width
                             }">
                         <!--Begin: If当前的参数为多参数，进行多参数处理操作 -->
-                        <span v-if="y.dataKey.split(',').length>1"> 
+                        <span v-if="y.dataKey&&y.dataKey.split(',').length>1"> 
                         <!--NOTE 此处的逻辑有点不正常，难描述。每个td中的params参数，先置为空数组，再往数组中逐个添加当前td中的参数。目的是防止其他td中多参数与当前td参数拼接到一起 -->
                         <span v-show='false'>{{x.params=[]}}</span>
                         <span v-for="singleKey in y.dataKey.split(',')" class="hide"> 
                             {{x.params.push(x[singleKey])}}
                         </span>
-                        <span v-html="renderHtml(x.params,y.filter)"> </span>
+                        <span v-html="renderHtml(x.params,y.filter)" > </span>
                         </span>
                         <!-- End:结束多参数判断 -->
 
                         <!-- Else当前的参数为单个参数，直接进行处理 -->
-                        <span v-else v-html="renderHtml(x[y.dataKey],y.filter)"> </span>
+                        <span v-else v-html="renderHtml(x[y.dataKey],y.filter)" v-tooltip.top="'向上提示'"> </span>
                     </td>
                 </tr>
                 <!-- 当前搜索结果为空时，提示没有搜索结果 -->
@@ -194,10 +194,16 @@
         mounted: function() {
             var self = this;
             var _this = this;
+            
+            console.log(_this.$slots);
+            console.log(_this.$slots.default);
             _this.$slots.default.forEach(function(child) {
                 var obj = {};
+                if(child&&child.componentOptions&&child.componentOptions.propsData){
+
                 for (var p in child.componentOptions.propsData) {
                     obj[p] = child.componentOptions.propsData[p];
+                }
                 }
                 _this.rule.push(obj);
             });
