@@ -14,16 +14,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active">
-              <router-link to="/welcome" class="btn btn-link">欢迎</router-link>
-            </li>
-            <li>
-              <router-link to="/know" class="btn btn-link">知识点</router-link>
-            </li>
-            <li>
-              <router-link to="/music" class="btn btn-link">网易云</router-link>
-            </li>
-            <li>
-              <router-link :to="{name:'userinfo', params:{ id: 155 }}" class="btn btn-link">用户信息</router-link>
+              <router-link to="/welcome/老六" class="btn btn-link">欢迎</router-link>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">组件 <span class="caret"></span></a>
@@ -36,6 +27,17 @@
                 </li>
               </ul>
             </li>
+            <li>
+              <router-link to="/know" class="btn btn-link">知识点</router-link>
+            </li>
+            <li>
+              <router-link to="/music" class="btn btn-link">网易云</router-link>
+            </li>
+            <li>
+              <!-- , params:{ id: 155 } -->
+              <router-link :to="{name:'userinfo'}" class="btn btn-link">用户信息</router-link>
+            </li>
+            
           </ul>
          
           <ul class="nav navbar-nav navbar-right">

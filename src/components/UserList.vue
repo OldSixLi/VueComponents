@@ -2,7 +2,9 @@
     <div id="" class="container">
          
         <div class="row">
+            
             <div class="col-md-12 form-inline">
+            <b class="pull-right">子路由:user/list</b>
             <label for="searchWord">搜索:</label>
             <input type="text" id="searchWord" name="searchWord" value="" class="form-control" placeholder="请输入搜索值">
             <button type="button" class="btn btn-success">搜索</button>
