@@ -34,6 +34,7 @@ import Loading from './layout/Loading.vue';
 import './directive/randomImg.js';
 import './directive/popover.js';
 import './directive/btnDelay.js';
+import './directive/tooltip.js';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

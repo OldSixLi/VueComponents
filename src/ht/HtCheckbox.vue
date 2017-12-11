@@ -148,8 +148,5 @@
         }
     }
 </script>
-<style scoped> 
-.a{
- /* transform:  */
-}
+<style scoped>  
 </style>
