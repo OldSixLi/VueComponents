@@ -98,6 +98,18 @@ this.$set(this.$data.items[index], '_isHover', true);
                 <p slot="footer">
                     <a target="_blank" href="https://lms.im/css/text-indent-and-picture-indentation.html">参考地址</a></p>
             </panel>
+
+<panel title="深入理解ES6箭头函数中的this(很重要)"> 
+                <p>
+                    箭头函数中的this，指向与一般function定义的函数不同，比较容易绕晕，箭头函数this的定义：箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。
+                    <br>
+                    箭头函数根本没有自己的this，导致内部的this就是外层代码块的this。正是因为它没有this，所以也就不能用作构造函数。
+                </p>
+                <p slot="footer">
+                    <a target="_blank" href="http://blog.csdn.net/liwusen/article/details/70257837">参考地址</a></p>
+            </panel>
+
+            
         </div>
         <div class="col-md-4">
             <panel title="Router回调执行顺序">

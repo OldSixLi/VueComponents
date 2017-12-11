@@ -270,7 +270,7 @@
 			changeName(){
                 store.commit('changeName');
             },
-			getPerson: function() {
+			getPerson() {
 				var _self = this;
 				$.ajax({
 					type: "GET",

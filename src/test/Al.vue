@@ -9,7 +9,6 @@
     export default {
         name: "Al",
         props: {  
-        //对外获取的数据
             message:String
         }, 
         methods:{
@@ -21,7 +20,4 @@
             }
         } 
     }
-</script>
-<style scoped> 
-
-</style>
+</script> 

@@ -1,6 +1,6 @@
 <template>
     <div id="">
-        <h3 class="text-center">会员信息</h3>
+        <h3 class="text-center">会员信息父级页面</h3>
         <router-view></router-view>
     </div>
 </template>
