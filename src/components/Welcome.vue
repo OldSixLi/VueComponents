@@ -2,7 +2,7 @@
   <div class="row">
     <!-- 消除外边距 -->
     <div class="col-md-12">
-      <h1 class="text-center">
+      <h1 class="text-center ">
         {{$route.params.name}}{{$route.params.name?',':""}}欢迎加入我们
       </h1>
       <!-- <music></music> -->

@@ -18,14 +18,6 @@ import UserList from './../components/UserList.vue';
 Vue.use(Router);
 
 export default new Router({
-  beforeEach: function(to, from, next) {
-    console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
-    console.log(to);
-    console.log(from);
-    console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
-    alert('开始');
-    next();
-  },
   routes: [{ //每一个链接都是一个对象
       path: '/', //链接路径
       name: 'begin', //路由名称，

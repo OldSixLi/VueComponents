@@ -9,7 +9,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-          <router-link to="/" class="navbar-brand icon img-href"><img src="/src/assets/img/ma/horse.png"  class="img-title"> </router-link> 
+          <router-link to="/" class="navbar-brand icon img-href">
+          <img :src="require('./../src/assets/img/ma/horse.png')"  class="img-title"> 
+          </router-link> 
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">

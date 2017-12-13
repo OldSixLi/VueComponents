@@ -5,8 +5,10 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    // publicPath: path.resolve(__dirname, './dist/') + '/',
+    publicPath: "/dist/",
+    filename: 'build.js',
+    // assetsPublicPath: "./src/"
   },
   module: {
     rules: [{
@@ -27,10 +29,11 @@ module.exports = {
         loader: "style-loader!css-loader",
       },
       {
-        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+        test: /\.(woff|eot|ttf|svg)\??.*$/,
         loader: 'file-loader?limit=8192&name=[path][name].[ext]'
-      }, {
-        test: /\.(png|jpg|gif|svg)$/,
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
@@ -42,7 +45,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve('src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
+      'assets': './src/assets/',
       'jquery': "jquery/src/jquery",
       'vuex': "vuex/dist/vuex.js"
     }

@@ -4,18 +4,17 @@
         <label class="control-label text-left" :for="name" v-if="!isHorizontal">{{label}}</label>
         <slot v-if="!isHorizontal"></slot>
         <transition name="errorinfo" mode="">
-            <span class="help-block" v-show="!isHorizontal">{{errorMessage}}</span>
+            <span class="help-block" v-if="!isHorizontal">{{errorMessage}}</span>
         </transition>
         <!-- 横向布局样式 -->
         <label class="control-label text-right" :for="name" :style="{'width':labelWidth+'%'}" v-if="isHorizontal">{{label}}</label>
         <div class="control-block" :style="{'width':(99-labelWidth)+'%'}" v-if="isHorizontal">
-            <slot></slot>
+            <p :data-a="isHorizontal"><slot/></p>
             <transition name="errorinfo" mode="">
                 <span class="help-block" v-show="validateError">{{errorMessage}}</span>
             </transition>
         </div>
         <!-- TODO 支持inline样式 -->
-
     </div>
 </template>
 <script>
@@ -255,19 +254,21 @@
     }
 </script>
 <style scoped>
-        /* 完成状态 */
-        .errorinfo-enter-active,
-        .errorinfo-leave-active {
-            transform: translate(0, 0);
-            opacity: 1;
-            transition: all .5s ease;
-        }
-        /* 初始状态 */
-        .errorinfo-enter,
-        .errorinfo-leave-active {
-            transform: translate(0, -50%);
-            opacity: 0;
-        }
+    /* 完成状态 */
+    .errorinfo-enter-active,
+    .errorinfo-leave-active {
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        opacity: 1;
+        transition: all .5s ease;
+    }
+    /* 初始状态 */
+    .errorinfo-enter,
+    .errorinfo-leave-active {
+        transform: translate3d(0, -50%, 0);
+        -webkit-transform: translate3d(0, -50%, 0);
+        opacity: 0;
+    }
     .form-horizontal .control-label {
         display: inline-block;
         width: 25%;
@@ -287,7 +288,10 @@
     .has-success .help-block {
         display: block;
     }
-    .has-error .el-checkbox{
-            color: #a94442;
+    .has-error .el-checkbox {
+        color: #a94442;
+    }
+    p{
+        margin-bottom: 0;
     }
 </style>

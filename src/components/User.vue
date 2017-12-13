@@ -20,19 +20,44 @@
             //组件生成时调用
         },
         methods: {}
+        // fade-enter：进入过渡的开始状态，元素被插入时生效，只应用一帧后立即删除；
+        // fade-enter-active：进入过渡的结束状态，元素被插入时就生效，在过渡过程完成之后移除；
+        // fade-leave：离开过渡的开始状态，元素被删除时触发，只应用一帧后立即删除；
+        // fade-leave-active：离开过渡的结束状态，元素被删除时生效，离开过渡完成之后被删除；
     }
 </script>
 <style scoped>
-     .userRouter-enter-active,
-     .userRouter-leave-active {
-         transform: scale(1);
-         opacity: 1;
-         transition: all .8s ease;
-     }
-     .userRouter-enter,
-     .userRouter-leave-active {
-         opacity: 0;
-         transform: scale(0.5);
-         transition: all .3s ease;
-     }
+    /* 进入过渡的结束状态，元素被插入时就生效，在过渡过程完成之后移除； */
+    .userRouter-enter-active {
+        transform: scale(1);
+        opacity: 1;
+        -webkit-transform: rotateY(0);
+        transform: rotateY(0);
+        -webkit-transform-origin:50% 0 0;
+        transform-origin: 50% 0 0;
+        transition: all .8s ease;
+    }
+    /* 进入过渡的开始状态，元素被插入时生效，只应用一帧后立即删除； */
+    .userRouter-enter {
+        opacity: 0;
+        -webkit-transform: rotateY(-90deg) translateZ(0);
+        transform: rotateY(-90deg)  translateZ(0);
+        -webkit-transform-origin: 50% 0 0; 
+        transform-origin: 50% 0 0;
+    }
+    /* 离开过渡的结束状态，元素被删除时生效，离开过渡完成之后被删除； */
+    .userRouter-leave-active {
+        opacity: 0;
+        -webkit-transform: rotateY(-90deg) ;
+        transform: rotateY(-90deg);
+        -webkit-transform-origin: 50% 0 0;
+        transform-origin: 50% 0 0; 
+        transition: all .3s ease;
+    }
+    /* 离开过渡的开始状态，元素被删除时触发，只应用一帧后立即删除； */
+    .userRouter-leave {
+        opacity: 1;
+        transform:translateZ(0); 
+        -webkit-transform:translateZ(0);
+    }
 </style>
