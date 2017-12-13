@@ -16,7 +16,7 @@
                 <a><img src="/src/assets/img/usericon/userIcon (7).jpg" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="~assets/img/usericon/userIcon (2).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img src="/src/assets/img/usericon/userIcon (2).jpg" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
                 <a><img src="/src/assets/img/usericon/userIcon (2).png" class="img-responsive  img-thumbnail"></a>
