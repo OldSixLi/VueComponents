@@ -45,7 +45,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li style="line-height: 50px;">{{name}}　　</li>
             <li>
-              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img src="/src/assets/img/github.png" class="img-title"> </a>
+              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img :src="require('./assets/img/github.png')" class="img-title"> </a>
             </li>
           </ul>
         </div>

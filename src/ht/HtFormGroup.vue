@@ -1,20 +1,25 @@
 <template>
     <div class="form-group" :class="{'has-error':validateError}">
-        <!-- 普通样式 -->
-        <label class="control-label text-left" :for="name" v-if="!isHorizontal">{{label}}</label>
-        <slot v-if="!isHorizontal"></slot>
-        <transition name="errorinfo" mode="">
-            <span class="help-block" v-if="!isHorizontal">{{errorMessage}}</span>
-        </transition>
-        <!-- 横向布局样式 -->
-        <label class="control-label text-right" :for="name" :style="{'width':labelWidth+'%'}" v-if="isHorizontal">{{label}}</label>
-        <div class="control-block" :style="{'width':(99-labelWidth)+'%'}" v-if="isHorizontal">
-            <p :data-a="isHorizontal"><slot/></p>
-            <transition name="errorinfo" mode="">
-                <span class="help-block" v-show="validateError">{{errorMessage}}</span>
+        <template v-if="!isHorizontal">
+            <label class="control-label text-left" :for="name" >{{label}}</label>
+            <p :data-a="isHorizontal">
+                <slot></slot>
+            </p>
+            <transition name="errorinfo">
+                <span class="help-block" v-if="!isHorizontal">{{errorMessage}}</span>
             </transition>
-        </div>
-        <!-- TODO 支持inline样式 -->
+        </template>
+        <template v-if="isHorizontal">
+            <label class="control-label text-right" :for="name" :style="{'width':labelWidth+'%'}" v-if="isHorizontal">{{label}}</label>
+            <div class="control-block" :style="{'width':(99-labelWidth)+'%'}" v-if="isHorizontal">
+                <p :data-a="isHorizontal">
+                    <slot></slot>
+                </p>
+                <transition name="errorinfo" mode="">
+                    <span class="help-block" v-show="validateError">{{errorMessage}}</span>
+                </transition>
+            </div>
+        </template>
     </div>
 </template>
 <script>
@@ -291,7 +296,7 @@
     .has-error .el-checkbox {
         color: #a94442;
     }
-    p{
+    p {
         margin-bottom: 0;
     }
 </style>

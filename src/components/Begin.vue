@@ -13,27 +13,27 @@
                 <a><img :src="require('./../assets/img/usericon/userIcon (1).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (7).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (7).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (2).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (2).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (2).png" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (2).png')" class="img-responsive  img-thumbnail"></a>
             </div>
         </div>
         <div class="row" style="margin-top: 15px;">
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (3).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (3).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (4).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (4).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (5).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (5).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
             <div class="col-md-3">
-                <a><img src="/src/assets/img/usericon/userIcon (6).jpg" class="img-responsive  img-thumbnail"></a>
+                <a><img :src="require('./../assets/img/usericon/userIcon (6).jpg')" class="img-responsive  img-thumbnail"></a>
             </div>
         </div>
       

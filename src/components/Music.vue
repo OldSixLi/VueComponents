@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <!-- 列表部分 -->
-            <div class="col-md-9 col-sm-9">
+            <div class="col-md-9 col-sm-12 col-xs-12">
                 <h2 class="text-center">搜索</h2>
                 <div class="panel panel-default">
                     <div class="panel-heading" style="padding-bottom: 0;">
@@ -52,14 +52,14 @@
                 </div>
             </div>
             <!-- 歌曲详情部分 -->
-            <div class="col-md-3 col-sm-3" >
+            <div class="col-md-3 col-sm-12 col-xs-12" >
                  
                 <h2 class="text-center">详情</h2>
                 <div class="panel panel-default">
                     <div class="panel-heading"><b>{{dataObj.name?dataObj.name:'歌曲详情'}}</b></div>
                     <div style="padding:10px;">
                         <div v-show="!showLoad">
-                            <img :src='dataObj.songImg?dataObj.songImg:"/src/assets/img/nigula.jpg"' class='img-responsive img-thumbnail' alt='头像'>
+                            <img :src='dataObj.songImg?dataObj.songImg:require("./../assets/img/nigula.jpg")' class='img-responsive img-thumbnail' alt='头像'>
                             <div class="caption">
                                 <h4 v-show="dataObj.name">名称:{{dataObj.name}}</h4>
                                 <h4 v-show="dataObj.name">作者:{{dataObj.author}}</h4>
