@@ -8,11 +8,7 @@
                 <tr>
                     <!-- 展示序列号 -->
                     <th v-show="!!showindex">#</th>
-                    <!-- 遍历当前的列名，进行展示，同时设置列的style样式 -->
-                    <th v-for="(x,index) in rule" :key="index" :width="x.width" :style="{
-                        'text-align':x.align,
-                        'width':x.width
-                        }">
+                    <th v-for="(x,index) in rule" :key="index" :class="x.class" :style="x.style">
                         {{x.name}}
                     </th>
                 </tr>
@@ -23,23 +19,9 @@
                     <td v-show="!!showindex">
                         {{index+1}}
                     </td>
-                    <td v-for="y in rule" style="vertical-align: middle;" :style="{
-                            'text-align':y.align,
-                            'width':y.width
-                            }">
-                        <!--Begin: If当前的参数为多参数，进行多参数处理操作 -->
-                        <span v-if="y.dataKey&&y.dataKey.split(',').length>1"> 
-                        <!--NOTE 此处的逻辑有点不正常，难描述。每个td中的params参数，先置为空数组，再往数组中逐个添加当前td中的参数。目的是防止其他td中多参数与当前td参数拼接到一起 -->
-                        <span v-show='false'>{{x.params=[]}}</span>
-                        <span v-for="singleKey in y.dataKey.split(',')" class="hide"> 
-                            {{x.params.push(x[singleKey])}}
-                        </span>
-                        <span v-html="renderHtml(x.params,y.filter)" > </span>
-                        </span>
-                        <!-- End:结束多参数判断 -->
-
-                        <!-- Else当前的参数为单个参数，直接进行处理 -->
-                        <span v-else v-html="renderHtml(x[y.dataKey],y.filter)" v-tooltip.top="'向上提示'"> </span>
+                    <td v-for="y in rule" style="vertical-align: middle;" :class="x.class" :style="y.style">
+                        <span v-html="renderHtml(y.filter,y.dataKey,x)"> </span>
+                         <!-- v-tooltip.top="'向上提示'" -->
                     </td>
                 </tr>
                 <!-- 当前搜索结果为空时，提示没有搜索结果 -->
@@ -54,7 +36,7 @@
         <div v-show="showLoading" :style="{'height':loadingHeight+'px'}" class="relative">
             <div class="cssload-loader"></div>
         </div>
-        <!-- 分页控件模块 --> 
+        <!-- 分页控件模块 -->
         <ht-page :param="pageOption" class="pull-right"></ht-page>
         <!-- 搜索参数 -->
         <span class="hide">{{searchDatas}}</span>
@@ -157,17 +139,17 @@
                     }
                 });
             },
-            renderHtml: function(tdData, rule) {
-                if (!rule) {
-                    return tdData;
-                } else {
-                    var filter = rule;
-                    if (this[filter]) {
-                        return this[filter](tdData);
-                    }
-                    return window.HtmlFun && window.HtmlFun[filter] ? Object.prototype.toString.call(tdData) == '[object Array]' ? window.HtmlFun[filter].apply(this, tdData) : window.HtmlFun[filter](tdData) : tdData;
-                }
-            }, 
+            renderHtml: function(rule, keys, obj) {
+                var valArr = [];
+                keys.split(',').forEach(element => {
+                    valArr.push(obj[element]);
+                });
+                // NOTE 在 2017年12月18日15:45:34 终于从html中循环生成改成了在方法中生成具体数据
+                // 原来的形式 需要在表格中生成很多的空span标签  现在直接获取到多参数数据  然后返回数据
+                // 避免了Vue的无限循环的提醒,就是在循环中修改循环对象
+                // 我有时候就在想 是不是我太菜了  为什么改个BUG就叫超级大BUG   - -!
+                return window.HtmlFun && window.HtmlFun[rule] ? window.HtmlFun[rule].apply(HtmlFun, valArr) : valArr.join(',');
+            },
             parseText: function(str) {
                 if (str.indexOf(0) == "{" || str.indexOf(0) == "[") {
                     str = str.replace(/'/g, "\"");
@@ -194,31 +176,33 @@
         mounted: function() {
             var self = this;
             var _this = this;
-            
-            console.log(_this.$slots);
-            console.log(_this.$slots.default);
             _this.$slots.default.forEach(function(child) {
                 var obj = {};
-                if(child&&child.componentOptions&&child.componentOptions.propsData){
-
-                for (var p in child.componentOptions.propsData) {
-                    obj[p] = child.componentOptions.propsData[p];
+                if (child && child.componentOptions && child.componentOptions.propsData) {
+                    for (var p in child.componentOptions.propsData) {
+                        obj[p] = child.componentOptions.propsData[p];
+                    }
                 }
+                obj.class = child.data.staticClass ? child.data.staticClass : "";
+                obj.style = child.data.staticStyle ? child.data.staticStyle : {};
+                if (child.data.staticStyle != undefined) {
+                    obj.style.textAlign = obj.align;
+                    obj.style.width = obj.width;
                 }
                 _this.rule.push(obj);
             });
-        }, 
+        }
     }
 </script>
 <style>
     .hide {
         display: none;
-    }  
+    }
     .ht-table {
         margin-bottom: 0;
     }
-     .ht-table td img{
-          width: 30px;
+    .ht-table td img {
+        width: 30px;
         height: 30px;
-     }
+    }
 </style>

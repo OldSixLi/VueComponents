@@ -166,7 +166,7 @@
 								<ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
 									<!--内部组件-->
 									<!-- http://localhost:3001/users/allUser -->
-									<column slot name="名称" data-key="name"></column>
+									<column slot name="名称" data-key="name" width="15%" align="left" class="nameClass aaa" style="color:red;text-align:right; "></column>
 									<column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
 									<column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
 									<column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>

@@ -36,7 +36,6 @@
               <router-link to="/music" class="btn btn-link">网易云</router-link>
             </li>
             <li>
-              <!-- , params:{ id: 155 } -->
               <router-link :to="{name:'userinfo'}" class="btn btn-link">用户信息</router-link>
             </li>
             
@@ -61,9 +60,8 @@
 </template>
 
 <script>
-import store from './store/index';
   export default {
-    name: 'app',store,
+    name: 'app',
     data() {
       return {
         isShow: true
@@ -71,7 +69,8 @@ import store from './store/index';
     },
     computed: {
       name(){
-        return  store.state.name;
+        //在根目录里边已经注册过store,此组件内不用注册,直接可以使用此属性
+        return this.$store.state.name;
       }
     }
   }
