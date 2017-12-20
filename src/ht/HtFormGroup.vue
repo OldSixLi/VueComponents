@@ -72,11 +72,7 @@
         mounted: function() {
             //TODO  在此处就应该校验用户输入的规则
             //NOTE  特殊长度字符等相当于默认填写内容  需用到requireMessage进行显示
-            console.log(
-                new Date().getHours() +
-                ':' + new Date().getMinutes() +
-                ':' + new Date().getSeconds() + "的值是:" +
-                this.$slots.default.value);
+            
             //从父组件获取值horizontal,从而判断isHorizontal
             this.isHorizontal = this.$parent.$options.propsData["horizontal"];
             this.$on('validate', function(infoType) {

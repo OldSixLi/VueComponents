@@ -46,9 +46,16 @@
 											</select>
 										</ht-form-group>
 										<ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
-											<label v-for="x in formPersonsList">
-												<ht-checkbox v-model="formTotalPrice" :label='x.price' name='cfWuqi'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
-											</label>
+										 <label v-for="x in formPersonsList">{{x.name}}</label>
+											<!-- <label v-for="x in PersonsList">
+											<ht-checkbox v-model="totalPrice" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+										</label> -->
+										<label v-for="y in formPersonsList">
+											<ht-checkbox v-model="formTotalPrice" :label='y.price' name='cfWuqi'> {{y.name+'('+y.price+'元)　'}}</ht-checkbox>
+										</label>
+
+										
+
 										</ht-form-group>
 										<ht-form-group label="付款方式：" label-width="20" name="payWay" :require="true" require-message="请选择付款方式">
 											<ht-radio v-model="payWay" label="1" name="payWay">微信</ht-radio>
@@ -73,17 +80,15 @@
 								</panel>
 								<panel title="复选框组件">
 									<label v-for="x in PersonsList">
-	                      <ht-checkbox v-model="totalPrice" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
-	                    </label>
-									<p> 总共花费了 {{totalPrice.sum()}}元</p>
+											<ht-checkbox v-model="totalPrice" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+											</label>
+									<p> 总共花费了 {{arrSum(totalPrice)}}元</p>
 								</panel>
 							</div>
 							<div class="col-md-6">
 								<panel title="分页组件">
 									<button type="button" slot="header" class="btn-link pull-right" @click="changePage" style="outline: none;">随机生成总页数与页码</button>
 									<ht-page :param="pageOptions"></ht-page>
-									<!-- <button type="button" class="btn btn-primary pull-right" @click="changePage">随机生成总页数与页码</button> -->
-									<!-- <div slot="footer">底部的内容</div> -->
 								</panel>
 								<panel title="Modal提示框">
 									<div class="text-center">
@@ -92,15 +97,20 @@
 								</panel>
 								<ht-modal :is-show="showModal" @states="modalControl" title="提示框">
 									<!-- <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p> -->
-									<img src="/src/assets/img/usericon/usericon_2.jpg" alt="" class="img-responsive">
+									<img :src="require('./../assets/img/usericon/usericon_2.jpg')" alt="" class="img-responsive">
 								</ht-modal>
 								<!-- 人物列表 -->
 								<panel title="动画效果" style="background-color: #ddd;">
-									<info-block img-src="/src/assets/img/usericon/xun.jpg" title="陈奕迅" intro="Eason,歌手,演员" word="拦路雨偏似雪花饮泣的你冻吗这风褛我给你磨到有襟花连调了职也不怕怎么始终牵挂苦心选中今天想车你回家原谅我不再送花伤口应要结疤花瓣铺满心里坟场才害怕如若你非我不嫁彼此终必火化一生一世等一天需要代价谁都只得那双手靠拥抱亦难任你拥有要拥有必先懂失去怎接受曾沿着雪路浪游为何为好事泪流谁能凭爱意要富士山私有何不把悲哀感觉假设是来自你虚构试管里找不到它染污眼眸前尘硬化像石头随缘地抛下便逃走我绝不罕有往街里绕过一周我便化乌有"
+									<info-block :img-src="require('./../assets/img/usericon/xun.jpg')" title="陈奕迅" intro="Eason,歌手,演员" word="拦路雨偏似雪花饮泣的你冻吗这风褛我给你磨到有襟花连调了职也不怕怎么始终牵挂苦心选中今天想车你回家原谅我不再送花伤口应要结疤花瓣铺满心里坟场才害怕如若你非我不嫁彼此终必火化一生一世等一天需要代价谁都只得那双手靠拥抱亦难任你拥有要拥有必先懂失去怎接受曾沿着雪路浪游为何为好事泪流谁能凭爱意要富士山私有何不把悲哀感觉假设是来自你虚构试管里找不到它染污眼眸前尘硬化像石头随缘地抛下便逃走我绝不罕有往街里绕过一周我便化乌有"
 									    style="width:32%;margin-left: 1%;"></info-block>
-									<info-block img-src="/src/assets/img/usericon/zhou.jpg" title="周杰伦" intro="歌手,演员" word="对这个世界如果你有太多的抱怨跌倒了 就不敢继续往前走为什么 人要这么的脆弱 堕落请你打开电视看看 多少人为生命在努力勇敢的走下去我们是不是该知足珍惜一切 就算没有拥有还记得你说家是唯一的城堡随着稻香河流继续奔跑微微笑 小时候的梦我知道不要哭让萤火虫带着你逃跑乡间的歌谣永远的依靠回家吧 回到最初的美好" style="width:32%;"></info-block>
-									<info-block img-src="/src/assets/img/usericon/qian.jpg" title="薛之谦" intro="歌手" word="简单点说话的方式简单点递进的情绪请省略你又不是个演员别设计那些情节没意见我只想看看你怎么圆你难过的太表面 像没天赋的演员观众一眼能看见该配合你演出的我演视而不见在逼一个最爱你的人即兴表演什么时候我们开始收起了底线顺应时代的改变看那些拙劣的表演可你曾经那么爱我干嘛演出细节我该变成什么样子才能延缓厌倦原来当爱放下防备后的这些那些才是考验"
+									<info-block :img-src="require('./../assets/img/usericon/zhou.jpg')" title="周杰伦" intro="歌手,演员" word="对这个世界如果你有太多的抱怨跌倒了 就不敢继续往前走为什么 人要这么的脆弱 堕落请你打开电视看看 多少人为生命在努力勇敢的走下去我们是不是该知足珍惜一切 就算没有拥有还记得你说家是唯一的城堡随着稻香河流继续奔跑微微笑 小时候的梦我知道不要哭让萤火虫带着你逃跑乡间的歌谣永远的依靠回家吧 回到最初的美好"
 									    style="width:32%;"></info-block>
+									<info-block :img-src="require('./../assets/img/usericon/qian.jpg')" title="薛之谦" intro="歌手" word="简单点说话的方式简单点递进的情绪请省略你又不是个演员别设计那些情节没意见我只想看看你怎么圆你难过的太表面 像没天赋的演员观众一眼能看见该配合你演出的我演视而不见在逼一个最爱你的人即兴表演什么时候我们开始收起了底线顺应时代的改变看那些拙劣的表演可你曾经那么爱我干嘛演出细节我该变成什么样子才能延缓厌倦原来当爱放下防备后的这些那些才是考验"
+									    style="width:32%;"></info-block>
+								</panel>
+								<panel title="提示框">
+									<button type="button" class="btn btn-primary" @click="notify()">左侧悬浮框</button>
+									<button type="button" class="btn btn-primary" @click="notifyRight()">右侧悬浮框</button>
 								</panel>
 							</div>
 						</div>
@@ -109,7 +119,6 @@
 					<div role="tabpanel" class="tab-pane" id="profile">
 						<div class="row">
 							<div class="col-md-2">
-								<!-- <img  v-random-img >  -->
 								<panel title="随便测试的组件">
 									<pr-list ref="pianduan">
 										<pr slot min="1" length="2" :has-error="false" message="昵索的对">父组件获取到这句话并进行校验</pr>
@@ -118,9 +127,6 @@
 									</pr-list>
 									<button type="button" class="btn btn-success" @click="likai('pianduan')">自定义BUTTON</button>
 								</panel>
-
-								
-
 							</div>
 							<div class="col-md-6">
 								<div class="panel panel-default" style="margin-top: 15px;">
@@ -145,17 +151,15 @@
 										</panel>
 									</div>
 								</div>
-								
 							</div>
-							<div class="col-md-4"> 
+							<div class="col-md-4">
 								<button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局sote中的名称</button>
-								 
-								 <panel title=".sync使用">
+								<panel title=".sync使用">
 									<textarea type="text" v-model="inputMsg" class="form-control"></textarea>
 									<p>封装组件如下</p>
 									<al :message.sync="inputMsg"></al>
-								 </panel>
-							 </div>
+								</panel>
+							</div>
 						</div>
 					</div>
 					<!-- 第三个 -->
@@ -163,15 +167,14 @@
 						<panel title="表格组件">
 							<span slot="header" class="pull-right"><b>2017年11月8日11:25:07 生成</b></span>
 							<panel title="人员列表">
-								<ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
-									<!--内部组件-->
-									<!-- http://localhost:3001/users/allUser -->
-									<column slot name="名称" data-key="name" width="15%" align="left" class="nameClass aaa" style="color:red;text-align:right; "></column>
+								<!-- <ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
+									 
+									<column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:red;text-align:right; "></column>
 									<column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
 									<column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
 									<column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
 									<column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
-								</ht-table>
+								</ht-table> -->
 							</panel>
 						</panel>
 					</div>
@@ -192,7 +195,7 @@
 		data: function() {
 			//组件内数据部分
 			return {
-				inputMsg:"你们好",
+				inputMsg: "你们好",
 				song: {
 					id: "",
 					name: "",
@@ -211,7 +214,7 @@
 				canglei: 8888888888888888,
 				kuanglong: '321@qq.com',
 				linghu: "1",
-				payWay:"1",
+				payWay: "1",
 				searchData: {
 					currentPage: 1
 				},
@@ -230,46 +233,48 @@
 				},
 				timepicker: "2017/11/14",
 				radio: "2",
-				totalPrice: [58],
+				totalPrice: [],
 				PersonsList: [{
 					name: "猎狐者",
 					price: 38
 				}],
-				formPersonsList: [{
-					"name": "猎狐者",
-					"price": 38
-				}, {
-					"name": "飞虎队",
-					"price": 58
-				}, {
-					"name": "灵狐者",
-					"price": 108
-				}, {
-					"name": "夜玫瑰",
-					"price": 18
-				}, {
-					"name": "刀锋战士",
-					"price": 36
-				}, {
-					"name": "潘多拉",
-					"price": 19
-				}],
+				formPersonsList:[],
 				formTotalPrice: [19]
 			}
 		},
 		mounted: function() {
-			this.getPerson();
+			// this.getPerson();
+			setTimeout(() => {
+				this.formPersonsList= [{
+								name: "猎狐者",
+								price: 38
+							}, {
+								name: "飞虎队",
+								price: 58
+							}, {
+								name: "灵狐者",
+								price: 108
+							}, {
+								name: "夜玫瑰",
+								price: 18
+							}, {
+								name: "刀锋战士",
+								price: 36
+							}, {
+								name: "潘多拉",
+								price: 19
+							}];
+			}, 1000);
 		},
 		methods: {
-			
 			/**
 			 * 修改Vuex中属性的方法 
 			 * 要求必须使用commit修改属性,这样数据流更加清晰和容易维护
 			 * @returns
 			 */
-			changeName(){
-                store.commit('changeName');
-            },
+			changeName() {
+				store.commit('changeName');
+			},
 			getPerson() {
 				var _self = this;
 				$.ajax({
@@ -280,12 +285,58 @@
 						if (data != null && data != "") {
 							_self.PersonsList = data;
 						} else {
-							_self.PersonsList = [];
+							// _self.PersonsList = [];
+							_self.PersonsList = [{
+								name: "猎狐者",
+								price: 38
+							}, {
+								name: "飞虎队",
+								price: 58
+							}, {
+								name: "灵狐者",
+								price: 108
+							}, {
+								name: "夜玫瑰",
+								price: 18
+							}, {
+								name: "刀锋战士",
+								price: 36
+							}, {
+								name: "潘多拉",
+								price: 19
+							}]
 						}
 					},
 					error: function(response) {
 						console.log("Mian.vue获取人物列表失败,请重试");
+						_self.PersonsList = [{
+							name: "猎狐者",
+							price: 38
+						}, {
+							name: "飞虎队",
+							price: 58
+						}, {
+							name: "灵狐者",
+							price: 108
+						}, {
+							name: "夜玫瑰",
+							price: 18
+						}, {
+							name: "刀锋战士",
+							price: 36
+						}, {
+							name: "潘多拉",
+							price: 19
+						}]
 					}
+				});
+			},
+			arrSum(arr) {
+				if(!arr.length){
+					return 0;
+				}
+				return arr.reduce(function(partial, value) {
+					return partial + value;
 				});
 			},
 			//不推荐使用JQ操作DOM  但是此处只是展示效果
@@ -343,10 +394,10 @@
 					if (isPass) {
 						console.log("通过");
 					} else {
-						console.error("通不过");
-						console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
-						console.info("用户自定义处理错误" + errorList.join('&&&&&'));
-						console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+						var n = this.$notifyMessage("<b>用户自定义处理错误</b><br>" + errorList.join('<br>'));
+						console.log("■■■■■■■■■■■■■此处显示提示框对象组件■■■■■■■■■■■■");
+						console.log(n);
+						console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 					}
 				});
 			},
@@ -362,6 +413,16 @@
 					':' + new Date().getMinutes() +
 					':' + new Date().getSeconds() + "的值是:" +
 					value);
+			},
+			notify() {
+				this.$notifyMessageLeft("在左边弹出一些东西你说呢")
+			},
+			notifyRight() {
+				// this.$notify({
+				//     direction:"right",
+				//     message:"原生提示配置内容"
+				// })
+				this.$notifyMessage("弹出一些提示内容");
 			}
 		},
 		components: {

@@ -6,7 +6,7 @@
         {{$route.params.name}}{{$route.params.name?',':""}}欢迎加入我们
       </h1>
       <!-- <music></music> -->
-      <img src="/src/assets/img/19696025--0--6c1b6af_r.jpg" alt="" class="img-responsive">
+      <img :src="require('./../assets/img/19696025--0--6c1b6af_r.jpg')" class="img-responsive">
     </div>
   </div>
 </template>

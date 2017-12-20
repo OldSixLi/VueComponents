@@ -42,7 +42,7 @@
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
-            <li style="line-height: 50px;">{{name}}　　</li>
+            <li style="line-height: 50px;">{{name}}</li>
             <li>
               <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img :src="require('./assets/img/github.png')" class="img-title"> </a>
             </li>
@@ -114,5 +114,21 @@
   }
   .img-title{
     width:45px;height:45px; 
+  }
+  .rightNotifyContent{
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    z-index:100; background-color:transparent;
+  }
+  .leftNotifyContent{
+    background-color:transparent;
+    position: fixed;top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    z-index:100;
   }
 </style>
