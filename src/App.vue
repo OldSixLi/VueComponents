@@ -29,6 +29,7 @@
                 <li>
                   <router-link to="/point">指令</router-link>
                 </li>
+                
               </ul>
             </li>
             <li>
@@ -39,6 +40,9 @@
             </li>
             <li>
               <router-link :to="{name:'userinfo'}" class="btn btn-link">用户信息</router-link>
+            </li>
+            <li>
+              <router-link to="/show">展示</router-link>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">

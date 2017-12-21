@@ -13,11 +13,12 @@ import Know from './../components/Know.vue';
 import Music from './../components/Music.vue';
 import Point from './../components/Point.vue';
 import User from './../components/User.vue';
+import Show from './../components/Show.vue';
 import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
 Vue.use(Router);
 
-var router = new Router({
+let router = new Router({
   routes: [{ //每一个链接都是一个对象
       path: '/', //链接路径
       name: 'begin', //路由名称，
@@ -73,6 +74,11 @@ var router = new Router({
       path: "/know",
       name: "know",
       component: Know,
+    }, {
+
+      path: "/show",
+      name: "show",
+      component: Show,
     },
     {
       path: "/point",

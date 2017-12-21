@@ -123,7 +123,10 @@ export default {
       ? confirm(_self.userInfoObj.name + ",您确认离开此页面吗?")
       : true;
     next(result);
-  }
+  },
+  scrollBehavior (to, from, savedPosition) {
+  return { x: 0, y:100 }
+}
 };
 </script>
 <style scoped>
