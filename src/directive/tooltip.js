@@ -14,4 +14,4 @@ Vue.directive('tooltip', {
     $(el).css('cursor', 'pointer');
     $(el).tooltip();
   }
-})
+});

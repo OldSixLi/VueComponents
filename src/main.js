@@ -16,46 +16,15 @@ import './assets/css/bootstrap.min.css';
 import './assets/js/bootstrap.js';
 
 window.Vue = Vue;
-// Vue.config.productionTip = false;//取消输出
 Vue.use(pluginPopBar);
-// window.console.log = function() {}
-// Array.prototype.sum = function() {
-//   if (this.length != 0) {
-//     return this.reduce(function(partial, value) {
-//       return partial + value;
-//     });
-//   } else {
-//     return 0;
-//   }
-// };
+console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+console.log(router);
+console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 new Vue({
   el: '#app',
   router,
   store,
-  data: {},
-  template: '<app></app>',
-  methods: {},
-  computed: {},
-  mounted() {}
-});
-
-
-
-//最先开始执行 全局前置守卫
-router.beforeEach((to, from, next) => {
-  console.log("开始beforeEach");
-  next();
-});
-// 和上个区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用。
-//全局解析守卫
-router.beforeResolve((to, from, next) => {
-  console.log("开始beforeResolve");
-  next();
-});
-// 全局后置钩子
-router.afterEach((to, from) => {
-  // 不会接受 next 函数也不会改变导航本身
-  console.log("开始afterEach");
+  template: '<app></app>'
 });
 
 //声明HtmlFun
