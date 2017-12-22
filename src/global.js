@@ -25,11 +25,13 @@ import HtDate from './ht/HtDate.vue';
 import HtRadio from './ht/HtRadio.vue';
 import HtCheckbox from './ht/HtCheckbox.vue';
 
+
 //布局组件
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
 import Loading from './layout/Loading.vue';
 import PopBar from './layout/PopBar.vue';
+import ImgAn from './layout/ImgAn.vue';
 
 //NOTE 指令
 import './directive/randomImg.js';
@@ -59,3 +61,4 @@ Vue.component('ajax-search', AjaxSearch);
 Vue.component('loading', Loading);
 Vue.component('al', Al);
 Vue.component('pop-bar', PopBar);
+Vue.component('img-an', ImgAn);
