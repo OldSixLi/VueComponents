@@ -94,6 +94,8 @@
         </tbody>
       </table>
     </panel>
+
+    
   </div>
 </template>
 <script>

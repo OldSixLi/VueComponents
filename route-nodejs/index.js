@@ -3,11 +3,10 @@
  * @Author:OldSixLi (oldsixli@gmail.com)
  * @Date: 2017年11月15日13:21:49
  * @Last Modified by: mashaobo
- * @Last Modified time:2017年11月15日13:22:08
+ * @Last Modified time:2017年12月27日13:59:17
  */
 
 var express = require('express');
-// var qiniu = require('qiniu'); //七牛云
 var url = require('url');
 var bodyParser = require("body-parser");
 // var DBhelper = require('../mysql/sql.js');
@@ -57,8 +56,10 @@ router.post('/users', function(req, res, next) {
       res.json(obj);
     }, 0);
   } catch (error) {
+    setTimeout(function() {
+      res.json("请求出错");
+    }, 0);
     console.log(error);　　
   }
 });
-
 module.exports = router;

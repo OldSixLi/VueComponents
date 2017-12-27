@@ -2,7 +2,7 @@
  * 右侧悬浮提示,封装成插件,引入到全局变量中,封装完毕后可以直接通过方法调用
  * @returns
  */
-import Template from './../layout/PopBar.vue';
+import Template from './../layout/notice/PopBar.vue';
 let globalOptions = {
   title: "提示",
   message: "提示内容",
@@ -50,33 +50,34 @@ export default {
         message: message
       });
     };
+    /**
+     * Vue封装ajax,其实和jQ的ajax类似,只不过补充了 对错误的统一处理
+     * @returns 
+     */
     Vue.prototype.$ajax = function(option) {
       return new Promise((resolve, reject) => {
         $.ajax({
           type: option.type || "POST",
-          url: option.url || "", //TODO 修改此时链接
+          url: option.url || "",
           data: option.data,
           dataType: "json",
           success: function(data, textStatus, jqXHR) {
             if (data != null && data != "") {
-              if (data.success) {
-                //此处是成功调用的回调
-              } else {
-                //此处是失败的回调
-              }
-
+              resolve(data);
             } else {
-              tool.alert("提示", "未获取到数据!");
+              reject();
+              Vue.prototype.$notifyMessage("未请求到数据");
             }
           },
           error: function(response) {
-            //NOTE 获取服务出错时提示
-            tool.alert("提示", "请求服务失败,请重试!");
+            reject();
+            Vue.prototype.$notifyMessage("请求服务失败,请重试!");
           },
           complete: function(xhr, textStatus) {
-            //NOTE 异步事件完成后需要操作的内容
+            option.complete && option.complete();
           }
         });
       })
     };
   }
+}

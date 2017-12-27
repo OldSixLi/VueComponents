@@ -10,20 +10,25 @@
         <link async href="http://fonts.googleapis.com/css?family=Aldrich" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css" />
       </div> 
       <div class="row">
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel1.jpg")' title="时间调度框架" content="一个基于C#的定时任务调度框架啊啊啊啊啊啊啊啊啊啊啊啊啊啊" href="http://localhost/csfwpt_console/"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel4.jpg")' title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel2.jpg")' title="时间调度框架" content="一个基于C#的定时任务调度框架啊啊啊啊啊啊啊啊啊啊啊啊啊啊" href="http://localhost/csfwpt_console/"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel5.jpg")' title="后台管理网站" content="基于Angularjs的后台管理网站" href="https://github.com/OldSixLi/Nodes"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel3.jpg")' title="时间调度框架" content="一个基于C#的定时任务调度框架啊啊啊啊啊啊啊啊啊啊啊啊啊啊" href="http://localhost/csfwpt_console/"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel6.jpg")' title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片" href="https://github.com/OldSixLi/NodeAngular"></img-an>
       </div>
-      <div class="row" style="margin-top: 20px;">
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel4.jpg")' title="时间调度框架" content="一个基于C#的定时任务调度框架啊啊啊啊啊啊啊啊啊啊啊啊啊啊" href="http://localhost/csfwpt_console/"></img-an>
+      <div class="row"  style="margin-top: 20px;">
+        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel1.jpg")' title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel5.jpg")' title="时间调度框架" content="一个基于C#的定时任务调度框架啊啊啊啊啊啊啊啊啊啊啊啊啊啊" href="http://localhost/csfwpt_console/"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel2.jpg")' title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel6.jpg")' title="时间调度框架" content="一个基于C#的定时任务调度框架啊啊啊啊啊啊啊啊啊啊啊啊啊啊" href="http://localhost/csfwpt_console/"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel3.jpg")' title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
+      
+      
     </div>
+    <div >
+        <running-man></running-man>
+      </div>
   </div>
 </template>
 <script>

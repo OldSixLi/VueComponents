@@ -1,9 +1,14 @@
 <template>
   <div id="">
-    <h3 class="text-center">会员信息父级页面</h3>
+    <h3 class="text-center">会员信息父级页面
+  <small>  <a href="javascript:;" @click="notice()">提示一哈</a></small>
+    </h3> 
     <transition name="userRouter" mode="">
       <router-view></router-view>
     </transition>
+    <!-- <div class="text-center">
+      <floor></floor>
+    </div> -->
   </div>
 </template>
 <script>
@@ -19,11 +24,20 @@ export default {
   mounted: function() {
     //组件生成时调用
   },
-  methods: {}
-  // fade-enter：进入过渡的开始状态，元素被插入时生效，只应用一帧后立即删除；
-  // fade-enter-active：进入过渡的结束状态，元素被插入时就生效，在过渡过程完成之后移除；
-  // fade-leave：离开过渡的开始状态，元素被删除时触发，只应用一帧后立即删除；
-  // fade-leave-active：离开过渡的结束状态，元素被删除时生效，离开过渡完成之后被删除；
+  methods: {
+    notice(){
+      this.$notice({
+        title:"友情提示",
+        content:"<b>当前的内容是你们必须提示的内容</b>",
+        cancelFun(){
+          this.$notifyMessageLeft("您点击了取消提示框");
+        },
+        confirmFun(){
+          this.$notifyMessage("您点击了确认提示框");
+        }
+      })
+    }
+  } 
 };
 </script>
 <style scoped>

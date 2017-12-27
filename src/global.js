@@ -30,8 +30,12 @@ import HtCheckbox from './ht/HtCheckbox.vue';
 import Panel from './layout/Panel.vue';
 import InfoBlock from './layout/InfoBlock.vue';
 import Loading from './layout/Loading.vue';
-import PopBar from './layout/PopBar.vue';
+import PopBar from './layout/notice/PopBar.vue';
 import ImgAn from './layout/ImgAn.vue';
+import RrunningMan from './layout/RrunningMan.vue';
+import Floor from './layout/cool/Floor.vue';
+import Notice from './layout/notice/Notice.vue';
+
 
 //NOTE 指令
 import './directive/randomImg.js';
@@ -62,3 +66,6 @@ Vue.component('loading', Loading);
 Vue.component('al', Al);
 Vue.component('pop-bar', PopBar);
 Vue.component('img-an', ImgAn);
+Vue.component('running-man', RrunningMan);
+Vue.component('floor', Floor);
+Vue.component('notice', Notice);

@@ -1,11 +1,6 @@
 <template>
   <transition name="notify">
-    <div class="notify" 
-    v-if="visible" 
-    :class="direction" 
-    :style="{}"
-    @mouseenter="clearTimer()"
-    @mouseleave="startTimer()">
+    <div class="notify" v-if="visible" :class="direction" :style="{}" @mouseenter="clearTimer()" @mouseleave="startTimer()">
       <p class="n-title">
         <b>{{title}}</b>
       </p>
@@ -22,8 +17,7 @@ export default {
   name: "PopBar",
   props: {
     //对外获取的数据
-    msg: String,
-    duration: Number
+    msg: String
   },
   data: function() {
     //组件内数据部分
@@ -32,20 +26,14 @@ export default {
       message: this.msg || "",
       title: "提示",
       direction: "right",
-      timer: null
+      timer: null,
+      duration: 3000
     };
   },
   mounted() {
-    // if (this.duration > 0) {
-    //     this.timer = setTimeout(() => {
-    //       if (!this.closed) {
-    //         this.close();
-    //       }
-    //     }, this.duration);
-    //   }
     if (this.duration > 0) {
       this.timer = setTimeout(() => {
-        if (!this.visible) {
+        if (this.visible) {
           this.close();
         }
       }, this.duration);
@@ -54,6 +42,16 @@ export default {
   methods: {
     close() {
       this.visible = false;
+    },
+    clearTimer() {
+      clearTimeout(this.timer);
+    },
+    startTimer() {
+      this.timer = setTimeout(() => {
+        if (this.visible) {
+          this.close();
+        }
+      }, this.duration);
     }
   }
 };
