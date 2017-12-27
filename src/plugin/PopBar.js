@@ -50,5 +50,33 @@ export default {
         message: message
       });
     };
+    Vue.prototype.$ajax = function(option) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          type: option.type || "POST",
+          url: option.url || "", //TODO 修改此时链接
+          data: option.data,
+          dataType: "json",
+          success: function(data, textStatus, jqXHR) {
+            if (data != null && data != "") {
+              if (data.success) {
+                //此处是成功调用的回调
+              } else {
+                //此处是失败的回调
+              }
+
+            } else {
+              tool.alert("提示", "未获取到数据!");
+            }
+          },
+          error: function(response) {
+            //NOTE 获取服务出错时提示
+            tool.alert("提示", "请求服务失败,请重试!");
+          },
+          complete: function(xhr, textStatus) {
+            //NOTE 异步事件完成后需要操作的内容
+          }
+        });
+      })
+    };
   }
-}

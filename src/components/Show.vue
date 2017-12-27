@@ -79,5 +79,6 @@ export default {
     -5px 6px 0 rgb(128, 141, 147), -6px 5px 0 rgb(205, 210, 213),
     -6px 7px 0 rgb(128, 141, 147), -7px 6px 0 rgb(205, 210, 213),
     -7px 8px 0 rgb(128, 141, 147), -8px 7px 0 rgb(205, 210, 213);
+    
 }
 </style>
