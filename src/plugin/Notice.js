@@ -27,6 +27,39 @@ const Notice = function(config = {}) {
 }
 export default {
   install(Vue) {
+    /**
+     * 弹框提示组件 (传入配置对象)
+     * @returns 
+     */
     Vue.prototype.$notice = Notice.bind(Vue);
+    /**
+     * alert提示框 
+     * @returns 
+     */
+    Vue.prototype.$alert = (title, content, okCallback, readyCallback) => {
+        return Vue.prototype.$notice({
+          alertType: "alert",
+          title: title,
+          alertType: "alert",
+          content: content,
+          confirmFun: okCallback || function() {},
+          readyFun: readyCallback || function() {}
+        });
+      },
+      /**
+       * confirm提示框
+       * 在Vue实例内部,调用this.$confirm()调用此方法 
+       * @returns 
+       */
+      Vue.prototype.$confirm = (title, content, okCallback, cancelCallback, readyCallback) => {
+        return Vue.prototype.$notice({
+          alertType: "confirm",
+          title: title,
+          content: content,
+          cancelFun: cancelCallback || function() {},
+          confirmFun: okCallback || function() {},
+          readyFun: readyCallback || function() {}
+        });
+      }
   }
 }

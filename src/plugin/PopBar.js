@@ -38,16 +38,18 @@ export default {
     //原生需配置提示
     Vue.prototype.$notify = Notify.bind(Vue);
     //右侧提示
-    Vue.prototype.$notifyMessage = function(message) {
+    Vue.prototype.$notifyMessage = function(message, duration) {
       return Vue.prototype.$notify({
-        message: message
+        message: message,
+        duration: duration == undefined ? 5000 : duration
       });
     };
     //左侧提示
-    Vue.prototype.$notifyMessageLeft = function(message) {
+    Vue.prototype.$notifyMessageLeft = function(message, duration) {
       return Vue.prototype.$notify({
         direction: "left",
-        message: message
+        message: message,
+        duration: duration == undefined ? 5000 : duration
       });
     };
     /**

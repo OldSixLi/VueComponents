@@ -1,25 +1,20 @@
 //顶部的提示条,可自动关闭
 <template>
-
-  <div class="notice-block" tabindex="-1" v-if="visible">
-    <div class="notice-backup" ></div>
-    <transition name="notice">
+  <div class="notice-block" tabindex="-1" v-if="visible" :class="{'active':visible}">
+    <div class="notice-backup"></div>
     <div class="notice-container">
       <div class="notice-word">
+        <span class="pull-right notice-icon" @click="close()" >&times;</span>
         <h3 class="notice-title" v-html="title"></h3>
-        <div class="notice-content" v-html="content"> 
+        
+        <div class="notice-content" v-html="content" ref="container">
         </div>
       </div>
-      <div class="text-center">
+      <div class="text-right">
         <button type="button" class="btn btn-default" @click="cancelClick" v-if="alertType=='confirm'">{{cancelBtnText}}</button>
-        <button type="button" class="btn btn-success" @click="confirmClick" 
-        :class="{
-          'pull-right':alertType=='alert'
-        }"
-        >{{confirmBtnText}}</button>
+        <button type="button" class="btn btn-primary" @click="confirmClick"  >{{confirmBtnText}}</button>
       </div>
-    </div> 
-</transition>
+    </div>
   </div>
 </template>
 <script>
@@ -33,31 +28,42 @@ export default {
     //组件内数据部分
     return {
       alertType: this.type || "confirm",
-      visible: true,
+      visible: false,
       title: "提示",
       confirmBtnText: "确定",
       cancelBtnText: "取消",
-      cancelFun:function(){},
-      confirmFun:function(){},
-    content: ""
+      cancelFun: function() {},
+      confirmFun: function() {},
+      readyFun: function() {},
+      content: ""
     };
   },
   mounted: function() {
-    //组件生成时调用
+    //监控运行,如果显示 ,则运行readyFun
+    this.$watch("visible", function(val) {
+      val &&
+        typeof this.readyFun === "function" &&
+        this.readyFun($(this.$refs.container));
+    });
   },
   methods: {
     close() {
       this.visible = false;
+      //TODO 如果必要可以添加关闭时的统一回调事件 
     },
-    cancelClick(){
-      this.cancelFun();
+    cancelClick() {
+      //当前提示内容作为默认值被回调
+      typeof this.cancelFun === "function" &&
+        this.cancelFun($(this.$refs.container));
       this.close();
     },
-    confirmClick(){
-      this.confirmFun();
+    confirmClick() {
+      //当前提示内容作为默认值被回调
+      typeof this.confirmFun === "function" &&
+        this.confirmFun($(this.$refs.container));
       this.close();
     }
-  }
+  } 
 };
 </script>
 <style scoped>
@@ -71,13 +77,14 @@ export default {
   overflow-y: scroll;
   padding: 50px;
   margin-right: -17px;
+  z-index: 1050;
 }
 .notice-container {
   line-height: 100%;
   display: inline-block;
   width: 400px;
   border-radius: 4px;
-  padding: 15px 30px 30px;
+  padding: 15px 15px 20px;
   vertical-align: middle;
   box-shadow: 1px 3px 15px 3px rgba(38, 28, 28, 0.2);
   background-color: #ffffff;
@@ -108,31 +115,43 @@ export default {
   text-align: center;
   color: #606266;
 }
+.notice-icon{
+  font-size: 22px;
+  cursor: pointer;
+}
 .notice-title {
-  text-align: center;
-  margin-bottom:15px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  font-size: 18px;
 }
 .notice-content {
+  text-align: left;
   line-height: 20px;
   margin-bottom: 30px;
 }
+.notice-container {
+  transition: all 0.3s;
+}
 
-.notice-enter-active {
-  -webkit-transform: translateY(0) scaleY(1);
-  transform: translateY(0) scaleY(1);
-  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+.active .notice-container {
+  animation-name: bounce;
+  transform-origin: center bottom;
+  animation-duration: 0.25s;
 }
-/* TODO 动画效果  以及是否确实需要添加格外的遮罩层 */
-/* 离开过渡的开始状态，元素被删除时触发，只应用一帧后立即删除； */
 
-.notice-leave-active {
-  opacity: 0;
-  transition: all 0.2s ease;
+@keyframes bounce {
+  from {
+    opacity: 0;
+    transform: rotateX(-60deg) scale3d(0.8, 0.8, 0.8);
+    transform-origin: 50% 0 0;
+  }
+  100% {
+    transform: rotateX(0deg);
+    transform-origin: 50% 0 0;
+    opacity: 1;
+  }
 }
-.notice-enter,
-.notice-leave-active{
-  opacity: 0;
-  -webkit-transform: translateY(-50%) ;
-  transform: translateY(-50%) ;
-}
+ 
 </style>

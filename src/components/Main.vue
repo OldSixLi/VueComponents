@@ -111,6 +111,10 @@
                   <button type="button" class="btn btn-primary" @click="notify()">左侧悬浮框</button>
                   <button type="button" class="btn btn-primary" @click="notifyRight()">右侧悬浮框</button>
                 </panel>
+                <panel title="对话框">
+                  <button type="button" class="btn btn-primary" @click="alertBtnClick()">alert提示框</button>
+                  <button type="button" class="btn btn-primary" @click="confirmBtnClick()">confirm提示框</button>
+                </panel>
               </div>
             </div>
           </div>
@@ -171,8 +175,9 @@
               </span>
               <panel title="人员列表">
                 <ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
-
-                  <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:red;text-align:right; "></column>
+                <!-- 可以自定义行的style与class -->
+                  <column slot name="名称" data-key=name width="15%" align="left"
+                   class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"></column>
                   <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
                   <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
                   <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
@@ -310,11 +315,50 @@ export default {
     }, 500);
   },
   methods: {
+    alertBtnClick() {
+      this.$alert(
+        "提示",
+        '<p><b>请输入您的值：</b></p><input id="ainput" type="text" placeholder="请输入值" class="form-control">',
+        $content => {
+          var val =
+            $content
+              .find("#ainput")
+              .val()
+              .trim() || "您没有输入任何内容";
+          this.$notifyMessage("您输入的值是<b>" + val + "</b>");
+        },
+        $content => {
+          console.log("加载完了");
+          $content.find("#ainput")[0].focus();
+        }
+      );
+    },
+    confirmBtnClick() {
+      this.$confirm(
+        "提示",
+        '<p><b>请输入您的值：</b></p><input id="ainput" type="text" placeholder="请输入值" class="form-control">',
+        $content => {
+          var val =
+            $content
+              .find("#ainput")
+              .val()
+              .trim() || "您没有输入任何内容";
+          this.$alert("提示", "您输入了<b>" + val + "</b>");
+        },
+        $content => {
+          this.$alert("提示", "您点击了取消按钮");
+        },
+        $content => {
+          console.log("加载完了");
+          $content.find("#ainput")[0].focus();
+        }
+      );
+    },
     /**
-			 * 修改Vuex中属性的方法 
-			 * 要求必须使用commit修改属性,这样数据流更加清晰和容易维护
-			 * @returns
-			 */
+     * 修改Vuex中属性的方法 
+     * 要求必须使用commit修改属性,这样数据流更加清晰和容易维护
+     * @returns
+     */
     changeName() {
       store.commit("changeName");
     },
@@ -457,10 +501,22 @@ export default {
     submitForm: function(formName) {
       this.$refs[formName].checkItem(function(isPass, errorList) {
         if (isPass) {
+          this.$alert(
+            "提示",
+            "添加成功",
+            function($content) {
+              //点击确定按钮进行操作(YES)
+                 
+          },
+            function($content) {
+              //提示框显示出来之后的操作(Ready)
+              
+            }
+          );
           console.log("通过");
         } else {
-          var n = this.$notifyMessage(
-            "<b>用户自定义处理错误</b><br>" + errorList.join("<br>")
+          var n = this.$alert("<b>用户自定义处理错误</b>",
+            errorList.join("<br>")
           );
           console.log("■■■■■■■■■■■■■此处显示提示框对象组件■■■■■■■■■■■■");
           console.log(n);
@@ -489,11 +545,7 @@ export default {
       this.$notifyMessageLeft("在左边弹出一些东西你说呢");
     },
     notifyRight() {
-      // this.$notify({
-      //     direction:"right",
-      //     message:"原生提示配置内容"
-      // })
-      this.$notifyMessage("弹出一些提示内容");
+      this.$notifyMessage("弹出一些提示内容,10s后自动关闭",10000);
     }
   },
   components: {

@@ -1,8 +1,10 @@
 <template>
   <div id="">
     <h3 class="text-center">会员信息父级页面
-  <small>  <a href="javascript:;" @click="notice()">提示一哈</a></small>
-    </h3> 
+      <small>
+        
+      </small>
+    </h3>
     <transition name="userRouter" mode="">
       <router-view></router-view>
     </transition>
@@ -25,19 +27,30 @@ export default {
     //组件生成时调用
   },
   methods: {
-    notice(){
+    notice() {
       this.$notice({
-        title:"友情提示",
-        content:"<b>当前的内容是你们必须提示的内容</b>",
-        cancelFun(){
+        title: "友情提示",
+        alertType: "alert",
+        content:
+          '<p><b>请输入您的值：</b></p><input id="ainput" type="text" placeholder="请输入值" class="form-control">',
+        cancelFun($content) {
           this.$notifyMessageLeft("您点击了取消提示框");
         },
-        confirmFun(){
-          this.$notifyMessage("您点击了确认提示框");
+        confirmFun($content) {
+          var val =
+            $content
+              .find("#ainput")
+              .val()
+              .trim() || "您没有输入任何内容";
+          this.$notifyMessage("您输入的值是<b>" + val + "</b>");
+        },
+        readyFun($content) {
+          console.log("加载完了");
+          $content.find("#ainput")[0].focus();
         }
-      })
+      });
     }
-  } 
+  }
 };
 </script>
 <style scoped>

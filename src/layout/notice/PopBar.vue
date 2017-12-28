@@ -27,7 +27,7 @@ export default {
       title: "提示",
       direction: "right",
       timer: null,
-      duration: 3000
+      duration: 5000
     };
   },
   mounted() {

@@ -22,7 +22,7 @@ let router = new Router({
   routes: [{ //每一个链接都是一个对象
       path: '/', //链接路径
       name: 'begin', //路由名称，
-      component: Show //对应的组件模板
+      component: Begin //对应的组件模板
     },
     {
       path: '/main',

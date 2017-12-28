@@ -22,7 +22,7 @@ Vue.use(pluginNotice);
 console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 console.log(router);
 console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-new Vue({
+var vueBlock = new Vue({
   el: '#app',
   router,
   store,
@@ -74,6 +74,9 @@ window.HtmlFun = {
     return m < 10 ? '0' + m : m;
   },
   test(id, name, problem) {
-    alert('id是' + id + '\r\n名称是：' + name + '\r\n问题是：' + problem);
+    vueBlock.$alert(
+      "提示",
+      'id是' + id + '<br>名称是：' + name + '<br>问题是：' + problem
+    );
   }　　
 }
