@@ -85,8 +85,28 @@
                   </label>
                   <p> 总共花费了 {{arrSum(totalPrice)}}元</p>
                 </panel>
+
+                <panel title="下拉菜单组件">
+                  <b>TODO </b>
+                </panel>
               </div>
               <div class="col-md-6">
+                <panel title="日期组件">
+                  <p>
+                    <b>起止日期(时间限定一周之内)</b>
+                  </p>
+                  <div style="font-size: 0;">
+                    <div style="display: inline-block;width:48%;">
+                      <ht-date v-model="timepicker" @select="daterSelect"></ht-date>
+                    </div>
+                    <span style="display: inline-block;width:4%;text-align: center;font-size: 14px;line-height: 38px;vertical-align: top;">至</span>
+                    <div style="display: inline-block;width:48%;">
+                      <ht-date :min-date="timepicker" :max-date="endDate"></ht-date>
+                    </div>
+                  </div>
+                  <p class="text-muted" slot="footer">
+                    <b>注:</b>此处利用第一个ht-date的值(timepicker)为基础,第二个ht-date组件中prop属性'min-date'的值设置为timepicker,而'max-date'值通过Vue computed属性进行实时计算,在timepicker的基础上加7天</p>
+                </panel>
                 <panel title="分页组件">
                   <button type="button" slot="header" class="btn-link pull-right" @click="changePage" style="outline: none;">随机生成总页数与页码</button>
                   <ht-page :param="pageOptions"></ht-page>
@@ -175,9 +195,8 @@
               </span>
               <panel title="人员列表">
                 <ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
-                <!-- 可以自定义行的style与class -->
-                  <column slot name="名称" data-key=name width="15%" align="left"
-                   class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"></column>
+                  <!-- 可以自定义行的style与class -->
+                  <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"></column>
                   <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
                   <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
                   <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
@@ -204,6 +223,7 @@ export default {
     //组件内数据部分
     return {
       inputMsg: "你们好",
+      timepicker: "2017/11/14",
       song: {
         id: "",
         name: "",
@@ -506,18 +526,14 @@ export default {
             "添加成功",
             function($content) {
               //点击确定按钮进行操作(YES)
-                 
-          },
+            },
             function($content) {
               //提示框显示出来之后的操作(Ready)
-              
             }
           );
           console.log("通过");
         } else {
-          var n = this.$alert("<b>用户自定义处理错误</b>",
-            errorList.join("<br>")
-          );
+          var n = this.$alert("<b>用户自定义处理错误</b>", errorList.join("<br>"));
           console.log("■■■■■■■■■■■■■此处显示提示框对象组件■■■■■■■■■■■■");
           console.log(n);
           console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
@@ -545,11 +561,28 @@ export default {
       this.$notifyMessageLeft("在左边弹出一些东西你说呢");
     },
     notifyRight() {
-      this.$notifyMessage("弹出一些提示内容,10s后自动关闭",10000);
+      this.$notifyMessage("弹出一些提示内容,10s后自动关闭", 10000);
     }
   },
   components: {
     HtDate
+  },
+  computed: {
+    endDate: function() {
+      var date = new Date(this.timepicker).setDate(
+        new Date(this.timepicker).getDate() + 7
+      );
+      var time = new Date(parseInt(date));
+      return (
+        time.getFullYear() +
+        "-" +
+        (time.getMonth() + 1 > 9
+          ? time.getMonth() + 1
+          : "0" + (time.getMonth() + 1)) +
+        "-" +
+        (time.getDate() > 9 ? time.getDate() : "0" + time.getDate())
+      );
+    }
   }
 };
 </script>

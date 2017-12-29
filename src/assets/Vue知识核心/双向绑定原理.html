@@ -1,0 +1,104 @@
+<!-- 马少博  创建于 2017年12月29日11:42:59 -->
+
+<head>
+  <title>ideal</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="test">
+    <span>{{user}}</span> 唱了
+    <b>{{song}}</b>
+    <br>
+    <label>名称:</label><input type="text" v-model="user">
+    <br>
+    <label>歌曲:</label><input type="text" v-model="song">
+  </div>
+  <script>
+    const bindingMark = 'data-element-binding'
+
+    function Element(classa, initData = {}) {
+      let self = this,
+        el = self.el = document.getElementById(classa), //多个input改为class
+        bindings = {},
+        data = self.data = {};
+      let inputEl = el.querySelectorAll('[v-model]');
+      /*
+       * 正则部分 
+       */
+      [...inputEl].forEach(ele => {
+        // 针对v-model的正则匹配
+        let content = ele.outerHTML.replace(/v-model=\"(.*)\"/g, (match, variable) => {
+          bindings[variable] = {}
+          return bindingMark + '="' + variable + '"' //内填一个span变为只改它的元素
+        });
+        ele.outerHTML = content;
+      });
+      //针对{{}}占位符的正则匹配
+      let contents = el.innerHTML.replace(/\{\{(.*)\}\}/g, (match, bindkey) => {
+        bindings[bindkey] = {} //每个属性都对应对象
+        return '<span ' + bindingMark + '="' + bindkey + '"></span>';
+      });
+      el.innerHTML = contents;
+
+      for (let variable in bindings) {
+        bind(variable);
+      }
+
+      //根据用户声明的值去赋值
+      if (initData) {
+        for (let variable in initData) {
+          data[variable] = initData[variable]
+        }
+      }
+      //双向绑定核心部分
+      function bind(variable) {
+        bindings[variable].els = document.querySelectorAll('[' + bindingMark + '="' + variable + '"]'); //document获取binding元素
+        //绑定事件处理双向绑定(处理输入法问题)
+        [...bindings[variable].els].forEach(node => {
+          if (node.value != undefined) {
+            node.cpLock = false;
+            // compositionstart: 要开始输入；
+            node.addEventListener('compositionstart', function() {
+              node.cpLock = true;
+            });
+            // 返回正常键盘输入状态；
+            node.addEventListener('compositionend', function() {
+              node.cpLock = false;
+              !node.cpLock && (data[variable] = this.value)
+            });
+            //处理默认输入
+            node.addEventListener('input', function() {
+              (!node.cpLock) && (data[variable] = this.value);
+            });
+          }
+        });
+        Object.defineProperty(data, variable, {
+          set(newVal) {
+            [...bindings[variable].els].forEach(e => {
+              if (e.value != undefined) {
+                bindings[variable].value = e.value = newVal;
+              } else if (e.textContent != undefined) {
+                bindings[variable].value = e.textContent = newVal;
+              }
+              //删除额外追加的属性
+              e.removeAttribute(bindingMark);
+            })
+          },
+          get() {
+            return bindings[variable].value
+          }
+        })
+      }
+    }
+
+    var app = new Element('test', {
+      user: '周杰伦',
+      song: '青花瓷'
+    });
+
+    setTimeout(() => {
+      app.data.song = "千里之外"
+    }, 5000);
+  </script>
+</body>
