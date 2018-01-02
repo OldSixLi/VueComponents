@@ -43,179 +43,181 @@
   </div>
 </template>
 <script>
-export default {
-  name: "HtTable",
-  props: {
-    //对外获取的数据
-    ajaxurl: {
-      required: true
-    },
-    searchData: {
-      default: function() {
-        return {
-          currentPage: 1
-        };
+  export default {
+    name: "HtTable",
+    props: {
+      //对外获取的数据
+      ajaxurl: {
+        required: true
+      },
+      searchData: {
+        default: function() {
+          return {
+            currentPage: 1
+          };
+        }
+      },
+      showindex: {
+        default: true
       }
     },
-    showindex: {
-      default: true
-    }
-  },
-  data: function() {
-    //组件内数据部分
-    return {
-      valuelist: [],
-      rule: [],
-      nameurl: "李三丰",
-      showLoading: false,
-      loadingHeight: "300",
-      errorInfo: "未获取到数据",
-      pageOption: {
-        currentPage: 1,
-        totalPage: 0
+    data: function() {
+      //组件内数据部分
+      return {
+        valuelist: [],
+        rule: [],
+        nameurl: "李三丰",
+        showLoading: false,
+        loadingHeight: "300",
+        errorInfo: "未获取到数据",
+        pageOption: {
+          currentPage: 1,
+          totalPage: 0
+        }
+      };
+    },
+    filter: {
+      toGender: function(value) {
+        return value == "M" ? "男" : "女";
+      },
+      toImg: function(value) {
+        return "<img src='" + value + "'/>";
       }
-    };
-  },
-  filter: {
-    toGender: function(value) {
-      return value == "M" ? "男" : "女";
     },
-    toImg: function(value) {
-      return "<img src='" + value + "'/>";
-    }
-  },
-  methods: {
-    toshow: function(e) {
-      e.preventDefault();
-      this.$emit("chuandi");
-    },
-    //异步请求数据
-    getlist: function() {
-      var self = this;
-      var params = new Object();
-      params = self.searchData;
-      var pageindex = params.currentPage;
-      self.loadingHeight = $(self.$el)
-        .find("tbody")
-        .height()
-        ? $(self.$el)
-            .find("tbody")
-            .height() -
-            0 >
-          300
-          ? $(self.$el)
-              .find("tbody")
-              .height()
-          : 300
-        : "300";
-      $.ajax({
-        type: "POST",
-        url: this.ajaxurl,
-        beforeSend: function(request) {
-          self.showLoading = true;
-        },
-        data: params,
-        dataType: "json",
-        success: function(data) {
-          if (data != null && data != "") {
-            try {
-              if (data.success) {
-                self.valuelist = data.bean.data ? data.bean.data : [];
-                for (var i = 0; i < self.valuelist.length; i++) {
-                  var element = self.valuelist[i];
-                  element["params"] = [];
+    methods: {
+      toshow: function(e) {
+        e.preventDefault();
+        this.$emit("chuandi");
+      },
+      //异步请求数据
+      getlist: function() {
+        var self = this;
+        var params = new Object();
+        params = self.searchData;
+        var pageindex = params.currentPage;
+        self.loadingHeight = $(self.$el)
+          .find("tbody")
+          .height() ?
+          $(self.$el)
+          .find("tbody")
+          .height() -
+          0 >
+          300 ?
+          $(self.$el)
+          .find("tbody")
+          .height() :
+          300 :
+          "300";
+        $.ajax({
+          type: "POST",
+          url: this.ajaxurl,
+          beforeSend: function(request) {
+            self.showLoading = true;
+          },
+          data: params,
+          dataType: "json",
+          success: function(data) {
+            if (data != null && data != "") {
+              try {
+                if (data.success) {
+                  self.valuelist = data.bean.data ? data.bean.data : [];
+                  for (var i = 0; i < self.valuelist.length; i++) {
+                    var element = self.valuelist[i];
+                    element["params"] = [];
+                  }
+                  self.pageOption.currentPage = pageindex;
+                  self.pageOption.totalPage = data.bean.pageCount;
+                  self.pageOption.click = function(index) {
+                    self.searchData.currentPage = index;
+                  };
+                } else {
+                  self.valuelist = [];
+                  self.errorInfo = data.message;
                 }
-                self.pageOption.currentPage = pageindex;
-                self.pageOption.totalPage = data.bean.pageCount;
-                self.pageOption.click = function(index) {
-                  self.searchData.currentPage = index;
-                };
-              } else {
+              } catch (error) {
+                console.error(error);
                 self.valuelist = [];
-                self.errorInfo = data.message;
+                self.showLoading = false;
               }
-            } catch (error) {
-              console.error(error);
-              self.valuelist = [];
-              self.showLoading = false;
+            }
+          },
+          error: function(response) {
+            self.valuelist = [];
+            self.showLoading = false;
+          },
+          complete: function() {
+            self.showLoading = false;
+          }
+        });
+      },
+      renderHtml: function(rule, keys, obj) {
+        var valArr = [];
+        keys.split(",").forEach(element => {
+          valArr.push(obj[element]);
+        });
+        // NOTE 在 2017年12月18日15:45:34 终于从html中循环生成改成了在方法中生成具体数据
+        // 原来的形式 需要在表格中生成很多的空span标签  现在直接获取到多参数数据  然后返回数据
+        // 避免了Vue的无限循环的提醒,就是在循环中修改循环对象
+        // 我有时候就在想 是不是我太菜了  为什么改个BUG就叫超级大BUG   - -!
+        return window.HtmlFun && window.HtmlFun[rule] ?
+          window.HtmlFun[rule].apply(HtmlFun, valArr) :
+          valArr.join(",");
+      },
+      parseText: function(str) {
+        if (str.indexOf(0) == "{" || str.indexOf(0) == "[") {
+          str = str.replace(/'/g, '"');
+          str = str.replace(/(\s?\{\s?)(\S)/g, "$1" + '"' + "$2");
+          str = str.replace(/(\s?,\s?)(\S)/g, "$1" + '"' + "$2");
+          str = str.replace(/(\S\s?):(\s?\S)/g, "$1" + '":' + "$2");
+          str = str.replace(/,"\{/g, ",{");
+          str = str.replace(/""/g, '"');
+          str = str.replace(/\s/g, "");
+          try {
+            str = JSON.parse(str);
+          } catch (e) {}
+        }
+        return str;
+      }
+    },
+    computed: {
+      searchDatas: function() {
+        this.getlist(0);
+        return this.searchData;
+      }
+    },
+    //在组件加载完成后的钩子
+    mounted: function() {
+      var self = this;
+      var _this = this;
+      _this.$slots.default.forEach(function(child) {
+        if (child.tag != undefined) {
+          var obj = {};
+          if (child && child.componentOptions && child.componentOptions.propsData) {
+            for (var p in child.componentOptions.propsData) {
+              obj[p] = child.componentOptions.propsData[p];
             }
           }
-        },
-        error: function(response) {
-          self.valuelist = [];
-          self.showLoading = false;
-        },
-        complete: function() {
-          self.showLoading = false;
+          obj.class = child.data && child.data.staticClass ? child.data.staticClass : "";
+          obj.style = child.data && child.data.staticStyle ? child.data.staticStyle : {};
+          if (child.data && child.data.staticStyle != undefined) {
+            obj.style.textAlign = obj.align;
+            obj.style.width = obj.width;
+          }
+          _this.rule.push(obj);
         }
       });
-    },
-    renderHtml: function(rule, keys, obj) {
-      var valArr = [];
-      keys.split(",").forEach(element => {
-        valArr.push(obj[element]);
-      });
-      // NOTE 在 2017年12月18日15:45:34 终于从html中循环生成改成了在方法中生成具体数据
-      // 原来的形式 需要在表格中生成很多的空span标签  现在直接获取到多参数数据  然后返回数据
-      // 避免了Vue的无限循环的提醒,就是在循环中修改循环对象
-      // 我有时候就在想 是不是我太菜了  为什么改个BUG就叫超级大BUG   - -!
-      return window.HtmlFun && window.HtmlFun[rule]
-        ? window.HtmlFun[rule].apply(HtmlFun, valArr)
-        : valArr.join(",");
-    },
-    parseText: function(str) {
-      if (str.indexOf(0) == "{" || str.indexOf(0) == "[") {
-        str = str.replace(/'/g, '"');
-        str = str.replace(/(\s?\{\s?)(\S)/g, "$1" + '"' + "$2");
-        str = str.replace(/(\s?,\s?)(\S)/g, "$1" + '"' + "$2");
-        str = str.replace(/(\S\s?):(\s?\S)/g, "$1" + '":' + "$2");
-        str = str.replace(/,"\{/g, ",{");
-        str = str.replace(/""/g, '"');
-        str = str.replace(/\s/g, "");
-        try {
-          str = JSON.parse(str);
-        } catch (e) {}
-      }
-      return str;
     }
-  },
-  computed: {
-    searchDatas: function() {
-      this.getlist(0);
-      return this.searchData;
-    }
-  },
-  //在组件加载完成后的钩子
-  mounted: function() {
-    var self = this;
-    var _this = this;
-    _this.$slots.default.forEach(function(child) {
-      var obj = {};
-      if (child && child.componentOptions && child.componentOptions.propsData) {
-        for (var p in child.componentOptions.propsData) {
-          obj[p] = child.componentOptions.propsData[p];
-        }
-      }
-      obj.class = child.data.staticClass ? child.data.staticClass : "";
-      obj.style = child.data.staticStyle ? child.data.staticStyle : {};
-      if (child.data.staticStyle != undefined) {
-        obj.style.textAlign = obj.align;
-        obj.style.width = obj.width;
-      }
-      _this.rule.push(obj);
-    });
-  }
-};
+  };
 </script>
 <style>
-.hide {
-  display: none;
-}
-.ht-table {
-  margin-bottom: 0;
-}
-.ht-table td img {
-  width: 30px;
-  height: 30px;
-}
+  .hide {
+    display: none;
+  }
+  .ht-table {
+    margin-bottom: 0;
+  }
+  .ht-table td img {
+    width: 30px;
+    height: 30px;
+  }
 </style>

@@ -195,7 +195,6 @@
               </span>
               <panel title="人员列表">
                 <ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
-                  <!-- 可以自定义行的style与class -->
                   <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"></column>
                   <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
                   <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
