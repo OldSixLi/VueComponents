@@ -24,6 +24,8 @@ import HtSearch from './ht/HtSearch.vue';
 import HtDate from './ht/HtDate.vue';
 import HtRadio from './ht/HtRadio.vue';
 import HtCheckbox from './ht/HtCheckbox.vue';
+import HtSelect from './ht/HtSelect.vue';
+import HtOption from './ht/HtOption.vue';
 
 
 //布局组件
@@ -55,6 +57,10 @@ Vue.component('info-block', InfoBlock);
 Vue.component('ht-search', HtSearch);
 Vue.component('pr', Pr);
 Vue.component('pr-list', PrList);
+
+Vue.component('ht-select', HtSelect);
+Vue.component('ht-option', HtOption);
+
 Vue.component('ht-modal', HtModal);
 Vue.component('ht-form', HtForm);
 Vue.component('ht-form-group', HtFormGroup);

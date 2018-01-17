@@ -23,7 +23,8 @@
 
             <div class="col-md-4">
                 <panel title="tooltip">
-                    <a href="javascript:;" title="通过使用v-tooltip.right指令在右侧显示信息" v-tooltip.right> 展示tooltip</a><br>
+                    <a href="javascript:;" title="通过使用v-tooltip.right指令在右侧显示信息" v-tooltip.right> 展示tooltip</a>
+                    <br>
                 </panel>
             </div>
         </div>

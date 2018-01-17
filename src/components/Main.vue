@@ -69,6 +69,16 @@
                     </div>
                   </ht-form>
                 </panel>
+
+
+                 <panel title="下拉菜单组件">
+                  <p>您当前选择的值是 {{selectModel}} </p>
+                  <ht-select v-model="selectModel">
+                    <option value="1">终结者</option>
+                    <option value="2">幽灵猎手</option>
+                    <option value="3">疯狂宝贝</option>
+                    <option value="4">灵魂忍者</option>
+                  </ht-select>
                 </panel>
                 <panel title="单选按钮组件">
                   <ht-radio v-model="radio" label="1" @click="alerts()" @change="change()" name="cfPerson">灵狐者</ht-radio>
@@ -86,9 +96,7 @@
                   <p> 总共花费了 {{arrSum(totalPrice)}}元</p>
                 </panel>
 
-                <panel title="下拉菜单组件">
-                  <b>TODO </b>
-                </panel>
+               
               </div>
               <div class="col-md-6">
                 <panel title="日期组件">
@@ -221,6 +229,7 @@ export default {
   data: function() {
     //组件内数据部分
     return {
+      selectModel:"4",
       inputMsg: "你们好",
       timepicker: "2017/11/14",
       song: {
@@ -293,6 +302,9 @@ export default {
     };
   },
   mounted: function() {
+    setTimeout(() => {
+      this.selectModel="3";
+    }, 3000);
     // this.getPerson();
     setTimeout(() => {
       this.formPersonsList = [

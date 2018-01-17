@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import $ from 'jquery';
+// import $ from 'jquery';
 Vue.directive('btnDelay', {
   bind: (el, binding, vnode, oldVnode) => {
     let beforeText = el.innerHTML, //BUTTON里的text

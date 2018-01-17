@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import $ from 'jquery';
+// import $ from 'jquery';
 import Vuex from 'vuex';
+
 
 //路由
 import router from './router/index.js';

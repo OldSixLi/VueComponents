@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import './../assets/js/bootstrap.js';
 import Vue from 'vue';
 Vue.directive('tooltip', {

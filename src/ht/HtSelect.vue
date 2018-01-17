@@ -1,22 +1,116 @@
 <template>
   <!-- TODO 这块没考虑好是自己封装或者是使用select2 -->
+  <!-- <li v-for="x in childOption" :value="x.data.attrs.value">{{x.children[0].text}}</li> -->
+  <select class="form-control" >
+    <slot></slot>
+  </select>
 </template>
-<script>
+ 
+<script> 
+import './../assets/js/select2.min.js'
 export default {
   name: "HtSelect",
   props: {
-    //对外获取的数据
-  },
-  data: function() {
-    //组件内数据部分
-    return {};
+    options: {
+      type: Object,
+      default: function() {
+        //NOTE:在prop设置默认值为对象时,需用方法返回值(不能直接设置值)
+        return {
+          tags: false,
+          minimumResultsForSearch: -1
+        };
+      }
+    },
+    value: String,
+    search: {
+      type: Boolean,
+      default: false
+    }
   },
   mounted: function() {
-    //组件生成时调用
+    var _self = this;
+    this.options.minimumResultsForSearch = this.search ? 0 : -1;
+    // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    // console.log(select2);
+    // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    $(this.$el)
+      .select2(this.options)
+      .val(this.value)
+      .trigger("change")
+      .on("change", function() {
+        _self.$emit("input", this.value);
+      });
   },
-  methods: {}
+  watch: {
+    value: function(value) {
+      // 更新值
+      $(this.$el)
+        .val(value)
+        .trigger("change");
+    },
+    options: function(options) {
+      // 更新设置
+      $(this.$el).select2(options);
+    }
+  },
+  destroyed: function() {
+    //删除配置
+    $(this.$el)
+      .off()
+      .select2("destroy");
+  }
 };
 </script>
-<style scoped>
+<style>
+/*修改select2控件默认样式*/
 
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #ccc;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ccc;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 12px;
+}
+
+.select2-container .select2-selection--single {
+    padding-top: 3px;
+    height: 34px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 4px;
+}
+
+.select2-dropdown {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.select2-container .select2-selection--single{
+  padding-top: 0;
+}
 </style>

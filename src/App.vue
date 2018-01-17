@@ -15,11 +15,15 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li :class="{
+                  'active':$route.name=='welcome'
+                  }">
               <router-link to="/welcome/老六" class="btn btn-link">欢迎</router-link>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">组件
+            <li class="dropdown" :class="{
+                  'active':($route.name=='point'||$route.name=='main')
+                  }">
+              <a href="#" class="btn btn-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">组件
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -29,20 +33,27 @@
                 <li>
                   <router-link to="/point">指令</router-link>
                 </li>
-                
               </ul>
             </li>
-            <li>
+            <li :class="{
+                  'active':$route.name=='know'
+                  }">
               <router-link to="/know" class="btn btn-link">知识点</router-link>
             </li>
-            <li>
+            <li :class="{
+                  'active':$route.name=='music'
+                  }">
               <router-link to="/music" class="btn btn-link">网易云</router-link>
             </li>
-            <li>
+            <li :class="{
+                  'active':$route.name=='userlist'
+                  }">
               <router-link :to="{name:'userinfo'}" class="btn btn-link">用户信息</router-link>
             </li>
-            <li>
-              <router-link to="/show">展示</router-link>
+            <li :class="{
+                  'active':$route.name=='show'
+                  }">
+              <router-link to="/show" class="btn btn-link">展示</router-link>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -76,7 +87,8 @@ export default {
       //在根目录里边已经注册过store,此组件内不用注册,直接可以使用此属性
       return this.$store.state.name;
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -137,5 +149,10 @@ body,
   height: 100%;
   width: 0;
   z-index: 100;
+}
+.nav .open > a,
+.nav .open > a:focus,
+.nav .open > a:hover {
+  border: none;
 }
 </style>

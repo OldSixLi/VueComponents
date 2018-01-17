@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import $ from 'jquery';
+// import $ from 'jquery';
 Vue.directive('popover', {
   bind: (el, binding, vnode, oldVnode) => {
     $(el).popover();

@@ -46,8 +46,9 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve('src'),
       'assets': './src/assets/',
-      'jquery': "jquery/src/jquery",
-      'vuex': "vuex/dist/vuex.js"
+      // 'jquery': "jquery/src/jquery",
+      'vuex': "vuex/dist/vuex.js",
+      // 'selects': "./src/assets/js/select2.min.js",
     }
   },
   devServer: {

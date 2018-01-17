@@ -70,7 +70,7 @@
                   <a :href="dataObj.url" class="btn btn-default" role="button" v-show="dataObj.name" target="_blank">
                     <span class="glyphicon glyphicon-headphones"></span> 点此试听
                   </a>
-                  <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name">
+                  <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name+'.mp3'">
                     <span class="glyphicon glyphicon-save"></span> 点此下载
                   </a>
                 </p>
@@ -209,7 +209,7 @@ export default {
           _self.dataObj = dataObj;
           _self.dataObj.id = id;
           _self.showLoad = false;
-        }, 2000);
+        }, 0);
       });
     },
     //按钮点击 搜索歌曲

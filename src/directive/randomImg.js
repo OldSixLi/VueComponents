@@ -3,7 +3,7 @@
  * 使用<img v-random-img>
  */
 import Vue from 'vue';
-import $ from 'jquery';
+// import $ from 'jquery';
 Vue.directive('randomImg', {
   bind: function(el, binding, vnode, oldVnode) {
     el.tagName.toUpperCase() == "IMG" || console.error("指令 v-random-img 必须应用在 img 标签上");

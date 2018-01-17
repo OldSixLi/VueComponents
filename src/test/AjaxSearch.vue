@@ -159,7 +159,7 @@ export default {
       Promise.all([step1, step2]).then(function(result) {
         setTimeout(() => {
           _self.$emit("suggestClick", "end", dataObj);
-        }, 1000);
+        }, 0);
       });
       //END 执行完毕
     },
@@ -178,6 +178,7 @@ export default {
       if (!this.$el.contains(e.target)) {
         this.resultList = [];
       }
+      
     });
   }
 };
