@@ -1,13 +1,11 @@
 <template>
-  <!-- TODO 这块没考虑好是自己封装或者是使用select2 -->
-  <!-- <li v-for="x in childOption" :value="x.data.attrs.value">{{x.children[0].text}}</li> -->
   <select class="form-control" >
     <slot></slot>
   </select>
 </template>
- 
 <script> 
-import './../assets/js/select2.min.js'
+import './../assets/css/select2.min.css';
+import './../assets/js/select2.min.js';
 export default {
   name: "HtSelect",
   props: {

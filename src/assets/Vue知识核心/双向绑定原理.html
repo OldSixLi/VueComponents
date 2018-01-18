@@ -22,6 +22,7 @@
         el = self.el = document.getElementById(classa), //多个input改为class
         bindings = {},
         data = self.data = {};
+      //NOTE 在此处可以设置各种属性,然后再外部可以访问的那种
       let inputEl = el.querySelectorAll('[v-model]');
       /*
        * 正则部分 
@@ -30,21 +31,21 @@
         // 针对v-model的正则匹配
         let content = ele.outerHTML.replace(/v-model=\"(.*)\"/g, (match, variable) => {
           bindings[variable] = {}
-          return bindingMark + '="' + variable + '"' //内填一个span变为只改它的元素
+          return bindingMark + '="' + variable + '"'
         });
         ele.outerHTML = content;
       });
+
       //针对{{}}占位符的正则匹配
       let contents = el.innerHTML.replace(/\{\{(.*)\}\}/g, (match, bindkey) => {
         bindings[bindkey] = {} //每个属性都对应对象
-        return '<span ' + bindingMark + '="' + bindkey + '"></span>';
+        return '<span ' + bindingMark + '="' + bindkey + '"></span>'; //内填一个span变为只改它的元素
       });
-      el.innerHTML = contents;
 
+      el.innerHTML = contents;
       for (let variable in bindings) {
         bind(variable);
       }
-
       //根据用户声明的值去赋值
       if (initData) {
         for (let variable in initData) {

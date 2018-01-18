@@ -78,6 +78,14 @@
                     <option value="2">幽灵猎手</option>
                     <option value="3">疯狂宝贝</option>
                     <option value="4">灵魂忍者</option>
+                    <option value="5">终结者</option>
+                    <option value="6">幽灵猎手</option>
+                    <option value="7">疯狂宝贝</option>
+                    <option value="8">灵魂忍者</option>
+                    <option value="9">终结者</option>
+                    <option value="10">幽灵猎手</option>
+                    <option value="11">疯狂宝贝</option>
+                    <option value="12">灵魂忍者</option>
                   </ht-select>
                 </panel>
                 <panel title="单选按钮组件">
