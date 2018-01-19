@@ -20,9 +20,14 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/,
+        test: /\.js$/,  
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+          test: /\.scss$/,
+          include:"/src/",
+          loaders:  ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.css$/,

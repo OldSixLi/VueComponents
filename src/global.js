@@ -37,8 +37,8 @@ import ImgAn from './layout/ImgAn.vue';
 import RrunningMan from './layout/RrunningMan.vue';
 import Floor from './layout/cool/Floor.vue';
 import Notice from './layout/notice/Notice.vue';
-
-
+import LoadBtn from './test/LoadBtn.vue'
+import OpenIcon from './test/OpenIcon.vue'
 //NOTE 指令
 import './directive/randomImg.js';
 import './directive/popover.js';
@@ -75,3 +75,5 @@ Vue.component('img-an', ImgAn);
 Vue.component('running-man', RrunningMan);
 Vue.component('floor', Floor);
 Vue.component('notice', Notice);
+Vue.component('load-btn', LoadBtn);
+Vue.component('open-icon', OpenIcon);

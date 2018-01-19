@@ -7,6 +7,8 @@
       </h1>
       <!-- <music></music> -->
       <img :src="require('./../assets/img/19696025--0--6c1b6af_r.jpg')" class="img-responsive">
+
+       
     </div>
   </div>
 </template>

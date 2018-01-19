@@ -192,6 +192,12 @@
                     </panel>
                   </div>
                 </div>
+
+
+
+                <panel title="按钮样式">
+                  <load-btn></load-btn>
+                </panel>
               </div>
               <div class="col-md-4">
                 <button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局sote中的名称</button>
@@ -200,6 +206,8 @@
                   <p>封装组件如下</p>
                   <al :message.sync="inputMsg"></al>
                 </panel>
+
+                
               </div>
             </div>
           </div>
@@ -218,6 +226,11 @@
                   <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
                 </ht-table>
               </panel>
+            </panel>
+
+            <panel title="展开图标">
+              <open-icon></open-icon> 
+              <p slot="footer">目前部分图标存在偏移的问题  待修改</p>
             </panel>
           </div>
         </div>
