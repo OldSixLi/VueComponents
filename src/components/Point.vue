@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <div class="row">
-
             <div class="col-md-4">
                 <panel title="倒计时按钮指令 v-btn-delay='10' ">
                     <button type="button" class="btn btn-success" v-btn-delay="10" @click="btnClick">

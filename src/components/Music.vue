@@ -25,7 +25,7 @@
                 </tr>
               </thead>
               <tbody id="databody">
-                <tr v-show="songList.length" v-for="(x,index) in songList">
+                <tr v-show="songList.length" v-for="(x,index) in songList" >
                   <td class="text-center">{{(pageOption.currentPage-1)*30+(index+1) }}</td>
                   <td>
                     <a href="javascript:;" @click='songDetail(x.id)' :title="x.name">{{x.name}}</a>

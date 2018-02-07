@@ -57,10 +57,8 @@ Vue.component('info-block', InfoBlock);
 Vue.component('ht-search', HtSearch);
 Vue.component('pr', Pr);
 Vue.component('pr-list', PrList);
-
 Vue.component('ht-select', HtSelect);
 Vue.component('ht-option', HtOption);
-
 Vue.component('ht-modal', HtModal);
 Vue.component('ht-form', HtForm);
 Vue.component('ht-form-group', HtFormGroup);

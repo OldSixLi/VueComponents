@@ -18,7 +18,7 @@
                     </p>
                 </panel>
 
-                <panel title="Vue.js键盘事件">
+                <panel title="Vue.js键盘事件 啊">
                     <pre>
 &lt;div id=&quot;box&quot;&gt;
   &lt;input type=&quot;text&quot; @keyup=&quot;show($event)&quot;&gt;
