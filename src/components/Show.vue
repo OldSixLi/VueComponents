@@ -8,7 +8,7 @@
       <div class="intro">
         <div class="enjoy-css">My Projects</div>
         <link async href="http://fonts.googleapis.com/css?family=Aldrich" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css" />
-      </div> 
+      </div>
       <div class="row">
         <img-an class="col-md-4" :src='require("./../assets/img/travel/travel4.jpg")' title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
 
@@ -23,8 +23,7 @@
 
         <img-an class="col-md-4" :src='require("./../assets/img/travel/travel3.jpg")' title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
-      
-      
+           
     </div>
     <div >
         <running-man></running-man>
@@ -42,6 +41,7 @@ export default {
   methods: {}
 };
 </script>
+
 <style scoped>
 .back-block {
   margin-top: -20px;
