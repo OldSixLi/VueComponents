@@ -70,6 +70,9 @@ export default {
     };
   },
   mounted: function() {
+    console.log("■■■■■■■■■■Group■■■■■■■■■■■■■■");
+    console.log(this);
+    console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     //TODO  在此处就应该校验用户输入的规则
     //NOTE  特殊长度字符等相当于默认填写内容  需用到requireMessage进行显示
 
@@ -103,10 +106,10 @@ export default {
       _self.validateError = false;
     },
     /**
-             * 根据NAME获取当前组件内input的值(严格来说这个模式并不严谨,适应性不是很强,但目前想不到其他好的办法)
-             * NOTE 后期如果项目需要,则引入sync特性,但是现在添加会增加组件使用的复杂度
-             * @returns
-             */
+     * 根据NAME获取当前组件内input的值(严格来说这个模式并不严谨,适应性不是很强,但目前想不到其他好的办法)
+     * NOTE 后期如果项目需要,则引入sync特性,但是现在添加会增加组件使用的复杂度
+     * @returns
+     */
     getDomValue(name) {
       var _self = this;
       var $modelDom = $(_self.$el).find("[name='" + name + "']");
@@ -133,9 +136,9 @@ export default {
       }
     },
     /**
-             * 校验本字段
-             * @returns
-             */
+     * 校验本字段
+     * @returns
+     */
     validate: function(infoType) {
       var _self = this;
       _self.validateError = false;
@@ -191,7 +194,9 @@ export default {
               if (Number(value) > Number(_self.max)) {
                 _self.validateError = true;
                 _self.errorMessageList.push(
-                  _self.maxMessage ? _self.maxMessage : "输入的值不能大于" + _self.max
+                  _self.maxMessage
+                    ? _self.maxMessage
+                    : "输入的值不能大于" + _self.max
                 );
               }
             } else {
@@ -218,11 +223,15 @@ export default {
           if (value.length < Number(_self.minlength)) {
             _self.validateError = true;
             _self.errorMessageList.push(
-              _self.minlengthMessage ? _self.minlengthMessage : "输入长度小于最小值"
+              _self.minlengthMessage
+                ? _self.minlengthMessage
+                : "输入长度小于最小值"
             );
           }
         } else {
-          console.error("ERROR:[表单项目" + _self.name + "的minlength值需输入数字]");
+          console.error(
+            "ERROR:[表单项目" + _self.name + "的minlength值需输入数字]"
+          );
           return false;
         }
       }
@@ -232,11 +241,15 @@ export default {
           if (value.length > Number(_self.maxlength)) {
             _self.validateError = true;
             _self.errorMessageList.push(
-              _self.maxlengthMessage ? _self.maxlengthMessage : "输入长度大于最大值"
+              _self.maxlengthMessage
+                ? _self.maxlengthMessage
+                : "输入长度大于最大值"
             );
           }
         } else {
-          console.error("ERROR:[表单项目" + _self.name + "的maxlength值需输入数字]");
+          console.error(
+            "ERROR:[表单项目" + _self.name + "的maxlength值需输入数字]"
+          );
           return false;
         }
       }
@@ -246,7 +259,9 @@ export default {
         if (!reg.test(value)) {
           _self.validateError = true;
           _self.errorMessageList.push(
-            _self.patternMessage ? _self.patternMessage : "您输入的格式有误,请修改"
+            _self.patternMessage
+              ? _self.patternMessage
+              : "您输入的格式有误,请修改"
           );
         }
       }

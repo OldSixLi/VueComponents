@@ -111,4 +111,22 @@ export default {
 .select2-container .select2-selection--single{
   padding-top: 0;
 }
+.has-error .select2-container--default .select2-selection--single{
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.has-error .select2-container--default.select2-container--focus .select2-selection--single{
+      border-color: #843534;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+}
+
+.has-error .select2-dropdown {
+    border-color:  #843534;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+}
 </style>

@@ -43,23 +43,23 @@
                       <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
                     </ht-form-group>
                     <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
-                      <select class="form-control" name="weiya">
+                      <ht-select class="form-control" name="weiya" v-model="sltValue">
                         <option value="">请选择</option>
                         <option value="FR-F2 寒冰">FR-F2 寒冰</option>
                         <option value="绿色烟雾弹">绿色烟雾弹</option>
                         <option value="金砖">金砖</option>
                         <option value="碳合金小刀">碳合金小刀</option>
-                      </select>
+                      </ht-select>
                     </ht-form-group>
                     <ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
-                      <label v-for="y in formPersonsList">
+                      <template v-for="y in formPersonsList">
                         <ht-checkbox v-model="formTotalPrice" :label='y.price' name='cfWuqi'> {{y.name+'('+y.price+'元)　'}}</ht-checkbox>
-                      </label>
+                      </template>
                     </ht-form-group>
                     <ht-form-group label="付款方式：" label-width="20" name="payWay" :require="true" require-message="请选择付款方式">
-                      <label for="" v-for="x in payWayList">
+                      <template for="" v-for="x in payWayList">
                         <ht-radio v-model="payWay" :label="x.value" name="payWay">{{x.name}}　</ht-radio>
-                      </label>
+                      </template>
 
                     </ht-form-group>
                     <hr>
@@ -199,7 +199,8 @@
                   <load-btn></load-btn>
                 </panel>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4">  
+                <br>
                 <button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局sote中的名称</button>
                 <panel title=".sync使用">
                   <textarea type="text" v-model="inputMsg" class="form-control"></textarea>
@@ -319,7 +320,8 @@ export default {
         }
       ],
       formPersonsList: [],
-      formTotalPrice: [19]
+      formTotalPrice: [19],
+      sltValue:"金砖"
     };
   },
   mounted: function() {

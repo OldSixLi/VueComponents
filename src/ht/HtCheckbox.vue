@@ -128,5 +128,11 @@ export default {
 };
 </script>
 <style scoped>
-
+.el-checkbox{
+  margin-right: 15px;
+}
+.el-checkbox+.el-checkbox{
+   /* margin-right: 15px; */
+   margin-left: 0;
+}
 </style>
