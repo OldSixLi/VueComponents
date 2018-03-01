@@ -1,4 +1,5 @@
 <template>
+<!-- 修复组件第二个slot不显示的问题 -->
   <div class="form-group" :class="{'has-error':validateError}">
       <!--根据横向或者纵向显示class与style -->
       <label class="control-label" 
