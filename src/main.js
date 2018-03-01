@@ -27,7 +27,13 @@ var vueBlock = new Vue({
   el: '#app',
   router,
   store,
-  template: '<app></app>'
+  template: '<app></app>',
+  beforeCreate() {
+    console.log("Loading....");
+  },
+  created() {
+    console.log("结束Loading");
+  }
 });
 
 //声明HtmlFun

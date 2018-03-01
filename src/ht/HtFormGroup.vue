@@ -1,28 +1,34 @@
 <template>
   <div class="form-group" :class="{'has-error':validateError}">
-    <template v-if="!isHorizontal">
-      <label class="control-label text-left" :for="name">{{label}}</label>
-      <p :data-a="isHorizontal">
-        <slot></slot>
-      </p>
-      <transition name="errorinfo">
-        <span class="help-block" v-if="!isHorizontal">{{errorMessage}}</span>
-      </transition>
-    </template>
-    <template v-if="isHorizontal">
-      <label class="control-label text-right" :for="name" :style="{'width':labelWidth+'%'}" v-if="isHorizontal">{{label}}</label>
-      <div class="control-block" :style="{'width':(99-labelWidth)+'%'}" v-if="isHorizontal">
-        <p :data-a="isHorizontal">
-          <slot></slot>
-        </p>
-        <transition name="errorinfo" mode="">
-          <span class="help-block" v-show="validateError">{{errorMessage}}</span>
-        </transition>
+      <!--根据横向或者纵向显示class与style -->
+      <label class="control-label" 
+        :class="{
+          'text-right':isHorizontal,
+          'text-left':!isHorizontal
+        }" 
+        :for="name" 
+        :style="{
+          'width':isHorizontal?labelWidth+'%':'auto'
+        }">
+        {{label}}
+      </label>
+      
+      <div 
+        :class="{'control-block':isHorizontal}" 
+        :style="{'width':(isHorizontal?(99-labelWidth):100)+'%'}">
+          <!--传入的内容 -->
+          <p :data-a="isHorizontal">
+            <slot></slot>
+          </p>
+          <transition name="errorinfo">
+            <span class="help-block" v-show="validateError">{{errorMessage}}</span>
+          </transition>
       </div>
-    </template>
   </div>
 </template>
+
 <script>
+// NOTE 之前的版本中,有两处<slot>,利用v-if进行判断.这种写法,在development环境下可以正常显示,但是在compress之后,在网页端打开,却无法显示v-else时的<slot> 内容.关于此现象的原因暂未找到,只能将模板代码更改为只使用一处<slot>来解决此问题.
 import Emitter from "./../mixins/emitter.js";
 export default {
   name: "HtFormGroup",

@@ -43,13 +43,15 @@
                       <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
                     </ht-form-group>
                     <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
-                      <ht-select class="form-control" name="weiya" v-model="sltValue">
+                        <ht-select class="form-control" name="weiya" v-model="sltValue">
                         <option value="">请选择</option>
                         <option value="FR-F2 寒冰">FR-F2 寒冰</option>
                         <option value="绿色烟雾弹">绿色烟雾弹</option>
                         <option value="金砖">金砖</option>
                         <option value="碳合金小刀">碳合金小刀</option>
-                      </ht-select>
+                      </ht-select>  
+                    
+                     
                     </ht-form-group>
                     <ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
                       <template v-for="y in formPersonsList">
@@ -60,7 +62,6 @@
                       <template for="" v-for="x in payWayList">
                         <ht-radio v-model="payWay" :label="x.value" name="payWay">{{x.name}}　</ht-radio>
                       </template>
-
                     </ht-form-group>
                     <hr>
                     <div class="text-right">
@@ -133,10 +134,7 @@
                   </div>
                   <!-- Modal提示框 -->
                 </panel>
-                <ht-modal :is-show="showModal" @states="modalControl" title="提示框">
-                  <!-- <p>&lt;ht-modal&gt;组件里边包裹的是&lt;app&gt;组件</p> -->
-                  <img :src="require('./../assets/img/usericon/usericon_2.jpg')" alt="" class="img-responsive">
-                </ht-modal>
+                 <ht-modal :is-show="showModal" @states="modalControl" title="提示框"> <img :src="require('./../assets/img/usericon/usericon_2.jpg')" alt="" class="img-responsive"></ht-modal>
                 <!-- 人物列表 -->
                 <panel title="动画效果" style="background-color: #ddd;">
                   <info-block :img-src="require('./../assets/img/usericon/xun.jpg')" title="陈奕迅" intro="Eason,歌手,演员" word="拦路雨偏似雪花饮泣的你冻吗这风褛我给你磨到有襟花连调了职也不怕怎么始终牵挂苦心选中今天想车你回家原谅我不再送花伤口应要结疤花瓣铺满心里坟场才害怕如若你非我不嫁彼此终必火化一生一世等一天需要代价谁都只得那双手靠拥抱亦难任你拥有要拥有必先懂失去怎接受曾沿着雪路浪游为何为好事泪流谁能凭爱意要富士山私有何不把悲哀感觉假设是来自你虚构试管里找不到它染污眼眸前尘硬化像石头随缘地抛下便逃走我绝不罕有往街里绕过一周我便化乌有" style="width:32%;margin-left: 1%;"></info-block>
@@ -324,6 +322,12 @@ export default {
       sltValue:"金砖"
     };
   },
+  // beforeCreate(){
+  //   console.log("Loading....");
+  // },
+  // created(){
+  //   console.log("结束Loading");
+  // },
   mounted: function() {
     setTimeout(() => {
       this.selectModel="3";
@@ -366,7 +370,7 @@ export default {
           value: "2"
         }
       ];
-    }, 500);
+    }, 0);
   },
   methods: {
     alertBtnClick() {
@@ -570,7 +574,7 @@ export default {
           var n = this.$alert("<b>用户自定义处理错误</b>", errorList.join("<br>"));
           console.log("■■■■■■■■■■■■■此处显示提示框对象组件■■■■■■■■■■■■");
           console.log(n);
-          console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+          console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         }
       });
     },

@@ -19,6 +19,7 @@ import UserList from './../components/UserList.vue';
 Vue.use(Router);
 
 let router = new Router({
+  // mode: "history",
   routes: [{ //每一个链接都是一个对象
       path: '/', //链接路径
       name: 'begin', //路由名称，
@@ -27,7 +28,7 @@ let router = new Router({
     {
       path: '/main',
       name: 'main',
-      component: Main
+      component: resolve => require(['./../components/Main.vue'], resolve)
     },
     {
       path: "/welcome",
@@ -83,7 +84,7 @@ let router = new Router({
     {
       path: "/point",
       name: "point",
-      component: Point,
+      component: resolve => require(['./../components/Point.vue'], resolve),
     },
     {
       path: "/user",
