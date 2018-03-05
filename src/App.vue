@@ -59,7 +59,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li style="line-height: 50px;">{{name}}</li>
             <li>
-              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href"><img :src="require('./assets/img/github.png')" class="img-title"> </a>
+              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href img-git"><img :src="require('./assets/img/github.png')" class="img-title"> </a>
             </li>
           </ul>
         </div>
@@ -98,6 +98,9 @@ export default {
 body,
 * {
   font-family: "MicroSoft YaHei";
+}
+.img-git{
+  margin-left: 10px;
 }
 /* 完成状态 */
 .fade-enter-active,

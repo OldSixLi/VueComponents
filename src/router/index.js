@@ -74,6 +74,9 @@ let router = new Router({
     {
       path: "/know",
       name: "know",
+      meta: {
+        requireAuth: true
+      },
       component: Know,
     }, {
 
@@ -90,6 +93,7 @@ let router = new Router({
       path: "/user",
       name: "user",
       component: User,
+
       children: [{
           path: 'info/:id',
           component: UserInfo,
@@ -109,14 +113,24 @@ let router = new Router({
 
 // //最先开始执行 全局前置守卫
 router.beforeEach((to, from, next) => {
-  console.log("开始beforeEach");
-  next();
+
+  // console.log(to.matched);
+  // next();
+  if (to.matched.some(res => res.meta.requireAuth)) {
+    Vue.prototype.$alert("提示", "<h4 class='text-center'>需要授权进入</h4>", () => {
+      Vue.prototype.$alert("提示", "当前页面涉及到登陆拦截等功能")
+    });
+    next();
+  } else {
+    next()
+  }
 });
 // 和上个区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用。
 //全局解析守卫
 router.beforeResolve((to, from, next) => {
   console.log("开始beforeResolve");
   next();
+
 });
 // 全局后置钩子
 router.afterEach((to, from) => {

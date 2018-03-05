@@ -9,8 +9,9 @@
       <h1 >OldSix.Li</h1>
       <!-- <span class="logo"></span> -->
     </div>
-    <div class="container">
+    <div class="container" id="main">
       <div class="intro">
+        <div class="hor-block"></div>
         <div class="enjoy-css">My Projects</div>
         <link async href="http://fonts.googleapis.com/css?family=Aldrich" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css" />
       </div>
@@ -39,13 +40,16 @@
   </div>
 </template>
 <script>
+import store from "./../store/index";
 export default {
-  name: "Show",
+  name: "Show",store,
   props: {},
   data: function() {
     return {};
   },
-  mounted: function() {},
+  mounted: function() {
+    store.commit("changeBasicName")
+  },
   methods: {}
 };
 </script>
@@ -67,6 +71,29 @@ export default {
   width: 1px;
   z-index: 0;
 } */
+.hor-block{
+  width: 50%;
+  transform: translateX(50%);
+  height: 15px;
+  border:1px solid #E7E7E7;
+  border-left: none;border-right: none;
+}
+#main{
+  position: relative;
+}
+#main:before {
+    background: rgba(224, 224, 224, 0.75);
+    content: '';
+    height: 100px;
+    left: 49.9%;
+    position: absolute;
+    top: 0;
+    width: 1px;
+    z-index: -1;
+}
+.intro{
+      padding-top: 100px;
+}
 .back-block {
   margin-top: -20px;
   /* position: relative; */
@@ -121,7 +148,7 @@ export default {
   box-sizing: content-box;
   border: none;
   font: normal normal 900 50px/normal "Aldrich", Helvetica, sans-serif;
-  margin: 20px 0;
+  padding: 20px 0 40px 0;
   color: rgba(102, 91, 101, 1);
   text-align: center;
   -o-text-overflow: clip;

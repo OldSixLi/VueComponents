@@ -32,6 +32,9 @@ export default new Vuex.Store({
     //这种情况应用场景可以是购物车 音乐播放器播放等
     changeName(state) {
       state.name = state.nameList[parseInt(Math.random() * 25)];
+    },
+    changeBasicName(state) {
+      state.name = "OldSix Li "
     }
   }
 });
