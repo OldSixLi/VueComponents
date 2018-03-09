@@ -207,14 +207,14 @@
           <!-- 第三个 -->
           <div role="tabpanel" class="tab-pane active" id="messages">
             <panel title="tab标签页组件"> 
-              <ht-tabs active="第三个">
-                <ht-tab title="第一个" @show="showTabFun('第一个')"> 
+              <ht-tabs >
+                <ht-tab title="第一个" > 
                   <h1>我属于第一个模块</h1>
                 </ht-tab>
                 <ht-tab title="第二个">
                   <h1>第二个模块在这展示</h1>
                 </ht-tab>
-                <ht-tab title="第三个">
+                <ht-tab title="第三个" @show="showTabFun('第三个')"> 
                   <h1>目前为止有三个模块</h1>
                 </ht-tab>
               </ht-tabs> 

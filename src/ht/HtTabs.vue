@@ -6,7 +6,7 @@
         v-for="(x,$index) in childArr" 
         :class="{'active':x.title==currentActiveTabTitle}" 
         @click="changeIndex(x.title)">
-          <a :href="'#'+x.name" role="tab" data-toggle="tab">
+          <a class="pointer" role="tab" data-toggle="tab">
             {{x.title}}
           </a>
       </li>
@@ -65,5 +65,7 @@ export default {
 };
 </script>
 <style scoped>
-
+.pointer{
+  cursor: pointer;
+}
 </style>
