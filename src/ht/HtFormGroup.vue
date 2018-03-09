@@ -77,9 +77,9 @@ export default {
     };
   },
   mounted: function() {
-    console.log("■■■■■■■■■■Group■■■■■■■■■■■■■■");
-    console.log(this);
-    console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    // console.log("■■■■■■■■■■Group■■■■■■■■■■■■■■");
+    // console.log(this);
+    // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     //TODO  在此处就应该校验用户输入的规则
     //NOTE  特殊长度字符等相当于默认填写内容  需用到requireMessage进行显示
 

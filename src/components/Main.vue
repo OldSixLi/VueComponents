@@ -5,20 +5,20 @@
       <div class="col-md-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
+          <li role="presentation" class="">
             <a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a>
           </li>
           <li role="presentation">
             <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">布局组件</a>
           </li>
-          <li role="presentation" class="">
+          <li role="presentation" class="active">
             <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a>
           </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
           <!-- 第一个 -->
-          <div role="tabpanel" class="tab-pane active" id="home">
+          <div role="tabpanel" class="tab-pane" id="home">
             <div class="row">
               <div class="col-md-6">
                 <!-- 表单 -->
@@ -43,15 +43,14 @@
                       <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
                     </ht-form-group>
                     <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
-                        <ht-select class="form-control" name="weiya" v-model="sltValue">
+                      <ht-select class="form-control" name="weiya" v-model="sltValue">
                         <option value="">请选择</option>
                         <option value="FR-F2 寒冰">FR-F2 寒冰</option>
                         <option value="绿色烟雾弹">绿色烟雾弹</option>
                         <option value="金砖">金砖</option>
                         <option value="碳合金小刀">碳合金小刀</option>
-                      </ht-select>  
-                    
-                     
+                      </ht-select>
+
                     </ht-form-group>
                     <ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
                       <template v-for="y in formPersonsList">
@@ -71,8 +70,7 @@
                   </ht-form>
                 </panel>
 
-
-                 <panel title="下拉菜单组件">
+                <panel title="下拉菜单组件">
                   <p>您当前选择的值是 {{selectModel}} </p>
                   <ht-select v-model="selectModel">
                     <option value="1">终结者</option>
@@ -105,7 +103,6 @@
                   <p> 总共花费了 {{arrSum(totalPrice)}}元</p>
                 </panel>
 
-               
               </div>
               <div class="col-md-6">
                 <panel title="日期组件">
@@ -134,7 +131,7 @@
                   </div>
                   <!-- Modal提示框 -->
                 </panel>
-                 <ht-modal :is-show="showModal" @states="modalControl" title="提示框"> <img :src="require('./../assets/img/usericon/usericon_2.jpg')" alt="" class="img-responsive"></ht-modal>
+                <ht-modal :is-show="showModal" @states="modalControl" title="提示框"> <img :src="require('./../assets/img/usericon/usericon_2.jpg')" alt="" class="img-responsive"></ht-modal>
                 <!-- 人物列表 -->
                 <panel title="动画效果" style="background-color: #ddd;">
                   <info-block :img-src="require('./../assets/img/usericon/xun.jpg')" title="陈奕迅" intro="Eason,歌手,演员" word="拦路雨偏似雪花饮泣的你冻吗这风褛我给你磨到有襟花连调了职也不怕怎么始终牵挂苦心选中今天想车你回家原谅我不再送花伤口应要结疤花瓣铺满心里坟场才害怕如若你非我不嫁彼此终必火化一生一世等一天需要代价谁都只得那双手靠拥抱亦难任你拥有要拥有必先懂失去怎接受曾沿着雪路浪游为何为好事泪流谁能凭爱意要富士山私有何不把悲哀感觉假设是来自你虚构试管里找不到它染污眼眸前尘硬化像石头随缘地抛下便逃走我绝不罕有往街里绕过一周我便化乌有" style="width:32%;margin-left: 1%;"></info-block>
@@ -191,27 +188,39 @@
                   </div>
                 </div>
 
-
-
                 <panel title="按钮样式">
                   <load-btn></load-btn>
                 </panel>
               </div>
-              <div class="col-md-4">  
+              <div class="col-md-4">
                 <br>
-                <button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局sote中的名称</button>
+                <button type="button" class="btn btn-primary btn-block" @click="changeName">改变全局store中的名称</button>
                 <panel title=".sync使用">
                   <textarea type="text" v-model="inputMsg" class="form-control"></textarea>
                   <p>封装组件如下</p>
                   <al :message.sync="inputMsg"></al>
                 </panel>
 
-                
               </div>
             </div>
           </div>
           <!-- 第三个 -->
-          <div role="tabpanel" class="tab-pane" id="messages">
+          <div role="tabpanel" class="tab-pane active" id="messages">
+            <panel title="tab标签页组件"> 
+              <ht-tabs active="第三个">
+                <ht-tab title="第一个">
+                  <h1>我属于第一个模块</h1>
+                </ht-tab>
+                <ht-tab title="第二个">
+                  <h1>第二个模块在这展示</h1>
+                </ht-tab>
+                <ht-tab title="第三个">
+                  <h1>目前为止有三个模块</h1>
+                </ht-tab>
+              </ht-tabs> 
+
+            </panel>
+            
             <panel title="表格组件">
               <span slot="header" class="pull-right">
                 <b>2017年11月8日11:25:07 生成</b>
@@ -227,10 +236,10 @@
               </panel>
             </panel>
 
-            <panel title="展开图标">
+            <!-- <panel title="展开图标">
               <open-icon></open-icon> 
               <p slot="footer">目前部分图标存在偏移的问题  待修改</p>
-            </panel>
+            </panel> -->
           </div>
         </div>
       </div>
@@ -249,7 +258,7 @@ export default {
   data: function() {
     //组件内数据部分
     return {
-      selectModel:"4",
+      selectModel: "4",
       inputMsg: "你们好",
       timepicker: "2017/11/14",
       song: {
@@ -319,7 +328,7 @@ export default {
       ],
       formPersonsList: [],
       formTotalPrice: [19],
-      sltValue:"金砖"
+      sltValue: "金砖"
     };
   },
   // beforeCreate(){
@@ -330,7 +339,7 @@ export default {
   // },
   mounted: function() {
     setTimeout(() => {
-      this.selectModel="3";
+      this.selectModel = "3";
     }, 3000);
     // this.getPerson();
     setTimeout(() => {
@@ -413,7 +422,7 @@ export default {
       );
     },
     /**
-     * 修改Vuex中属性的方法 
+     * 修改Vuex中属性的方法
      * 要求必须使用commit修改属性,这样数据流更加清晰和容易维护
      * @returns
      */
@@ -540,11 +549,11 @@ export default {
       this.pageOptions.currentPage = num;
       this.pageOptions.totalPage = parseInt(Math.random() * (40 - 30) + 30);
       /**
-				 * 生成随机数（不包含起止点）
-				 * 
-				 * @param {any} start 起点
-				 * @param {any} end 终点
-				 */
+       * 生成随机数（不包含起止点）
+       *
+       * @param {any} start 起点
+       * @param {any} end 终点
+       */
       function radomNum(start, end) {
         end = start > end ? [start, (start = end)][0] : end; //保证End最大
         return;
@@ -571,7 +580,10 @@ export default {
           );
           console.log("通过");
         } else {
-          var n = this.$alert("<b>用户自定义处理错误</b>", errorList.join("<br>"));
+          var n = this.$alert(
+            "<b>用户自定义处理错误</b>",
+            errorList.join("<br>")
+          );
           console.log("■■■■■■■■■■■■■此处显示提示框对象组件■■■■■■■■■■■■");
           console.log(n);
           console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");

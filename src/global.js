@@ -26,6 +26,8 @@ import HtRadio from './ht/HtRadio.vue';
 import HtCheckbox from './ht/HtCheckbox.vue';
 import HtSelect from './ht/HtSelect.vue';
 import HtOption from './ht/HtOption.vue';
+import HtTab from './ht/HtTab.vue';
+import HtTabs from './ht/HtTabs.vue';
 
 
 //布局组件
@@ -63,6 +65,9 @@ Vue.component('ht-modal', HtModal);
 Vue.component('ht-form', HtForm);
 Vue.component('ht-form-group', HtFormGroup);
 Vue.component('ht-table', HtTable);
+// 标签页
+Vue.component('ht-tab', HtTab);
+Vue.component('ht-tabs', HtTabs);
 Vue.component('column', Column);
 Vue.component('ht-date', HtDate);
 Vue.component('ajax-search', AjaxSearch);

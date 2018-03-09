@@ -78,7 +78,8 @@ export default {
       let node = event.target;
       let dataObj = {};
       this.currentValue = $(node).text();
-      this.$emit("input", $(node).text());
+      this.$emit("input", $(node).text()
+      );
 
       //BEGIN 开始获取音乐信息 并传递给父组件
       _self.$emit("suggestClick", "begin", dataObj);

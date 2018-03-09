@@ -187,6 +187,9 @@
     },
     //在组件加载完成后的钩子
     mounted: function() {
+      // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+      // console.log(this);
+      // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
       var self = this;
       var _this = this;
       _this.$slots.default.forEach(function(child) {

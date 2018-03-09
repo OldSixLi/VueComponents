@@ -2,12 +2,8 @@
 <template>
   <div class="show-block">
     <div class="back-block">
-      <!-- <img src='http://om6fr85l4.bkt.clouddn.com/bgc.jpg' class="bgc-img" alt='背景'> -->
-      
-
-      <h1>Hi. This is My Homepage.</h1>
-      <h1 >OldSix.Li</h1>
-      <!-- <span class="logo"></span> -->
+      <img :src='require("./../assets/img/show/oldsix.png")' alt="OldSix.Li" class="img-name">
+      <h3 style="margin-top: -50px;">　　　　　　　　　　　　Welcome To My Homepage.</h3> 
     </div>
     <div class="container" id="main">
       <div class="intro">
@@ -16,24 +12,39 @@
         <link async href="http://fonts.googleapis.com/css?family=Aldrich" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css" />
       </div>
       <div class="row">
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel4.jpg")' title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
+        <!-- ./../assets/img/travel/travel4.jpg -->
+        <img-an class="col-md-4" :src='require("./../assets/img/show/hor4.jpg")' title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel5.jpg")' title="后台管理网站" content="基于Angularjs的后台管理网站" href="https://github.com/OldSixLi/Nodes"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/show/hor5.jpg")' title="后台管理网站" content="基于Angularjs的后台管理网站" href="https://github.com/OldSixLi/Nodes"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel6.jpg")' title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片" href="https://github.com/OldSixLi/NodeAngular"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/show/hor6.jpg")' title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片" href="https://github.com/OldSixLi/NodeAngular"></img-an>
       </div>
       <div class="row" style="margin-top: 20px;">
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel1.jpg")' title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/show/hor1.jpg")' title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel2.jpg")' title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/show/hor2.jpg")' title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/travel/travel3.jpg")' title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
+        <img-an class="col-md-4" :src='require("./../assets/img/show/hor3.jpg")' title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
 
     </div>
-    <div class="">
-      <running-man></running-man>
+    <div class="section-two">
+      <h1 class="text-center" style="padding-top: 250px;color: #fff;">其他文字</h1>
     </div>
+
+    <div class="section-three" style="height: 800px;">
+
+    </div>
+
+    <div class="section-four">
+<h1 class="text-center" style="padding-top: 250px;color: #fff;">其他文字</h1>
+    </div>
+    <div class="section-five" style="height: 800px;">
+
+    </div>
+    <!-- <div class="">
+      <running-man></running-man>
+    </div> -->
 
     <div class="footer">
     </div>
@@ -42,57 +53,45 @@
 <script>
 import store from "./../store/index";
 export default {
-  name: "Show",store,
+  name: "Show",
+  store,
   props: {},
   data: function() {
     return {};
   },
   mounted: function() {
-    store.commit("changeBasicName")
-  },
-  methods: {}
+    store.commit("changeBasicName");
+  } 
 };
 </script>
 
-<style scoped>
-/* 竖线 */
-/* .back-block:before {
-  height: calc(100% - 50px);
-  opacity: 0.15;
-  top: 0;
+<style scoped> 
+.img-name{
+  transform:skewX(160deg);
 }
-
-.back-block:before,
-.back-block:after {
-  background: rgba(224, 224, 224, 0.75);
-  content: "";
-  left: 49.9%;
-  position: absolute;
-  width: 1px;
-  z-index: 0;
-} */
-.hor-block{
+.hor-block {
   width: 50%;
   transform: translateX(50%);
   height: 15px;
-  border:1px solid #E7E7E7;
-  border-left: none;border-right: none;
+  border: 1px solid #e7e7e7;
+  border-left: none;
+  border-right: none;
 }
-#main{
+#main {
   position: relative;
 }
 #main:before {
-    background: rgba(224, 224, 224, 0.75);
-    content: '';
-    height: 100px;
-    left: 49.9%;
-    position: absolute;
-    top: 0;
-    width: 1px;
-    z-index: -1;
+  background: rgba(224, 224, 224, 0.75);
+  content: "";
+  height: 100px;
+  left: 49.9%;
+  position: absolute;
+  top: 0;
+  width: 1px;
+  z-index: -1;
 }
-.intro{
-      padding-top: 100px;
+.intro {
+  padding-top: 100px;
 }
 .back-block {
   margin-top: -20px;
@@ -100,16 +99,36 @@ export default {
   font: normal 18px/normal "brush-script-std", Helvetica, sans-serif;
   height: 800px;
   background-attachment: scroll, scroll, fixed;
-  background-image: url("http://demo.cssmoban.com/cssthemes4/btst_52_directive/css/images/top-3200.svg"),
-    url("./../assets/img/a1.png"),
+  background-image: url("./../assets/img/show/top-3200.svg"),
+    url("./../assets/img/show/a1.png"),
     url("http://om6fr85l4.bkt.clouddn.com/bgc.jpg");
   background-position: bottom center, top left, center center;
   background-repeat: repeat-x, repeat, no-repeat;
   background-size: 3200px 460px, auto, cover;
   color: rgba(255, 255, 255, 0.8);
-  padding: 10em 0 20em 0;
+  padding: 6em 0 20em 0;
   position: relative;
   text-align: center;
+}
+
+.section-two {
+  height: 1200px;
+  background-image: url("./../assets/img/show/top-3200.svg"),
+    url("./../assets/img/show/top-back.svg"),url("./../assets/img/show/a1.png"), url("./../assets/img/show/back-3.jpg");
+  background-attachment: scroll, scroll,scroll, fixed;
+  background-position: bottom center,top center, top left, center center;
+  background-repeat: repeat-x,repeat-x, repeat, no-repeat;
+}
+.section-four{
+   height: 1200px;
+  background-image: 
+    url("./../assets/img/show/top-3200.svg"),
+     url("./../assets/img/show/top-back.svg"),
+     url("./../assets/img/show/a1.png"), 
+     url("./../assets/img/show/back-5.jpg");
+  background-attachment: scroll, scroll,scroll, fixed;
+  background-position: bottom center,top center, top left, center center;
+  background-repeat: repeat-x,repeat-x, repeat, no-repeat;
 }
 .back-block .logo {
   background: #4eb980;
@@ -163,7 +182,7 @@ export default {
     -7px 8px 0 rgb(128, 141, 147), -8px 7px 0 rgb(205, 210, 213);
 }
 .footer {
-      margin-bottom: -20px;
+  margin-bottom: -20px;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
