@@ -26,11 +26,7 @@ export default {
     }
   },
   mounted: function() {
-    var _self = this;
-    // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-    // console.log("select2");
-    // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-    console.log(_self);
+    var _self = this; 
     this.options.minimumResultsForSearch = this.search ? 0 : -1;
     this.options.width =this.options.width|| "100%";//此处设置默认为100%的宽度
     $(this.$el)

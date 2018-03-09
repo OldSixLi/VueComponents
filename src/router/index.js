@@ -16,6 +16,8 @@ import User from './../components/User.vue';
 import Show from './../components/Show.vue';
 import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
+import WaterFall from './../components/WaterFall.vue';
+
 Vue.use(Router);
 
 let router = new Router({
@@ -54,6 +56,10 @@ let router = new Router({
       path: "/music",
       name: "music",
       component: Music
+    }, {
+      path: "/water",
+      name: "water",
+      component: WaterFall
     },
     {
       path: "/music/:type",

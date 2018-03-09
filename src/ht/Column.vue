@@ -30,9 +30,9 @@ export default {
   },
   mounted: function() {
     // 把{key:1}变成object
-    console.log("↓↓↓↓↓↓↓↓↓↓↓↓cloumn的值是↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
-    console.log(this);
-    console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+    // console.log("↓↓↓↓↓↓↓↓↓↓↓↓cloumn的值是↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
+    // console.log(this);
+    // console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
     var filter = this.filter;
     if (filter && !$.isPlainObject(filter)) {
       this.filter = this.parseText(filter);

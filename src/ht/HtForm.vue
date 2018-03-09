@@ -8,20 +8,11 @@
     <slot name="liehu"></slot>
   </form>
 </template>
-<script>
-function broadcast(componentName, eventName, params) {
-  this.$children.forEach(function(child) {
-    var name = child.$options.name;
-    if (name === componentName) {
-      child.$emit.apply(child, [eventName].concat(params));
-    } else {
-      //这个地方的意思是一直找他的深层元素 直到找到为止
-      broadcast.apply(child, [componentName, eventName].concat([params]));
-    }
-  });
-}
+<script> 
+import Emitter from "./../mixins/emitter";
 export default {
   name: "HtForm",
+  mixins: [Emitter],
   props: {
     infoType: {
       type: String,
@@ -52,9 +43,7 @@ export default {
     //获取从子组件传递过来的校验结果
     //BUG: 在这我有个疑问,为毛Pr的name就可以正常显示,但是ht-form-group 使用child.$options.name就无法正常显示( NOTE 问题已解决,是因为在组件内没有定义name)
     // this.htFormItemLength=0; //TODO  这块暂时没有想通要不要多余设置一步0
-    // console.log("■■■■■■■Form表单■■■■■■■■■■■■■■■");
-    // console.log(this);
-    // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+     
     this.$children.forEach(function(child) {
       child.$options._componentTag == "ht-form-group" &&
         this.htFormItemLength++;
@@ -85,10 +74,7 @@ export default {
       }
     });
   },
-  methods: {
-    broadcast(componentName, eventName, params) {
-      broadcast.call(this, componentName, eventName, params);
-    },
+  methods: { 
     //校验每个ht-form-group
     checkItem(callback) {
       //这个地方的声明必须在事件传播之前调用

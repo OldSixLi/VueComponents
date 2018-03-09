@@ -18,11 +18,14 @@ import './assets/css/bootstrap.min.css';
 import './assets/js/bootstrap.js';
 
 window.Vue = Vue;
+window.log = str => console.log(str);
+
 Vue.use(pluginPopBar);
 Vue.use(pluginNotice);
-console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-console.log(router);
-console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+
+// console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+// console.log(router);
+// console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 var vueBlock = new Vue({
   el: '#app',
   router,

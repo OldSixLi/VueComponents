@@ -17,19 +17,11 @@
     </div> 
   </div>
 </template>
-<script>
-function broadcast(componentName, eventName, params) {
-  this.$children.forEach(function(child) {
-    var name = child.$options.name;
-    if (name === componentName) {
-      child.$emit.apply(child, [eventName].concat(params));
-    } else {
-      broadcast.apply(child, [componentName, eventName].concat([params]));
-    }
-  });
-}
+<script> 
+import Emitter from "./../mixins/emitter";
 export default {
   name: "HtTabs",
+   mixins: [Emitter],
   props: {
     active:String
   },
@@ -39,24 +31,24 @@ export default {
       childArr: []
     };
   },
-  mounted: function() {
+  mounted() {
+    log(54456456)
+    log(this)
     let self = this; 
     let child_length = 0;
-    this.$children.forEach(child => {
-      if (child.$options.name === "HtTab") {
-        if(!self.currentActiveTabTitle&&child_length==0){
+    self.$children.forEach(child => { 
+      if (child.$options.name&& child.$options.name=== "HtTab") {
+        //如果没有指定激活的模块 默认设置第一个组件显示
+        if(!self.currentActiveTabTitle && child_length==0){
         self.currentActiveTabTitle=child.$options.propsData.title;
         }
         self.childArr.push(child.$options.propsData);
         child_length++;
       }
-      this.broadcast("HtTab", "changeActiveTab", self.currentActiveTabTitle);
+      self.broadcast("HtTab", "changeActiveTab", self.currentActiveTabTitle);
     });
   },
-  methods: {
-    broadcast(componentName, eventName, params) {
-      broadcast.call(this, componentName, eventName, params);
-    },
+  methods: { 
     changeIndex(title) {
       this.broadcast("HtTab", "changeActiveTab", title);
       this.changeActiveTab = title;

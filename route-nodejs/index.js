@@ -19,6 +19,9 @@ var router = express.Router();
 var fs = require("fs");
 var Q = require('promise');
 var fs = require('fs');
+var url = require('url');
+let SqlHelper = require('./sql');
+
 
 
 // parse application/x-www-form-urlencoded
@@ -62,4 +65,23 @@ router.post('/users', function(req, res, next) {
     console.log(error);　　
   }
 });
+
+router.get('/musicUserList', (req, res, next) => {
+  var params = url.parse(req.url, true).query;
+  let page = params.pageindex;
+  console.log(page);
+  SqlHelper.getMusicUser(page).then(result => {
+    setTimeout(function() {
+    res.json({
+      success: true,
+      data: result
+    })},2000);
+  }, err => {
+    res.json({
+      success: false,
+      errorMessage: err
+    })
+  });
+});
+
 module.exports = router;
