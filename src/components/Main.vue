@@ -208,7 +208,7 @@
           <div role="tabpanel" class="tab-pane active" id="messages">
             <panel title="tab标签页组件"> 
               <ht-tabs active="第三个">
-                <ht-tab title="第一个">
+                <ht-tab title="第一个" @show="showTabFun('第一个')"> 
                   <h1>我属于第一个模块</h1>
                 </ht-tab>
                 <ht-tab title="第二个">
@@ -218,6 +218,11 @@
                   <h1>目前为止有三个模块</h1>
                 </ht-tab>
               </ht-tabs> 
+
+              <ht-tabs>
+<ht-tab v-for="x in PersonsList" :title="x.name" :key="x.name"> <h1>{{x.name}}</h1></ht-tab>
+
+              </ht-tabs>
 
             </panel>
             
@@ -382,6 +387,12 @@ export default {
     }, 0);
   },
   methods: {
+    showTabFun(str){
+      this.$alert(
+        "提示",
+        "当前显示的tab模块是:"+str 
+      );
+    },
     alertBtnClick() {
       this.$alert(
         "提示",

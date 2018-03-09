@@ -28,6 +28,13 @@
         self.$on("changeActiveTab",title=>{
             self.activeTabTitile=title;
         });
+        },watch: {
+            activeTabTitile(){
+                let self=this;
+                if(self.activeTabTitile==self.title){
+                    self.$emit('show');
+                }
+            }
         } 
     }
 </script>
