@@ -36,5 +36,7 @@ export default new Vuex.Store({
     changeBasicName(state) {
       state.name = "OldSix Li "
     }
+
+
   }
 });
