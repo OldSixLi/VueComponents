@@ -4,7 +4,6 @@
  */
 
 import Vue from 'vue';
-// import $ from 'jquery';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);

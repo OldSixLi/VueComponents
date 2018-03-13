@@ -39,8 +39,10 @@ import ImgAn from './layout/ImgAn.vue';
 import RrunningMan from './layout/RrunningMan.vue';
 import Floor from './layout/cool/Floor.vue';
 import Notice from './layout/notice/Notice.vue';
-import LoadBtn from './test/LoadBtn.vue'
-import OpenIcon from './test/OpenIcon.vue'
+import LoadBtn from './test/LoadBtn.vue';
+import OpenIcon from './test/OpenIcon.vue';
+import Load from './layout/Load.vue';
+
 //NOTE 指令
 import './directive/randomImg.js';
 import './directive/popover.js';
@@ -48,7 +50,6 @@ import './directive/btnDelay.js';
 import './directive/tooltip.js';
 
 Vue.use(VueRouter);
-Vue.use(VueResource);
 
 Vue.component('app', App);
 Vue.component('ht-page', HtPage);
@@ -80,3 +81,5 @@ Vue.component('floor', Floor);
 Vue.component('notice', Notice);
 Vue.component('load-btn', LoadBtn);
 Vue.component('open-icon', OpenIcon);
+
+Vue.component('load', Load);

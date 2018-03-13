@@ -2,6 +2,10 @@ import Vue from 'vue';
 // import $ from 'jquery';
 import Vuex from 'vuex';
 
+//请求框架
+import Axios from 'axios';
+
+// import VueAxios from 'vue-axios';
 
 //路由
 import router from './router/index.js';
@@ -20,9 +24,11 @@ import './assets/js/bootstrap.js';
 window.Vue = Vue;
 window.log = str => console.log(str);
 
+
 Vue.use(pluginPopBar);
 Vue.use(pluginNotice);
-
+Vue.prototype.$http = Axios;
+//注册插件 
 // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 // console.log(router);
 // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
