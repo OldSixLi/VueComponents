@@ -28,7 +28,8 @@ import HtSelect from './ht/HtSelect.vue';
 import HtOption from './ht/HtOption.vue';
 import HtTab from './ht/HtTab.vue';
 import HtTabs from './ht/HtTabs.vue';
-
+import HtClass from './test/HtClass.vue';
+import InputNum from './ht/InputNum.vue'
 
 //布局组件
 import Panel from './layout/Panel.vue';
@@ -83,3 +84,5 @@ Vue.component('load-btn', LoadBtn);
 Vue.component('open-icon', OpenIcon);
 
 Vue.component('load', Load);
+Vue.component('ht-class', HtClass);
+Vue.component('input-num', InputNum);

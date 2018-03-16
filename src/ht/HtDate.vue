@@ -1,7 +1,7 @@
 //日期组件
 <template>
-  <div class="input-group date form_date" data-date="" data-link-field="dtp_input2" ref="dateInput" :dataMin="min" :dataMax="max">
-    <input class="form-control settime-input" type="text" v-bind:value="setTime" readonly>
+  <div class="input-group date form_date" data-date="" data-link-field="dtp_input2" ref="dateInput" :dataMin="min" :dataMax="max" style="width:100%;">
+    <input class="form-control settime-input" type="text" v-bind:value="setTime" readonly :placeholder="placeholder">
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-calendar"></span>
     </span>
@@ -17,7 +17,8 @@ export default {
     value: String,
     option: Object,
     minDate: String,
-    maxDate: String
+    maxDate: String,
+    placeholder:String
   },
   data: function() {
     //组件内数据部分
@@ -40,6 +41,7 @@ export default {
         autoclose: true,
         pickerPosition: "bottom-left"
       };
+      
       $(_self.$refs.dateInput).datetimepicker(options);
       //如果输入的值合法,则设置起始时间
       if (
@@ -105,4 +107,7 @@ export default {
 </script>
 <style scoped>
 @import "./../assets/js/datetimepicker/bootstrap-datetimepicker.min.css";
+.input-group {
+  width: 100%;
+}
 </style>

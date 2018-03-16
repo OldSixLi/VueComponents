@@ -55,11 +55,11 @@
                   }">
               <router-link to="/show" class="btn btn-link">展示</router-link>
             </li>
-            <li :class="{
+            <!-- <li :class="{
                   'active':$route.name=='water'
                   }">
               <router-link to="/water" class="btn btn-link">瀑布流</router-link>
-            </li>
+            </li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li style="line-height: 50px;">{{name}}</li>
