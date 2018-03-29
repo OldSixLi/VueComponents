@@ -98,7 +98,6 @@ let router = new Router({
       path: "/user",
       name: "user",
       component: User,
-
       children: [{
           path: 'info/:id',
           component: UserInfo,
@@ -117,15 +116,40 @@ let router = new Router({
 });
 
 // //最先开始执行 全局前置守卫
+/**
+ * 拦截功能 
+ * @returns 
+ */
 router.beforeEach((to, from, next) => {
 
-  // console.log(to.matched);
-  // next();
   if (to.matched.some(res => res.meta.requireAuth)) {
-    Vue.prototype.$alert("提示", "<h4 class='text-center'>需要授权进入</h4>", () => {
-      Vue.prototype.$alert("提示", "当前页面涉及到登陆拦截等功能")
-    });
-    next();
+    Vue.prototype.$confirm(
+      "提示",
+      '当前页面涉及到登陆拦截等功能,确定跳转吗?',
+      $content => {
+        //确定按钮
+        next()
+      },
+      $content => {
+        //取消按钮
+        //提示用户
+        Vue.prototype.$alert(
+          "提示",
+          "您将跳转到周杰伦页面",
+          $content => {
+            //点击确定按钮进行操作(YES)
+            next({
+              name: "userinfo",
+              params: {
+                id: 1
+              }
+            });
+          }
+        );
+
+      }
+    );
+
   } else {
     next()
   }

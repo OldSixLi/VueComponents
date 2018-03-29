@@ -4,11 +4,13 @@
     <input type="text" class="form-control" :value="currentValue" @input="handleInput" @focus="handleInput" @keypress.enter="searchClick" :placeholder="placeholder">
     <!-- @blur="blurFn" 失去焦点时如何处理-->
     <!-- //AJAX部分 -->
-    <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color: #fff;    box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="resultList&&resultList.length">
+    <transition name="panel">
+    <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="resultList&&resultList.length">
       <ul style="padding:0;">
         <li v-for="(x,index) in resultList" :key="index" :data-song-id="x.id" :data-song-name="x.name" @click="itemClick($event,x.id)">{{x.name+(x.artists[0]?' - '+x.artists[0].name:'')}}</li>
       </ul>
     </div>
+    </transition>
     <!-- //按钮部分 -->
     <span class="input-group-btn">
       <button class="btn btn-primary" :class="{
@@ -209,5 +211,26 @@ export default {
 }
 .resultPanel li:hover {
   background-color: #f5f7fa;
+}
+
+
+/* panel */
+/* 完成状态 */
+.panel-enter-active {
+  transform: translate(0, 0) scaleY(1);
+  transition: all 0.3s ease;
+
+}
+/* 初始状态 */
+.panel-enter,
+.panel-leave-active {
+  transform: translate(0, -50%) scaleY(0.2);
+  height: 0;
+}
+
+.panel-leave-active {
+/* 隐藏缩短时间 */
+transition: all 0.01s ease;
+
 }
 </style>
