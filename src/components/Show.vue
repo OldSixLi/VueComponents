@@ -131,7 +131,7 @@ export default {
     let self = this;
     //保证首屏可以完整显示
     Promise.all([
-      self.imgLoad("http://om6fr85l4.bkt.clouddn.com/bgc.jpg"),
+      self.imgLoad("http://om6fr85l4.bkt.clouddn.com/back-1.jpg"),
       self.imgLoad("http://om6fr85l4.bkt.clouddn.com/oldsix.png"),
       self.imgLoad("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
       self.imgLoad("http://om6fr85l4.bkt.clouddn.com/a1.png")
@@ -176,7 +176,7 @@ export default {
   background-attachment: scroll, scroll, fixed;
   background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
     url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
-    url("http://om6fr85l4.bkt.clouddn.com/bgc.jpg");
+    url("http://om6fr85l4.bkt.clouddn.com/back-1.jpg");
   background-position: bottom center, top left, center center;
   background-repeat: repeat-x, repeat, no-repeat;
   background-size: 3200px 460px, auto, cover;
@@ -246,7 +246,7 @@ export default {
   background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
     url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"),
     url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
-    url("./../assets/img/show/back-3.jpg");
+    url("http://om6fr85l4.bkt.clouddn.com/back-3.jpg");
   background-attachment: scroll, scroll, scroll, fixed;
   background-position: bottom center, top center, top left, center center;
   background-repeat: repeat-x, repeat-x, repeat, no-repeat;
@@ -255,7 +255,7 @@ export default {
   height: 1200px;
   background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
     url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
-    url("./../assets/img/show/back-5.jpg");
+    url("http://om6fr85l4.bkt.clouddn.com/back-5.jpg");
   background-attachment: scroll, scroll, scroll, fixed;
   background-position: bottom center, top center, top left, center center;
   background-repeat: repeat-x, repeat-x, repeat, no-repeat;
