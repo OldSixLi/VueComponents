@@ -1,20 +1,25 @@
 //做个展示页面
 <template>
-  <div class="show-block">
-    <div class="back-block">
-      <transition name="cover" mode="">
-        <!-- 遮罩区域 -->
+  <div class="page">
+    <div class="first-page">
+      <!-- 遮罩区域 -->
+      <transition name="cover">
         <div class="cover" v-show="showCover"></div>
       </transition>
-      <img :src='require("./../assets/img/show/oldsix.png")' alt="OldSix.Li" class="img-name" :class="imgClass">
-      <h3 style="" class='h-welcome' :class="h3Class">　　　　　　　　　　　　Welcome To My Homepage.</h3>
+      <!-- OLDSIXLI -->
+      <img :src='require("./../assets/img/show/oldsix.png")' class="img-name" :class="imgClass" alt="OldSix.Li">
+      <h3 class='h-welcome' :class="h3Class">
+        Welcome To My Homepage.</h3>
     </div>
+    <!-- 项目展示 -->
     <div class="container" id="main">
+      <!-- 标题 -->
       <div class="intro">
         <div class="hor-block"></div>
-        <div class="enjoy-css">My Projects</div>
+        <div class="project">My Projects</div>
         <link async href="http://fonts.googleapis.com/css?family=Aldrich" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css" />
       </div>
+      <!-- 项目主要内容 -->
       <div class="row">
         <img-an class="col-md-4" :src='require("./../assets/img/show/hor4.jpg")' title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
 
@@ -29,8 +34,8 @@
 
         <img-an class="col-md-4" :src='require("./../assets/img/show/hor3.jpg")' title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
-
     </div>
+    <!-- 电影 -->
     <div class="section-two">
       <h1 class="text-center" style="padding-top: 110px;color: #fff;">剧</h1>
       <br><br>
@@ -75,21 +80,18 @@
         </div>
       </div>
     </div>
-    <div class="section-three" style="height: 1000px;">
-
-    </div>
+    <!-- 空白 -->
+    <div class="section-three" style="height: 1000px;"></div>
+    <!-- 其他 -->
     <div class="section-four">
       <h1 class="text-center" style="padding-top: 250px;color: #fff;">其他文字</h1>
     </div>
-    <div class="section-five" style="height: 800px;">
-
-    </div>
+    <!-- final -->
+    <div class="section-five" style="height: 800px;"></div>
     <!-- <div class="">
       <running-man></running-man>
     </div> -->
-
-    <div class="footer">
-    </div>
+    <div class="footer"></div>
   </div>
 </template>
 <script>
@@ -100,24 +102,18 @@ export default {
   props: {},
   data: function() {
     return {
-      imgClass: "",h3Class:"",
+      imgClass: "",
+      h3Class: "",
       showCover: true
     };
   },
-  /**
-   * 判断浏览器版本
-   * @returns
-   */
   mounted: function() {
     store.commit("changeBasicName");
-
     var newImg = new Image();
     newImg.src = "http://om6fr85l4.bkt.clouddn.com/bgc.jpg";
     newImg.onload = () => {
-      // 图片加载成功后把地址给原来的img
-      // img.src = newImg.src;
       this.imgClass = "img-logo";
-      this.h3Class="h3-logo";
+      this.h3Class = "h3-logo";
       setTimeout(() => {
         this.showCover = false;
       }, 1500);
@@ -125,51 +121,8 @@ export default {
   }
 };
 </script>
-
 <style scoped>
-.h-welcome{
-  opacity:0;margin-top: -50px;width: 800px;margin: 0 auto;
-}
-.cover {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background-color: #000;
-}
-.img-name {
-  transform: skewX(160deg);
-  margin-bottom: -50px;
-  opacity: 0;
-}
-.hor-block {
-  width: 50%;
-  transform: translateX(50%);
-  height: 15px;
-  border: 1px solid #e7e7e7;
-  border-left: none;
-  border-right: none;
-}
-#main {
-  position: relative;
-}
-#main:before {
-  background: rgba(224, 224, 224, 0.75);
-  content: "";
-  height: 100px;
-  left: 49.9%;
-  position: absolute;
-  top: 0;
-  width: 1px;
-  z-index: -1;
-}
-.intro {
-  padding-top: 100px;
-}
-.back-block {
+.first-page {
   margin-top: -20px;
   font: normal 18px/normal "brush-script-std", Helvetica, sans-serif;
   height: 800px;
@@ -186,105 +139,71 @@ export default {
   text-align: center;
 }
 
-.cover-enter-active {
-  /* 动画过渡设置 */
-  transition: all 0.8s;
+#main {
+  position: relative;
 }
-.cover-leave-active {
-  /* 动画过渡设置 */
-  transition: all 1.9s;
+#main:before {
+  content: "";
+  height: 100px;
+  width: 1px;
+  position: absolute;
+  top: 0;
+  left: 49.9%;
+  background: rgba(224, 224, 224, 0.75);
+  z-index: -1;
 }
-.cover-leave,
-.cover-enter-to {
-  /* 终止,动画已完成 */
-  opacity: 1;
+.intro {
+  padding-top: 100px;
 }
-.cover-leave-to,
-.cover-enter {
-  /* 起始,动画刚开始*/
+.h-welcome {
+  width: 640px;
+  margin: 0 auto;
+  opacity: 0;
+  text-align: right;
+}
+.cover {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+.img-name {
+  transform: skewX(160deg);
+  margin-bottom: -50px;
   opacity: 0;
 }
+.hor-block {
+  width: 50%;
+  transform: translateX(50%);
+  height: 15px;
+  border: 1px solid #e7e7e7;
+  border-left: none;
+  border-right: none;
+}
+.first-page .logo {
+  background: #4eb980;
+  border-radius: 100%;
+  color: white;
+  cursor: default;
+  display: inline-block;
+  font-size: 2.25em;
+  height: 2.35em;
+  line-height: 2.35em;
+  margin: 0 0 0.75em 0;
+  text-align: center;
+  width: 2.35em;
+}
 .img-logo {
-  /* display: inline; */
   opacity: 1;
   animation: mymove 1s forwards;
 }
 
-@keyframes mymove {
-  from {
-    transform: translateY(-500px) skewX(160deg);
-  }
-  to {
-    transform: translateY(0) skewX(160deg);
-  }
-}
-
-@-moz-keyframes mymove {
-  from {
-    transform: translateY(-500px) skewX(160deg);
-  }
-  to {
-    transform: translateY(0) skewX(160deg);
-  }
-}
-
-@-webkit-keyframes mymove {
-  from {
-    transform: translateY(-500px) skewX(160deg);
-  }
-  to {
-    transform: translateY(0) skewX(160deg);
-  }
-}
-
-@-o-keyframes mymove {
-  from {
-    transform: translateY(-500px) skewX(160deg);
-  }
-  to {
-    transform: translateY(0) skewX(160deg);
-  }
-}
-
 .h3-logo {
-  
-  animation: mymoves 1s cubic-bezier(0.075, 0.82, 0.165, 1) .5s forwards;
-}
-
-@keyframes mymoves {
-  from {opacity: 0;
-    transform: translateY(600px);
-  }
-  to {
-    transform: translateY(0);opacity: 1;
-  }
-}
-
-@-moz-keyframes mymoves {
-  from {opacity: 0;
-    transform: translateY(600px);
-  }
-  to {
-    transform: translateY(0);opacity: 1;
-  }
-}
-
-@-webkit-keyframes mymoves {
-  from {opacity: 0;
-    transform: translateY(600px);
-  }
-  to {
-    transform: translateY(0);opacity: 1;
-  }
-}
-
-@-o-keyframes mymoves {
-  from {opacity: 0;
-    transform: translateY(600px);
-  }
-  to {
-    transform: translateY(0);opacity: 1;
-  }
+  animation: mymoves 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s forwards;
 }
 
 .section-two {
@@ -305,34 +224,8 @@ export default {
   background-position: bottom center, top center, top left, center center;
   background-repeat: repeat-x, repeat-x, repeat, no-repeat;
 }
-.back-block .logo {
-  background: #4eb980;
-  border-radius: 100%;
-  color: white;
-  cursor: default;
-  display: inline-block;
-  font-size: 2.25em;
-  height: 2.35em;
-  line-height: 2.35em;
-  margin: 0 0 0.75em 0;
-  text-align: center;
-  width: 2.35em;
-}
-.bgc-img {
-  width: 100%;
-  height: auto;
-  z-index: -1;
-}
-.title-block {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
-  background-color: #000;
-}
-.enjoy-css {
+
+.project {
   position: relative;
   /* bottom: 0; */
   left: 50%;
@@ -590,5 +483,97 @@ export default {
   background-clip: border-box;
   -webkit-background-size: 100px 50px;
   background-size: 100px 50px;
+}
+.cover-enter-active {
+  /* 动画过渡设置 */
+  transition: all 0.8s;
+}
+.cover-leave-active {
+  /* 动画过渡设置 */
+  transition: all 1.9s;
+}
+.cover-leave,
+.cover-enter-to {
+  /* 终止,动画已完成 */
+  opacity: 1;
+}
+.cover-leave-to,
+.cover-enter {
+  /* 起始,动画刚开始*/
+  opacity: 0;
+}
+/* 图片动画效果 */
+@keyframes mymove {
+  from {
+    transform: translateY(-500px) skewX(160deg);
+  }
+  to {
+    transform: translateY(0) skewX(160deg);
+  }
+}
+@-moz-keyframes mymove {
+  from {
+    transform: translateY(-500px) skewX(160deg);
+  }
+  to {
+    transform: translateY(0) skewX(160deg);
+  }
+}
+@-webkit-keyframes mymove {
+  from {
+    transform: translateY(-500px) skewX(160deg);
+  }
+  to {
+    transform: translateY(0) skewX(160deg);
+  }
+}
+@-o-keyframes mymove {
+  from {
+    transform: translateY(-500px) skewX(160deg);
+  }
+  to {
+    transform: translateY(0) skewX(160deg);
+  }
+}
+/* 段落动画效果 */
+@keyframes mymoves {
+  from {
+    opacity: 0;
+    transform: translateY(600px);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-moz-keyframes mymoves {
+  from {
+    opacity: 0;
+    transform: translateY(600px);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes mymoves {
+  from {
+    opacity: 0;
+    transform: translateY(600px);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-o-keyframes mymoves {
+  from {
+    opacity: 0;
+    transform: translateY(600px);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>
