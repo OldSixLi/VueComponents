@@ -6,7 +6,7 @@
       <div class="img-block_caption">
         <h3 class="img-block_caption_title">{{title}}</h3>
         <p class="img-block_caption_content">{{content}}</p>
-        <a class="img-block_caption_a" :href="href"></a>
+        <a class="img-block_caption_a" :href="href" target="_blank"></a>
       </div>
     </div>
   </div>

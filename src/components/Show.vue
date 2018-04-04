@@ -1,40 +1,42 @@
 //做个展示页面
 <template>
   <div class="page">
+    <!-- 首屏加载 -->
     <div class="first-page">
       <!-- 遮罩区域 -->
       <transition name="cover">
         <div class="cover" v-show="showCover"></div>
       </transition>
       <!-- OLDSIXLI -->
-      <img :src='require("./../assets/img/show/oldsix.png")' class="img-name" :class="imgClass" alt="OldSix.Li">
+      <img src='http://om6fr85l4.bkt.clouddn.com/oldsix.png' class="img-name" :class="imgClass" alt="OldSix.Li">
       <h3 class='h-welcome' :class="h3Class">
         Welcome To My Homepage.</h3>
     </div>
+
     <!-- 项目展示 -->
     <div class="container" id="main">
       <!-- 标题 -->
       <div class="intro">
         <div class="hor-block"></div>
         <div class="project">My Projects</div>
-        <link async href="http://fonts.googleapis.com/css?family=Aldrich" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css" />
       </div>
       <!-- 项目主要内容 -->
       <div class="row">
-        <img-an class="col-md-4" :src='require("./../assets/img/show/hor4.jpg")' title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
+        <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor4.jpg" title="时间任务调度框架" content="一个基于C#的定时任务调度框架" href="https://github.com/OldSixLi/TimerSwitch"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/show/hor5.jpg")' title="后台管理网站" content="基于Angularjs的后台管理网站" href="https://github.com/OldSixLi/Nodes"></img-an>
+        <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor5.jpg" title="后台管理网站" content="基于Angularjs的后台管理网站" href="https://github.com/OldSixLi/Nodes"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/show/hor6.jpg")' title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片" href="https://github.com/OldSixLi/NodeAngular"></img-an>
+        <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor6.jpg" title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片" href="https://github.com/OldSixLi/NodeAngular"></img-an>
       </div>
       <div class="row" style="margin-top: 20px;">
-        <img-an class="col-md-4" :src='require("./../assets/img/show/hor1.jpg")' title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
+        <img-an class="col-md-4"  src="http://om6fr85l4.bkt.clouddn.com/hor1.jpg"  title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/show/hor2.jpg")' title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
+        <img-an class="col-md-4"  src="http://om6fr85l4.bkt.clouddn.com/hor2.jpg"  title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
 
-        <img-an class="col-md-4" :src='require("./../assets/img/show/hor3.jpg")' title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
+        <img-an class="col-md-4"  src="http://om6fr85l4.bkt.clouddn.com/hor3.jpg"  title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
     </div>
+
     <!-- 电影 -->
     <div class="section-two">
       <h1 class="text-center" style="padding-top: 110px;color: #fff;">剧</h1>
@@ -43,92 +45,137 @@
         <div class="row">
           <!-- 士兵突击 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/soldier.jpg")' title="士兵突击" word="三多和成才就像一张纸的正反面，走过不同的路后都在成长。希望永远怀揣一颗赤子之心。" />
+            <img-introduce img='http://om6fr85l4.bkt.clouddn.com/soldier.jpg' title="士兵突击" word="三多和成才就像一张纸的正反面，走过不同的路后都在成长。希望永远怀揣一颗赤子之心。" />
           </div>
           <!-- 釜山行 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/chumen.jpg")' title="楚门的世界" word="就算你能摄影我的一切也无法在我脑内安装摄影机" />
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/chumen.jpg" title="楚门的世界" word="就算你能摄影我的一切也无法在我脑内安装摄影机" />
           </div>
           <!-- 活着 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/live.jpg")' title="活着" word="活着" />
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/live.jpg" title="活着" word="活着" />
           </div>
           <!-- 鬼子来了 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/devil.jpg")' title="鬼子来了" word="可能比大部分抗日剧都接地气的多" />
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/devil.jpg" title="鬼子来了" word="可能比大部分抗日剧都接地气的多" />
           </div>
         </div>
         <br>
         <div class="row">
           <!-- 烈日灼心 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/hot.jpg")' title="烈日灼心" word="烈日灼心" />
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/hot.jpg" title="烈日灼心" word="烈日灼心" />
           </div>
           <!-- 阳光灿烂的日子 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/day.jpg")' title="阳光灿烂的日子" word="阳光灿烂的日子" />
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/day.jpg" title="阳光灿烂的日子" word="阳光灿烂的日子" />
 
           </div>
           <!-- 十二公民 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/twelve.jpg")' title="十二公民" word="言语的力量" />
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/twelve.jpg" title="十二公民" word="言语的力量" />
 
           </div>
           <!-- 美国队长 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce :img='require("./../assets/img/movie/cover/capation.jpg")' title="美国队长" word="永远为了自由与公正" /> </div>
+            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/capation.jpg" title="美国队长" word="永远为了自由与公正" /> </div>
         </div>
       </div>
     </div>
+
     <!-- 空白 -->
     <div class="section-three" style="height: 1000px;"></div>
+
     <!-- 其他 -->
     <div class="section-four">
       <h1 class="text-center" style="padding-top: 250px;color: #fff;">其他文字</h1>
     </div>
+
     <!-- final -->
     <div class="section-five" style="height: 800px;"></div>
-    <!-- <div class="">
-      <running-man></running-man>
-    </div> -->
+
+    <!-- footer -->
     <div class="footer"></div>
   </div>
 </template>
+
 <script>
 import store from "./../store/index";
 export default {
   name: "Show",
   store,
-  props: {},
-  data: function() {
+  data() {
     return {
       imgClass: "",
       h3Class: "",
       showCover: true
     };
   },
-  mounted: function() {
+  methods: {
+    imgLoad(src) {
+      //返回一个promise对象才可以调用then等函数
+      return new Promise(function(resolve, reject) {
+        var newImg = new Image();
+        newImg.src = src;
+        newImg.onload = () => {
+          resolve("success");
+        };
+        newImg.onerror = () => {
+          reject("error");
+        };
+      });
+    }
+  },
+  mounted() {
     store.commit("changeBasicName");
-    var newImg = new Image();
-    newImg.src = "http://om6fr85l4.bkt.clouddn.com/bgc.jpg";
-    newImg.onload = () => {
-      this.imgClass = "img-logo";
-      this.h3Class = "h3-logo";
-      setTimeout(() => {
-        this.showCover = false;
-      }, 1500);
-    };
+    let self = this;
+    //保证首屏可以完整显示
+    Promise.all([
+      self.imgLoad("http://om6fr85l4.bkt.clouddn.com/bgc.jpg"),
+      self.imgLoad("http://om6fr85l4.bkt.clouddn.com/oldsix.png"),
+      self.imgLoad("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
+      self.imgLoad("http://om6fr85l4.bkt.clouddn.com/a1.png")
+    ]).then(
+      str => {
+        self.imgClass = "img-logo";
+        self.h3Class = "h3-logo";
+        setTimeout(() => {
+          self.showCover = false;
+        }, 1500);
+      },
+      err => {
+        //失败了也得让进去啊,多等一会就得了
+        setTimeout(() => {
+          self.imgClass = "img-logo";
+          self.h3Class = "h3-logo";
+          setTimeout(() => {
+            self.showCover = false;
+          }, 1500);
+        }, 1500);
+      }
+    );
   }
 };
 </script>
 <style scoped>
+/* latin */
+@font-face {
+  font-family: "Aldrich";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Aldrich Regular"), local("Aldrich-Regular"),
+    url("./../assets/fonts/MCoTzAn-1s3IGyJMVacY3w.woff2") format("woff2");
+  unicode-range: U+0000-00ff, U+0131, U+0152-0153, U+02bb-02bc, U+02c6, U+02da,
+    U+02dc, U+2000-206f, U+2074, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
 .first-page {
   margin-top: -20px;
   font: normal 18px/normal "brush-script-std", Helvetica, sans-serif;
   height: 800px;
   background-attachment: scroll, scroll, fixed;
-  background-image: url("./../assets/img/show/top-3200.svg"),
-    url("./../assets/img/show/a1.png"),
+  background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
+    url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
     url("http://om6fr85l4.bkt.clouddn.com/bgc.jpg");
   background-position: bottom center, top left, center center;
   background-repeat: repeat-x, repeat, no-repeat;
@@ -184,19 +231,7 @@ export default {
   border-left: none;
   border-right: none;
 }
-.first-page .logo {
-  background: #4eb980;
-  border-radius: 100%;
-  color: white;
-  cursor: default;
-  display: inline-block;
-  font-size: 2.25em;
-  height: 2.35em;
-  line-height: 2.35em;
-  margin: 0 0 0.75em 0;
-  text-align: center;
-  width: 2.35em;
-}
+
 .img-logo {
   opacity: 1;
   animation: mymove 1s forwards;
@@ -208,8 +243,9 @@ export default {
 
 .section-two {
   height: 1200px;
-  background-image: url("./../assets/img/show/top-3200.svg"),
-    url("./../assets/img/show/top-back.svg"), url("./../assets/img/show/a1.png"),
+  background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
+    url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"),
+    url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
     url("./../assets/img/show/back-3.jpg");
   background-attachment: scroll, scroll, scroll, fixed;
   background-position: bottom center, top center, top left, center center;
@@ -217,8 +253,8 @@ export default {
 }
 .section-four {
   height: 1200px;
-  background-image: url("./../assets/img/show/top-3200.svg"),
-    url("./../assets/img/show/top-back.svg"), url("./../assets/img/show/a1.png"),
+  background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
+    url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
     url("./../assets/img/show/back-5.jpg");
   background-attachment: scroll, scroll, scroll, fixed;
   background-position: bottom center, top center, top left, center center;
@@ -227,7 +263,6 @@ export default {
 
 .project {
   position: relative;
-  /* bottom: 0; */
   left: 50%;
   transform: translateX(-50%);
   -webkit-box-sizing: class="support css-value" content-box;
