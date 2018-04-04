@@ -49,7 +49,7 @@
             </div>
             <div class="col-md-3">
                 <a>
-                    <img src="require('./../assets/img/usericon/userIcon (6).jpg')" class="img-responsive  img-thumbnail">
+                    <img src="http://om6fr85l4.bkt.clouddn.com/userIcon%20%282%29.png" class="img-responsive  img-thumbnail">
                 </a>
             </div>
         </div>
