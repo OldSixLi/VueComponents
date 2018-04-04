@@ -5,11 +5,14 @@
     <!-- @blur="blurFn" 失去焦点时如何处理-->
     <!-- //AJAX部分 -->
     <transition name="panel">
-    <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="resultList&&resultList.length">
-      <ul style="padding:0;">
-        <li v-for="(x,index) in resultList" :key="index" :data-song-id="x.id" :data-song-name="x.name" @click="itemClick($event,x.id)">{{x.name+(x.artists[0]?' - '+x.artists[0].name:'')}}</li>
-      </ul>
-    </div>
+      <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="resultList&&resultList.length">
+        <ul style="padding:0;">
+          <li v-for="(x,index) in resultList" :key="index" :data-song-id="x.id" :data-song-name="x.name" @click="itemClick($event,x.id)">{{x.name+(x.artists[0]?' - '+x.artists[0].name:'')}}</li>
+          <hr>
+          <li v-for="(y,i) in authorList" :key="i" :data-author-id="y.id" :data-song-name="y.name" @click="itemClick($event,y.id,'user')"><img :src="y.picUrl" alt="" class="img-author">{{" "+y.name}}</li>
+        </ul>
+
+      </div>
     </transition>
     <!-- //按钮部分 -->
     <span class="input-group-btn">
@@ -37,14 +40,21 @@ export default {
     //组件内数据部分
     return {
       currentValue: this.value,
-      resultList: []
+      resultList: [],
+      authorList: []
     };
   },
   methods: {
     searchClick: function() {
       this.resultList = [];
+      this.authorList = [];
       this.$emit("search", this.value);
     },
+    /**
+     * 点击用户
+     * @returns
+     */
+    authorClick(event, authorId) {},
     handleInput(event) {
       //ajax部分
       // handleInput
@@ -61,6 +71,7 @@ export default {
         success: function(data) {
           if (data.code == 200) {
             _self.resultList = data.result.songs; //歌曲列表
+            _self.authorList = data.result.artists;
           } else {
             //failed  do something
             _self.resultList = [];
@@ -74,96 +85,99 @@ export default {
       this.currentValue = event.target.value;
       this.$emit("input", value); //触发 input 事件，并传入新值
     },
-    itemClick(event, id) {
+    itemClick(event, id, user) {
       this.resultList = [];
       let _self = this;
       let node = event.target;
       let dataObj = {};
       this.currentValue = $(node).text();
-      this.$emit("input", $(node).text()
-      );
-
-      //BEGIN 开始获取音乐信息 并传递给父组件
-      _self.$emit("suggestClick", "begin", dataObj);
-      dataObj.id = id;
-      //TODO 妈蛋 完犊子 这块不能用同步  得用promise
-      //获取MP3链接 ②步 使用promise
-      //NOTE promise的用法需要注意
-      var step1 = new Promise(function(resolve, reject) {
-        $.ajax({
-          type: "GET",
-          url: "http://localhost:9999/music/url",
-          data: {
-            id: id,
-            timestamp: Date.parse(new Date())
-          },
-          async: true,
-          dataType: "json",
-          success: function(data) {
-            if (data.code == 200) {
-              //URL
-              dataObj.url = data.data[0].url;
-            } else {
+      this.$emit("input", $(node).text());
+      if (user == "user") {
+        _self.$emit("suggestClick", "user", id);
+      } else {
+        //BEGIN 开始获取音乐信息 并传递给父组件
+        _self.$emit("suggestClick", "begin", dataObj);
+        dataObj.id = id;
+        //TODO 妈蛋 完犊子 这块不能用同步  得用promise
+        //获取MP3链接 ②步 使用promise
+        //NOTE promise的用法需要注意
+        var step1 = new Promise(function(resolve, reject) {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost:9999/music/url",
+            data: {
+              id: id,
+              timestamp: Date.parse(new Date())
+            },
+            async: true,
+            dataType: "json",
+            success: function(data) {
+              if (data.code == 200) {
+                //URL
+                dataObj.url = data.data[0].url;
+              } else {
+                dataObj.url = "";
+              }
+            },
+            error: function(response) {
               dataObj.url = "";
+            },
+            complete: function(xhr, textStatus) {
+              //NOTE 异步事件完成后需要操作的内容
+              dataObj.urlComplete = true; //代表链接获取完毕
+              // if(dataObj.detailComplete){
+              //     // _self.$emit('suggestClick','end', dataObj);
+              //     setTimeout(() => {
+              //         _self.$emit('suggestClick','end', dataObj);
+              //     },0);
+              // }
+              resolve(true);
             }
-          },
-          error: function(response) {
-            dataObj.url = "";
-          },
-          complete: function(xhr, textStatus) {
-            //NOTE 异步事件完成后需要操作的内容
-            dataObj.urlComplete = true; //代表链接获取完毕
-            // if(dataObj.detailComplete){
-            //     // _self.$emit('suggestClick','end', dataObj);
-            //     setTimeout(() => {
-            //         _self.$emit('suggestClick','end', dataObj);
-            //     },0);
-            // }
-            resolve(true);
-          }
+          });
         });
-      });
-      //获取歌曲详情 ①步 使用promise
-      var step2 = new Promise(function(resolve, reject) {
-        $.ajax({
-          type: "GET",
-          url: "http://localhost:9999/song/detail",
-          data: {
-            ids: id,
-            timestamp: Date.parse(new Date())
-          },
-          async: true,
-          dataType: "json",
-          success: function(data) {
-            if (data.code == 200) {
-              dataObj.name = data.songs[0].name;
-              dataObj.author = data.songs[0].ar[0].name;
-              dataObj.songImg = data.songs[0].al.picUrl;
-            } else {
+        //获取歌曲详情 ①步 使用promise
+        var step2 = new Promise(function(resolve, reject) {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost:9999/song/detail",
+            data: {
+              ids: id,
+              timestamp: Date.parse(new Date())
+            },
+            async: true,
+            dataType: "json",
+            success: function(data) {
+              if (data.code == 200) {
+                dataObj.name = data.songs[0].name;
+                dataObj.author = data.songs[0].ar[0].name;
+                dataObj.songImg = data.songs[0].al.picUrl;
+              } else {
+                dataObj.name = "";
+                dataObj.author = "";
+                dataObj.songImg = "";
+              }
+            },
+            error: function(response) {
               dataObj.name = "";
               dataObj.author = "";
               dataObj.songImg = "";
+            },
+            complete: function(xhr, textStatus) {
+              dataObj.detailComplete = true; //代表详情获取完毕
+              resolve(true);
             }
-          },
-          error: function(response) {
-            dataObj.name = "";
-            dataObj.author = "";
-            dataObj.songImg = "";
-          },
-          complete: function(xhr, textStatus) {
-            dataObj.detailComplete = true; //代表详情获取完毕
-            resolve(true);
-          }
+          });
         });
-      });
-      //此处因为涉及到两个AJAX请求,所以必须等待两个都执行完毕才可以回调,所以利用promise
-      //2017年11月21日14:15:59 更改为promise
-      //执行promsie
-      Promise.all([step1, step2]).then(function(result) {
-        setTimeout(() => {
-          _self.$emit("suggestClick", "end", dataObj);
-        }, 0);
-      });
+        //此处因为涉及到两个AJAX请求,所以必须等待两个都执行完毕才可以回调,所以利用promise
+        //2017年11月21日14:15:59 更改为promise
+        //执行promsie
+        Promise.all([step1, step2]).then(function(result) {
+          setTimeout(() => {
+            _self.$emit("suggestClick", "end", dataObj);
+          }, 0);
+        });
+      }
+
       //END 执行完毕
     },
     blurFn: function() {
@@ -181,12 +195,18 @@ export default {
       if (!this.$el.contains(e.target)) {
         this.resultList = [];
       }
-      
     });
   }
 };
 </script>
 <style scoped>
+hr {
+  margin: 7px 0;
+}
+.img-author {
+  width: 30px;
+  height: 30px;
+}
 .input-group {
   position: relative;
 }
@@ -213,13 +233,11 @@ export default {
   background-color: #f5f7fa;
 }
 
-
 /* panel */
 /* 完成状态 */
 .panel-enter-active {
   transform: translate(0, 0) scaleY(1);
   transition: all 0.3s ease;
-
 }
 /* 初始状态 */
 .panel-enter,
@@ -229,8 +247,7 @@ export default {
 }
 
 .panel-leave-active {
-/* 隐藏缩短时间 */
-transition: all 0.01s ease;
-
+  /* 隐藏缩短时间 */
+  /* transition: all 0.01s ease; */
 }
 </style>

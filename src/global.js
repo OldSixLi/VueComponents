@@ -12,6 +12,7 @@ import Pr from './test/P.vue';
 import PrList from './test/PrList.vue';
 import AjaxSearch from './test/AjaxSearch.vue';
 import Al from './test/Al.vue';
+import ImgIntroducePanel from './layout/ImgIntroducePanel.vue';
 
 //ht组件
 import HtModal from './ht/HtModal.vue';
@@ -82,6 +83,9 @@ Vue.component('floor', Floor);
 Vue.component('notice', Notice);
 Vue.component('load-btn', LoadBtn);
 Vue.component('open-icon', OpenIcon);
+Vue.component('img-introduce', ImgIntroducePanel);
+
+
 
 Vue.component('load', Load);
 Vue.component('ht-class', HtClass);

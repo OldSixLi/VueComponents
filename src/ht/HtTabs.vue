@@ -6,8 +6,8 @@
         v-for="(x,$index) in childArr" 
         :class="{'active':x.title==currentActiveTabTitle}" 
         @click="changeIndex(x.title)">
-          <a class="pointer" role="tab" data-toggle="tab">
-            {{x.title}}
+          <a class="pointer" role="tab" data-toggle="tab" v-html="x.title">
+            
           </a>
       </li>
     </ul>

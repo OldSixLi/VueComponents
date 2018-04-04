@@ -9,7 +9,9 @@ import Welcome from './../components/Welcome.vue';
 import Main from './../components/Main.vue';
 import Begin from './../components/Begin.vue';
 import Know from './../components/Know.vue';
-import Music from './../components/Music.vue';
+import Music from './../components/music/Music.vue';
+import MusicUser from './../components/music/MusicUser.vue';
+import MusicSearch from './../components/music/MusicSearch.vue';
 import Point from './../components/Point.vue';
 import User from './../components/User.vue';
 import Show from './../components/Show.vue';
@@ -51,28 +53,28 @@ let router = new Router({
       component: Welcome
     },
     //网易云音乐APP 
+    // {
+    //   path: "/music",
+    //   name: "music",
+    //   component: Music
+    // },
     {
-      path: "/music",
-      name: "music",
-      component: Music
-    }, {
       path: "/water",
       name: "water",
       component: WaterFall
     },
     {
-      path: "/music/:type",
+      path: "/music",
       name: "music",
       component: Music,
       children: [{
-          path: 'table',
-          component: Music
+          path: '',
+          component: MusicSearch
         },
         {
-          // 当 /user/:id/posts 匹配成功
-          // UserPosts 会被渲染在 User 的 <router-view> 中
-          path: 'detail',
-          component: Music
+          path: 'user/:id',
+          component: MusicUser,
+          name: "musicuser"
         }
       ]
     },
@@ -103,9 +105,7 @@ let router = new Router({
           component: UserInfo,
           name: "userinfo"
         },
-        {
-          // 当 /user/:id/posts 匹配成功
-          // UserPosts 会被渲染在 User 的 <router-view> 中
+        { 
           path: 'list',
           component: UserList,
           name: "userlist"

@@ -1,11 +1,18 @@
 <template>
+
   <div class="container">
+    <transition name="userRouter" mode="">
+      <router-view></router-view>
+    </transition>
     <div class="row">
-      <ht-tabs>
+
+      <ht-tabs active="2">
         <ht-tab title="1">
           <ht-class :config="config" :data="classData" @getResult="result"></ht-class>
         </ht-tab>
         <ht-tab title="2">
+
+         
           <!-- 列表部分 -->
           <div class="col-md-9 col-sm-12 col-xs-12">
             <h2 class="text-center">搜索</h2>
@@ -67,7 +74,7 @@
               </div>
               <div style="padding:10px;">
                 <div v-show="!showLoad">
-                  <img :src='dataObj.songImg?dataObj.songImg:require("./../assets/img/nigula.jpg")' class='img-responsive img-thumbnail' alt='头像'>
+                  <img :src='dataObj.songImg?dataObj.songImg:require("./../../assets/img/nigula.jpg")' class='img-responsive img-thumbnail' alt='头像'>
                   <div class="caption">
                     <h4 v-show="dataObj.name">名称:{{dataObj.name}}</h4>
                     <h4 v-show="dataObj.name">作者:{{dataObj.author}}</h4>
@@ -91,17 +98,18 @@
 
       </ht-tabs>
     </div>
+
   </div>
 </template>
 <script>
+import router from "./../../router/index.js";
 export default {
+  router,
   name: "Music",
   data: function() {
     //组件内数据部分
     return {
-      classData: {
-        
-      },
+      classData: {},
       //配置项
       config: {
         //课程名称
@@ -179,27 +187,27 @@ export default {
         // 积分计算规则 百分比或固定数值
         score: {
           default: ""
-        }, 
+        },
         // 是否需使用听课券
         useCourseTicket: {
           default: ""
-        }, 
+        },
         // 咨询电话
         phone: {
           default: ""
-        }, 
+        },
         // 多人参加计费规则(一般设置为固定值)
         mutiplySale: {
           default: "M*N"
-        }, 
+        },
         // 规则说明(一般设置为固定值)
         mutiplDes: {
           default: "单价乘以人数"
-        }, 
+        },
         // 课程介绍
         introduction: {
           default: ""
-        } 
+        }
       },
       songList: [],
       word: "二手玫瑰",
@@ -247,6 +255,10 @@ export default {
         this.dataObj.songImg = result.songImg;
         this.dataObj.url = result.url;
         this.dataObj.showDetail = true;
+      } else if (state == "user") {
+        router.push({
+          path: "/music/user/" + result
+        });
       }
     },
     //获取歌曲详情
