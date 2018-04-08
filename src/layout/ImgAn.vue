@@ -141,7 +141,7 @@ export default {
   -ms-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 10;
 }
 .img-block .img-block_caption_title {
   font-size: 1.3em;

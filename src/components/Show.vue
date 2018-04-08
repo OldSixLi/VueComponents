@@ -8,9 +8,9 @@
         <div class="cover" v-show="showCover"></div>
       </transition>
       <!-- OLDSIXLI -->
-      <img src='http://om6fr85l4.bkt.clouddn.com/oldsix.png' class="img-name" :class="imgClass" alt="OldSix.Li">
-      <h3 class='h-welcome' :class="h3Class">
-        Welcome To My Homepage.</h3>
+        <img src='http://om6fr85l4.bkt.clouddn.com/oldsix.png' class="img-name" :class="imgClass" alt="OldSix.Li">
+        <h3 class='h-welcome' :class="h3Class">
+          Welcome To My Homepage.</h3>
     </div>
 
     <!-- 项目展示 -->
@@ -29,11 +29,11 @@
         <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor6.jpg" title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片" href="https://github.com/OldSixLi/NodeAngular"></img-an>
       </div>
       <div class="row" style="margin-top: 20px;">
-        <img-an class="col-md-4"  src="http://om6fr85l4.bkt.clouddn.com/hor1.jpg"  title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
+        <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor1.jpg" title="Vue组件编写" content="Vue的学习以及一些组件的封装" href="https://github.com/OldSixLi/VueComponents"></img-an>
 
-        <img-an class="col-md-4"  src="http://om6fr85l4.bkt.clouddn.com/hor2.jpg"  title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
+        <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor2.jpg" title="浩天智慧财税" content="上线的网站项目" href="http://www.htyfw.com.cn/"></img-an>
 
-        <img-an class="col-md-4"  src="http://om6fr85l4.bkt.clouddn.com/hor3.jpg"  title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
+        <img-an class="col-md-4" src="http://om6fr85l4.bkt.clouddn.com/hor3.jpg" title="服务支撑平台" content="后台管理项目,已上线" href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
     </div>
 
@@ -88,7 +88,22 @@
 
     <!-- 其他 -->
     <div class="section-four">
-      <h1 class="text-center" style="padding-top: 250px;color: #fff;">其他文字</h1>
+      <h1 class="text-center" style="padding-top: 200px;color: #fff;">占位区域</h1>
+      <div class="container">
+        <div class="row" style="margin-top:30px;">
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+        </div>
+      </div>
     </div>
 
     <!-- final -->
@@ -108,7 +123,7 @@ export default {
     return {
       imgClass: "",
       h3Class: "",
-      showCover: true
+      showCover: true, 
     };
   },
   methods: {
@@ -138,10 +153,11 @@ export default {
     ]).then(
       str => {
         self.imgClass = "img-logo";
-        self.h3Class = "h3-logo";
+        self.h3Class = "h3-logo"; 
         setTimeout(() => {
           self.showCover = false;
         }, 1500);
+
       },
       err => {
         //失败了也得让进去啊,多等一会就得了
@@ -149,7 +165,7 @@ export default {
           self.imgClass = "img-logo";
           self.h3Class = "h3-logo";
           setTimeout(() => {
-            self.showCover = false;
+            self.showCover = false; 
           }, 1500);
         }, 1500);
       }
@@ -158,6 +174,12 @@ export default {
 };
 </script>
 <style scoped>
+.head-title {
+  position: fixed;
+  left: 50%;
+  margin-left: -360px;
+  z-index: 101;
+}
 /* latin */
 @font-face {
   font-family: "Aldrich";
@@ -254,7 +276,8 @@ export default {
 .section-four {
   height: 1200px;
   background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
-    url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
+    url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"),
+    url("http://om6fr85l4.bkt.clouddn.com/a1.png"),
     url("http://om6fr85l4.bkt.clouddn.com/back-5.jpg");
   background-attachment: scroll, scroll, scroll, fixed;
   background-position: bottom center, top center, top left, center center;
