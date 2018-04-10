@@ -5,14 +5,11 @@
       <router-view></router-view>
     </transition>
     <div class="row">
-
-      <ht-tabs active="2">
+      <ht-tabs active="1">
         <ht-tab title="1">
-          <ht-class :config="config" :data="classData" @getResult="result"></ht-class>
+          <ht-class :config="config" :data="classData" @result="result" @cancel="cancel"></ht-class>
         </ht-tab>
         <ht-tab title="2">
-
-         
           <!-- 列表部分 -->
           <div class="col-md-9 col-sm-12 col-xs-12">
             <h2 class="text-center">搜索</h2>
@@ -102,329 +99,339 @@
   </div>
 </template>
 <script>
-import router from "./../../router/index.js";
-export default {
-  router,
-  name: "Music",
-  data: function() {
-    //组件内数据部分
-    return {
-      classData: {},
-      //配置项
-      config: {
-        //课程名称
-        name: {
-          disabled: false,
-          default: "默认课程名称",
-          show: true
-        },
-        // 任课教师
-        teacherId: {
-          default: ""
-        },
-        // 课程类型 D:单次课程 X:系列课程
-        type: {
-          default: "D"
-        },
-        // 听课方式 O:线上课程 F:线下课程
-        lineType: {
-          default: "F"
-        },
-        // 课程属性[checkbox以数组形式存储值] ["vipfree", "allowVip"]
-        allowVip: {
-          default: []
-        },
-        // 报名人数
-        studentCount: {
-          default: ""
-        }, // 单账户参加人数
-        singleCount: {
-          default: ""
-        }, // 报名开始时间
-        begin_time: {
-          default: ""
-        }, // 报名结束时间
-        end_time: {
-          default: ""
-        },
-        // [赠送标志]会员赠送 NOTE:只允许"" 和 "Y" 值
-        transVip: {
-          default: ""
-        },
-        // [赠送标志]非会员赠送 NOTE:只允许"" 和 "Y" 值
-        notVipGive: {
-          default: ""
-        },
-        // 会员赠送产品
-        vipGoodsId: {
-          default: ""
-        },
-        // 非会员赠送产品
-        notVipGoodsId: {
-          default: ""
-        },
-        // 收费类型 F:免费  P:收费
-        feeType: {
-          default: "F"
-        },
-        // 会员价格 与 非会员差价 NOTE 两者show属性必须保持一致
-        vipPrice: {
-          default: ""
-        },
-        nonVipPrice: {
-          default: ""
-        },
-        // 是否赠送积分 1:是 3:否
+  import router from "./../../router/index.js";
+  export default {
+    router,
+    name: "Music",
+    data: function() {
+      //组件内数据部分
+      return {
+        classData: {},
+        //配置项
+        config: {
+          //课程名称
+          name: {
+            disabled: false,
+            default: "默认课程名称",
+            show: true
+          },
+          // 任课教师
+          teacherId: {
+            default: ""
+          },
+          // 课程类型 D:单次课程 X:系列课程
+          type: {
+            default: "D"
+          },
+          // 听课方式 O:线上课程 F:线下课程
+          lineType: {
+            default: "F"
+          },
+          // 课程属性[checkbox以数组形式存储值] ["vipfree", "allowVip"]
+          allowVip: {
+            default: []
+          },
+          // 报名人数
+          studentCount: {
+            default: ""
+          }, // 单账户参加人数
+          singleCount: {
+            default: ""
+          }, // 报名开始时间
+          begin_time: {
+            default: ""
+          }, // 报名结束时间
+          end_time: {
+            default: ""
+          },
+          // [赠送标志]会员赠送 NOTE:只允许"" 和 "Y" 值
+          transVip: {
+            default: ""
+          },
+          // [赠送标志]非会员赠送 NOTE:只允许"" 和 "Y" 值
+          notVipGive: {
+            default: ""
+          },
+          // 会员赠送产品
+          vipGoodsId: {
+            default: ""
+          },
+          // 非会员赠送产品
+          notVipGoodsId: {
+            default: ""
+          },
+          // 收费类型 F:免费  P:收费
+          feeType: {
+            default: "F"
+          },
+          // 会员价格 与 非会员差价 NOTE 两者show属性必须保持一致
+          vipPrice: {
+            default: ""
+          },
+          nonVipPrice: {
+            default: ""
+          },
+          // 是否赠送积分 1:是 3:否
 
-        scoreRadio: {
-          default: ""
-        },
-        // 积分赠送方式  1:价格百分比 2:固定积分
-        scoreKindRadio: {
-          default: ""
-        },
+          scoreRadio: {
+            default: ""
+          },
+          // 积分赠送方式  1:价格百分比 2:固定积分
+          scoreKindRadio: {
+            default: ""
+          },
 
-        // 积分计算规则 百分比或固定数值
-        score: {
-          default: ""
+          // 积分计算规则 百分比或固定数值
+          score: {
+            default: ""
+          },
+          // 是否需使用听课券
+          useCourseTicket: {
+            default: ""
+          },
+          // 咨询电话
+          phone: {
+            default: ""
+          },
+          // 多人参加计费规则(一般设置为固定值)
+          mutiplySale: {
+            default: "M*N"
+          },
+          // 规则说明(一般设置为固定值)
+          mutiplDes: {
+            default: "单价乘以人数"
+          },
+          // 课程介绍
+          introduction: {
+            default: ""
+          }
         },
-        // 是否需使用听课券
-        useCourseTicket: {
-          default: ""
+        songList: [],
+        word: "二手玫瑰",
+        pageOption: {
+          currentPage: 1,
+          totalPage: 0,
+          showItem: 5,
+          showSkip: false
         },
-        // 咨询电话
-        phone: {
-          default: ""
+        totalCount: 0,
+        //歌曲详情
+        dataObj: {
+          id: "",
+          name: "",
+          author: "",
+          songImg: "",
+          url: "",
+          showDetail: true
         },
-        // 多人参加计费规则(一般设置为固定值)
-        mutiplySale: {
-          default: "M*N"
-        },
-        // 规则说明(一般设置为固定值)
-        mutiplDes: {
-          default: "单价乘以人数"
-        },
-        // 课程介绍
-        introduction: {
-          default: ""
+        showLoad: false
+      };
+    },
+    mounted: function() {
+      this.getSongList(1);
+    },
+    methods: {
+      cancel() {
+        alert('s')
+      },
+      result(data) {
+        alert(JSON.stringify(data))
+        console.log(JSON.stringify(data));
+      },
+      suggestClick: function(state, result) {
+        if (state == "begin") {
+          this.showLoad = true;
+          this.dataObj.id = "";
+          this.dataObj.showDetail = false;
+          this.dataObj.name = "获取中...";
+          this.dataObj.author = "";
+          this.dataObj.songImg = "";
+          this.dataObj.url = "";
+        } else if (state == "end") {
+          this.showLoad = false;
+          //歌曲详情
+          this.dataObj.id = result.id;
+          this.dataObj.name = result.name;
+          this.dataObj.author = result.author;
+          this.dataObj.songImg = result.songImg;
+          this.dataObj.url = result.url;
+          this.dataObj.showDetail = true;
+        } else if (state == "user") {
+          router.push({
+            path: "/music/user/" + result
+          });
         }
       },
-      songList: [],
-      word: "二手玫瑰",
-      pageOption: {
-        currentPage: 1,
-        totalPage: 0,
-        showItem: 5,
-        showSkip: false
-      },
-      totalCount: 0,
-      //歌曲详情
-      dataObj: {
-        id: "",
-        name: "",
-        author: "",
-        songImg: "",
-        url: "",
-        showDetail: true
-      },
-      showLoad: false
-    };
-  },
-  mounted: function() {
-    this.getSongList(1);
-  },
-  methods: {
-    result(data) {
-      console.log(JSON.stringify(data));
-    },
-    suggestClick: function(state, result) {
-      if (state == "begin") {
-        this.showLoad = true;
+      //获取歌曲详情
+      songDetail(id) {
+        var _self = this;
+        var dataObj = {};
         this.dataObj.id = "";
-        this.dataObj.showDetail = false;
-        this.dataObj.name = "获取中...";
-        this.dataObj.author = "";
-        this.dataObj.songImg = "";
-        this.dataObj.url = "";
-      } else if (state == "end") {
-        this.showLoad = false;
-        //歌曲详情
-        this.dataObj.id = result.id;
-        this.dataObj.name = result.name;
-        this.dataObj.author = result.author;
-        this.dataObj.songImg = result.songImg;
-        this.dataObj.url = result.url;
-        this.dataObj.showDetail = true;
-      } else if (state == "user") {
-        router.push({
-          path: "/music/user/" + result
-        });
-      }
-    },
-    //获取歌曲详情
-    songDetail(id) {
-      var _self = this;
-      var dataObj = {};
-      this.dataObj.id = "";
-      this.showLoad = true;
-      var step1 = new Promise(function(resolve, reject) {
-        $.ajax({
-          type: "GET",
-          url: "http://localhost:9999/music/url",
-          data: {
-            id: id,
-            timestamp: Date.parse(new Date())
-          },
-          async: true,
-          dataType: "json",
-          success: function(data) {
-            if (data.code == 200) {
-              //URL
-              dataObj.url = data.data[0].url;
-            } else {
+        this.showLoad = true;
+        var step1 = new Promise(function(resolve, reject) {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost:9999/music/url",
+            data: {
+              id: id,
+              timestamp: Date.parse(new Date())
+            },
+            async: true,
+            dataType: "json",
+            success: function(data) {
+              if (data.code == 200) {
+                //URL
+                dataObj.url = data.data[0].url;
+              } else {
+                dataObj.url = "";
+              }
+            },
+            error: function(response) {
               dataObj.url = "";
+            },
+            complete: function(xhr, textStatus) {
+              //NOTE 异步事件完成后需要操作的内容
+              dataObj.urlComplete = true;
+              resolve(true);
             }
-          },
-          error: function(response) {
-            dataObj.url = "";
-          },
-          complete: function(xhr, textStatus) {
-            //NOTE 异步事件完成后需要操作的内容
-            dataObj.urlComplete = true;
-            resolve(true);
-          }
+          });
         });
-      });
-      //获取歌曲详情 ①步 使用promise
-      var step2 = new Promise(function(resolve, reject) {
-        $.ajax({
-          type: "GET",
-          url: "http://localhost:9999/song/detail",
-          data: {
-            ids: id,
-            timestamp: Date.parse(new Date())
-          },
-          async: true,
-          dataType: "json",
-          success: function(data) {
-            if (data.code == 200) {
-              dataObj.name = data.songs[0].name;
-              dataObj.author = data.songs[0].ar[0].name;
-              dataObj.songImg = data.songs[0].al.picUrl;
-            } else {
+        //获取歌曲详情 ①步 使用promise
+        var step2 = new Promise(function(resolve, reject) {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost:9999/song/detail",
+            data: {
+              ids: id,
+              timestamp: Date.parse(new Date())
+            },
+            async: true,
+            dataType: "json",
+            success: function(data) {
+              if (data.code == 200) {
+                dataObj.name = data.songs[0].name;
+                dataObj.author = data.songs[0].ar[0].name;
+                dataObj.songImg = data.songs[0].al.picUrl;
+              } else {
+                dataObj.name = "";
+                dataObj.author = "";
+                dataObj.songImg = "";
+              }
+            },
+            error: function(response) {
               dataObj.name = "";
               dataObj.author = "";
               dataObj.songImg = "";
+            },
+            complete: function(xhr, textStatus) {
+              dataObj.detailComplete = true; //代表详情获取完毕
+              resolve(true);
+            }
+          });
+        });
+        //执行promsie
+        Promise.all([step1, step2]).then(function(result) {
+          setTimeout(() => {
+            _self.dataObj = dataObj;
+            _self.dataObj.id = id;
+            _self.showLoad = false;
+          }, 0);
+        });
+      },
+      //按钮点击 搜索歌曲
+      musicSearch() {
+        this.getSongList(1);
+      },
+      //搜索歌曲AJAX操作
+      getSongList(pageindex) {
+        var _self = this;
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:9999/search",
+          data: {
+            keywords: _self.word,
+            limit: 30,
+            offset: 30 * (pageindex - 1),
+            timestamp: Date.parse(new Date())
+          },
+          dataType: "json",
+          success: function(data) {
+            if (data != null && data != "") {
+              if (data.code == 200) {
+                _self.totalCount = data.result.songCount ?
+                  data.result.songCount :
+                  0;
+                _self.songList = data.result.songs;
+                _self.pageOption.currentPage = pageindex;
+                _self.pageOption.totalPage = Math.ceil(
+                  data.result.songCount / 30
+                );
+                _self.pageOption.click = function(currentPage) {
+                  _self.getSongList(currentPage);
+                };
+              } else {
+                _self.songList = [];
+                _self.pageOption.totalPage = 1;
+                _self.totalCount = 0;
+              }
+            } else {
+              _self.songList = [];
             }
           },
           error: function(response) {
-            dataObj.name = "";
-            dataObj.author = "";
-            dataObj.songImg = "";
-          },
-          complete: function(xhr, textStatus) {
-            dataObj.detailComplete = true; //代表详情获取完毕
-            resolve(true);
-          }
-        });
-      });
-      //执行promsie
-      Promise.all([step1, step2]).then(function(result) {
-        setTimeout(() => {
-          _self.dataObj = dataObj;
-          _self.dataObj.id = id;
-          _self.showLoad = false;
-        }, 0);
-      });
-    },
-    //按钮点击 搜索歌曲
-    musicSearch() {
-      this.getSongList(1);
-    },
-    //搜索歌曲AJAX操作
-    getSongList(pageindex) {
-      var _self = this;
-      $.ajax({
-        type: "GET",
-        url: "http://localhost:9999/search",
-        data: {
-          keywords: _self.word,
-          limit: 30,
-          offset: 30 * (pageindex - 1),
-          timestamp: Date.parse(new Date())
-        },
-        dataType: "json",
-        success: function(data) {
-          if (data != null && data != "") {
-            if (data.code == 200) {
-              _self.totalCount = data.result.songCount
-                ? data.result.songCount
-                : 0;
-              _self.songList = data.result.songs;
-              _self.pageOption.currentPage = pageindex;
-              _self.pageOption.totalPage = Math.ceil(
-                data.result.songCount / 30
-              );
-              _self.pageOption.click = function(currentPage) {
-                _self.getSongList(currentPage);
-              };
-            } else {
-              _self.songList = [];
-              _self.pageOption.totalPage = 1;
-              _self.totalCount = 0;
-            }
-          } else {
             _self.songList = [];
           }
-        },
-        error: function(response) {
-          _self.songList = [];
-        }
-      });
-    },
-    //时间戳转化为日期
-    shijian: function(shijianchuo) {
-      var time = new Date(parseInt(shijianchuo));
-      var y = time.getFullYear();
-      var m = time.getMonth() + 1;
-      var d = time.getDate();
-      return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d);
+        });
+      },
+      //时间戳转化为日期
+      shijian: function(shijianchuo) {
+        var time = new Date(parseInt(shijianchuo));
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+        return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d);
+      }
     }
-  }
-};
+  };
 </script>
 <style scoped>
-table {
-  /* 表格布局属性,宽度根据设置值设定 */
-  table-layout: fixed;
-}
-td {
-  /* 字体超出后显示为省略号 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-td img {
-  /* 设置图片大小 */
-  width: 30px;
-  height: 30px;
-}
-td a {
-  color: #444648;
-}
-a:focus,
-a:hover {
-  color: #7c858e;
-  text-decoration: none;
-}
-.search-block {
-  display: inline-block;
-  width: 50%;
-}
-.search-title {
-  display: inline-block;
-  width: 49%;
-  line-height: 34px;
-  vertical-align: top;
-}
+  table {
+    /* 表格布局属性,宽度根据设置值设定 */
+    table-layout: fixed;
+  }
+  
+  td {
+    /* 字体超出后显示为省略号 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  td img {
+    /* 设置图片大小 */
+    width: 30px;
+    height: 30px;
+  }
+  
+  td a {
+    color: #444648;
+  }
+  
+  a:focus,
+  a:hover {
+    color: #7c858e;
+    text-decoration: none;
+  }
+  
+  .search-block {
+    display: inline-block;
+    width: 50%;
+  }
+  
+  .search-title {
+    display: inline-block;
+    width: 49%;
+    line-height: 34px;
+    vertical-align: top;
+  }
 </style>

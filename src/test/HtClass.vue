@@ -92,6 +92,7 @@
           </div>
           <div class="col-sm-3" v-show="config.begin_time==undefined||config.begin_time.show!=false">
             <div>
+              {{obj.begin_time}}
               <ht-date v-model="obj.begin_time" placeholder="请输入报名开始时间" :disabled="config.begin_time&&config.begin_time.disabled"></ht-date>
             </div>
           </div>
@@ -371,7 +372,7 @@
           <div class="form-group text-right">
             <div class="col-md-12">
               <button type="button" class="btn btn-primary" id="saveBtn" @click="saveInfo()">保存课程信息</button> &nbsp;&nbsp;
-              <button type="button" class="btn btn-danger" id="cancelBtn" onclick="javascript:history.back(-1)">放弃本次操作</button>
+              <button type="button" class="btn btn-danger" id="cancelBtn" @click="cancel()">放弃本次操作</button>
             </div>
 
           </div>
@@ -382,234 +383,225 @@
 
 </template>
 <script>
-export default {
-  name: "HtClass",
-  props: {
-    //对外获取的数据
-    config: {
-      type: Object,
-      required: true
-    },
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    data: {
-      type: Object,
-      required: true
-    }
-  },
-  data: function() {
-    //组件内数据部分
-    return {
-      money: 78,
-      obj: this.assignData(this.config, this.data),
-      teacherList: [], //教师列表
-      memberGoodsList: [], //会员赠送产品列表
-      notMemberGoodsList: [] //非会员赠送产品列表
-    };
-  },
-  mounted: function() {
-    this.getTeacherSltOptions();
-    this.getVipSltOptions();
-  },
-  computed: {
-    isShowVipGoods() {},
-    // 选择后才显示表格
-    notMemberGoodObj() {
-      var obj = {};
-      var id = this.obj.notVipGoodsId;
-      if (id) {
-        obj = this.notMemberGoodsList.filter(x => x.id == id);
+  export default {
+    name: "HtClass",
+    props: {
+      //对外获取的数据
+      config: {
+        type: Object,
+        required: true
+      },
+      isEdit: {
+        type: Boolean,
+        default: false
+      },
+      data: {
+        type: Object,
+        required: true
       }
-      return obj.length > 0 ? obj[0] : {};
     },
-    vipGoodsObj() {
-      var obj = {};
-      var id = this.obj.vipGoodsId;
-      if (id) {
-        obj = this.notMemberGoodsList.filter(x => x.id == id);
+    data: function() {
+      //组件内数据部分
+      return {
+        money: 78,
+        obj: this.assignData(this.config, this.data),
+        teacherList: [], //教师列表
+        memberGoodsList: [], //会员赠送产品列表
+        notMemberGoodsList: [] //非会员赠送产品列表
+      };
+    },
+    mounted: function() {
+      this.getTeacherSltOptions();
+      this.getVipSltOptions();
+    },
+    computed: {
+      isShowVipGoods() {},
+      // 选择后才显示表格
+      notMemberGoodObj() {
+        var obj = {};
+        var id = this.obj.notVipGoodsId;
+        if (id) {
+          obj = this.notMemberGoodsList.filter(x => x.id == id);
+        }
+        return obj.length > 0 ? obj[0] : {};
+      },
+      vipGoodsObj() {
+        var obj = {};
+        var id = this.obj.vipGoodsId;
+        if (id) {
+          obj = this.notMemberGoodsList.filter(x => x.id == id);
+        }
+        return obj.length > 0 ? obj[0] : {};
       }
-      return obj.length > 0 ? obj[0] : {};
-    }
-  },
-  methods: {
-    assignData(config, data) {
-      var self = this;
-      var obj = {};
-      for (const k in data) {
-        if (data.hasOwnProperty(k)) {
-          const ele = data[k];
-          if (ele != undefined && !obj[k]) {
-            obj[k] = ele;
+    },
+    methods: {
+      cancel() {
+        this.$emit("cancel");
+      },
+      assignData(config, data) {
+        var self = this;
+        var obj = {};
+        for (const k in data) {
+          if (data.hasOwnProperty(k)) {
+            const ele = data[k];
+            if (ele != undefined && !obj[k]) {
+              obj[k] = ele;
+            }
           }
         }
-      }
-      for (const key in config) {
-        if (config.hasOwnProperty(key)) {
-          const element = config[key];
-          console.log(element.default);
-          if (element.default != undefined && !obj[key]) {
-            obj[key] = element.default;
+        for (const key in config) {
+          if (config.hasOwnProperty(key)) {
+            const element = config[key];
+            console.log(element.default);
+            if (element.default != undefined && !obj[key]) {
+              obj[key] = element.default;
+            }
           }
         }
-      }
-      obj.transVipArr = [];
-      if (obj.transVip != undefined && obj.transVip == "Y") {
-        obj.transVipArr[0] = "trans_vip";
-      }
-      if (obj.notVipGive != undefined && obj.notVipGive == "Y") {
-        obj.transVipArr[1] = "not_vip_give";
-      }
-      return obj;
-    },
-    // 保存信息按钮
-    saveInfo() {
-      var phone = $("#phone").val();
-      var des = $("#mutipl_des").val();
-      var self = this;
-      var __error = [];
-      if (!$.trim(self.obj.name)) {
-        __error.push("课程名称不能为空！");
-      }
-      if ($.trim(self.obj.name).length > 40) {
-        __error.push("课程名称不超过40字，请修改！");
-      }
-      if (!$.trim(self.obj.teacherId)) {
-        __error.push("任课教师不能为空！");
-      }
-      //2017年8月16日13:07:06   sjh   添加
-      if (
-        !$.trim(self.obj.vipGoodsId) &&
-        self.obj.transVipArr.indexOf("trans_vip") > -1
-      ) {
-        __error.push("会员赠送产品不能为空！");
-      }
-      if (
-        !$.trim(self.obj.notVipGoodsId) &&
-        self.obj.transVipArr.indexOf("not_vip_give") > -1
-      ) {
-        __error.push("非会员赠送产品不能为空！");
-      }
-      if (!$.trim(self.obj.studentCount)) {
-        __error.push("课程报名人数不能为空！");
-      }
-      if (!$.trim(self.obj.singleCount)) {
-        __error.push("单账户参加人数不能为空！");
-      }
-
-      if (!$.trim(self.obj.begin_time)) {
-        __error.push("课程开始时间不能为空！");
-      }
-      if (!$.trim(self.obj.end_time)) {
-        __error.push("课程结束时间不能为空！");
-      }
-      if (!$.trim(self.obj.introduction)) {
-        __error.push("课程介绍信息不能为空！");
-      }
-
-      //如果课程为收费，则进行以下校验
-      if (self.obj.feeType == "P") {
-        if (!$.trim(self.obj.vipPrice)) {
-          __error.push("会员价格不能为空！");
+        obj.transVipArr = [];
+        if (obj.transVip != undefined && obj.transVip == "Y") {
+          obj.transVipArr[0] = "trans_vip";
         }
-        if (!$.trim(self.obj.nonVipPrice)) {
-          __error.push("非会员差价不能为空！");
+        if (obj.notVipGive != undefined && obj.notVipGive == "Y") {
+          obj.transVipArr[1] = "not_vip_give";
         }
-        if (!$.trim(self.obj.mutiplDes)) {
-          __error.push("计费规则描述不能为空！");
+        return obj;
+      },
+      // 保存信息按钮
+      saveInfo() {
+        var phone = $("#phone").val();
+        var des = $("#mutipl_des").val();
+        var self = this;
+        var __error = [];
+        if (!$.trim(self.obj.name)) {
+          __error.push("课程名称不能为空！");
         }
-      }
+        if ($.trim(self.obj.name).length > 40) {
+          __error.push("课程名称不超过40字，请修改！");
+        }
+        if (!$.trim(self.obj.teacherId)) {
+          __error.push("任课教师不能为空！");
+        }
+        //2017年8月16日13:07:06   sjh   添加
+        if (!$.trim(self.obj.vipGoodsId) &&
+          self.obj.transVipArr.indexOf("trans_vip") > -1
+        ) {
+          __error.push("会员赠送产品不能为空！");
+        }
+        if (!$.trim(self.obj.notVipGoodsId) &&
+          self.obj.transVipArr.indexOf("not_vip_give") > -1
+        ) {
+          __error.push("非会员赠送产品不能为空！");
+        }
+        if (!$.trim(self.obj.studentCount)) {
+          __error.push("课程报名人数不能为空！");
+        }
+        if (!$.trim(self.obj.singleCount)) {
+          __error.push("单账户参加人数不能为空！");
+        }
 
-      var scoreKind = self.obj.scoreKindRadio; //积分赠送方式
-      var percent = $.trim(self.obj.score); //价格百分比方式
-      var fixed = $.trim(self.obj.score); //固定积分方式
-      if (self.obj.scoreRadio == "1") {
-        if (scoreKind == "1") {
-          if (percent == "" || percent == null) {
-            __error.push("请输入积分计算规则！");
+        if (!$.trim(self.obj.begin_time)) {
+          __error.push("课程开始时间不能为空！");
+        }
+        if (!$.trim(self.obj.end_time)) {
+          __error.push("课程结束时间不能为空！");
+        }
+        if (!$.trim(self.obj.introduction)) {
+          __error.push("课程介绍信息不能为空！");
+        }
+
+        //如果课程为收费，则进行以下校验
+        if (self.obj.feeType == "P") {
+          if (!$.trim(self.obj.vipPrice)) {
+            __error.push("会员价格不能为空！");
           }
-        } else if (scoreKind == "2") {
-          if (fixed == "" || fixed == null) {
-            __error.push("请输入积分值！");
+          if (!$.trim(self.obj.nonVipPrice)) {
+            __error.push("非会员差价不能为空！");
+          }
+          if (!$.trim(self.obj.mutiplDes)) {
+            __error.push("计费规则描述不能为空！");
           }
         }
-      }
-      //错误提示
-      if (__error.length > 0) {
-        __error.push("请修改后再进行提交。");
-        alert(__error.join("\r\n"));
-        return false;
-      }
-      // this.obj.name_err = "请填写相关姓名";
 
-      //关于两个属性的处理
-      if (self.obj.transVipArr.indexOf("trans_vip") > -1) {
-        self.obj.transVip = "Y";
-      } else {
-        self.obj.transVip = "";
-       self.obj.vipGoodsId = "" ;
-      }
-      if (self.obj.transVipArr.indexOf("not_vip_give") > -1) {
-        self.obj.notVipGive = "Y";
-      } else {
-        self.obj.notVipGive = "";
-         self.obj.notVipGoodsId = "" ;
-      }
-      this.$emit("getResult", this.obj);
-    },
-    // 获取教师下拉列表
-    getTeacherSltOptions() {
-      this.teacherList = [
-        {
+        var scoreKind = self.obj.scoreKindRadio; //积分赠送方式
+        var percent = $.trim(self.obj.score); //价格百分比方式
+        var fixed = $.trim(self.obj.score); //固定积分方式
+        if (self.obj.scoreRadio == "1") {
+          if (scoreKind == "1") {
+            if (percent == "" || percent == null) {
+              __error.push("请输入积分计算规则！");
+            }
+          } else if (scoreKind == "2") {
+            if (fixed == "" || fixed == null) {
+              __error.push("请输入积分值！");
+            }
+          }
+        }
+        //错误提示
+        if (__error.length > 0) {
+          __error.push("请修改后再进行提交。");
+          alert(__error.join("\r\n"));
+          return false;
+        }
+        // this.obj.name_err = "请填写相关姓名";
+
+        //关于两个属性的处理
+        if (self.obj.transVipArr.indexOf("trans_vip") > -1) {
+          self.obj.transVip = "Y";
+        } else {
+          self.obj.transVip = "";
+          self.obj.vipGoodsId = "";
+        }
+        if (self.obj.transVipArr.indexOf("not_vip_give") > -1) {
+          self.obj.notVipGive = "Y";
+        } else {
+          self.obj.notVipGive = "";
+          self.obj.notVipGoodsId = "";
+        }
+        this.$emit("result", this.obj);
+      },
+      // 获取教师下拉列表
+      getTeacherSltOptions() {
+        this.teacherList = [{
           id: 2,
           username: "szht",
           password: "null111111",
           name: "马兆瑞",
           birthdayYear: "1970",
-          note:
-            "    有近二十年会计职称考试辅导经验，并担任企业法律顾问。为企业作纳税筹划。经常参与注册会计师后期培训及企业专题讲座，先后为天津市各企事业单位、税务机关、单位领导干部、MBA学员讲授经济法、税法、税收实务、纳税检查、税收筹划等综合性课程。2007年开始，先后为德勤、普华永道等四大会计师事务所做CPA专职培训。理论功底深厚，并具有丰富的实践经验。",
+          note: "    有近二十年会计职称考试辅导经验，并担任企业法律顾问。为企业作纳税筹划。经常参与注册会计师后期培训及企业专题讲座，先后为天津市各企事业单位、税务机关、单位领导干部、MBA学员讲授经济法、税法、税收实务、纳税检查、税收筹划等综合性课程。2007年开始，先后为德勤、普华永道等四大会计师事务所做CPA专职培训。理论功底深厚，并具有丰富的实践经验。",
           email: "",
           phone: "13752326919",
-          icon:
-            "/upload_file/2018-02-01/396e7300-fa23-4148-83c9-cd1dbe873971.jpg",
+          icon: "/upload_file/2018-02-01/396e7300-fa23-4148-83c9-cd1dbe873971.jpg",
           lifeIcon: "",
-          evaluation:
-            "天津市资深会计职称、注册会计师考试辅导专家，天津财经大学法学院教授，硕士生导师。天津仲裁委员会仲裁员，中国法学会会员，天津市经济法研究会理事，自1993年开始长期担任会计资格考试、注册会计师、注册税务师、注册资产评估师和国家司法考试经济法、税法课程的教学辅导工作，发表论文多篇，著作多部。",
+          evaluation: "天津市资深会计职称、注册会计师考试辅导专家，天津财经大学法学院教授，硕士生导师。天津仲裁委员会仲裁员，中国法学会会员，天津市经济法研究会理事，自1993年开始长期担任会计资格考试、注册会计师、注册税务师、注册资产评估师和国家司法考试经济法、税法课程的教学辅导工作，发表论文多篇，著作多部。",
           state: "Y"
-        },
-        {
+        }, {
           id: 3,
           username: "szht",
           password: "null111111",
           name: "张文英",
           birthdayYear: "1980",
-          note:
-            "张文英，神州浩天技术服务部经理、业务研究员。长期从事财税业务研究工作，多次参与天津税务申报软件升级业务需求分析工作，撰写了大量的申报软件操作指南。熟悉企业实际业务情况。",
+          note: "张文英，神州浩天技术服务部经理、业务研究员。长期从事财税业务研究工作，多次参与天津税务申报软件升级业务需求分析工作，撰写了大量的申报软件操作指南。熟悉企业实际业务情况。",
           email: "",
           phone: "",
           icon: "static/common/images/course/upload-alert.png",
           lifeIcon: "",
           evaluation: "业务扎实，讲解细致入微，深入浅出，具备实用价值。",
           state: "Y"
-        },
-        {
+        }, {
           id: 4,
           username: "szht",
           password: "f86e6c8816600f6a45ae5abbbcc7b6a7",
           name: "安文英",
           birthdayYear: "1979",
-          note:
-            "天津工业大学副教授，赴美访问学者。工业大学税研所主任，天津市财政局、天津市国税局、地税局、天津市教委税收、会计领域特聘专家。",
+          note: "天津工业大学副教授，赴美访问学者。工业大学税研所主任，天津市财政局、天津市国税局、地税局、天津市教委税收、会计领域特聘专家。",
           email: "",
           phone: "13752326919",
-          icon:
-            "/upload_file/2017-04-26/71e712ba-619f-453c-a9dd-5b6b0344c774.png",
+          icon: "/upload_file/2017-04-26/71e712ba-619f-453c-a9dd-5b6b0344c774.png",
           lifeIcon: "",
           evaluation: "严谨、专业、高效、务实",
           state: "Y"
-        },
-        {
+        }, {
           id: 26,
           username: "szht",
           password: "null111111",
@@ -618,19 +610,15 @@ export default {
           note: "asdasdad",
           email: "",
           phone: "",
-          icon:
-            "/upload_file/2017-06-05/486d312e-32ec-4cd4-8438-9aa54c1c2720.jpg",
-          lifeIcon:
-            "/upload_file/2017-06-05/f8442522-8432-4feb-96e1-8add81385681.jpg",
+          icon: "/upload_file/2017-06-05/486d312e-32ec-4cd4-8438-9aa54c1c2720.jpg",
+          lifeIcon: "/upload_file/2017-06-05/f8442522-8432-4feb-96e1-8add81385681.jpg",
           evaluation: "asdasd",
           state: "Y"
-        }
-      ];
-    },
-    // 获取会员赠品下拉列表
-    getVipSltOptions() {
-      this.notMemberGoodsList = this.memberGoodsList = [
-        {
+        }];
+      },
+      // 获取会员赠品下拉列表
+      getVipSltOptions() {
+        this.notMemberGoodsList = this.memberGoodsList = [{
           id: "TEST-04",
           name: "测试商品4 ",
           price: 0.01,
@@ -658,8 +646,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "TEST-03",
           name: "测试商品3  ",
           price: 0.01,
@@ -687,8 +674,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "TEST-02",
           name: "测试商品2 ",
           price: 1500.0,
@@ -716,8 +702,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "KC_20170830_4",
           name: "测试商品1",
           price: 0.01,
@@ -745,8 +730,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "GE_PRINT",
           name: "个人版打印机",
           price: 2500.0,
@@ -774,8 +758,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "CSFW_720",
           name: "智慧财税服务高级版  ",
           price: 360.0,
@@ -803,8 +786,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "CSFW_360",
           name: "智慧财税服务",
           price: 360.0,
@@ -829,13 +811,10 @@ export default {
           isCourse: null,
           scoreType: null,
           score: null,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024101606095.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171024/20171024101606095.jpg",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "CSFW_1000",
           name: "智慧财税服务特级版",
           price: 360.0,
@@ -860,13 +839,10 @@ export default {
           isCourse: null,
           scoreType: null,
           score: null,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024101606095.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171024/20171024101606095.jpg",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "cs111",
           name: "cs111 ",
           price: 750.0,
@@ -885,20 +861,16 @@ export default {
           pjUserSpbmId: "106030102990000000001",
           yj: "N",
           onlyCompany: "Y",
-          describeInfo:
-            "csacascasca123\r\n\t\t\t\t\t\t\t\t\t\t\t<table><tr><td>asdasd</td><td>asdasd</td></tr><tr><td>asdasd</td><td>asdasd</td></tr></table>\r\n####+1",
+          describeInfo: "csacascasca123\r\n\t\t\t\t\t\t\t\t\t\t\t<table><tr><td>asdasd</td><td>asdasd</td></tr><tr><td>asdasd</td><td>asdasd</td></tr></table>\r\n####+1",
           canGive: "",
           isWeb: "Y",
           isCourse: null,
           scoreType: "1",
           score: 33,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
+          coverImage: "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
+          detailImage: "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
           allowAuth: "Y"
-        },
-        {
+        }, {
           id: "CS02212",
           name: "测试",
           price: 750.0,
@@ -923,13 +895,10 @@ export default {
           isCourse: null,
           scoreType: null,
           score: null,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
+          coverImage: "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
+          detailImage: "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "999",
           name: "浩天培训",
           price: 0.0,
@@ -957,8 +926,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "750",
           name: "智慧财税服务 750",
           price: 750.0,
@@ -983,13 +951,10 @@ export default {
           isCourse: null,
           scoreType: "1",
           score: 80,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
+          coverImage: "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
+          detailImage: "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "6",
           name: "99元促销产品         ",
           price: 99.0,
@@ -1017,8 +982,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "360",
           name: "智慧财税服务 360         ",
           price: 360.0,
@@ -1043,16 +1007,12 @@ export default {
           isCourse: null,
           scoreType: "1",
           score: 10,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
+          coverImage: "http://192.168.10.102:18001/resources/image/20170401/20170401130412084.png",
+          detailImage: "http://192.168.10.102:18001/resources/image/20180105/20180105135539481.png",
           allowAuth: "Y"
-        },
-        {
+        }, {
           id: "20180205cs",
-          name:
-            "测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度",
+          name: "测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度测试名称长度",
           price: 950.0,
           once: "N",
           alone: "N",
@@ -1075,13 +1035,10 @@ export default {
           isCourse: null,
           scoreType: "1",
           score: 50,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024155915708.png",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171024/20171024155915708.png",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
           allowAuth: "Y"
-        },
-        {
+        }, {
           id: "20180110ceshi",
           name: "20180110测试360    ",
           price: 360.0,
@@ -1100,20 +1057,16 @@ export default {
           pjUserSpbmId: "304020199000000000008",
           yj: "N",
           onlyCompany: "Y",
-          describeInfo:
-            "<table >\r\n   <tr>\r\n        <td>课程服务课程服务</td>   \r\n       <td>一年课程服务课程服务课程服务课程服务课程服务课程服务课程服务课程服务课程服务课程服务 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n\r\n</table>",
+          describeInfo: "<table >\r\n   <tr>\r\n        <td>课程服务课程服务</td>   \r\n       <td>一年课程服务课程服务课程服务课程服务课程服务课程服务课程服务课程服务课程服务课程服务 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n  <tr>\r\n        <td>课程服务</td>   \r\n       <td>一年 </td> \r\n</tr>\r\n\r\n</table>",
           canGive: "",
           isWeb: "Y",
           isCourse: null,
           scoreType: "1",
           score: 200,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171025/20171025134945145.jpg",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171025/20171025132516761.png",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171025/20171025134945145.jpg",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171025/20171025132516761.png",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "20171225cs2",
           name: "20171225cs2  ",
           price: 750.0,
@@ -1132,20 +1085,16 @@ export default {
           pjUserSpbmId: "106030102990000000001",
           yj: "N",
           onlyCompany: "Y",
-          describeInfo:
-            "![图片详情](http://192.168.10.102:18001/resources/image/20171025/20171025135617719.jpg)",
+          describeInfo: "![图片详情](http://192.168.10.102:18001/resources/image/20171025/20171025135617719.jpg)",
           canGive: "",
           isWeb: "Y",
           isCourse: null,
           scoreType: "2",
           score: 211,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024155915708.png",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171024/20171024155915708.png",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
           allowAuth: "Y"
-        },
-        {
+        }, {
           id: "20171225cs",
           name: "20171225cs         ",
           price: 750.0,
@@ -1164,20 +1113,16 @@ export default {
           pjUserSpbmId: "106030102990000000001",
           yj: "N",
           onlyCompany: "Y",
-          describeInfo:
-            '[{"type":"测试","value":"1"}]\r\n\t\t\t\t\t\t\t![图片详情](http://192.168.10.102:18001/resources/image/20171024/20171024103217808.jpg)',
+          describeInfo: '[{"type":"测试","value":"1"}]\r\n\t\t\t\t\t\t\t![图片详情](http://192.168.10.102:18001/resources/image/20171024/20171024103217808.jpg)',
           canGive: "",
           isWeb: "",
           isCourse: null,
           scoreType: "2",
           score: 444,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171025/20171025135632181.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171025/20171025135632181.jpg",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "20171218cs1",
           name: "20181218cs1",
           price: 750.0,
@@ -1205,8 +1150,7 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "20171215ceshi2",
           name: "cs2",
           price: 750.0,
@@ -1225,20 +1169,16 @@ export default {
           pjUserSpbmId: "106030102990000000001",
           yj: "N",
           onlyCompany: "Y",
-          describeInfo:
-            "![图片详情](http://192.168.10.102:18001/resources/image/20171024/20171024101705002.jpg)",
+          describeInfo: "![图片详情](http://192.168.10.102:18001/resources/image/20171024/20171024101705002.jpg)",
           canGive: "Y",
           isWeb: "Y",
           isCourse: null,
           scoreType: "2",
           score: 22,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024101653786.jpg",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024101649229.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171024/20171024101653786.jpg",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171024/20171024101649229.jpg",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "20171215ceshi",
           name: "1215ceshi               ",
           price: 750.0,
@@ -1257,20 +1197,16 @@ export default {
           pjUserSpbmId: "106030102990000000001",
           yj: "N",
           onlyCompany: "Y",
-          describeInfo:
-            "##商品ID      123\r\n服务期限             ![图片详情](http://192.168.10.102:18001/resources/image/20180108/20180108184457674.png)年\r\n\t\t\t\t\t\t\t\t<table><tr><td>asdasd</td><td>asdasd</td></tr><tr><td>asdasd</td><td>asdasd</td></tr></table>\r\n####+1",
+          describeInfo: "##商品ID      123\r\n服务期限             ![图片详情](http://192.168.10.102:18001/resources/image/20180108/20180108184457674.png)年\r\n\t\t\t\t\t\t\t\t<table><tr><td>asdasd</td><td>asdasd</td></tr><tr><td>asdasd</td><td>asdasd</td></tr></table>\r\n####+1",
           canGive: "Y",
           isWeb: "Y",
           isCourse: null,
           scoreType: "1",
           score: 300,
-          coverImage:
-            "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
-          detailImage:
-            "http://192.168.10.102:18001/resources/image/20171024/20171024101711320.jpg",
+          coverImage: "http://192.168.10.102:18001/resources/image/20171030/20171030084420673.jpg",
+          detailImage: "http://192.168.10.102:18001/resources/image/20171024/20171024101711320.jpg",
           allowAuth: "N"
-        },
-        {
+        }, {
           id: "000789",
           name: "test_isweb",
           price: 1200.0,
@@ -1298,37 +1234,36 @@ export default {
           coverImage: "",
           detailImage: "",
           allowAuth: "N"
+        }];
+      }
+    },
+    watch: {
+      //检测对象中属性变化
+      "obj.scoreRadio": function() {
+        if (this.obj.scoreRadio == "3") {
+          this.obj.scoreKindRadio = "";
+        } else if (this.obj.scoreRadio == "1") {
+          // this.obj.scoreKindRadio = "1";
         }
-      ];
+      },
+      "obj.allowVip": function() {
+        if (this.obj.allowVip.indexOf("vipfree") > -1) {
+          this.obj.vipPrice = 0;
+        }
+      },
+      "obj.feeType": function() {
+        if (this.obj.feeType == "F") {
+          this.obj.vipPrice = this.obj.nonVipPrice = 0;
+        }
+      },
+      "obj.scoreKindRadio": function() {
+        this.obj.score = "";
+      }
     }
-  },
-  watch: {
-    //检测对象中属性变化
-    "obj.scoreRadio": function() {
-      if (this.obj.scoreRadio == "3") {
-        this.obj.scoreKindRadio = "";
-      } else if (this.obj.scoreRadio == "1") {
-        // this.obj.scoreKindRadio = "1";
-      }
-    },
-    "obj.allowVip": function() {
-      if (this.obj.allowVip.indexOf("vipfree") > -1) {
-        this.obj.vipPrice = 0;
-      }
-    },
-    "obj.feeType": function() {
-      if (this.obj.feeType == "F") {
-        this.obj.vipPrice = this.obj.nonVipPrice = 0;
-      }
-    },
-    "obj.scoreKindRadio": function() {
-      this.obj.score = "";
-    }
-  }
-};
+  };
 </script>
 <style scoped>
-.form-group:empty {
-  margin-bottom: 0;
-}
+  .form-group:empty {
+    margin-bottom: 0;
+  }
 </style>
