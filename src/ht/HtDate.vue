@@ -97,6 +97,9 @@
           this.$emit("input", this.maxDate);
         }
         return this.maxDate;
+      },
+      value: function() {
+        this.setTime = this.value;
       }
     }
   };

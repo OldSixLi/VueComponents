@@ -10,19 +10,18 @@
           <div class="col-sm-10">
             <input v-model="obj.name" :disabled="config.name.disabled" type="text" class="form-control" id="name" name="name" placeholder="请输入课程名称，不超过40字" maxlength="40">
           </div>
-
         </div>
-
         <!-- 任课教师 -->
         <div class="form-group" v-show="config.teacherId==undefined||config.teacherId.show!=false">
           <div class="col-sm-2 text-right">
             <label for="teacherId" class="control-label">任课教师</label>
           </div>
           <div class="col-sm-10">
-            <ht-select v-model="obj.teacherId" :disabled="config.teacherId&&config.teacherId.disabled" id="teacherId" name="teacherId" class="form-control" style="height:34px;" placeholder="请输入任课教师">
+            <ht-select v-model="obj.teacherId" :disabled="config.teacherId&&config.teacherId.disabled" id="teacherId" name="teacherId" class="form-control" style="height:34px;" placeholder="请输入任课教师" ref="teacherLists">
               <option value="">请选择</option>
               <option :value="x.id" v-for="x in teacherList">{{x.name}}</option>
             </ht-select>
+ 
           </div>
         </div>
 
@@ -92,8 +91,8 @@
           </div>
           <div class="col-sm-3" v-show="config.begin_time==undefined||config.begin_time.show!=false">
             <div>
-              {{obj.begin_time}}
-              <ht-date v-model="obj.begin_time" placeholder="请输入报名开始时间" :disabled="config.begin_time&&config.begin_time.disabled"></ht-date>
+              <!-- {{obj.begin_time}} -->
+              <ht-date  :option="timeOption" v-model="obj.begin_time" placeholder="请输入报名开始时间" :disabled="config.begin_time&&config.begin_time.disabled"></ht-date>
             </div>
           </div>
           <div class="col-sm-2 text-right" v-show="config.end_time==undefined||config.end_time.show!=false">
@@ -101,7 +100,7 @@
           </div>
           <div class="col-sm-3" v-show="config.end_time==undefined||config.end_time.show!=false">
             <div>
-              <ht-date v-model="obj.end_time" placeholder="请输入报名结束时间" :disabled="config.end_time&&config.end_time.disabled" :minDate="obj.begin_time">
+              <ht-date :option="timeOption" v-model="obj.end_time" placeholder="请输入报名结束时间" :disabled="config.end_time&&config.end_time.disabled" :minDate="obj.begin_time">
               </ht-date>
             </div>
           </div>
@@ -355,6 +354,60 @@
             <input v-model="obj.mutiplDes" :disabled="(config.mutiplDes&&config.mutiplDes.disabled)" type="text" class="form-control" id="mutipl_des" name="mutiplDes" placeholder="请输入规则说明，示例：第一人全价，其他人每人减一百" value="单价乘以人数">
           </div>
         </div>
+        <!-- 录入课程信息 -->
+        <div class="form-group" v-show="config.courdetail==undefined||config.courdetail.show!=false">
+              <div class="col-sm-2 text-right">
+                  <label for="mutipl_des" class="control-label">上课时间</label>
+              </div>
+              <div class="col-md-10"> 
+                <div class="panel panel-default hasradius" id="course_panel">
+                  <input type="hidden" id="ZUOBIAO_X" value=""> <input
+                    type="hidden" id="ZUOBIAO_Y" value="">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th width="5%" class="text-center">#</th>
+                        <th width="35%" class="text-center">上课地点</th>
+                        <th width="35%" class="text-center">上课时间</th>
+                        <th width="25%" class="text-center">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                      <tr v-for="(x,$index) in obj.courdetail">
+                        <td width="5%"  class="text-center">{{($index+1)}}</td>
+                        <td width="35%" class="text-center">{{x.address}}</td>
+                        <td width="35%" class="text-center">{{x.time}}</td>
+                        <td  width="25%" class="text-center">
+                          <a href="javascript:;" @click="deleteColumn($index)">删除</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                 <!-- 添加按钮  -->
+                <div id="addColumn">
+                  <div id="newcolumn" class="form-inline"
+                     v-show="isAddNewClass">
+                    <div style="width:5%;"></div>
+                    <div style="width:35%;text-align: center;">
+                      <input type="text" class="form-control" style="width:100%;" disabled="true" placeholder="请输入上课地点"  value="线上">
+                    </div>
+                    <div style="width:35%;text-align: center;">
+                      <ht-date :option="timeOption"  v-model="newClassObjTime" placeholder="请选择上课时间"></ht-date>
+                    </div>
+                    <div style="width:25%;text-align: center;">
+                      <button type="button" name="button" class="btn btn-primary btn-sm" id="course_save" @click="saveNewClass">保存</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-inline course_column_bottom text-center">
+                  <p name="button" id="addCourseColumn" @click="addClassClick">
+                    添加上课时间地点
+                    </p>
+                </div>
+              </div>
+        </div>
+          
 
         <!-- 课程介绍 -->
         <div class="form-group" v-show="config.introduction==undefined||config.introduction.show!=false">
@@ -407,7 +460,24 @@
         obj: this.assignData(this.config, this.data),
         teacherList: [], //教师列表
         memberGoodsList: [], //会员赠送产品列表
-        notMemberGoodsList: [] //非会员赠送产品列表
+        notMemberGoodsList: [], //非会员赠送产品列表
+        isAddNewClass: false, //是否添加新上课地点(用于控制控件的显示与隐藏)
+        newClassObjTime: "",
+        //日期控件配置
+        timeOption: {
+          format: "yyyy-mm-dd hh:ii:ss",
+          weekStart: 1,
+          todayBtn: "linked",
+          pickerPosition: "bottom-left",
+          autoclose: true,
+          todayHighlight: 1,
+          startView: 2,
+          forceParse: 0,
+          showMeridian: true,
+          showMeridian: 1,
+          startDate: new Date(),
+          language: 'zh-CN'
+        },
       };
     },
     mounted: function() {
@@ -415,7 +485,9 @@
       this.getVipSltOptions();
     },
     computed: {
-      isShowVipGoods() {},
+      isShowVipGoods() {
+
+      },
       // 选择后才显示表格
       notMemberGoodObj() {
         var obj = {};
@@ -435,6 +507,37 @@
       }
     },
     methods: {
+      /**
+       * 删除某一行 
+       * @returns 
+       */
+      deleteColumn(index) {
+        this.obj.courdetail.splice(index, 1);
+      },
+      /**
+       * 添加子课程 
+       * @returns 
+       */
+      saveNewClass() {
+        //TODO 添加操作
+        if (!this.newClassObjTime) {
+          alert("请选择上课时间")
+          return false;
+        }
+        this.obj.courdetail.push({
+          address: "线上",
+          time: this.newClassObjTime
+        });
+        this.newClassObjTime = "";
+        this.isAddNewClass = false;
+      },
+      addClassClick() {
+        if (this.isAddNewClass) {
+          alert("请完善上一条信息后再进行添加操作");
+        } else {
+          this.isAddNewClass = true;
+        }
+      },
       cancel() {
         this.$emit("cancel");
       },
@@ -458,7 +561,8 @@
             }
           }
         }
-        obj.transVipArr = [];
+
+        // obj.transVipArr = [];
         if (obj.transVip != undefined && obj.transVip == "Y") {
           obj.transVipArr[0] = "trans_vip";
         }
@@ -562,59 +666,68 @@
       },
       // 获取教师下拉列表
       getTeacherSltOptions() {
-        this.teacherList = [{
-          id: 2,
-          username: "szht",
-          password: "null111111",
-          name: "马兆瑞",
-          birthdayYear: "1970",
-          note: "    有近二十年会计职称考试辅导经验，并担任企业法律顾问。为企业作纳税筹划。经常参与注册会计师后期培训及企业专题讲座，先后为天津市各企事业单位、税务机关、单位领导干部、MBA学员讲授经济法、税法、税收实务、纳税检查、税收筹划等综合性课程。2007年开始，先后为德勤、普华永道等四大会计师事务所做CPA专职培训。理论功底深厚，并具有丰富的实践经验。",
-          email: "",
-          phone: "13752326919",
-          icon: "/upload_file/2018-02-01/396e7300-fa23-4148-83c9-cd1dbe873971.jpg",
-          lifeIcon: "",
-          evaluation: "天津市资深会计职称、注册会计师考试辅导专家，天津财经大学法学院教授，硕士生导师。天津仲裁委员会仲裁员，中国法学会会员，天津市经济法研究会理事，自1993年开始长期担任会计资格考试、注册会计师、注册税务师、注册资产评估师和国家司法考试经济法、税法课程的教学辅导工作，发表论文多篇，著作多部。",
-          state: "Y"
-        }, {
-          id: 3,
-          username: "szht",
-          password: "null111111",
-          name: "张文英",
-          birthdayYear: "1980",
-          note: "张文英，神州浩天技术服务部经理、业务研究员。长期从事财税业务研究工作，多次参与天津税务申报软件升级业务需求分析工作，撰写了大量的申报软件操作指南。熟悉企业实际业务情况。",
-          email: "",
-          phone: "",
-          icon: "static/common/images/course/upload-alert.png",
-          lifeIcon: "",
-          evaluation: "业务扎实，讲解细致入微，深入浅出，具备实用价值。",
-          state: "Y"
-        }, {
-          id: 4,
-          username: "szht",
-          password: "f86e6c8816600f6a45ae5abbbcc7b6a7",
-          name: "安文英",
-          birthdayYear: "1979",
-          note: "天津工业大学副教授，赴美访问学者。工业大学税研所主任，天津市财政局、天津市国税局、地税局、天津市教委税收、会计领域特聘专家。",
-          email: "",
-          phone: "13752326919",
-          icon: "/upload_file/2017-04-26/71e712ba-619f-453c-a9dd-5b6b0344c774.png",
-          lifeIcon: "",
-          evaluation: "严谨、专业、高效、务实",
-          state: "Y"
-        }, {
-          id: 26,
-          username: "szht",
-          password: "null111111",
-          name: "aa",
-          birthdayYear: "2014",
-          note: "asdasdad",
-          email: "",
-          phone: "",
-          icon: "/upload_file/2017-06-05/486d312e-32ec-4cd4-8438-9aa54c1c2720.jpg",
-          lifeIcon: "/upload_file/2017-06-05/f8442522-8432-4feb-96e1-8add81385681.jpg",
-          evaluation: "asdasd",
-          state: "Y"
-        }];
+        setTimeout(() => {
+          this.teacherList = [{
+            id: 2,
+            username: "szht",
+            password: "null111111",
+            name: "马兆瑞",
+            birthdayYear: "1970",
+            note: "    有近二十年会计职称考试辅导经验，并担任企业法律顾问。为企业作纳税筹划。经常参与注册会计师后期培训及企业专题讲座，先后为天津市各企事业单位、税务机关、单位领导干部、MBA学员讲授经济法、税法、税收实务、纳税检查、税收筹划等综合性课程。2007年开始，先后为德勤、普华永道等四大会计师事务所做CPA专职培训。理论功底深厚，并具有丰富的实践经验。",
+            email: "",
+            phone: "13752326919",
+            icon: "/upload_file/2018-02-01/396e7300-fa23-4148-83c9-cd1dbe873971.jpg",
+            lifeIcon: "",
+            evaluation: "天津市资深会计职称、注册会计师考试辅导专家，天津财经大学法学院教授，硕士生导师。天津仲裁委员会仲裁员，中国法学会会员，天津市经济法研究会理事，自1993年开始长期担任会计资格考试、注册会计师、注册税务师、注册资产评估师和国家司法考试经济法、税法课程的教学辅导工作，发表论文多篇，著作多部。",
+            state: "Y"
+          }, {
+            id: 3,
+            username: "szht",
+            password: "null111111",
+            name: "张文英",
+            birthdayYear: "1980",
+            note: "张文英，神州浩天技术服务部经理、业务研究员。长期从事财税业务研究工作，多次参与天津税务申报软件升级业务需求分析工作，撰写了大量的申报软件操作指南。熟悉企业实际业务情况。",
+            email: "",
+            phone: "",
+            icon: "static/common/images/course/upload-alert.png",
+            lifeIcon: "",
+            evaluation: "业务扎实，讲解细致入微，深入浅出，具备实用价值。",
+            state: "Y"
+          }, {
+            id: 4,
+            username: "szht",
+            password: "f86e6c8816600f6a45ae5abbbcc7b6a7",
+            name: "安文英",
+            birthdayYear: "1979",
+            note: "天津工业大学副教授，赴美访问学者。工业大学税研所主任，天津市财政局、天津市国税局、地税局、天津市教委税收、会计领域特聘专家。",
+            email: "",
+            phone: "13752326919",
+            icon: "/upload_file/2017-04-26/71e712ba-619f-453c-a9dd-5b6b0344c774.png",
+            lifeIcon: "",
+            evaluation: "严谨、专业、高效、务实",
+            state: "Y"
+          }, {
+            id: 26,
+            username: "szht",
+            password: "null111111",
+            name: "aa",
+            birthdayYear: "2014",
+            note: "asdasdad",
+            email: "",
+            phone: "",
+            icon: "/upload_file/2017-06-05/486d312e-32ec-4cd4-8438-9aa54c1c2720.jpg",
+            lifeIcon: "/upload_file/2017-06-05/f8442522-8432-4feb-96e1-8add81385681.jpg",
+            evaluation: "asdasd",
+            state: "Y"
+          }];
+
+          //何时调用方法
+          this.$nextTick(() => {
+            this.$refs.teacherLists.bindSelect();
+          })
+        }, 1000);
+
+
       },
       // 获取会员赠品下拉列表
       getVipSltOptions() {
@@ -1265,5 +1378,41 @@
 <style scoped>
   .form-group:empty {
     margin-bottom: 0;
+  }
+  
+  .course_column_bottom:hover {
+    background-color: #E5E7EC;
+  }
+  
+  .course_column_bottom {
+    padding: 5px 0;
+    border: 1px solid #ddd;
+    background-color: #EFF0F4;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+  #addCourseColumn {
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  #course_panel {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  #newcolumn {
+    font-size: 0;
+    border: 1px solid #ddd;
+    border-top: none;
+  }
+  
+  #newcolumn>div {
+    display: inline-block;
+    font-size: 14px;
+    padding: 4px 8px;
   }
 </style>

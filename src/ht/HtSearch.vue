@@ -14,30 +14,35 @@
   </div>
 </template>
 <script>
-export default {
-  name: "HtSearch",
-  props: {
-    //对外获取的数据
-    placeholder: String,
-    value: String,
-    type: String
-  },
-  data: function() {
-    //组件内数据部分
-    return {
-      currentValue: this.value
-    };
-  },
-  methods: {
-    searchClick: function() {
-      this.$emit("search", this.value);
+  export default {
+    name: "HtSearch",
+    props: {
+      //对外获取的数据
+      placeholder: String,
+      value: String,
+      type: String
     },
-    handleInput(event) {
-      var value = event.target.value;
-      this.$emit("input", value); //触发 input 事件，并传入新值
+    data: function() {
+      //组件内数据部分
+      return {
+        currentValue: this.value
+      };
+    },
+    methods: {
+      searchClick: function() {
+        this.$emit("search", this.value);
+      },
+      handleInput(event) {
+        var value = event.target.value;
+        this.$emit("input", value); //触发 input 事件，并传入新值
+      }
+    },
+    watch: {
+      value() {
+        this.currentValue = value;
+      }
     }
-  }
-};
+  };
 </script>
 <style scoped>
 

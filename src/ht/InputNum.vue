@@ -105,6 +105,9 @@
     watch: {
       currentValue: function(val) {
         this.$emit("input", val);
+      },
+      value() {
+        this.currentValue = this.value;
       }
     }
   };

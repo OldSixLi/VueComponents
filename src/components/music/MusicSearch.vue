@@ -106,7 +106,38 @@
     data: function() {
       //组件内数据部分
       return {
-        classData: {},
+        classData: {
+          "studentCount": 4510,
+          "feeType": "P",
+          "transVip": "",
+          "scoreRadio": "1",
+          "scoreKindRadio": "1",
+          "allowVip": ["allowVip", "allowAbsent", "vipBest", "vipfree", "allowAbandon"],
+          "useCourseTicket": "Y",
+          "name": "自定义名称课程",
+          "type": "D",
+          "lineType": "F",
+          "vipPrice": 0,
+          "transVipArr": ["not_vip_give", "trans_vip"],
+          "begin_time": "2018-04-10 17:33:13",
+          "end_time": "2018-04-26 17:30:15",
+          "mutiplySale": "M*N",
+          "mutiplDes": "单价乘以人数",
+          "notVipGoodsId": "TEST-04",
+          "courdetail": [{
+            "address": "线上",
+            "time": "2018-04-10 17:33:31"
+          }],
+          "vipGoodsId": "TEST-03",
+          "teacherId": "3",
+          "singleCount": 123,
+          "nonVipPrice": 13,
+          "score": "123",
+          "phone": "312",
+          "introduction": "213213",
+          "name_err": "请填写相关姓名"
+        },
+
         //配置项
         config: {
           //课程名称
@@ -126,6 +157,9 @@
           // 听课方式 O:线上课程 F:线下课程
           lineType: {
             default: "F"
+          },
+          transVipArr: {
+            default: ["not_vip_give", "trans_vip"]
           },
           // 课程属性[checkbox以数组形式存储值] ["vipfree", "allowVip"]
           allowVip: {
@@ -198,8 +232,8 @@
             default: "M*N"
           },
           // 规则说明(一般设置为固定值)
-          mutiplDes: {
-            default: "单价乘以人数"
+          courdetail: {
+            default: []
           },
           // 课程介绍
           introduction: {
@@ -229,6 +263,8 @@
     },
     mounted: function() {
       this.getSongList(1);
+
+      console.log(JSON.parse('{"studentCount":4510,"feeType":"P","transVip":"","scoreRadio":"1","scoreKindRadio":"1","allowVip":["allowVip","allowAbsent","vipBest","vipfree","allowAbandon"],"useCourseTicket":"Y","name":"自定义名称课程","type":"D","lineType":"F","vipPrice":0,"transVipArr":["not_vip_give","trans_vip"],"begin_time":"2018-04-10 17:33:13","end_time":"2018-04-26 17:30:15","mutiplySale":"M*N","mutiplDes":"单价乘以人数","notVipGoodsId":"TEST-04","courdetail":[{"address":"线上","time":"2018-04-10 17:33:31"}],"vipGoodsId":"TEST-03","teacherId":"3","singleCount":123,"nonVipPrice":13,"score":"123","phone":"312","introduction":"213213","name_err":"请填写相关姓名"}'));
     },
     methods: {
       cancel() {
