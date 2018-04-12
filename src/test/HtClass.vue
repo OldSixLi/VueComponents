@@ -127,7 +127,7 @@
             <label for="vipGoodsId" class="control-label">会员赠送产品</label>
           </div>
           <div class="col-sm-10">
-            <ht-select v-model="obj.vipGoodsId" id="vipGoodsId" name="vipGoodsId" class="form-control" style="height:34px;width:100%" placeholder="请输入绑定企业">
+            <ht-select v-model="obj.vipGoodsId" id="vipGoodsId" name="vipGoodsId" class="form-control" style="height:34px;width:100%" placeholder="请输入绑定企业" :disabled="config.transVip&&config.transVip.disabled">
               <option value="">请选择</option>
               <option :value="x.id" v-for="x in memberGoodsList">{{x.name}}</option>
             </ht-select>
@@ -180,7 +180,7 @@
             <label for="notVipGoodsId" class="control-label">非会员赠送产品</label>
           </div>
           <div class="col-sm-10">
-            <ht-select v-model="obj.notVipGoodsId" id="notVipGoodsId" name="notVipGoodsId" class="form-control" style="height:34px;width:100%" placeholder="请输入绑定企业">
+            <ht-select v-model="obj.notVipGoodsId" id="notVipGoodsId" name="notVipGoodsId" class="form-control" style="height:34px;width:100%" placeholder="请输入绑定企业" :disabled="config.transVip&&config.transVip.disabled">
               <option value="">请选择</option>
               <option :value="x.id" v-for="x in notMemberGoodsList">{{x.name}}</option>
             </ht-select>
@@ -277,8 +277,8 @@
           </div>
           <div>
             <div class="col-sm-10" id="scoreKind">
-              <ht-radio label="1" v-model="obj.scoreKindRadio" :disabled="obj.scoreRadio=='3'">价格百分比 </ht-radio>
-              <ht-radio label="2" v-model="obj.scoreKindRadio" :disabled="obj.scoreRadio=='3'">固定积分</ht-radio>
+              <ht-radio label="1" v-model="obj.scoreKindRadio" :disabled="obj.scoreRadio=='3'||(config.scoreRadio&&config.scoreRadio.disabled)">价格百分比 </ht-radio>
+              <ht-radio label="2" v-model="obj.scoreKindRadio" :disabled="obj.scoreRadio=='3'||(config.scoreRadio&&config.scoreRadio.disabled)">固定积分</ht-radio>
             </div>
             <span class="help-block"></span>
           </div>
@@ -292,7 +292,7 @@
               <label for="percent" class="control-label">积分计算规则</label>
             </div>
             <div class="col-sm-9">
-              <input type="text" v-model="obj.score" class="form-control score-input" id="percent" name="" placeholder="请输入积分计算规则" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" pattern="[0-9]*" maxlength="3">
+              <input type="text" v-model="obj.score" class="form-control score-input" id="percent" name="" placeholder="请输入积分计算规则" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" pattern="[0-9]*" maxlength="3" :disabled="obj.scoreRadio=='3'||(config.scoreRadio&&config.scoreRadio.disabled)">
             </div>
             <div class="col-sm-1">
               <label class="control-label">%</label>
@@ -303,7 +303,7 @@
               <label for="percent" class="control-label">积分值</label>
             </div>
             <div class="col-sm-10">
-              <input type="text" v-model="obj.score" class="form-control score-input" id="fixed" name="" placeholder="请输入积分值" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" pattern="[0-9]*">
+              <input type="text" v-model="obj.score" class="form-control score-input" id="fixed" name="" placeholder="请输入积分值" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" pattern="[0-9]*" :disabled="obj.scoreRadio=='3'||(config.scoreRadio&&config.scoreRadio.disabled)">
             </div>
           </div>
         </div>
@@ -315,8 +315,8 @@
           </div>
           <div>
             <div class="col-sm-10" id="cou_ticket">
-              <ht-radio label="Y" v-model="obj.useCourseTicket">是 </ht-radio>
-              <ht-radio label="N" v-model="obj.useCourseTicket">否 </ht-radio>
+              <ht-radio label="Y" v-model="obj.useCourseTicket"  :disabled="config.useCourseTicket&&config.useCourseTicket.disabled">是 </ht-radio>
+              <ht-radio label="N" v-model="obj.useCourseTicket"  :disabled="config.useCourseTicket&&config.useCourseTicket.disabled">否 </ht-radio>
             </div>
             <span class="help-block"></span>
           </div>
@@ -421,11 +421,20 @@
 
         <!-- 按钮 -->
 
-        <div class="">
+        <div class="" v-show="!obj.wholeDisabled">
           <div class="form-group text-right">
             <div class="col-md-12">
               <button type="button" class="btn btn-primary" id="saveBtn" @click="saveInfo()">保存课程信息</button> &nbsp;&nbsp;
               <button type="button" class="btn btn-danger" id="cancelBtn" @click="cancel()">放弃本次操作</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="" v-show="obj.wholeDisabled">
+          <div class="form-group text-right">
+            <div class="col-md-12">
+              <button type="button" class="btn btn-primary" id="saveBtn" @click="saveInfo()">确定</button>
             </div>
 
           </div>
@@ -548,16 +557,25 @@
           if (data.hasOwnProperty(k)) {
             const ele = data[k];
             if (ele != undefined && !obj[k]) {
+              //NOTE 此处使用!obj[k]是因为值里边没有Boolean类型值,wholeDisable另外处理
               obj[k] = ele;
             }
           }
         }
+
+        var isWholeDisable = data.wholeDisable != undefined && data.wholeDisable; //整个对象是否只读
         for (const key in config) {
           if (config.hasOwnProperty(key)) {
             const element = config[key];
-            console.log(element.default);
+
+            // console.log(element.default);
             if (element.default != undefined && !obj[key]) {
               obj[key] = element.default;
+            }
+            if (isWholeDisable) {
+              element.disabled = obj.wholeDisabled = true;
+            } else {
+              obj.wholeDisabled = false;
             }
           }
         }
@@ -616,7 +634,7 @@
 
         //如果课程为收费，则进行以下校验
         if (self.obj.feeType == "P") {
-          if (!$.trim(self.obj.vipPrice)) {
+          if (!$.trim(self.obj.vipPrice) && self.obj.allowVip.indexOf('vipfree') < 0) {
             __error.push("会员价格不能为空！");
           }
           if (!$.trim(self.obj.nonVipPrice)) {

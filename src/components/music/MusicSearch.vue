@@ -107,6 +107,7 @@
       //组件内数据部分
       return {
         classData: {
+          // "wholeDisable": true, //全部文档禁用(只读)NOTE 此属性针对整个文档适用
           "studentCount": 4510,
           "feeType": "P",
           "transVip": "",
@@ -123,12 +124,10 @@
           "end_time": "2018-04-26 17:30:15",
           "mutiplySale": "M*N",
           "mutiplDes": "单价乘以人数",
-          "notVipGoodsId": "TEST-04",
           "courdetail": [{
             "address": "线上",
             "time": "2018-04-10 17:33:31"
           }],
-          "vipGoodsId": "TEST-03",
           "teacherId": "3",
           "singleCount": 123,
           "nonVipPrice": 13,
@@ -233,7 +232,11 @@
           },
           // 规则说明(一般设置为固定值)
           courdetail: {
-            default: []
+            default: [],
+            show: false
+          },
+          mutiplDes: {
+            default: ""
           },
           // 课程介绍
           introduction: {
