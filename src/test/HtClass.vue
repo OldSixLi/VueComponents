@@ -424,8 +424,11 @@
         <div class="" v-show="!obj.wholeDisabled">
           <div class="form-group text-right">
             <div class="col-md-12">
-              <button type="button" class="btn btn-primary" id="saveBtn" @click="saveInfo()">保存课程信息</button> &nbsp;&nbsp;
-              <button type="button" class="btn btn-danger" id="cancelBtn" @click="cancel()">放弃本次操作</button>
+              <button type="button" class="btn btn-primary" id="saveBtn" @click="saveInfo()" v-show="!obj.wholeDisabled">保存课程信息</button> &nbsp;&nbsp;
+              <button type="button" class="btn btn-danger" id="cancelBtn" @click="cancel()">
+                <span v-show="obj.wholeDisabled">返回</span>
+                <span v-show="!obj.wholeDisabled">放弃本次操作</span>
+                </button>
             </div>
 
           </div>
@@ -587,6 +590,23 @@
         if (obj.notVipGive != undefined && obj.notVipGive == "Y") {
           obj.transVipArr[1] = "not_vip_give";
         }
+        obj.allowVips = obj.allowVips || [];
+        if (data.vipfree != undefined && data.vipfree == "Y") {
+          obj.allowVips.push('vipfree');
+        }
+        if (data.allowVip != undefined && data.allowVip == "Y") {
+          obj.allowVips.push('allowVip');
+        }
+        if (data.vipBest != undefined && data.vipBest == "Y") {
+          obj.allowVips.push('vipBest');
+        }
+        if (data.allowAbsent != undefined && data.allowAbsent == "Y") {
+          obj.allowVips.push('allowAbsent');
+        }
+        if (data.allowAbandon != undefined && data.allowAbandon == "Y") {
+          obj.allowVips.push('allowAbandon');
+        }
+
         return obj;
       },
       // 保存信息按钮
