@@ -5,11 +5,11 @@
       <router-view></router-view>
     </transition>
     <div class="row">
-      <ht-tabs active="1">
-        <ht-tab title="1">
+      <ht-tabs active="网易云搜索">
+        <!-- <ht-tab title="1">
           <ht-class :config="config" :data="classData" @result="result" @cancel="cancel"></ht-class>
-        </ht-tab>
-        <ht-tab title="2">
+        </ht-tab> -->
+        <ht-tab title="网易云搜索">
           <!-- 列表部分 -->
           <div class="col-md-9 col-sm-12 col-xs-12">
             <h2 class="text-center">搜索</h2>
@@ -266,7 +266,6 @@
     },
     mounted: function() {
       this.getSongList(1);
-
       console.log(JSON.parse('{"studentCount":4510,"feeType":"P","transVip":"","scoreRadio":"1","scoreKindRadio":"1","allowVip":["allowVip","allowAbsent","vipBest","vipfree","allowAbandon"],"useCourseTicket":"Y","name":"自定义名称课程","type":"D","lineType":"F","vipPrice":0,"transVipArr":["not_vip_give","trans_vip"],"begin_time":"2018-04-10 17:33:13","end_time":"2018-04-26 17:30:15","mutiplySale":"M*N","mutiplDes":"单价乘以人数","notVipGoodsId":"TEST-04","courdetail":[{"address":"线上","time":"2018-04-10 17:33:31"}],"vipGoodsId":"TEST-03","teacherId":"3","singleCount":123,"nonVipPrice":13,"score":"123","phone":"312","introduction":"213213","name_err":"请填写相关姓名"}'));
     },
     methods: {

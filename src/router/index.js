@@ -18,6 +18,7 @@ import Show from './../components/Show.vue';
 import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
 import WaterFall from './../components/WaterFall.vue';
+import Company from './../components/Company.vue';
 
 Vue.use(Router);
 
@@ -105,12 +106,17 @@ let router = new Router({
           component: UserInfo,
           name: "userinfo"
         },
-        { 
+        {
           path: 'list',
           component: UserList,
           name: "userlist"
         }
       ]
+    },
+    {
+      path: "/company",
+      name: "company",
+      component: resolve => require(['./../components/Company.vue'], resolve),
     }
   ]
 });

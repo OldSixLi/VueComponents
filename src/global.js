@@ -30,6 +30,7 @@ import HtOption from './ht/HtOption.vue';
 import HtTab from './ht/HtTab.vue';
 import HtTabs from './ht/HtTabs.vue';
 import HtClass from './test/HtClass.vue';
+import HtSell from './test/HtSell.vue';
 import InputNum from './ht/InputNum.vue'
 
 //布局组件
@@ -89,4 +90,6 @@ Vue.component('img-introduce', ImgIntroducePanel);
 
 Vue.component('load', Load);
 Vue.component('ht-class', HtClass);
+Vue.component('ht-sell', HtSell);
+
 Vue.component('input-num', InputNum);

@@ -497,9 +497,7 @@
       this.getVipSltOptions();
     },
     computed: {
-      isShowVipGoods() {
-
-      },
+      isShowVipGoods() {},
       // 选择后才显示表格
       notMemberGoodObj() {
         var obj = {};

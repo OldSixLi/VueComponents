@@ -51,8 +51,9 @@
       value: function(value) {
         // 更新值
         $(this.$el)
-          .val(value)
-          .trigger("change");
+          .val(value);
+        this.bindSelect();
+        //2018年4月19日15:03:41 修改 tigger('change')可能部分浏览器会有影响
       },
       options: function(options) {
         // 更新设置
@@ -79,14 +80,14 @@
   }
   
   .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border-color: #66afe9;
+    border-color: #f5c4f7;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
   }
   
   .select2-container--default.select2-container--focus .select2-selection--single {
-    border-color: #66afe9;
+    border-color: #e97566;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
@@ -102,6 +103,7 @@
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    -moz-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
     -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   }
