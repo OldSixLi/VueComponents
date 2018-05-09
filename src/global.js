@@ -12,6 +12,7 @@ import Pr from './test/P.vue';
 import PrList from './test/PrList.vue';
 import AjaxSearch from './test/AjaxSearch.vue';
 import Al from './test/Al.vue';
+import TimeLine from './test/TimeLine.vue';
 import ImgIntroducePanel from './layout/ImgIntroducePanel.vue';
 
 //ht组件
@@ -85,11 +86,9 @@ Vue.component('notice', Notice);
 Vue.component('load-btn', LoadBtn);
 Vue.component('open-icon', OpenIcon);
 Vue.component('img-introduce', ImgIntroducePanel);
-
-
-
+//时间轴组件
+Vue.component('time-line', TimeLine);
 Vue.component('load', Load);
 Vue.component('ht-class', HtClass);
 Vue.component('ht-sell', HtSell);
-
 Vue.component('input-num', InputNum);

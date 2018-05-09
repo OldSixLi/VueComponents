@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h2 class="text-center">产品销售</h2>
-          <!-- 模块内容 -->
-          <form class="form-horizontal" method="post" role="form">
-            <ht-tabss active="点位选择">
-                <!--  ◆　　　　　　　　　◆　　　◆　　　　　　　◆　　　　　◆　　　　　　　◆　◆◆◆◆◆◆　　
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h2 class="text-center">产品销售</h2>
+        <!-- 模块内容 -->
+        <form class="form-horizontal" method="post" role="form">
+          <ht-tabss active="点位选择">
+            <!--  ◆　　　　　　　　　◆　　　◆　　　　　　　◆　　　　　◆　　　　　　　◆　◆◆◆◆◆◆　　
                 　　　　　　◆◆◆◆◆◆　　　　◆　　　　◆　　　　　　　◆　　◆　◆　　　　　　　◆　　◆　　　◆　　
                 　　　　　　◆　　　　　　　　◆　　　　　　　　　　　　　　　　◆◆◆◆◆　　　　　◆　　　◆　◆　　　
                 　　　　　　◆　　　　　　　　◆　◆◆◆◆◆◆◆◆　　　　　　◆　　◆　　　　　◆◆◆◆　　　◆　　　　
@@ -18,26 +18,26 @@
                 　　　　　　　　　　　　　　　◆　　　◆　　◆　　　　　　◆　◆　　　　◆◆　　　　◆　◆◆◆◆◆◆◆　
                 　　◆　◆　　◆　　◆　　　　◆　　　　　◆　　　　　　◆　◆　　　　　　　　　　　◆　　　　◆　　　　
                 　◆　　　◆　　◆　　◆　　　◆　◆◆◆◆◆◆◆◆　　◆　　　◆◆◆◆◆◆◆　　　◆◆　　　　◆　　　　  -->
-               
-                <ht-tab title="点位选择">
-                  <panel title="点位选择">
-                    {{point}}
-                      <div class="form-group" style="margin-top:15px;">
-                          <div class="col-sm-2 text-right">
-                            <label for="teacherId" class="control-label">点位选择</label>
-                          </div>
-                          <div class="col-sm-10" >
-                            
-                            <ht-select name="sds" v-model="point">
-                              <option value="">请选择</option>
-                              <option v-for="x in points" :value="x.id">{{x.name}}</option>
-                            </ht-select>
-                          </div>
-                        </div>
-                  </panel>
-                </ht-tab>
-                
-                  <!--  
+
+            <ht-tab title="点位选择">
+              <panel title="点位选择">
+                {{point}}
+                <div class="form-group" style="margin-top:15px;">
+                  <div class="col-sm-2 text-right">
+                    <label for="teacherId" class="control-label">点位选择</label>
+                  </div>
+                  <div class="col-sm-10">
+
+                    <ht-select name="sds" v-model="point">
+                      <option value="">请选择</option>
+                      <option v-for="x in points" :value="x.id">{{x.name}}</option>
+                    </ht-select>
+                  </div>
+                </div>
+              </panel>
+            </ht-tab>
+
+            <!--  
                 　　　　　　◆　　　　　　　　　　　　◆　　　　　　　　　◆　　　◆　　　　　　　　　　◆　　　　　　　
                 　◆◆◆◆◆◆◆◆◆◆◆　　　　　　　　◆　　　　　　　　◆　　　　◆　　　　　　◆◆◆◆◆◆◆◆◆　　
                 　◆　　◆　　　　　　◆　　　　◆◆◆◆◆◆◆◆◆　　　◆　◆◆◆◆◆◆◆◆　　　◆　　　　　　　◆　　
@@ -50,114 +50,115 @@
                 　　　◆　　　　　◆　　　　　◆　　　　　　　　　　　　◆　　◆　　　　◆　　　　◆　◆　　◆　　◆　　
                 　　　◆◆◆◆◆◆◆　　　　　◆　　　　　　　　　　　　◆　　◆◆◆◆◆◆　　　　◆　◆　　　　◆　◆　
                 　　　◆　　　　　◆　　　　◆　　　　　　　　　　　　　◆　　◆　　　　◆　　　◆　　　◆◆◆◆◆　◆　 -->
-                <ht-tab title="客户信息">
-                  <panel  title="客户信息"> 
-                        <div class="form-group hidden">
-                            <label for="inputPassword3" class="col-xs-2 control-label">地税纳税人识别号</label>
-                            <div class="col-xs-10">
-                              <div class="input-group">
-                                <input type="text" class="form-control" id="dsNsrsbh" name="dsNsrsbh" value="${info.dsNsrsbh}" maxlength="50" placeholder="请输入地税纳税人识别号代码信息">
-                                <span class="input-group-btn">
-                                  <button class="btn btn-primary" type="button" onclick="findMessageBydsNsrsbh(this)"><span class="glyphicon glyphicon-search"></span></button>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                              <label for="inputPassword3" class="col-xs-2 control-label">纳税人识别号(统一社会信用代码)</label>
-                              <div class="col-xs-10">
-                                <div class="col-xs-11" style="padding:0;">
-                              <div class="input-group">
-                                <input type="text" class="form-control" id="shxydm" name="shxydm" v-model="shxydm"  maxlength="50" placeholder="请输入统一社会信用代码信息">
-                                <span class="input-group-btn">
-                                  <button class="btn btn-primary" type="button" @click="getCompanyInfo()"><span class="glyphicon glyphicon-search"></span></button>
-                                </span>
-                              </div>
-                            </div>
-                                <div class="col-xs-1" style="padding:2px 0 0 12px;">
-                                  <a class="delbtn btn btn-sm btn-primary" onclick="toOrderList()">查询订单</a>
-                          </div>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputEmail3" class="col-xs-2 control-label">纳税人名称</label>
-                            <div class="col-xs-10">
-                              <input type="text" class="form-control" id="nsrmc" name="nsrmc" v-model="companyInfo.nsrmc" maxlength="300" placeholder="请输入纳税人名称信息">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPassword3" class="col-xs-2 control-label">联系地址</label>
-                            <div class="col-xs-10">
-                              <input type="text" class="form-control" id="address" name="address" v-model="companyInfo.address" maxlength="300" placeholder="请输入联系地址信息">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPassword3" class="col-xs-2 control-label">联系邮编</label>
-                            <div class="col-xs-10">
-                              <input type="text" class="form-control" id="zip" name="zip" v-model="companyInfo.zip" maxlength="6" placeholder="请输入联系邮编信息">
-                            </div>
-                          </div>
-                          <!-- {{companyInfo}} -->
-                          <div class="form-group">
-                            <label for="inputPassword3" class="col-xs-2 control-label">授权服务电话</label>
-                            <div  class="col-xs-10"  id="phoneList" > 
-                                  <div v-for="(x,$index) in (companyInfo.phone!=undefined&&companyInfo.phone.split(','))" class="row" style="margin:  0 0 10px">
-                                    <div class="col-xs-11" style="padding:0">
-                                      <input type="text" class="form-control"  v-model="(companyInfo.phone!=undefined&&companyInfo.phone.split(','))[$index]"
-                                        placeholder="请输入授权服务电话信息">
-                                    </div>
-                                    <div class="col-xs-1" style="padding:2px 0 0 12px">
-                                      <a class="delbtn btn btn-sm btn-danger btn-block" title="删除"
-                                        @click="delPhone($index)">删除</a>
-                                    </div>
-                                  </div>
-                            </div>
-                          <div class="col-xs-offset-2 col-xs-10">
-                            <a class="btn btn-sm htbtn-info" onclick="addPhone()">添加</a>
-                          </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="contact" class="col-xs-2 control-label">联系人</label>
-                            <div class="col-xs-10">
-                              <input type="text" class="form-control" id="contact" name="contact"  maxlength="80" v-model="companyInfo.contact"  placeholder="请输入联系人信息">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="mobilePhone" class="col-xs-2 control-label">联系人手机号码</label>
-                            <div class="col-xs-10">
-                              <input type="text" class="form-control" id="mobilePhone" name="mobilePhone" v-model="companyInfo.mobilePhone"  placeholder="请输入联系人手机号码">
-                              <p class="text-danger padding-top7">(*请工作人员现场打电话确认)</p>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="wechatOpenid" class="col-xs-2 control-label">联系人微信号</label>
-                            <div class="col-xs-10">
-                              <input type="text" class="form-control" 
-                              v-model="companyInfo.wechatOpenid" maxlength="128" placeholder="请输入联系人微信号">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPassword3" class="col-xs-2 control-label">联系人职位</label>
-                            <div class="col-xs-10">
-                             <!-- <input type="hidden" class="form-control" id="jobHidden"  > -->
-                             {{companyInfo.jobs}}
-                              <ht-select v-model="companyInfo.jobs">
-                                  <option value="">请选择</option>
-                                  <option value="其他">其他</option>
-                                  <option value="公司负责人">公司负责人</option>
-                                  <option value="财务负责人">财务负责人</option>
-                                  <option value="会计">会计</option>
-                                  <option value="代理公司">代理公司</option>
-                              </ht-select>
-                            </div>
-                          </div>
-                          <div class="text-center text-danger">
-                          <strong id="message"></strong>
-                          </div>
-                  </panel>
-                  
-                </ht-tab>
-                <!--   　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+            <ht-tab title="客户信息">
+              <panel title="客户信息">
+                <div class="form-group hidden">
+                  <label for="inputPassword3" class="col-xs-2 control-label">地税纳税人识别号</label>
+                  <div class="col-xs-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="dsNsrsbh" name="dsNsrsbh" value="${info.dsNsrsbh}" maxlength="50" placeholder="请输入地税纳税人识别号代码信息">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" onclick="findMessageBydsNsrsbh(this)">
+                          <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-xs-2 control-label">纳税人识别号(统一社会信用代码)</label>
+                  <div class="col-xs-10">
+                    <div class="col-xs-11" style="padding:0;">
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="shxydm" name="shxydm" v-model="shxydm" maxlength="50" placeholder="请输入统一社会信用代码信息">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button" @click="getCompanyInfo()">
+                            <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xs-1" style="padding:2px 0 0 12px;">
+                      <a class="delbtn btn btn-sm btn-primary" onclick="toOrderList()">查询订单</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-xs-2 control-label">纳税人名称</label>
+                  <div class="col-xs-10">
+                    <input type="text" class="form-control" id="nsrmc" name="nsrmc" v-model="companyInfo.nsrmc" maxlength="300" placeholder="请输入纳税人名称信息">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-xs-2 control-label">联系地址</label>
+                  <div class="col-xs-10">
+                    <input type="text" class="form-control" id="address" name="address" v-model="companyInfo.address" maxlength="300" placeholder="请输入联系地址信息">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-xs-2 control-label">联系邮编</label>
+                  <div class="col-xs-10">
+                    <input type="text" class="form-control" id="zip" name="zip" v-model="companyInfo.zip" maxlength="6" placeholder="请输入联系邮编信息">
+                  </div>
+                </div>
+                <!-- {{companyInfo}} -->
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-xs-2 control-label">授权服务电话</label>
+                  <div class="col-xs-10" id="phoneList">
+                    <div v-for="(x,$index) in phoneArr" class="row" style="margin:  0 0 10px">
+                      <div class="col-xs-11" style="padding:0">
+                        <input type="text" class="form-control" v-model="phoneArr[$index]" placeholder="请输入授权服务电话信息">
+                      </div>
+                      <div class="col-xs-1" style="padding:2px 0 0 12px">
+                        <a class="delbtn btn btn-sm btn-danger btn-block" title="删除" @click="(phoneArr.length > 1)&&phoneArr.splice($index,1)">删除</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-offset-2 col-xs-10">
+                    <a class="btn btn-sm htbtn-info" @click="(phoneArr[phoneArr.length-1]!='')&&phoneArr.push('')">添加</a>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="contact" class="col-xs-2 control-label">联系人</label>
+                  <div class="col-xs-10">
+                    <input type="text" class="form-control" id="contact" name="contact" maxlength="80" v-model="companyInfo.contact" placeholder="请输入联系人信息">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="mobilePhone" class="col-xs-2 control-label">联系人手机号码</label>
+                  <div class="col-xs-10">
+                    <input type="text" class="form-control" id="mobilePhone" name="mobilePhone" v-model="companyInfo.mobilePhone" placeholder="请输入联系人手机号码">
+                    <p class="text-danger padding-top7">(*请工作人员现场打电话确认)</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wechatOpenid" class="col-xs-2 control-label">联系人微信号</label>
+                  <div class="col-xs-10">
+                    <input type="text" class="form-control" v-model="companyInfo.wechatOpenid" maxlength="128" placeholder="请输入联系人微信号">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-xs-2 control-label">联系人职位</label>
+                  <div class="col-xs-10">
+                    <!-- <input type="hidden" class="form-control" id="jobHidden"  > -->
+                    {{companyInfo.jobs}}
+                    <ht-select v-model="companyInfo.jobs">
+                      <option value="">请选择</option>
+                      <option value="其他">其他</option>
+                      <option value="公司负责人">公司负责人</option>
+                      <option value="财务负责人">财务负责人</option>
+                      <option value="会计">会计</option>
+                      <option value="代理公司">代理公司</option>
+                    </ht-select>
+                  </div>
+                </div>
+                <div class="text-center text-danger">
+                  <strong id="message"></strong>
+                </div>
+              </panel>
+
+            </ht-tab>
+            <!--   　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
                 　　　　　◆　　　　　　　　　　◆◆◆◆◆◆◆　　　　　　◆　　　◆　　　　　　　　　　◆　　　　　　　
                 　　　　　　◆　　　　　　　　　◆　　　　　◆　　　　　　◆　　　　◆　　　　　　◆◆◆◆◆◆◆◆◆　　
                 　　◆◆◆◆◆◆◆◆◆◆　　　　◆　　　　　◆　　　　　◆　◆◆◆◆◆◆◆◆　　　◆　　　　　　　◆　　
@@ -171,56 +172,54 @@
                 　　◆　　　　　　　　　　　◆◆◆◆◆　◆◆◆◆◆　　　◆　　◆◆◆◆◆◆　　　　◆　◆　　　　◆　◆　
                 　◆　　　　　　　　　　　　◆　　　◆　◆　　　◆　　　◆　　◆　　　　◆　　　◆　　　◆◆◆◆◆　◆　
                 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 -->
-                <ht-tab title="产品信息">
-                    
-                    <panel title="产品信息">
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-xs-2 control-label">产品名称</label>
-                            <div class="col-xs-10">
-                              <ht-select  class="form-control" v-model="selectGood">
-						       	            <option value="">请选择产品</option> 
-                                <option :value="x.id" v-for="(x,$index) in goodsList">{{x.id+'、'+x.name+(x.alone=='Y'?'(独立销售产品)':'')}}</option>
-						                  </ht-select>
-                            </div>
-                          </div>
+            <ht-tab title="产品信息">
 
-                          <table class="table table-hover text-center">
-                              <thead>
-                                <tr>
-                                  <th class="text-center">产品ID</th>
-                                  <th class="text-center">产品名称</th>
-                                  <th class="text-center">打印名称</th>
-                                  <th class="text-center">数量</th>
-                                  <th class="text-center">含税价格</th>
-                                  <th class="text-center">税率</th>
-                                  <th class="text-center">单价</th>
-                                  <th class="text-center">操作</th>
-                                </tr>
-                              </thead>
-                              <tbody id="goodsList">
+              <panel title="产品信息">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-xs-2 control-label">产品名称</label>
+                  <div class="col-xs-10">
+                    <ht-select class="form-control" v-model="selectGood">
+                      <option value="">请选择产品</option>
+                      <option :value="x.id" v-for="(x,$index) in goodsList">{{x.id+'、'+x.name+(x.alone=='Y'?'(独立销售产品)':'')}}</option>
+                    </ht-select>
+                  </div>
+                </div>
 
-                                <tr v-for="(vt,$index) in selectedGoods">
-                                    <td>{{vt.id}}</td>
-                                    <td style="max-width:350px;">{{vt.name}}</td>
-                                    <td>{{vt.printName}}</td>
-                                    <td><input class='form-control  text-center' value='1' type='text' readonly></td>
-                                    <td>
-                                      <input class="form-control  text-center price" onkeyup="priceChange(this)" onblur="priceBlur(this)" :value="vt.price" type="text" 
-                                      />
-                                    </td>
-                                    <td>{{vt.sl*100}}%</td>
-                                    <td class="tdTotle">
-                                      <!-- <fmt:formatNumber value="" type="number" pattern="0.00" /> -->
-                                      {{vt.price.toFixed(2)}}
-                                    </td>
-                                    <td>
-                                      <a class="btn btn-sm btn-danger" href="javascript:;" onclick="delProduct(this)" @click="deleteSelectedGoods($index)">删除</a>
-                                      <!-- <input type='hidden' value='{{vt.alone}}'>
+                <table class="table table-hover text-center">
+                  <thead>
+                    <tr>
+                      <th class="text-center">产品ID</th>
+                      <th class="text-center">产品名称</th>
+                      <th class="text-center">打印名称</th>
+                      <th class="text-center">数量</th>
+                      <th class="text-center">含税价格</th>
+                      <th class="text-center">税率</th>
+                      <th class="text-center">单价</th>
+                      <th class="text-center">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="goodsList">
+
+                    <tr v-for="(vt,$index) in selectedGoods">
+                      <td>{{vt.id}}</td>
+                      <td style="max-width:350px;">{{vt.name}}</td>
+                      <td>{{vt.printName}}</td>
+                      <td><input class='form-control  text-center' value='1' type='text' readonly></td>
+                      <td>
+                        <input-num type="money" class="form-control  text-center price" v-model="vt.price" :readonly="vt.yj != 'Y'"></input-num>
+                      </td>
+                      <td>{{vt.sl*100}}%</td>
+                      <td class="tdTotle">
+                        {{(!isNaN(vt.price)&&(vt.price-0).toFixed(2))||'0.00'}}
+                      </td>
+                      <td>
+                        <a class="btn btn-sm btn-danger" href="javascript:;" onclick="delProduct(this)" @click="deleteSelectedGoods($index)">删除</a>
+                        <!-- <input type='hidden' value='{{vt.alone}}'>
                                       <input type='hidden' value='{{vt.orderGoods.spbm}}'>
                                       <input type='hidden' value='{{vt.onlyCompany}}' > -->
-                                    </td>
-                                </tr>
-                                <!-- <c:forEach items="${buy_goods}" var="vt">
+                      </td>
+                    </tr>
+                    <!-- <c:forEach items="${buy_goods}" var="vt">
                                   <tr>
                                     <td>${vt.orderGoods.goodsId}</td>
                                     <td>${vt.goodsName}</td>
@@ -242,24 +241,28 @@
                                     </td>
                                   </tr>
                                 </c:forEach> -->
-                              </tbody>
-                              <tfoot id="right">
-                                <tr>
-                                  <td class="text-right" colspan="8"><strong>总价&nbsp;:&nbsp;</strong>&nbsp;&nbsp;&nbsp;<span id="totlePrice">{{sumPrice}}</span>&nbsp;&nbsp;&nbsp;</td>
-                                </tr>
-                              </tfoot>
-                              <!-- <tfoot id="wrong">
+                  </tbody>
+                  <tfoot id="right">
+                    <tr>
+                      <td class="text-right" colspan="8">
+                        <strong>总价&nbsp;:&nbsp;</strong>&nbsp;&nbsp;&nbsp;
+                        <span id="totlePrice">{{sumPrice}}</span>&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                  </tfoot>
+                  <!-- <tfoot id="wrong">
                                 <tr>
                                   <td class="text-center text-danger" colspan="8">产品价格输入有误</td>
                                 </tr>
                               </tfoot> -->
-                            </table>
+                </table>
 
-
-                            {{selectedGoods}}
-                    </panel>
-                </ht-tab>
-                <!-- 
+                <div>
+                  <p style="padding: 15px;" class="text-danger lead text-center" v-show="messageWord!=''" id="backBuyMessage">{{messageWord}}</p>
+                </div>
+                {{selectedGoods}}
+              </panel>
+            </ht-tab>
+            <!-- 
                                 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
                 　　　◆　◆◆◆◆◆◆◆　　　◆　　　　　◆　　　　　　　◆◆◆◆◆◆◆　　　
                 　　　◆　◆　　　　　◆　　　◆◆　◆　　◆　　◆　　　　◆　　　　　◆　　　
@@ -274,19 +277,19 @@
                 　　◆　◆　◆　◆　　　　　　◆◆　◆　　　　　◆　　◆◆◆◆◆　◆◆◆◆◆　
                 　　◆◆　　　◆◆◆◆◆　　　◆　　◆　　　　◆◆　　◆　　　◆　◆　　　◆　
                 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 -->
-                <ht-tab title="促销品信息"> 
-                <panel title="促销品信息">
-                    <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th class="id text-center">是否赠送</th>
-                            <th class="text-center">促销品编号</th>
-                            <th class="text-center">促销品名</th>
-                            <th class="text-center">数量</th>
-                          </tr>
-                        </thead>
-                        <tbody id="giftList">
-                          <!-- <c:forEach items="${buy_gift}" var="vt">
+            <ht-tab title="促销品信息">
+              <panel title="促销品信息">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th class="id text-center">是否赠送</th>
+                      <th class="text-center">促销品编号</th>
+                      <th class="text-center">促销品名</th>
+                      <th class="text-center">数量</th>
+                    </tr>
+                  </thead>
+                  <tbody id="giftList">
+                    <!-- <c:forEach items="${buy_gift}" var="vt">
                             <tr>
                               <td class="text-center"><input type="checkbox" class="cxpCheckBox" checked/> </td>
                               <td class="text-center">${vt.gift.giftId }</td>
@@ -303,6 +306,7 @@
                               </td>
                             </tr>
                           </c:forEach>
+                          
                           <c:forEach items="${gifts}" var="vt">
                             <tr>
                               <td class="text-center"><input type="checkbox" class="cxpCheckBox" /> </td>
@@ -321,34 +325,34 @@
                             </tr>
                           </c:forEach> -->
 
-                          <tr v-for="(vt,$index) in giftList">
-                            <td class="text-center">
-                              <ht-checkbox  v-model="selectedGifts" :label="vt.id" :labelShow="false"></ht-checkbox>
-                              <!-- <input type="checkbox" class="cxpCheckBox" /> -->
-                               </td>
-                              <td class="text-center">{{vt.id }}</td>
-                                <td class="text-center">{{vt.name }} ({{vt.score||0 }}积分)</td>
-                              
-                              <td class="text-center"> 
-                                <a href="javascript:;" class="btn btn-sm btn-danger low"  :disabled="selectedGifts.indexOf(vt.id)==-1" @click="vt.qualityNum>1&&vt.qualityNum--">减少</a>
-                                <input type="text" class="form-control cxpNum text-center" v-model="vt.qualityNum" style="display: inline;width: 50px;"/>
-                                <a href="javascript:;" class="btn btn-sm btn-success up"  :disabled="selectedGifts.indexOf(vt.id)==-1" @click="vt.qualityNum++">增加</a>
-                              </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      {{selectedGifts}}
-                </panel>
+                    <tr v-for="(vt,$index) in giftList">
+                      <td class="text-center">
+                        <ht-checkbox v-model="selectedGifts" :label="vt.id" :labelShow="false"></ht-checkbox>
+                        <!-- <input type="checkbox" class="cxpCheckBox" /> -->
+                      </td>
+                      <td class="text-center">{{vt.id }}</td>
+                      <td class="text-center">{{vt.name }} ({{vt.score||0 }}积分)</td>
+
+                      <td class="text-center">
+                        <a href="javascript:;" class="btn btn-sm btn-danger low" :disabled="selectedGifts.indexOf(vt.id)==-1" @click="vt.qualityNum>1&&vt.qualityNum--">减少</a>
+                        <input type="text" class="form-control cxpNum text-center" v-model="vt.qualityNum" style="display: inline;width: 50px;" />
+                        <a href="javascript:;" class="btn btn-sm btn-success up" :disabled="selectedGifts.indexOf(vt.id)==-1" @click="vt.qualityNum++">增加</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- {{selectedGifts}} -->
+              </panel>
               <div class="text-right">
                 <button type="button" class="btn btn-primary" @click="saveInfo()">保存信息</button>
               </div>
-                </ht-tab>
-              </ht-tabss> 
-             </form>
-        </div> 
+            </ht-tab>
+          </ht-tabss>
+        </form>
       </div>
     </div>
-    
+  </div>
+
 </template>
 <script>
   export default {
@@ -369,6 +373,7 @@
     data: function() {
       //组件内数据部分
       return {
+        isRead: false, //是否为详情
         giftList: [],
         goodsList: [],
         points: [], //点位信息
@@ -381,7 +386,10 @@
           phone: ""
         }, //公司信息
         shxydm: "12010819710326251X31", //社会信用代码
-        point: "009"
+        point: "009",
+        phoneArr: [''],
+        messageWord: "" //提示750信息
+
       }
     },
     mounted: function() {
@@ -397,11 +405,12 @@
     // 　◆◆　◆　◆◆◆◆◆◆◆　　◆◆◆　　◆◆　　◆◆　◆◆◆　　◆◆◆◆　　◆◆◆◆　　
     //方法
     methods: {
-      delPhone($index) {
-        let arr = this.companyInfo.phone.split(',');
-
-        arr.length > 1 && arr.splice($index, 1);
-        this.companyInfo.phone = arr.join(',')
+      /**
+       * 用于将外部数据转化为内部数据 
+       * @returns 
+       */
+      initData() {
+        //外部数据传递整体数据对象,然后获取
       },
       /**
        * 保存信息 
@@ -420,6 +429,9 @@
             num: element.qualityNum
           });
         });
+        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        console.log(giftResult);
+        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
       },
       /**
        * 获取公司信息 
@@ -449,26 +461,45 @@
           },
           error: function(response) {
             self.companyInfo = {
-              "id": 7,
-              "type": "1",
-              "shxydm": "12010819710326251X31",
-              "gsNsrsbh": "",
-              "dsNsrsbh": "",
-              "nsrmc": "天津市滨海新区汉沽广正五金经营部",
-              "address": "",
-              "zip": "",
-              "phone": "15922135158,18722097320,15902212707",
-              "contact": "小马同学",
-              "wechatOpenid": "oldsix",
-              "qqOpenid": null,
-              "mobilePhone": "15922135158",
-              "vipLevel": 1,
-              "regTime": 1501816506000,
-              "modifyTime": 1515560675000,
-              "source": null,
-              "jobs": "其他",
-              "ukeyId": null,
-              "djxh": null
+                "id": 7,
+                "type": "1",
+                "shxydm": "12010819710326251X31",
+                "gsNsrsbh": "",
+                "dsNsrsbh": "",
+                "nsrmc": "天津市滨海新区汉沽广正五金经营部",
+                "address": "天津市河东区东局子大道",
+                "zip": "173000",
+                "phone": "15922135158,18722097320,15902212707",
+                "contact": "小马同学",
+                "wechatOpenid": "oldsix",
+                "qqOpenid": null,
+                "mobilePhone": "15922135158",
+                "vipLevel": 1,
+                "regTime": 1501816506000,
+                "modifyTime": 1515560675000,
+                "source": null,
+                "jobs": "其他",
+                "ukeyId": null,
+                "djxh": null
+              }
+              //NOTE 此处电话需要操作
+            self.phoneArr = self.companyInfo.phone ? self.companyInfo.phone.split(',') : ['']
+          }
+        });
+
+        let customerstatusUrl = 'http://www.htyfw.com.cn:10078/customerstatus/qyjbxx';
+        $.ajax({
+          dataType: 'jsonp',
+          data: {
+            sh: id
+          },
+          jsonp: 'callback',
+          jsonpCallback: "jsonpCallBack",
+          url: customerstatusUrl,
+          success: function(data) {
+            if (data.bean > 0) {
+              // $("#backBuyMessage").html("");
+              self.messageWord = "该用户在纳税申报系统授权记录中存在，应该属于购买过750产品的用户，请谨慎销售！"
             }
           }
         });
@@ -525,6 +556,7 @@
 
         //   }
         // });
+
 
         self.goodsList = [{
           "id": "TEST-04",
@@ -1615,6 +1647,9 @@
 
           }
         }
+      },
+      phoneArr() {
+        this.companyInfo.phone = this.phoneArr.join(',');
       }
     }　　　　　　　　　　　　　　　　　　　　　　　　　
   }
@@ -1623,5 +1658,9 @@
   th,
   td {
     vertical-align: middle !important;
+  }
+  
+  .lead {
+    font-size: 21px;
   }
 </style>
