@@ -38,52 +38,93 @@
       </div>
     </div>
 
-    <!-- 电影 -->
-    <div class="section-two">
-      <h1 class="text-center" style="padding-top: 110px;color: #fff;">剧</h1>
-      <br><br>
-      <div class="container">
-        <div class="row">
-          <!-- 士兵突击 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img='http://om6fr85l4.bkt.clouddn.com/soldier.jpg' title="士兵突击" word="三多和成才就像一张纸的正反面，走过不同的路后都在成长。希望永远怀揣一颗赤子之心。"
-            />
+    
+    <!-- 其他 -->
+    <div class="section-four">
+        <h1 class="text-center" style="padding-top: 200px;color: #fff;">技能</h1>
+        <div class="container">
+          <div class="row" style="margin-top:30px;">
+  
+  
+  
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s1.jpg" title="HTML">
+                <ul class="lists">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s2.jpg" title="CSS">
+                <ul class="lists">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s3.jpg" title="JS">
+                <ul class="JS">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s4.jpg" title="NODE">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
           </div>
-          <!-- 釜山行 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/chumen.jpg" title="楚门的世界" word="就算你能摄影我的一切也无法在我脑内安装摄影机" />
+  
+          <div class="row" style="margin-top:30px;">
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s5.jpg" title="C#">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s6.jpg" title="SQL">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s7.jpg" title="IFRAME">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
+            <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s8.jpg" title="OTHER">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+            </div>
           </div>
-          <!-- 活着 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/live.jpg" title="活着" word="活着" />
-          </div>
-          <!-- 鬼子来了 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/devil.jpg" title="鬼子来了" word="可能比大部分抗日剧都接地气的多" />
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <!-- 烈日灼心 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/hot.jpg" title="烈日灼心" word="烈日灼心" />
-          </div>
-          <!-- 阳光灿烂的日子 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/day.jpg" title="阳光灿烂的日子" word="阳光灿烂的日子" />
-
-          </div>
-          <!-- 十二公民 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/twelve.jpg" title="十二公民" word="言语的力量" />
-
-          </div>
-          <!-- 美国队长 -->
-          <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/capation.jpg" title="美国队长" word="永远为了自由与公正" /> </div>
         </div>
       </div>
-    </div>
 
     <!-- 空白 -->
     <div class="section-three" style="height: 1300px;padding-left: 200px;position: relative;" id="expericnceBlock">
@@ -98,93 +139,53 @@
       </div>
     </div>
 
-    <!-- 其他 -->
-    <div class="section-four">
-      <h1 class="text-center" style="padding-top: 200px;color: #fff;">技能</h1>
-      <div class="container">
-        <div class="row" style="margin-top:30px;">
 
-
-
-          <div class="col-md-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s1.jpg" title="HTML">
-              <ul class="lists">
-                <li>熟练使用HTML构建页面功能</li>
-                <li>熟悉HTML5新功能和相关特性</li>
-                <li>正确使用语义化标签以及良好的代码规范</li>
-              </ul>
-            </skill>
+    <!-- 电影 -->
+    <div class="section-two">
+        <h1 class="text-center" style="padding-top: 110px;color: #fff;">剧</h1>
+        <br><br>
+        <div class="container">
+          <div class="row">
+            <!-- 士兵突击 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img='http://om6fr85l4.bkt.clouddn.com/soldier.jpg' title="士兵突击" word="三多和成才就像一张纸的正反面，走过不同的路后都在成长。希望永远怀揣一颗赤子之心。"
+              />
+            </div>
+            <!-- 釜山行 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/chumen.jpg" title="楚门的世界" word="就算你能摄影我的一切也无法在我脑内安装摄影机" />
+            </div>
+            <!-- 活着 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/live.jpg" title="活着" word="活着" />
+            </div>
+            <!-- 鬼子来了 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/devil.jpg" title="鬼子来了" word="可能比大部分抗日剧都接地气的多" />
+            </div>
           </div>
-          <div class="col-md-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s2.jpg" title="CSS">
-              <ul class="lists">
-                <li>熟练使用HTML构建页面功能</li>
-                <li>熟悉HTML5新功能和相关特性</li>
-                <li>正确使用语义化标签以及良好的代码规范</li>
-              </ul>
-            </skill>
-          </div>
-          <div class="col-md-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s3.jpg" title="JS">
-              <ul class="JS">
-                <li>熟练使用HTML构建页面功能</li>
-                <li>熟悉HTML5新功能和相关特性</li>
-                <li>正确使用语义化标签以及良好的代码规范</li>
-              </ul>
-            </skill>
-          </div>
-          <div class="col-md-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s4.jpg" title="NODE">
-            <ul class="NODE">
-              <li>熟练使用HTML构建页面功能</li>
-              <li>熟悉HTML5新功能和相关特性</li>
-              <li>正确使用语义化标签以及良好的代码规范</li>
-            </ul>
-          </skill>
-        </div>
-        </div>
-
-        <div class="row" style="margin-top:30px;">
-          <div class="col-md-3">
-              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s5.jpg" title="C#">
-                <ul class="NODE">
-                  <li>熟练使用HTML构建页面功能</li>
-                  <li>熟悉HTML5新功能和相关特性</li>
-                  <li>正确使用语义化标签以及良好的代码规范</li>
-                </ul>
-              </skill>
-          </div>
-          <div class="col-md-3">
-              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s6.jpg" title="SQL">
-                <ul class="NODE">
-                  <li>熟练使用HTML构建页面功能</li>
-                  <li>熟悉HTML5新功能和相关特性</li>
-                  <li>正确使用语义化标签以及良好的代码规范</li>
-                </ul>
-              </skill>
-          </div>
-          <div class="col-md-3">
-              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s7.jpg" title="IFRAME">
-                <ul class="NODE">
-                  <li>熟练使用HTML构建页面功能</li>
-                  <li>熟悉HTML5新功能和相关特性</li>
-                  <li>正确使用语义化标签以及良好的代码规范</li>
-                </ul>
-              </skill>
-          </div>
-          <div class="col-md-3">
-              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s8.jpg" title="OTHER">
-                <ul class="NODE">
-                  <li>熟练使用HTML构建页面功能</li>
-                  <li>熟悉HTML5新功能和相关特性</li>
-                  <li>正确使用语义化标签以及良好的代码规范</li>
-                </ul>
-              </skill>
+          <br>
+          <div class="row">
+            <!-- 烈日灼心 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/hot.jpg" title="烈日灼心" word="烈日灼心" />
+            </div>
+            <!-- 阳光灿烂的日子 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/day.jpg" title="阳光灿烂的日子" word="阳光灿烂的日子" />
+  
+            </div>
+            <!-- 十二公民 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/twelve.jpg" title="十二公民" word="言语的力量" />
+  
+            </div>
+            <!-- 美国队长 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <img-introduce img="http://om6fr85l4.bkt.clouddn.com/capation.jpg" title="美国队长" word="永远为了自由与公正" /> </div>
           </div>
         </div>
       </div>
-    </div>
-
     <!-- final -->
     <div class="section-five" style="height: 800px;">
     </div>
@@ -226,6 +227,12 @@
       }
     },
     mounted() {
+      if (navigator.userAgent.indexOf("Firefox") > 0) {
+        this.$alert(
+          "提示",
+          "Firefox浏览器下动画展示不完美"
+        );
+      }
       store.commit("changeBasicName");
       let self = this;
       //保证首屏可以完整显示
@@ -362,7 +369,7 @@
 
   .section-four {
     height: 1200px;
-    background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-5.jpg");
+    background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-7.jpg");
     background-attachment: scroll, scroll, scroll, fixed;
     background-position: bottom center, top center, top left, center center;
     background-repeat: repeat-x, repeat-x, repeat, no-repeat;
@@ -391,6 +398,7 @@
     background-size: 103% 100%;
     background-color: #2d3237;
     height: 450px;
+    margin-bottom: -20px;
   }
 
   .cover-enter-active {

@@ -6,7 +6,7 @@
         {{$route.params.name}}{{$route.params.name?',':""}}欢迎加入我们
       </h1>
       <!-- <music></music> -->
-      <img :src="require('./../assets/img/19696025--0--6c1b6af_r.jpg')" class="img-responsive">
+      <img src="http://om6fr85l4.bkt.clouddn.com/19696025--0--6c1b6af_r.jpg" class="img-responsive">
 
        
     </div>

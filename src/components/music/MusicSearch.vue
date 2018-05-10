@@ -71,7 +71,7 @@
               </div>
               <div style="padding:10px;">
                 <div v-show="!showLoad">
-                  <img :src='dataObj.songImg?dataObj.songImg:require("./../../assets/img/nigula.jpg")' class='img-responsive img-thumbnail' alt='头像'>
+                  <img :src='dataObj.songImg?dataObj.songImg:"http://om6fr85l4.bkt.clouddn.com/nigula.jpg"'  class='img-responsive img-thumbnail' alt='头像'>
                   <div class="caption">
                     <h4 v-show="dataObj.name">名称:{{dataObj.name}}</h4>
                     <h4 v-show="dataObj.name">作者:{{dataObj.author}}</h4>

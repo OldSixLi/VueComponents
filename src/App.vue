@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
           </button>
           <router-link to="/" class="navbar-brand icon img-href">
-            <img :src="require('./../src/assets/img/ma/horse.png')" class="img-title">
+            <img src="http://om6fr85l4.bkt.clouddn.com/horse.png" class="img-title">
           </router-link>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -69,7 +69,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li style="line-height: 50px;">{{name}}</li>
             <li>
-              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href img-git"><img :src="require('./assets/img/github.png')" class="img-title"> </a>
+              <a href="https://github.com/OldSixLi" target="_blank" style="padding:0;" class="img-href img-git"><img src="http://om6fr85l4.bkt.clouddn.com/github.png" class="img-title"> </a>
             </li>
           </ul>
         </div>
