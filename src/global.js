@@ -45,6 +45,7 @@ import Floor from './layout/cool/Floor.vue';
 import Notice from './layout/notice/Notice.vue';
 import LoadBtn from './test/LoadBtn.vue';
 import OpenIcon from './test/OpenIcon.vue';
+import Skill from './test/Skill.vue';
 import Load from './layout/Load.vue';
 
 //NOTE 指令
@@ -92,3 +93,4 @@ Vue.component('load', Load);
 Vue.component('ht-class', HtClass);
 Vue.component('ht-sell', HtSell);
 Vue.component('input-num', InputNum);
+Vue.component('skill', Skill);

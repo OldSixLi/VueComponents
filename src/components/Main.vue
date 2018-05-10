@@ -234,6 +234,16 @@
               </ht-tabs>
 
             </panel>
+            <panel title="技能展示">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/square3.jpg?imageView2/0/q/58|imageslim"
+              title="HTML">
+                  <ul class="lists">
+                      <li>精通HTML5完成页面构建</li>
+                      <li>语义化标签</li>
+                      <li>SEO实现以及良好的代码规范</li>
+                  </ul>
+              </skill>
+            </panel>
 
             <panel title="时间线组件">
               <div style="height:1100px;position: relative;">

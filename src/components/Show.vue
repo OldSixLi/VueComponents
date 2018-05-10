@@ -103,24 +103,90 @@
       <h1 class="text-center" style="padding-top: 200px;color: #fff;">技能</h1>
       <div class="container">
         <div class="row" style="margin-top:30px;">
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+
+
+
+          <div class="col-md-3">
+            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s1.jpg" title="HTML">
+              <ul class="lists">
+                <li>熟练使用HTML构建页面功能</li>
+                <li>熟悉HTML5新功能和相关特性</li>
+                <li>正确使用语义化标签以及良好的代码规范</li>
+              </ul>
+            </skill>
+          </div>
+          <div class="col-md-3">
+            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s2.jpg" title="CSS">
+              <ul class="lists">
+                <li>熟练使用HTML构建页面功能</li>
+                <li>熟悉HTML5新功能和相关特性</li>
+                <li>正确使用语义化标签以及良好的代码规范</li>
+              </ul>
+            </skill>
+          </div>
+          <div class="col-md-3">
+            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s3.jpg" title="JS">
+              <ul class="JS">
+                <li>熟练使用HTML构建页面功能</li>
+                <li>熟悉HTML5新功能和相关特性</li>
+                <li>正确使用语义化标签以及良好的代码规范</li>
+              </ul>
+            </skill>
+          </div>
+          <div class="col-md-3">
+            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s4.jpg" title="NODE">
+            <ul class="NODE">
+              <li>熟练使用HTML构建页面功能</li>
+              <li>熟悉HTML5新功能和相关特性</li>
+              <li>正确使用语义化标签以及良好的代码规范</li>
+            </ul>
+          </skill>
+        </div>
         </div>
 
         <div class="row" style="margin-top:30px;">
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
-          <div class="col-md-3"><img src="" v-random-img.square class="img-thumbnail img-responsive" alt=""></div>
+          <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s5.jpg" title="C#">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+          </div>
+          <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s6.jpg" title="SQL">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+          </div>
+          <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s7.jpg" title="IFRAME">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+          </div>
+          <div class="col-md-3">
+              <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s8.jpg" title="OTHER">
+                <ul class="NODE">
+                  <li>熟练使用HTML构建页面功能</li>
+                  <li>熟悉HTML5新功能和相关特性</li>
+                  <li>正确使用语义化标签以及良好的代码规范</li>
+                </ul>
+              </skill>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- final -->
     <div class="section-five" style="height: 800px;">
-
     </div>
 
     <!-- footer -->
@@ -147,7 +213,7 @@
     methods: {
       imgLoad(src) {
         //返回一个promise对象才可以调用then等函数
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
           var newImg = new Image();
           newImg.src = src;
           newImg.onload = () => {
@@ -198,8 +264,9 @@
     margin-left: -360px;
     z-index: 101;
   }
+
   /* latin */
-  
+
   @font-face {
     font-family: "Aldrich";
     font-style: normal;
@@ -207,7 +274,7 @@
     src: local("Aldrich Regular"), local("Aldrich-Regular"), url("./../assets/fonts/MCoTzAn-1s3IGyJMVacY3w.woff2") format("woff2");
     unicode-range: U+0000-00ff, U+0131, U+0152-0153, U+02bb-02bc, U+02c6, U+02da, U+02dc, U+2000-206f, U+2074, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
-  
+
   .first-page {
     margin-top: -20px;
     font: normal 18px/normal "brush-script-std", Helvetica, sans-serif;
@@ -222,11 +289,11 @@
     position: relative;
     text-align: center;
   }
-  
+
   #main {
     position: relative;
   }
-  
+
   #expericnceBlock:before,
   #main:before {
     content: "";
@@ -238,18 +305,18 @@
     background: rgba(224, 224, 224, 0.75);
     z-index: -1;
   }
-  
+
   .intro {
     padding-top: 100px;
   }
-  
+
   .h-welcome {
     width: 640px;
     margin: 0 auto;
     opacity: 0;
     text-align: right;
   }
-  
+
   .cover {
     position: fixed;
     left: 0;
@@ -260,13 +327,13 @@
     height: 100%;
     background-color: #000;
   }
-  
+
   .img-name {
     transform: skewX(160deg);
     margin-bottom: -50px;
     opacity: 0;
   }
-  
+
   .hor-block {
     width: 50%;
     transform: translateX(50%);
@@ -275,16 +342,16 @@
     border-left: none;
     border-right: none;
   }
-  
+
   .img-logo {
     opacity: 1;
     animation: mymove 1s forwards;
   }
-  
+
   .h3-logo {
     animation: mymoves 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s forwards;
   }
-  
+
   .section-two {
     height: 1200px;
     background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-3.jpg");
@@ -292,7 +359,7 @@
     background-position: bottom center, top center, top left, center center;
     background-repeat: repeat-x, repeat-x, repeat, no-repeat;
   }
-  
+
   .section-four {
     height: 1200px;
     background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-5.jpg");
@@ -300,7 +367,7 @@
     background-position: bottom center, top center, top left, center center;
     background-repeat: repeat-x, repeat-x, repeat, no-repeat;
   }
-  
+
   .project {
     position: relative;
     left: 50%;
@@ -317,37 +384,39 @@
     text-overflow: clip;
     text-shadow: 0 1px 0 rgb(128, 141, 147), -1px 0 0 rgb(205, 210, 213), -1px 2px 0 rgb(128, 141, 147), -2px 1px 0 rgb(205, 210, 213), -2px 3px 0 rgb(128, 141, 147), -3px 2px 0 rgb(205, 210, 213), -3px 4px 0 rgb(128, 141, 147), -4px 3px 0 rgb(205, 210, 213), -4px 5px 0 rgb(128, 141, 147), -5px 4px 0 rgb(205, 210, 213), -5px 6px 0 rgb(128, 141, 147), -6px 5px 0 rgb(205, 210, 213), -6px 7px 0 rgb(128, 141, 147), -7px 6px 0 rgb(205, 210, 213), -7px 8px 0 rgb(128, 141, 147), -8px 7px 0 rgb(205, 210, 213);
   }
-  
+
   .footer {
-    background: url('http://om6fr85l4.bkt.clouddn.com/showfooter.png');
+    /* background: url('http://om6fr85l4.bkt.clouddn.com/showfooter.png'); */
     background-repeat: no-repeat;
     background-size: 103% 100%;
+    background-color: #2d3237;
     height: 450px;
   }
-  
+
   .cover-enter-active {
     /* 动画过渡设置 */
     transition: all 0.8s;
   }
-  
+
   .cover-leave-active {
     /* 动画过渡设置 */
     transition: all 1.9s;
   }
-  
+
   .cover-leave,
   .cover-enter-to {
     /* 终止,动画已完成 */
     opacity: 1;
   }
-  
+
   .cover-leave-to,
   .cover-enter {
     /* 起始,动画刚开始*/
     opacity: 0;
   }
+
   /* 图片动画效果 */
-  
+
   @keyframes mymove {
     from {
       transform: translateY(-500px) skewX(160deg);
@@ -356,7 +425,7 @@
       transform: translateY(0) skewX(160deg);
     }
   }
-  
+
   @-moz-keyframes mymove {
     from {
       transform: translateY(-500px) skewX(160deg);
@@ -365,7 +434,7 @@
       transform: translateY(0) skewX(160deg);
     }
   }
-  
+
   @-webkit-keyframes mymove {
     from {
       transform: translateY(-500px) skewX(160deg);
@@ -374,7 +443,7 @@
       transform: translateY(0) skewX(160deg);
     }
   }
-  
+
   @-o-keyframes mymove {
     from {
       transform: translateY(-500px) skewX(160deg);
@@ -383,8 +452,9 @@
       transform: translateY(0) skewX(160deg);
     }
   }
+
   /* 段落动画效果 */
-  
+
   @keyframes mymoves {
     from {
       opacity: 0;
@@ -395,7 +465,7 @@
       opacity: 1;
     }
   }
-  
+
   @-moz-keyframes mymoves {
     from {
       opacity: 0;
@@ -406,7 +476,7 @@
       opacity: 1;
     }
   }
-  
+
   @-webkit-keyframes mymoves {
     from {
       opacity: 0;
@@ -417,7 +487,7 @@
       opacity: 1;
     }
   }
-  
+
   @-o-keyframes mymoves {
     from {
       opacity: 0;

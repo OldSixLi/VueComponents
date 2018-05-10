@@ -28,6 +28,11 @@ export default {
 };
 </script>
 <style scoped>
+  .content img{
+    
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%);
+  }
 .contents {
   display: inline-block;
   min-height: 200px;
