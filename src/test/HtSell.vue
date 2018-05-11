@@ -1,33 +1,39 @@
 <template>
   <div class="container">
-    <div class="row">
+    <!--
+        '##:::::'##:'########::'####:'########:'########:'####:'##::: ##:'########::'#######::
+         ##:'##: ##: ##.... ##:. ##::... ##..:: ##.....::. ##:: ###:: ##: ##.....::'##.... ##:
+         ##: ##: ##: ##:::: ##:: ##::::: ##:::: ##:::::::: ##:: ####: ##: ##::::::: ##:::: ##:
+         ##: ##: ##: ########::: ##::::: ##:::: ######:::: ##:: ## ## ##: ######::: ##:::: ##:
+         ##: ##: ##: ##.. ##:::: ##::::: ##:::: ##...::::: ##:: ##. ####: ##...:::: ##:::: ##:
+         ##: ##: ##: ##::. ##::: ##::::: ##:::: ##:::::::: ##:: ##:. ###: ##::::::: ##:::: ##:
+        . ###. ###:: ##:::. ##:'####:::: ##:::: ########:'####: ##::. ##: ##:::::::. #######::
+        :...::...:::..:::::..::....:::::..:::::........::....::..::::..::..:::::::::.......:::
+        -->
+    <div class="row" v-show="currentPanel=='new'">
       <div class="col-md-12 col-sm-12">
         <h2 class="text-center">产品销售</h2>
-        <!-- 模块内容 -->
+        
+        
         <form class="form-horizontal" method="post" role="form">
           <ht-tabss active="点位选择">
-            <!--  ◆　　　　　　　　　◆　　　◆　　　　　　　◆　　　　　◆　　　　　　　◆　◆◆◆◆◆◆　　
-                　　　　　　◆◆◆◆◆◆　　　　◆　　　　◆　　　　　　　◆　　◆　◆　　　　　　　◆　　◆　　　◆　　
-                　　　　　　◆　　　　　　　　◆　　　　　　　　　　　　　　　　◆◆◆◆◆　　　　　◆　　　◆　◆　　　
-                　　　　　　◆　　　　　　　　◆　◆◆◆◆◆◆◆◆　　　　　　◆　　◆　　　　　◆◆◆◆　　　◆　　　　
-                　　◆◆◆◆◆◆◆◆◆　　　◆◆　　　　　　　　　　　◆◆◆　　　　◆　　　　　　　◆　　　◆　◆　　　
-                　　◆　　　　　　　◆　　　　◆　　◆　　　　◆　　　　　◆　◆◆◆◆◆◆◆　　　　◆　◆◆　◆　◆◆　
-                　　◆　　　　　　　◆　　　　◆　　◆　　　　◆　　　　　◆　　　◆　◆　　　　　　◆◆　　　◆　　　　
-                　　◆　　　　　　　◆　　　　◆　　　◆　　　◆　　　　　◆　　　◆　◆　　　　◆◆◆　　◆◆◆◆◆　　
-                　　◆◆◆◆◆◆◆◆◆　　　　◆　　　◆　　◆　　　　　　◆　　◆　　◆　◆　　　　◆　　　　◆　　　　
-                　　　　　　　　　　　　　　　◆　　　◆　　◆　　　　　　◆　◆　　　　◆◆　　　　◆　◆◆◆◆◆◆◆　
-                　　◆　◆　　◆　　◆　　　　◆　　　　　◆　　　　　　◆　◆　　　　　　　　　　　◆　　　　◆　　　　
-                　◆　　　◆　　◆　　◆　　　◆　◆◆◆◆◆◆◆◆　　◆　　　◆◆◆◆◆◆◆　　　◆◆　　　　◆　　　　  -->
-
+            <!--
+           '########:::'#######::'####:'##::: ##:'########:
+            ##.... ##:'##.... ##:. ##:: ###:: ##:... ##..::
+            ##:::: ##: ##:::: ##:: ##:: ####: ##:::: ##::::
+            ########:: ##:::: ##:: ##:: ## ## ##:::: ##::::
+            ##.....::: ##:::: ##:: ##:: ##. ####:::: ##::::
+            ##:::::::: ##:::: ##:: ##:: ##:. ###:::: ##::::
+            ##::::::::. #######::'####: ##::. ##:::: ##::::
+           ..::::::::::.......:::....::..::::..:::::..:::::
+           -->
             <ht-tab title="点位选择">
               <panel title="点位选择">
-                {{point}}
                 <div class="form-group" style="margin-top:15px;">
                   <div class="col-sm-2 text-right">
                     <label for="teacherId" class="control-label">点位选择</label>
                   </div>
                   <div class="col-sm-10">
-
                     <ht-select name="sds" v-model="point">
                       <option value="">请选择</option>
                       <option v-for="x in points" :value="x.id">{{x.name}}</option>
@@ -36,20 +42,16 @@
                 </div>
               </panel>
             </ht-tab>
-
-            <!--  
-                　　　　　　◆　　　　　　　　　　　　◆　　　　　　　　　◆　　　◆　　　　　　　　　　◆　　　　　　　
-                　◆◆◆◆◆◆◆◆◆◆◆　　　　　　　　◆　　　　　　　　◆　　　　◆　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　◆　　◆　　　　　　◆　　　　◆◆◆◆◆◆◆◆◆　　　◆　◆◆◆◆◆◆◆◆　　　◆　　　　　　　◆　　
-                　　　　◆◆◆◆◆◆　　　　　　◆　　　　　　　◆　　　◆　　　　　　　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　　◆　　　　　◆　　　　　　◆　　　　　　　◆　　◆◆　　◆◆◆◆◆◆　　　　◆　　　　　　　◆　　
-                　　◆　◆　　　◆　　　　　　　◆　　　　　　　◆　　　◆　　　　　　　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　　　　◆◆◆　　　　　　　　◆◆◆◆◆◆◆◆◆　　　◆　　◆◆◆◆◆◆　　　　◆　　　　　　　◆　　
-                　◆◆◆◆　　　◆◆◆◆　　　　◆　　　　　　　◆　　　◆　　　　　　　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　　◆◆◆◆◆◆◆　　　　　　◆　　　　　　　　　　　◆　　◆◆◆◆◆◆　　　　　　　　◆　　　　　　
-                　　　◆　　　　　◆　　　　　◆　　　　　　　　　　　　◆　　◆　　　　◆　　　　◆　◆　　◆　　◆　　
-                　　　◆◆◆◆◆◆◆　　　　　◆　　　　　　　　　　　　◆　　◆◆◆◆◆◆　　　　◆　◆　　　　◆　◆　
-                　　　◆　　　　　◆　　　　◆　　　　　　　　　　　　　◆　　◆　　　　◆　　　◆　　　◆◆◆◆◆　◆　 -->
+            <!--
+            '##::::'##::'######::'########:'########::'####:'##::: ##:'########::'#######::
+             ##:::: ##:'##... ##: ##.....:: ##.... ##:. ##:: ###:: ##: ##.....::'##.... ##:
+             ##:::: ##: ##:::..:: ##::::::: ##:::: ##:: ##:: ####: ##: ##::::::: ##:::: ##:
+             ##:::: ##:. ######:: ######::: ########::: ##:: ## ## ##: ######::: ##:::: ##:
+             ##:::: ##::..... ##: ##...:::: ##.. ##:::: ##:: ##. ####: ##...:::: ##:::: ##:
+             ##:::: ##:'##::: ##: ##::::::: ##::. ##::: ##:: ##:. ###: ##::::::: ##:::: ##:
+            . #######::. ######:: ########: ##:::. ##:'####: ##::. ##: ##:::::::. #######::
+            :.......::::......:::........::..:::::..::....::..::::..::..:::::::::.......:::
+            -->
             <ht-tab title="客户信息">
               <panel title="客户信息">
                 <div class="form-group hidden">
@@ -158,22 +160,18 @@
               </panel>
 
             </ht-tab>
-            <!--   　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-                　　　　　◆　　　　　　　　　　◆◆◆◆◆◆◆　　　　　　◆　　　◆　　　　　　　　　　◆　　　　　　　
-                　　　　　　◆　　　　　　　　　◆　　　　　◆　　　　　　◆　　　　◆　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　◆◆◆◆◆◆◆◆◆◆　　　　◆　　　　　◆　　　　　◆　◆◆◆◆◆◆◆◆　　　◆　　　　　　　◆　　
-                　　　　　　　　　　　　　　　　◆　　　　　◆　　　　　◆　　　　　　　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　　　◆　　　　◆　　　　　　◆◆◆◆◆◆◆　　　　◆◆　　◆◆◆◆◆◆　　　　◆　　　　　　　◆　　
-                　　　　　◆　　◆　　　　　　　　　　　　　　　　　　　◆　　　　　　　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　◆◆◆◆◆◆◆◆◆◆　　◆◆◆◆◆　◆◆◆◆◆　　　◆　　◆◆◆◆◆◆　　　　◆　　　　　　　◆　　
-                　　◆　　　　　　　　　　　◆　　　◆　◆　　　◆　　　◆　　　　　　　　　　　　◆◆◆◆◆◆◆◆◆　　
-                　　◆　　　　　　　　　　　◆　　　◆　◆　　　◆　　　◆　　◆◆◆◆◆◆　　　　　　　　◆　　　　　　
-                　　◆　　　　　　　　　　　◆　　　◆　◆　　　◆　　　◆　　◆　　　　◆　　　　◆　◆　　◆　　◆　　
-                　　◆　　　　　　　　　　　◆◆◆◆◆　◆◆◆◆◆　　　◆　　◆◆◆◆◆◆　　　　◆　◆　　　　◆　◆　
-                　◆　　　　　　　　　　　　◆　　　◆　◆　　　◆　　　◆　　◆　　　　◆　　　◆　　　◆◆◆◆◆　◆　
-                　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 -->
-            <ht-tab title="产品信息">
 
+            <!--
+            :'######::::'#######:::'#######::'########:::'######::
+            '##... ##::'##.... ##:'##.... ##: ##.... ##:'##... ##:
+             ##:::..::: ##:::: ##: ##:::: ##: ##:::: ##: ##:::..::
+             ##::'####: ##:::: ##: ##:::: ##: ##:::: ##:. ######::
+             ##::: ##:: ##:::: ##: ##:::: ##: ##:::: ##::..... ##:
+             ##::: ##:: ##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:
+            . ######:::. #######::. #######:: ########::. ######::
+            :......:::::.......::::.......:::........::::......:::
+            -->
+            <ht-tab title="产品信息">
               <panel title="产品信息">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-xs-2 control-label">产品名称</label>
@@ -184,7 +182,6 @@
                     </ht-select>
                   </div>
                 </div>
-
                 <table class="table table-hover text-center">
                   <thead>
                     <tr>
@@ -214,33 +211,9 @@
                       </td>
                       <td>
                         <a class="btn btn-sm btn-danger" href="javascript:;" onclick="delProduct(this)" @click="deleteSelectedGoods($index)">删除</a>
-                        <!-- <input type='hidden' value='{{vt.alone}}'>
-                                      <input type='hidden' value='{{vt.orderGoods.spbm}}'>
-                                      <input type='hidden' value='{{vt.onlyCompany}}' > -->
+
                       </td>
                     </tr>
-                    <!-- <c:forEach items="${buy_goods}" var="vt">
-                                  <tr>
-                                    <td>${vt.orderGoods.goodsId}</td>
-                                    <td>${vt.goodsName}</td>
-                                    <td>${vt.orderGoods.printName}</td>
-                                    <td><input class='form-control  text-center' value='${vt.orderGoods.quantity}' type='text' readonly></td>
-                                    <td>
-                                      <input class="form-control  text-center price" onkeyup="priceChange(this)" onblur="priceBlur(this)" value="<fmt:formatNumber  value=" ${vt.orderGoods.price} " type="number " pattern="0.00 " />" type="text" 
-                                      />
-                                    </td>
-                                    <td>${vt.orderGoods.sl*100}%</td>
-                                    <td class="tdTotle">
-                                      <fmt:formatNumber value="${vt.orderGoods.amount}" type="number" pattern="0.00" />
-                                    </td>
-                                    <td>
-                                      <a class="btn btn-sm btn-danger" href="javascript:;" onclick="delProduct(this)">删除</a>
-                                      <input type='hidden' value='${vt.alone}'>
-                                      <input type='hidden' value='${vt.orderGoods.spbm}'>
-                                      <input type='hidden' value='${vt.onlyCompany}'>
-                                    </td>
-                                  </tr>
-                                </c:forEach> -->
                   </tbody>
                   <tfoot id="right">
                     <tr>
@@ -249,11 +222,6 @@
                         <span id="totlePrice">{{sumPrice}}</span>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                   </tfoot>
-                  <!-- <tfoot id="wrong">
-                                <tr>
-                                  <td class="text-center text-danger" colspan="8">产品价格输入有误</td>
-                                </tr>
-                              </tfoot> -->
                 </table>
 
                 <div>
@@ -262,21 +230,17 @@
                 {{selectedGoods}}
               </panel>
             </ht-tab>
-            <!-- 
-                                　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-                　　　◆　◆◆◆◆◆◆◆　　　◆　　　　　◆　　　　　　　◆◆◆◆◆◆◆　　　
-                　　　◆　◆　　　　　◆　　　◆◆　◆　　◆　　◆　　　　◆　　　　　◆　　　
-                　　◆　　◆　　　　　◆　　◆　　　　◆　◆　◆　　　　　◆　　　　　◆　　　
-                　　◆　　◆　　　　　◆　　　　　　　　　◆　　　　　　　◆　　　　　◆　　　
-                　◆◆　　◆◆◆◆◆◆◆　　◆◆◆　◆◆◆◆◆◆◆　　　　◆◆◆◆◆◆◆　　　
-                　　◆　　　　　◆　　　　　　◆　　◆　　　　　◆　　　　　　　　　　　　　　
-                　　◆　　◆　　◆　　　　　　◆　　◆◆◆◆◆◆◆　　◆◆◆◆◆　◆◆◆◆◆　
-                　　◆　　◆　　◆◆◆◆　　◆◆◆　◆　　　　　◆　　◆　　　◆　◆　　　◆　
-                　　◆　　◆　　◆　　　　　　◆　　◆◆◆◆◆◆◆　　◆　　　◆　◆　　　◆　
-                　　◆　　◆　　◆　　　　　　◆　　◆　　　　　◆　　◆　　　◆　◆　　　◆　
-                　　◆　◆　◆　◆　　　　　　◆◆　◆　　　　　◆　　◆◆◆◆◆　◆◆◆◆◆　
-                　　◆◆　　　◆◆◆◆◆　　　◆　　◆　　　　◆◆　　◆　　　◆　◆　　　◆　
-                　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 -->
+
+            <!--
+            :'######::'########:'##::: ##:'########:::'######::::'#######:::'#######::'########::
+            '##... ##: ##.....:: ###:: ##: ##.... ##:'##... ##::'##.... ##:'##.... ##: ##.... ##:
+             ##:::..:: ##::::::: ####: ##: ##:::: ##: ##:::..::: ##:::: ##: ##:::: ##: ##:::: ##:
+            . ######:: ######::: ## ## ##: ##:::: ##: ##::'####: ##:::: ##: ##:::: ##: ##:::: ##:
+            :..... ##: ##...:::: ##. ####: ##:::: ##: ##::: ##:: ##:::: ##: ##:::: ##: ##:::: ##:
+            '##::: ##: ##::::::: ##:. ###: ##:::: ##: ##::: ##:: ##:::: ##: ##:::: ##: ##:::: ##:
+            . ######:: ########: ##::. ##: ########::. ######:::. #######::. #######:: ########::
+            :......:::........::..::::..::........::::......:::::.......::::.......:::........:::
+            -->
             <ht-tab title="促销品信息">
               <panel title="促销品信息">
                 <table class="table table-hover">
@@ -289,41 +253,7 @@
                     </tr>
                   </thead>
                   <tbody id="giftList">
-                    <!-- <c:forEach items="${buy_gift}" var="vt">
-                            <tr>
-                              <td class="text-center"><input type="checkbox" class="cxpCheckBox" checked/> </td>
-                              <td class="text-center">${vt.gift.giftId }</td>
-                              <c:if test="${empty vt.score }">
-                                <td class="text-center">${vt.giftName } (0积分)</td>
-                              </c:if>
-                              <c:if test="${not empty vt.score }">
-                                <td class="text-center">${vt.giftName } (${vt.score}积分)</td>
-                              </c:if>
-                              <td class="text-center">
-                                <a href="javascript:;" class="btn btn-sm btn-danger low" onclick="reduce(this)">减少</a>
-                                <input type="text" class="form-control cxpNum text-center" value="${vt.gift.quantity}" onkeyup="giftChange(this)"></input>
-                                <a href="javascript:;" class="btn btn-sm btn-success up" onclick="addCXP(this)">增加</a>
-                              </td>
-                            </tr>
-                          </c:forEach>
-                          
-                          <c:forEach items="${gifts}" var="vt">
-                            <tr>
-                              <td class="text-center"><input type="checkbox" class="cxpCheckBox" /> </td>
-                              <td class="text-center">${vt.id }</td>
-                              <c:if test="${empty vt.score }">
-                                <td class="text-center">${vt.name } (0积分)</td>
-                              </c:if>
-                              <c:if test="${not empty vt.score }">
-                                <td class="text-center">${vt.name } (${vt.score}积分)</td>
-                              </c:if>
-                              <td class="text-center">
-                                <a href="javascript:;" class="btn btn-sm btn-danger low disabled" onclick="reduce(this)">减少</a>
-                                <input type="text" class="form-control cxpNum text-center" value="1" onkeyup="giftChange(this)" readonly/>
-                                <a href="javascript:;" class="btn btn-sm btn-success up disabled" onclick="addCXP(this)">增加</a>
-                              </td>
-                            </tr>
-                          </c:forEach> -->
+
 
                     <tr v-for="(vt,$index) in giftList">
                       <td class="text-center">
@@ -351,26 +281,202 @@
         </form>
       </div>
     </div>
+
+    <!--
+    :'#######::'########::'########::'########:'########::'####:'##::: ##:'########::'#######::
+    '##.... ##: ##.... ##: ##.... ##: ##.....:: ##.... ##:. ##:: ###:: ##: ##.....::'##.... ##:
+     ##:::: ##: ##:::: ##: ##:::: ##: ##::::::: ##:::: ##:: ##:: ####: ##: ##::::::: ##:::: ##:
+     ##:::: ##: ########:: ##:::: ##: ######::: ########::: ##:: ## ## ##: ######::: ##:::: ##:
+     ##:::: ##: ##.. ##::: ##:::: ##: ##...:::: ##.. ##:::: ##:: ##. ####: ##...:::: ##:::: ##:
+     ##:::: ##: ##::. ##:: ##:::: ##: ##::::::: ##::. ##::: ##:: ##:. ###: ##::::::: ##:::: ##:
+    . #######:: ##:::. ##: ########:: ########: ##:::. ##:'####: ##::. ##: ##:::::::. #######::
+    :.......:::..:::::..::........:::........::..:::::..::....::..::::..::..:::::::::.......:::
+    -->
+    <div class="row" v-show="currentPanel=='order'">
+        <div class="col-md-12 ">
+
+          <h1 class="text-center">确认订单</h1>
+          <panel title="确认订单">
+            <div class="menuContent">
+              <div class="menuSmellTitle">
+                  纳税人名称
+                </div>
+                <p>
+                  &nbsp;&nbsp;&nbsp;{{orderInfo.info.nsrmc}}
+                </p>
+                  <div class="menuSmellTitle">
+                  产品信息
+                </div>
+              	<table class="table table-hover text-center">
+                    <thead>
+                    <tr>
+                      <th class="text-center">产品ID</th>
+                      <th class="text-center">产品名称</th>
+                      <th class="text-center">打印名称</th>
+                      <th class="text-center">数量</th>
+                      <th class="text-center">含税价</th>
+                      <th class="text-center">税率</th>
+                      <th class="text-center">单价</th>
+                    </tr> </thead>
+                      <tbody>
+                      <tr v-for="x in orderInfo.goods" v-if="orderInfo.goods.length>0">
+                        <td class="text-center">{{x.orderGoods.goodsId}}</td>
+                        <td class="text-center">{{x.goodsName}}</td>
+                          <td class="text-center">{{x.orderGoods.printName}}</td>
+                        <td class="text-center">{{x.orderGoods.quantity}}</td>
+                        <td class="text-center">{{x.orderGoods.price}}</td>
+                        <td class="text-center">{{x.orderGoods.sl*100}}%</td>
+                        <td class="text-center">{{x.orderGoods.amount}}</td>
+                      </tr>
+                      <tr v-if="orderInfo.goods.length==0">
+                          <td class="text-center" colspan="10">暂无数据</td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="menuSmellTitle">
+                    元件
+                  </div>
+                  <table class="table table-hover text-center">
+                      <thead>
+                      <tr>
+                        <th class="text-center">元件名</th>
+                        <th class="text-center">类型</th>
+                        <th class="text-center">数量</th>
+                        <th class="text-center">模块</th>
+                        <th class="text-center">服务次数</th>
+                        <th class="text-center">服务期限(月)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-if="orderInfo.items.length==0">
+                          <td class="text-center" colspan="10">暂无数据</td> 
+                        </tr>
+                        <tr v-for="item in orderInfo.items" v-if="orderInfo.items.length>0">
+                            <td class="text-center">${item.goodsItem.itemName}</td>
+                            <td class="text-center">
+                            <c:if test="${item.goodsItem.itemType eq '1'}">
+                              硬件
+                            </c:if>
+                            <c:if test="${item.goodsItem.itemType eq '2'}">
+                              软件
+                            </c:if>
+                            <c:if test="${item.goodsItem.itemType eq '3'}">
+                              服务
+                            </c:if>
+                            </td>
+                            <td class="text-center">
+                              <c:if test="${item.goodsItem.itemType eq '2'}">
+                                -
+                              </c:if>
+                              <c:if test="${item.goodsItem.itemType eq '3'}">
+                                -
+                              </c:if>
+                              <c:if test="${item.goodsItem.itemType eq '1'}">
+                                ${item.num}
+                              </c:if>
+                            </td>
+                            <td class="text-center">${item.moduls}</td>
+                            <td class="text-center">
+                              <c:if test="${item.numOfService >= 0}">
+                                ${item.numOfService }
+                              </c:if>
+                              <c:if test="${item.numOfService < 0}">
+                                -
+                              </c:if>
+                            </td>
+                            <td class="text-center">
+                              <c:if test="${item.months >= 0}">
+                                ${item.showMonths}
+                              </c:if>
+                              <c:if test="${item.months < 0}">
+                                -
+                              </c:if>
+                            </td>
+                          </tr>
+                      </tbody>
+                      <!-- <c:forEach items="${items}" var="item"> -->
+                       
+                      <!-- </c:forEach> -->
+                    
+                  </table>
+
+                  <div class="menuSmellTitle">
+                      促销品
+              </div>
+              <div class="form-horizontal">
+              <c:forEach items="${gifts}" var="gift">
+                <p v-for="x in orderInfo.gifts">
+                {{x.giftName}}&nbsp;X&nbsp;{{x.gift.quantity}}&nbsp;&nbsp;&nbsp;
+              </p>
+              </c:forEach>
+              </div>
+              <br />
+
+
+              </div>
+          </panel>
+          <div class="row">
+          
+          <div class="col-xs-12 text-center">
+                  <h4 v-if="orderInfo.isExist ==='false'||orderInfo.isExist ===false">
+                    <strong class="text-danger">该客户在一年之内存在产品相同的订单</strong>
+                  </h4>
+              </div>
+
+              <div class="col-xs-12 text-center">
+                  <h4><strong class="text-danger">{{orderInfo.flag}}</strong></h4>
+                </div></div>
+          <div class="row">
+              <div class="col-xs-12">
+                <div class="pull-left">
+                </div>
+                <div class="pull-right">
+                  <p class="money">总计：
+                    {{orderInfo.order.amount.toFixed(2) }}元</p><br/>
+                  <p class="money">积分：
+                   {{orderInfo.order.totalScore||0}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="flagAgreement" name="flagAgreement" value="1">
+            <input type="hidden" name="id" value="${order.id}">
+            <div class="row text-right">
+              <div class="col-xs-12">
+                <a id="btn_save" class="btn btn-primary " onclick="submits()">确认并提交</a> &nbsp;&nbsp;
+                <a class="btn btn-danger" >取消</a>
+              </div>
+            </div> 
+
+      </div> 
+    </div>
   </div>
 
 </template>
-<script>
+<script> 
+
+  //  ██████╗ ██████╗ ██████╗ ███████╗
+  // ██╔════╝██╔═══██╗██╔══██╗██╔════╝
+  // ██║     ██║   ██║██║  ██║█████╗
+  // ██║     ██║   ██║██║  ██║██╔══╝
+  // ╚██████╗╚██████╔╝██████╔╝███████╗
+  //  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
   export default {
     name: "HtSell",
-    props: {
-      //对外获取的数据
-      // 点阵字 http://www.orz6.com/lattice.aspx 
+    props: { 
     },
-    // 　◆◆◆◆　　　　◆　　　◆◆◆◆◆　　　◆　　　　
-    // 　　◆　　◆　　　◆　　　◆　◆　◆　　　◆　　　　
-    // 　　◆　　◆　　　◆◆　　　　◆　　　　　◆◆　　　
-    // 　　◆　　◆　　◆　◆　　　　◆　　　　◆　◆　　　
-    // 　　◆　　◆　　◆　◆　　　　◆　　　　◆　◆　　　
-    // 　　◆　　◆　　◆◆◆◆　　　◆　　　　◆◆◆◆　　
-    // 　　◆　　◆　　◆　　◆　　　◆　　　　◆　　◆　　
-    // 　◆◆◆◆　　◆◆　　◆◆　◆◆◆　　◆◆　　◆◆　
+    /*
+    '########:::::'###::::'########::::'###::::
+     ##.... ##:::'## ##:::... ##..::::'## ##:::
+     ##:::: ##::'##:. ##::::: ##:::::'##:. ##::
+     ##:::: ##:'##:::. ##:::: ##::::'##:::. ##:
+     ##:::: ##: #########:::: ##:::: #########:
+     ##:::: ##: ##.... ##:::: ##:::: ##.... ##:
+     ########:: ##:::: ##:::: ##:::: ##:::: ##:
+    ........:::..:::::..:::::..:::::..:::::..::
+    */
     //数据部分 
-    data: function() {
+    data: function () {
       //组件内数据部分
       return {
         isRead: false, //是否为详情
@@ -388,21 +494,23 @@
         shxydm: "12010819710326251X31", //社会信用代码
         point: "009",
         phoneArr: [''],
-        messageWord: "" //提示750信息
+        messageWord: "", //提示750信息
+        currentPanel:"order",//当前展示订单页面还是展示信息填写页面
+        orderInfo:JSON.parse('{"success":true,"message":null,"bean":{"flag":null,"order":{"id":"20180511142322471000000000000032","customerId":8806,"time":1526026473646,"salesman":"admin","amount":2552.0,"state":"N","flagPay":"N","payType":null,"flagInvoice":null,"flagAgreement":null,"remarks":null,"pointId":"001","sendStatus":null,"ly":"XSXT","totalScore":0,"remarksInvoice":null},"isExist":false,"items":[],"goods":[{"orderGoods":{"id":1111112169,"orderId":"20180511142322471000000000000032","goodsId":"KC_20170830_4","quantity":1,"price":0.01,"amount":0.01,"sl":0.17,"spbm":"1060301029900000000","printName":"浩天财税通-通用财务系统","isRenew":"Y","score":0},"goodsName":"测试商品1","gift":null,"giftName":null,"score":null,"alone":null,"yj":null,"onlyCompany":null}],"gifts":[{"orderGoods":null,"goodsName":null,"gift":{"id":11838,"orderId":"20180511142322471000000000000032","giftId":"001","quantity":1},"giftName":"测试促销品1","score":null,"alone":null,"yj":null,"onlyCompany":null},{"orderGoods":null,"goodsName":null,"gift":{"id":11839,"orderId":"20180511142322471000000000000032","giftId":"002","quantity":1},"giftName":"测试促销品22","score":null,"alone":null,"yj":null,"onlyCompany":null}],"isAgree":false,"info":{"id":8806,"type":"1","shxydm":"120117777303334","gsNsrsbh":"","dsNsrsbh":"","nsrmc":"kkkk","address":"的撒啊萨达大事的撒打算","zip":"123123","phone":"15902212707","contact":"联系人","wechatOpenid":"123","qqOpenid":null,"mobilePhone":"15902212707","vipLevel":1,"regTime":1510802155000,"modifyTime":1526026477791,"source":null,"jobs":"公司负责人","ukeyId":null,"djxh":null}}}').bean,
 
       }
     },
-    mounted: function() {
+    mounted: function () {
       //组件生成时调用
     },
-    // 　◆◆◆　◆◆◆◆◆◆◆◆　◆◆◆◆◆　◆◆　　◆◆　◆◆◆　　◆◆◆◆　　　◆◆◆◆　
-    // 　　◆◆　◆◆　　◆　　◆　◆　◆　◆　　◆　　◆　◆　　　◆　　◆　　◆　◆　　　◆　
-    // 　　◆◆　◆◆　　◆　◆　　　　◆　　　　◆　　◆　◆　　　◆　　◆　　◆　◆　　　　　
-    // 　　◆◆　◆◆　　◆◆◆　　　　◆　　　　◆◆◆◆　◆　　　◆　　◆　　◆　　◆◆　　　
-    // 　　◆　◆　◆　　◆　◆　　　　◆　　　　◆　　◆　◆　　　◆　　◆　　◆　　　　◆　　
-    // 　　◆　◆　◆　　◆　　　　　　◆　　　　◆　　◆　◆　　　◆　　◆　　◆　　　　　◆　
-    // 　　◆　◆　◆　　◆　　◆　　　◆　　　　◆　　◆　◆　　　◆　　◆　　◆　◆　　　◆　
-    // 　◆◆　◆　◆◆◆◆◆◆◆　　◆◆◆　　◆◆　　◆◆　◆◆◆　　◆◆◆◆　　◆◆◆◆　　
+    // '##::::'##:'########:'########:'##::::'##::'#######::'########:::'######::
+    //  ###::'###: ##.....::... ##..:: ##:::: ##:'##.... ##: ##.... ##:'##... ##:
+    //  ####'####: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##:::: ##: ##:::..::
+    //  ## ### ##: ######:::::: ##:::: #########: ##:::: ##: ##:::: ##:. ######::
+    //  ##. #: ##: ##...::::::: ##:::: ##.... ##: ##:::: ##: ##:::: ##::..... ##:
+    //  ##:.:: ##: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:
+    //  ##:::: ##: ########:::: ##:::: ##:::: ##:. #######:: ########::. ######::
+    // ..:::::..::........:::::..:::::..:::::..:::.......:::........::::......:::
     //方法
     methods: {
       /**
@@ -449,7 +557,7 @@
             dsNsrsbh: ""
           },
           dataType: "json",
-          success: function(data, textStatus, jqXHR) {
+          success: function (data, textStatus, jqXHR) {
             if (data != null && data != "") {
               if (data.success) {
                 //TODO 此时需要更多操作
@@ -459,30 +567,30 @@
               self.companyInfo = {}
             }
           },
-          error: function(response) {
+          error: function (response) {
             self.companyInfo = {
-                "id": 7,
-                "type": "1",
-                "shxydm": "12010819710326251X31",
-                "gsNsrsbh": "",
-                "dsNsrsbh": "",
-                "nsrmc": "天津市滨海新区汉沽广正五金经营部",
-                "address": "天津市河东区东局子大道",
-                "zip": "173000",
-                "phone": "15922135158,18722097320,15902212707",
-                "contact": "小马同学",
-                "wechatOpenid": "oldsix",
-                "qqOpenid": null,
-                "mobilePhone": "15922135158",
-                "vipLevel": 1,
-                "regTime": 1501816506000,
-                "modifyTime": 1515560675000,
-                "source": null,
-                "jobs": "其他",
-                "ukeyId": null,
-                "djxh": null
-              }
-              //NOTE 此处电话需要操作
+              "id": 7,
+              "type": "1",
+              "shxydm": "12010819710326251X31",
+              "gsNsrsbh": "",
+              "dsNsrsbh": "",
+              "nsrmc": "天津市滨海新区汉沽广正五金经营部",
+              "address": "天津市河东区东局子大道",
+              "zip": "173000",
+              "phone": "15922135158,18722097320,15902212707",
+              "contact": "小马同学",
+              "wechatOpenid": "oldsix",
+              "qqOpenid": null,
+              "mobilePhone": "15922135158",
+              "vipLevel": 1,
+              "regTime": 1501816506000,
+              "modifyTime": 1515560675000,
+              "source": null,
+              "jobs": "其他",
+              "ukeyId": null,
+              "djxh": null
+            }
+            //NOTE 此处电话需要操作
             self.phoneArr = self.companyInfo.phone ? self.companyInfo.phone.split(',') : ['']
           }
         });
@@ -496,7 +604,7 @@
           jsonp: 'callback',
           jsonpCallback: "jsonpCallBack",
           url: customerstatusUrl,
-          success: function(data) {
+          success: function (data) {
             if (data.bean > 0) {
               // $("#backBuyMessage").html("");
               self.messageWord = "该用户在纳税申报系统授权记录中存在，应该属于购买过750产品的用户，请谨慎销售！"
@@ -522,16 +630,18 @@
         this.$alert(
           "提示",
           "搜索",
-          function($content) {
+          function ($content) {
             //点击确定按钮进行操作(YES)
           },
-          function($content) {
+          function ($content) {
             //提示框显示出来之后的操作(Ready)
 
           }
         );
       },
       getGiftAndGood() {
+
+        // 点阵字 http://www.orz6.com/lattice.aspx 
         var self = this;
         // $.ajax({
         //   type: "GET",
@@ -1571,49 +1681,55 @@
         }];
       }
     },
-    // 　◆◆◆◆◆　◆◆◆◆◆　◆◆◆　　　◆◆◆◆◆　◆◆◆◆◆　◆◆◆◆　　　◆◆◆◆　
-    // 　　◆　　◆　　　◆　　　　◆　　　　◆　◆　◆　　◆　　◆　　◆　　◆　◆　　　◆　
-    // 　　◆　◆　　　　◆　　　　◆　　　　　　◆　　　　◆　◆　　　◆　　◆　◆　　　　　
-    // 　　◆◆◆　　　　◆　　　　◆　　　　　　◆　　　　◆◆◆　　　◆◆◆　　　◆◆　　　
-    // 　　◆　◆　　　　◆　　　　◆　　　　　　◆　　　　◆　◆　　　◆　◆　　　　　◆　　
-    // 　　◆　　　　　　◆　　　　◆　　　　　　◆　　　　◆　　　　　◆　　◆　　　　　◆　
-    // 　　◆　　　　　　◆　　　　◆　　　◆　　◆　　　　◆　　◆　　◆　　◆　◆　　　◆　
-    // 　◆◆◆　　　◆◆◆◆◆　◆◆◆◆◆◆　◆◆◆　　◆◆◆◆◆　◆◆◆　◆◆◆◆◆◆　　
-    // 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+
+    // '########:'####:'##:::::::'########:'########:'########:::'######::
+    //  ##.....::. ##:: ##:::::::... ##..:: ##.....:: ##.... ##:'##... ##:
+    //  ##:::::::: ##:: ##:::::::::: ##:::: ##::::::: ##:::: ##: ##:::..::
+    //  ######:::: ##:: ##:::::::::: ##:::: ######::: ########::. ######::
+    //  ##...::::: ##:: ##:::::::::: ##:::: ##...:::: ##.. ##::::..... ##:
+    //  ##:::::::: ##:: ##:::::::::: ##:::: ##::::::: ##::. ##::'##::: ##:
+    //  ##:::::::'####: ########:::: ##:::: ########: ##:::. ##:. ######::
+    // ..::::::::....::........:::::..:::::........::..:::::..:::......:::
     //过滤器
     filters: {},
 
-    // 　　◆◆◆◆　◆◆◆◆　　◆◆◆◆◆　　　◆　　　◆◆◆◆◆　◆◆◆◆◆　◆◆◆◆　　
-    // 　◆　　　◆　　◆　　◆　　◆　　◆　　　◆　　　◆　◆　◆　　◆　　◆　　◆　　◆　
-    // 　◆　　　　　　◆　　◆　　◆　◆　　　　◆◆　　　　◆　　　　◆　◆　　　◆　　◆　
-    // 　◆　　　　　　◆◆◆　　　◆◆◆　　　◆　◆　　　　◆　　　　◆◆◆　　　◆　　◆　
-    // 　◆　　　　　　◆　◆　　　◆　◆　　　◆　◆　　　　◆　　　　◆　◆　　　◆　　◆　
-    // 　◆　　　　　　◆　　◆　　◆　　　　　◆◆◆◆　　　◆　　　　◆　　　　　◆　　◆　
-    // 　◆　　　◆　　◆　　◆　　◆　　◆　　◆　　◆　　　◆　　　　◆　　◆　　◆　　◆　
-    // 　　◆◆◆　　◆◆◆　◆◆◆◆◆◆◆　◆◆　　◆◆　◆◆◆　　◆◆◆◆◆　◆◆◆◆　　
-    // 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+    // :'######::'########::'########::::'###::::'########:'########:'########::
+    // '##... ##: ##.... ##: ##.....::::'## ##:::... ##..:: ##.....:: ##.... ##:
+    //  ##:::..:: ##:::: ##: ##::::::::'##:. ##::::: ##:::: ##::::::: ##:::: ##:
+    //  ##::::::: ########:: ######:::'##:::. ##:::: ##:::: ######::: ##:::: ##:
+    //  ##::::::: ##.. ##::: ##...:::: #########:::: ##:::: ##...:::: ##:::: ##:
+    //  ##::: ##: ##::. ##:: ##::::::: ##.... ##:::: ##:::: ##::::::: ##:::: ##:
+    // . ######:: ##:::. ##: ########: ##:::: ##:::: ##:::: ########: ########::
+    // :......:::..:::::..::........::..:::::..:::::..:::::........::........:::
     //加载后立即执行的方法(created 这个钩子在实例被创建之后被调用)
-    created: function() {
+    created: function () {
       this.getGiftAndGood();
       setTimeout(() => {
         this.point = "008"
       }, 3000);
     },
+    // :'######:::'#######::'##::::'##:'########::'##::::'##:'########:'########:'########::
+    // '##... ##:'##.... ##: ###::'###: ##.... ##: ##:::: ##:... ##..:: ##.....:: ##.... ##:
+    //  ##:::..:: ##:::: ##: ####'####: ##:::: ##: ##:::: ##:::: ##:::: ##::::::: ##:::: ##:
+    //  ##::::::: ##:::: ##: ## ### ##: ########:: ##:::: ##:::: ##:::: ######::: ##:::: ##:
+    //  ##::::::: ##:::: ##: ##. #: ##: ##.....::: ##:::: ##:::: ##:::: ##...:::: ##:::: ##:
+    //  ##::: ##: ##:::: ##: ##:.:: ##: ##:::::::: ##:::: ##:::: ##:::: ##::::::: ##:::: ##:
+    // . ######::. #######:: ##:::: ##: ##::::::::. #######::::: ##:::: ########: ########::
+    // :......::::.......:::..:::::..::..::::::::::.......::::::..:::::........::........:::
     computed: {
       sumPrice() {
         return this.selectedGoods.reduce((sum, ele) => sum + ele.price, 0);
       }
     },
-    //     　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-    // 　◆　◆　◆　　　◆　　　◆◆◆◆◆　　◆◆◆◆　◆◆　　◆◆　
-    // 　◆　◆　◆　　　◆　　　◆　◆　◆　◆　　　◆　　◆　　◆　　
-    // 　◆　◆　◆　　　◆◆　　　　◆　　　◆　　　　　　◆　　◆　　
-    // 　◆　◆　◆　　◆　◆　　　　◆　　　◆　　　　　　◆◆◆◆　　
-    // 　　◆◆◆　　　◆　◆　　　　◆　　　◆　　　　　　◆　　◆　　
-    // 　　◆　◆　　　◆◆◆◆　　　◆　　　◆　　　　　　◆　　◆　　
-    // 　　◆　◆　　　◆　　◆　　　◆　　　◆　　　◆　　◆　　◆　　
-    // 　　◆　◆　　◆◆　　◆◆　◆◆◆　　　◆◆◆　　◆◆　　◆◆　
-    // 　　
+
+    // '##:::::'##::::'###::::'########::'######::'##::::'##:
+    //  ##:'##: ##:::'## ##:::... ##..::'##... ##: ##:::: ##:
+    //  ##: ##: ##::'##:. ##::::: ##:::: ##:::..:: ##:::: ##:
+    //  ##: ##: ##:'##:::. ##:::: ##:::: ##::::::: #########:
+    //  ##: ##: ##: #########:::: ##:::: ##::::::: ##.... ##:
+    //  ##: ##: ##: ##.... ##:::: ##:::: ##::: ##: ##:::: ##:
+    // . ###. ###:: ##:::: ##:::: ##::::. ######:: ##:::: ##:
+    // :...::...:::..:::::..:::::..::::::......:::..:::::..::
     watch: {
       selectGood() {
         //如果不为空
@@ -1644,7 +1760,6 @@
 
             isHaveGoodsId && this.$alert("提示", "编号" + this.selectGood + "已存在,不可重复添加");
             !isHaveGoodsId && this.selectedGoods.push(items[0]);
-
           }
         }
       },
@@ -1659,8 +1774,17 @@
   td {
     vertical-align: middle !important;
   }
-  
+
   .lead {
     font-size: 21px;
   }
+  .menuContent .menuSmellTitle {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #002e3d;
+    padding-left: 5px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+}
 </style>

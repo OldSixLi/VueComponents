@@ -2,6 +2,7 @@
  * 右侧悬浮提示,封装成插件,引入到全局变量中,封装完毕后可以直接通过方法调用
  * @returns
  */
+
 import Template from './../layout/notice/PopBar.vue';
 let globalOptions = {
   title: "提示",

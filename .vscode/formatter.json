@@ -1,5 +1,5 @@
 {
-  "onSave": true,
+  "onSave": false,
   "javascript": {
     "indent_size": 2,
     "indent_char": " ",
@@ -27,15 +27,9 @@
     "selector_separator_newline": true,
     "end_with_newline": false,
     "newline_between_rules": true,
-    "eol": "\r"
+    "eol": "\n"
   },
   "html": {
-    "indent_inner_html": true,
-    "indent_size": 2,
-    "indent_char": " ",
-    "indent_character": " "
-  },
-  "vue": {
     "indent_inner_html": true,
     "indent_size": 2,
     "indent_char": " ",
