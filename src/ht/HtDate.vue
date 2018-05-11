@@ -34,7 +34,6 @@
       console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
       console.log(this.disabled);
       console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-
     },
     methods: {
       dateDefind() {

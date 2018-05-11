@@ -1,5 +1,5 @@
 {
-  "onSave": false,
+  "onSave": true,
   "javascript": {
     "indent_size": 2,
     "indent_char": " ",
@@ -30,6 +30,12 @@
     "eol": "\r"
   },
   "html": {
+    "indent_inner_html": true,
+    "indent_size": 2,
+    "indent_char": " ",
+    "indent_character": " "
+  },
+  "vue": {
     "indent_inner_html": true,
     "indent_size": 2,
     "indent_char": " ",

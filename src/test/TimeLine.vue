@@ -8,7 +8,6 @@
         <div class="time-line-head-parent">
           <div class="time-year" style="animation: runn 0.5s linear;">
             <span>WORK</span>
-            <!-- <i>year</i> -->
             <div class="time-s" style="display: none;"></div>
           </div>
         </div>
@@ -28,7 +27,7 @@
     </div>
     <div class="time-work-right">
       <ul ref="content" @mouseout="leaveUl()">
-        <li v-for="(x,index) in data[0].lists" :class="{'on':currentHoverIndex==index}"  @mouseover="leftLiHover(index)">
+        <li v-for="(x,index) in data[0].lists" :class="{'on':currentHoverIndex==index}" @mouseover="leftLiHover(index)">
           <p class="W-jie1">{{x.title}}</p>
           <p class="W-jie2">
             <span>{{x.job}}</span>
@@ -48,7 +47,7 @@
       data: {
         type: [Object, Array],
         require: true,
-        default: function () {
+        default: function() {
           return [{
             year: 2017,
             lists: [{
@@ -84,18 +83,17 @@
         }
       }
     },
-    data: function () {
-      //组件内数据部分
+    data: function() { //组件内数据部分
       return {
         lisHeightArr: [],
         currentHoverIndex: -1
       }
     },
-    mounted: function () {
+    mounted: function() {
       //组件生成时调用
       let heightArr = [];
       var dom = this.$refs.content;
-      $(dom).find('li').each(function () {
+      $(dom).find('li').each(function() {
         heightArr.push($(this).outerHeight(true));
       });
       this.lisHeightArr = heightArr;
@@ -119,9 +117,9 @@
     margin: 0;
     padding: 0;
   }
-
+  
   .W-work {}
-
+  
   .time-line-block {
     width: 820px;
     min-height: 800px;
@@ -132,23 +130,23 @@
     top: 0;
     margin: 0 0 0 -410px;
   }
-
+  
   .time-work-left {
     float: left
   }
-
+  
   .time-line-head {
     width: 200px;
     height: 82px
   }
-
+  
   .time-line-head-parent {
     width: 93px;
     height: 93px;
     position: relative;
     float: right
   }
-
+  
   .time-line-head .time-year {
     width: 83px;
     height: 83px;
@@ -164,7 +162,7 @@
     border: 5px solid #81a7a7;
     cursor: pointer
   }
-
+  
   .time-line-head h5 {
     margin-left: 10px;
     margin-top: 36px;
@@ -172,7 +170,7 @@
     font-size: 18px;
     color: #ffd200
   }
-
+  
   .time-line-head .time-year i {
     font-size: 15px;
     color: #90af70;
@@ -181,13 +179,13 @@
     margin-top: -10px;
     text-transform: uppercase
   }
-
+  
   .time-year span {
     display: block;
     width: 100%;
     margin-top: 22px
   }
-
+  
   .time-s {
     display: none;
     width: 83px;
@@ -201,7 +199,7 @@
     left: -5px;
     top: -5px
   }
-
+  
   .time-ul {
     position: relative;
     width: 150px;
@@ -210,25 +208,25 @@
     padding-top: 20px;
     cursor: pointer;
   }
-
+  
   .time-ul li {
     /* height: 100px; */
     line-height: 100px
   }
-
+  
   .time-ul li em {
     font-size: 12px;
     font-style: normal;
     color: #21211d;
     margin-left: 30px
   }
-
+  
   .time-ul li i {
     font-size: 18px;
     color: #31312c;
     margin-left: 8px;
   }
-
+  
   .time-ul li b {
     width: 25px;
     height: 2px;
@@ -238,7 +236,7 @@
     margin-top: -1px;
     background: #6e716a;
   }
-
+  
   .time-ul li span {
     border: 2px solid #6e716a;
     height: 16px;
@@ -256,9 +254,9 @@
     margin-right: -12px;
     margin-top: -8px;
   }
-
-  .time-ul li:hover span ,
-  .time-ul li.on span{
+  
+  .time-ul li:hover span,
+  .time-ul li.on span {
     /* border-width: 10px; */
     border-width: 8px;
     /* width: px; */
@@ -269,36 +267,37 @@
     transition: all .2s;
   }
   
-  
-  .time-ul li.on em{
+  .time-ul li.on em {
     font-size: 13px;
     transition: all .2s;
-  }.time-ul li.on i{
+  }
+  
+  .time-ul li.on i {
     font-size: 20px;
     transition: all .2s;
   }
-
+  
   .time-ul .W-margin-top1 {
     margin-top: 25px;
   }
-
+  
   .time-ul .time-li-top-diyi {
     margin-top: 3px;
     position: relative;
   }
-
+  
   .time-ul .W-margin-top1 span {
     top: 188px;
   }
-
+  
   .time-ul .W-margin-top2 {
     margin-top: 25px;
   }
-
+  
   .time-ul .W-margin-top2 span {
     top: 313px;
   }
-
+  
   .time-work-right {
     width: 670px;
     padding-bottom: 1px;
@@ -307,51 +306,52 @@
     left: 150px;
     top: 90px;
   }
-
+  
   .time-work-right ul li .W-jie1 {
     color: rgb(47, 7, 7);
     font-size: 24px;
     transition: color 0.2s ease-in;
   }
-
+  
   .time-work-right ul li.on {
     color: #ddd;
     transform: translateX(-2px);
     transition: all .2s;
   }
-
-.time-work-right ul li.on .W-jie1{
-  color: rgb(128, 141, 150);
-  transition: all .2s;
-}
+  
+  .time-work-right ul li.on .W-jie1 {
+    color: rgb(128, 141, 150);
+    transition: all .2s;
+  }
+  
   .W-jie1 strong {
     font-weight: 500;
   }
-
+  
   .time-work-right ul li .W-jie2 {
     font-size: 14px;
     color: #fff;
   }
-
+  
   .time-work-right ul li {
     margin-top: 26px;
     padding-left: 30px;
     /* height: 100px */
   }
-
+  
   .time-work-right ul .time-year-top {
     margin-top: 25px;
   }
-
+  
   .time-work-right ul li .W-jie2 span {
     display: block;
     margin: -2px 0 2px;
     color: #2f4244;
   }
-
+  
   .time-work-right ul {
     cursor: pointer;
   }
-
+  
   .W-mywork {}
 </style>

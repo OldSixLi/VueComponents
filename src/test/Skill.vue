@@ -33,7 +33,7 @@
 <style scoped>
   .skill-content {
     max-width: 300px;
-    height: 0;
+    /* height: 0; */
     max-height: 300px;
     position: relative;
     overflow: hidden;
@@ -41,9 +41,8 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all .3s;
-    /* padding: 3px; */
     background-color: #fff;
-    padding-bottom: 100%;
+    /* padding-bottom: 100%; */
     width: 100%;
   }
 
@@ -54,15 +53,7 @@
 
   }
 
-  
-
-  .skill-content:hover .back {
-    /* padding: 2px;
-     transition: all .3s;
-    transition-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715); */
-  }
-
-
+  .skill-content:hover .back {}
 
   .introduce {
     height: 200%;
@@ -84,7 +75,7 @@
     width: 100%;
     height: 100%;
     /* 原图裁剪有些白边 */
-    transform: scale(1.01);
+    transform: scale(1.02);
     -webkit-filter: grayscale(85%);
     filter: grayscale(85%);
   }

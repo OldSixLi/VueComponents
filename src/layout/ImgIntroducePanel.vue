@@ -1,6 +1,6 @@
 <template>
   <div class="contents">
-    
+
     <div class="content" :class="{'d3':isFireFox}">
       <!-- 正面图片,背面介绍 -->
       <img :src='img' alt="图片" class="img-thumbnail img-responsive">
@@ -26,14 +26,7 @@
         isFireFox: false
       }
     },
-    created() {
-      
-    },
     mounted: function () {
-
-      console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-      console.log(navigator.userAgent);
-      console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
       if (navigator.userAgent.indexOf("Firefox") > 0) {
         setTimeout(() => {
           this.isFireFox = true;
@@ -45,7 +38,6 @@
 </script>
 <style scoped>
   .content img {
-
     -webkit-filter: grayscale(80%);
     filter: grayscale(80%);
   }
@@ -58,20 +50,21 @@
     perspective: 600px;
     min-height: 200px;
   }
- 
+
   .content.d3 {
-    -webkit-transform-style:flat;
-    -moz-transform-style:flat;
+    -webkit-transform-style: flat;
+    -moz-transform-style: flat;
     -ms-transform-style: flat;
     transform-style: flat;
   }
 
- .contents:hover .content.d3{
-  -webkit-transform-style:preserve-3d;
-    -moz-transform-style:preserve-3d;
+  .contents:hover .content.d3 {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
- }
+  }
+
   .content {
     display: inline-block;
     position: relative;
@@ -98,7 +91,7 @@
     backface-visibility: hidden;
   }
 
-  
+
 
   /* 背面div */
 
