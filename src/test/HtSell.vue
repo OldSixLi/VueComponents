@@ -13,8 +13,8 @@
     <div class="row" v-show="currentPanel=='new'">
       <div class="col-md-12 col-sm-12">
         <h2 class="text-center">产品销售</h2>
-        
-        
+
+
         <form class="form-horizontal" method="post" role="form">
           <ht-tabss active="点位选择">
             <!--
@@ -34,6 +34,7 @@
                     <label for="teacherId" class="control-label">点位选择</label>
                   </div>
                   <div class="col-sm-10">
+                    {{point}}
                     <ht-select name="sds" v-model="point">
                       <option value="">请选择</option>
                       <option v-for="x in points" :value="x.id">{{x.name}}</option>
@@ -81,7 +82,7 @@
                       </div>
                     </div>
                     <div class="col-xs-1" style="padding:2px 0 0 12px;">
-                      <a class="delbtn btn btn-sm btn-primary" onclick="toOrderList()">查询订单</a>
+                      <a class="delbtn btn btn-sm btn-primary" onclick="toOrderList()" disabled="true">查询订单</a>
                     </div>
                   </div>
                 </div>
@@ -293,162 +294,133 @@
     :.......:::..:::::..::........:::........::..:::::..::....::..::::..::..:::::::::.......:::
     -->
     <div class="row" v-show="currentPanel=='order'">
-        <div class="col-md-12 ">
+      <div class="col-md-12 ">
 
-          <h1 class="text-center">确认订单</h1>
-          <panel title="确认订单">
-            <div class="menuContent">
-              <div class="menuSmellTitle">
-                  纳税人名称
-                </div>
-                <p>
-                  &nbsp;&nbsp;&nbsp;{{orderInfo.info.nsrmc}}
-                </p>
-                  <div class="menuSmellTitle">
-                  产品信息
-                </div>
-              	<table class="table table-hover text-center">
-                    <thead>
-                    <tr>
-                      <th class="text-center">产品ID</th>
-                      <th class="text-center">产品名称</th>
-                      <th class="text-center">打印名称</th>
-                      <th class="text-center">数量</th>
-                      <th class="text-center">含税价</th>
-                      <th class="text-center">税率</th>
-                      <th class="text-center">单价</th>
-                    </tr> </thead>
-                      <tbody>
-                      <tr v-for="x in orderInfo.goods" v-if="orderInfo.goods.length>0">
-                        <td class="text-center">{{x.orderGoods.goodsId}}</td>
-                        <td class="text-center">{{x.goodsName}}</td>
-                          <td class="text-center">{{x.orderGoods.printName}}</td>
-                        <td class="text-center">{{x.orderGoods.quantity}}</td>
-                        <td class="text-center">{{x.orderGoods.price}}</td>
-                        <td class="text-center">{{x.orderGoods.sl*100}}%</td>
-                        <td class="text-center">{{x.orderGoods.amount}}</td>
-                      </tr>
-                      <tr v-if="orderInfo.goods.length==0">
-                          <td class="text-center" colspan="10">暂无数据</td> 
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="menuSmellTitle">
-                    元件
-                  </div>
-                  <table class="table table-hover text-center">
-                      <thead>
-                      <tr>
-                        <th class="text-center">元件名</th>
-                        <th class="text-center">类型</th>
-                        <th class="text-center">数量</th>
-                        <th class="text-center">模块</th>
-                        <th class="text-center">服务次数</th>
-                        <th class="text-center">服务期限(月)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-if="orderInfo.items.length==0">
-                          <td class="text-center" colspan="10">暂无数据</td> 
-                        </tr>
-                        <tr v-for="item in orderInfo.items" v-if="orderInfo.items.length>0">
-                            <td class="text-center">${item.goodsItem.itemName}</td>
-                            <td class="text-center">
-                            <c:if test="${item.goodsItem.itemType eq '1'}">
-                              硬件
-                            </c:if>
-                            <c:if test="${item.goodsItem.itemType eq '2'}">
-                              软件
-                            </c:if>
-                            <c:if test="${item.goodsItem.itemType eq '3'}">
-                              服务
-                            </c:if>
-                            </td>
-                            <td class="text-center">
-                              <c:if test="${item.goodsItem.itemType eq '2'}">
-                                -
-                              </c:if>
-                              <c:if test="${item.goodsItem.itemType eq '3'}">
-                                -
-                              </c:if>
-                              <c:if test="${item.goodsItem.itemType eq '1'}">
-                                ${item.num}
-                              </c:if>
-                            </td>
-                            <td class="text-center">${item.moduls}</td>
-                            <td class="text-center">
-                              <c:if test="${item.numOfService >= 0}">
-                                ${item.numOfService }
-                              </c:if>
-                              <c:if test="${item.numOfService < 0}">
-                                -
-                              </c:if>
-                            </td>
-                            <td class="text-center">
-                              <c:if test="${item.months >= 0}">
-                                ${item.showMonths}
-                              </c:if>
-                              <c:if test="${item.months < 0}">
-                                -
-                              </c:if>
-                            </td>
-                          </tr>
-                      </tbody>
-                      <!-- <c:forEach items="${items}" var="item"> -->
-                       
-                      <!-- </c:forEach> -->
-                    
-                  </table>
-
-                  <div class="menuSmellTitle">
-                      促销品
-              </div>
-              <div class="form-horizontal">
-              <c:forEach items="${gifts}" var="gift">
-                <p v-for="x in orderInfo.gifts">
-                {{x.giftName}}&nbsp;X&nbsp;{{x.gift.quantity}}&nbsp;&nbsp;&nbsp;
-              </p>
-              </c:forEach>
-              </div>
-              <br />
-
-
-              </div>
-          </panel>
-          <div class="row">
-          
-          <div class="col-xs-12 text-center">
-                  <h4 v-if="orderInfo.isExist ==='false'||orderInfo.isExist ===false">
-                    <strong class="text-danger">该客户在一年之内存在产品相同的订单</strong>
-                  </h4>
-              </div>
-
-              <div class="col-xs-12 text-center">
-                  <h4><strong class="text-danger">{{orderInfo.flag}}</strong></h4>
-                </div></div>
-          <div class="row">
-              <div class="col-xs-12">
-                <div class="pull-left">
-                </div>
-                <div class="pull-right">
-                  <p class="money">总计：
-                    {{orderInfo.order.amount.toFixed(2) }}元</p><br/>
-                  <p class="money">积分：
-                   {{orderInfo.order.totalScore||0}}
-                  </p>
-                </div>
-              </div>
+        <h1 class="text-center">确认订单</h1>
+        <panel title="确认订单">
+          <div class="menuContent">
+            <div class="menuSmellTitle">
+              纳税人名称
             </div>
-            <input type="hidden" id="flagAgreement" name="flagAgreement" value="1">
-            <input type="hidden" name="id" value="${order.id}">
-            <div class="row text-right">
-              <div class="col-xs-12">
-                <a id="btn_save" class="btn btn-primary " onclick="submits()">确认并提交</a> &nbsp;&nbsp;
-                <a class="btn btn-danger" >取消</a>
-              </div>
-            </div> 
+            <p>
+              &nbsp;&nbsp;&nbsp;{{orderInfo.info.nsrmc}}
+            </p>
+            <div class="menuSmellTitle">
+              产品信息
+            </div>
+            <table class="table table-hover text-center">
+              <thead>
+                <tr>
+                  <th class="text-center">产品ID</th>
+                  <th class="text-center">产品名称</th>
+                  <th class="text-center">打印名称</th>
+                  <th class="text-center">数量</th>
+                  <th class="text-center">含税价</th>
+                  <th class="text-center">税率</th>
+                  <th class="text-center">单价</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="x in orderInfo.goods" v-if="orderInfo.goods.length>0">
+                  <td class="text-center">{{x.orderGoods.goodsId}}</td>
+                  <td class="text-center">{{x.goodsName}}</td>
+                  <td class="text-center">{{x.orderGoods.printName}}</td>
+                  <td class="text-center">{{x.orderGoods.quantity}}</td>
+                  <td class="text-center">{{x.orderGoods.price}}</td>
+                  <td class="text-center">{{x.orderGoods.sl*100}}%</td>
+                  <td class="text-center">{{x.orderGoods.amount}}</td>
+                </tr>
+                <tr v-if="orderInfo.goods.length==0">
+                  <td class="text-center" colspan="10">暂无数据</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="menuSmellTitle">
+              元件
+            </div>
+            <table class="table table-hover text-center">
+              <thead>
+                <tr>
+                  <th class="text-center">元件名</th>
+                  <th class="text-center">类型</th>
+                  <th class="text-center">数量</th>
+                  <th class="text-center">模块</th>
+                  <th class="text-center">服务次数</th>
+                  <th class="text-center">服务期限(月)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-if="orderInfo.items.length==0">
+                  <td class="text-center" colspan="10">暂无数据</td>
+                </tr>
+                <tr v-for="item in orderInfo.items" v-if="orderInfo.items.length>0">
+                  <td class="text-center">{{item.goodsItem.itemName}}</td>
+                  <td class="text-center">
+                    <span v-if="item.goodsItem.itemType=='1'">硬件</span>
+                    <span v-if="item.goodsItem.itemType=='2'">软件</span>
+                    <span v-if="item.goodsItem.itemType=='3'">服务</span>
+                  </td>
+                  <td class="text-center">
+                    <span v-if="item.goodsItem.itemType=='1'">{{item.num}}</span>
+                    <span v-if="item.goodsItem.itemType=='2'"> - </span>
+                    <span v-if="item.goodsItem.itemType=='3'"> - </span>
 
-      </div> 
+                  </td>
+                  <td class="text-center">{{item.moduls}}</td>
+                  <td class="text-center">
+                    <span v-if="item.numOfService>= 0"> {{item.numOfService }} </span>
+                    <span v-if="item.numOfService< 0">- </span>
+                  </td>
+                  <td class="text-center">
+                    <span v-if="item.months>= 0">{{item.showMonths}}</span>
+                    <span v-if="item.months< 0">- </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="menuSmellTitle">
+              促销品
+            </div>
+            <div class="form-horizontal">
+              <span v-for="x in orderInfo.gifts">
+                <b> {{x.giftName}}</b>&nbsp;x&nbsp;<b>{{x.gift.quantity}} </b>&nbsp;&nbsp;&nbsp;
+              </span>
+            </div>
+            <br />
+          </div>
+        </panel>
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h4 v-if="orderInfo.isExist ==='false'||orderInfo.isExist ===false">
+              <strong class="text-danger">该客户在一年之内存在产品相同的订单</strong>
+            </h4>
+          </div>
+          <div class="col-xs-12 text-center">
+            <h4>
+              <strong class="text-danger">{{orderInfo.flag}}</strong>
+            </h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="pull-left">
+            </div>
+            <div class="pull-right">
+              <p class="money">总计： {{orderInfo.order.amount.toFixed(2) }}元</p><br/>
+              <p class="money">积分： {{orderInfo.order.totalScore||0}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="flagAgreement" name="flagAgreement" value="1">
+        <input type="hidden" name="id" value="${order.id}">
+        <div class="row text-right">
+          <div class="col-xs-12">
+            <a id="btn_save" class="btn btn-primary " @click="submits()">确认并提交</a> &nbsp;&nbsp;
+            <a class="btn btn-danger">取消</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -463,7 +435,7 @@
   //  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
   export default {
     name: "HtSell",
-    props: { 
+    props: {
     },
     /*
     '########:::::'###::::'########::::'###::::
@@ -495,8 +467,8 @@
         point: "009",
         phoneArr: [''],
         messageWord: "", //提示750信息
-        currentPanel:"order",//当前展示订单页面还是展示信息填写页面
-        orderInfo:JSON.parse('{"success":true,"message":null,"bean":{"flag":null,"order":{"id":"20180511142322471000000000000032","customerId":8806,"time":1526026473646,"salesman":"admin","amount":2552.0,"state":"N","flagPay":"N","payType":null,"flagInvoice":null,"flagAgreement":null,"remarks":null,"pointId":"001","sendStatus":null,"ly":"XSXT","totalScore":0,"remarksInvoice":null},"isExist":false,"items":[],"goods":[{"orderGoods":{"id":1111112169,"orderId":"20180511142322471000000000000032","goodsId":"KC_20170830_4","quantity":1,"price":0.01,"amount":0.01,"sl":0.17,"spbm":"1060301029900000000","printName":"浩天财税通-通用财务系统","isRenew":"Y","score":0},"goodsName":"测试商品1","gift":null,"giftName":null,"score":null,"alone":null,"yj":null,"onlyCompany":null}],"gifts":[{"orderGoods":null,"goodsName":null,"gift":{"id":11838,"orderId":"20180511142322471000000000000032","giftId":"001","quantity":1},"giftName":"测试促销品1","score":null,"alone":null,"yj":null,"onlyCompany":null},{"orderGoods":null,"goodsName":null,"gift":{"id":11839,"orderId":"20180511142322471000000000000032","giftId":"002","quantity":1},"giftName":"测试促销品22","score":null,"alone":null,"yj":null,"onlyCompany":null}],"isAgree":false,"info":{"id":8806,"type":"1","shxydm":"120117777303334","gsNsrsbh":"","dsNsrsbh":"","nsrmc":"kkkk","address":"的撒啊萨达大事的撒打算","zip":"123123","phone":"15902212707","contact":"联系人","wechatOpenid":"123","qqOpenid":null,"mobilePhone":"15902212707","vipLevel":1,"regTime":1510802155000,"modifyTime":1526026477791,"source":null,"jobs":"公司负责人","ukeyId":null,"djxh":null}}}').bean,
+        currentPanel: "new",//当前展示订单页面还是展示信息填写页面
+        orderInfo: JSON.parse('{"success":true,"message":null,"bean":{"flag":null,"order":{"id":"20180511142322471000000000000032","customerId":8806,"time":1526266173719,"salesman":"admin","amount":2552.0,"state":"N","flagPay":"N","payType":null,"flagInvoice":null,"flagAgreement":null,"remarks":null,"pointId":"001","sendStatus":null,"ly":"XSXT","totalScore":0,"remarksInvoice":null},"isExist":false,"items":[{"goodsItem":{"id":1044,"goodsId":"CSFW_360","itemId":"000555","itemName":"进销存软件","itemType":"2","times":null,"quantity":null},"moduls":"","num":1,"numOfService":-1,"months":-1,"showMonths":"","isOnce":"N"},{"goodsItem":{"id":1045,"goodsId":"CSFW_360","itemId":"001125","itemName":"电脑2","itemType":"1","times":null,"quantity":1},"moduls":"","num":1,"numOfService":-1,"months":-1,"showMonths":"","isOnce":"N"}],"goods":[{"orderGoods":{"id":1111112182,"orderId":"20180511142322471000000000000032","goodsId":"KC_20170830_4","quantity":1,"price":0.01,"amount":0.01,"sl":0.17,"spbm":"1060301029900000000","printName":"浩天财税通-通用财务系统","isRenew":"Y","score":0},"goodsName":"测试商品1","gift":null,"giftName":null,"score":null,"alone":null,"yj":null,"onlyCompany":null},{"orderGoods":{"id":1111112183,"orderId":"20180511142322471000000000000032","goodsId":"CSFW_360","quantity":1,"price":360.0,"amount":360.0,"sl":0.06,"spbm":"3040201990000000000","printName":"技术服务费","isRenew":"Y","score":0},"goodsName":"智慧财税服务","gift":null,"giftName":null,"score":null,"alone":null,"yj":null,"onlyCompany":null},{"orderGoods":{"id":1111112184,"orderId":"20180511142322471000000000000032","goodsId":"GE_PRINT","quantity":1,"price":2500.0,"amount":2500.0,"sl":0.17,"spbm":"1090511030000000000","printName":"EPSON小型票据打印机","isRenew":"N","score":0},"goodsName":"个人版打印机","gift":null,"giftName":null,"score":null,"alone":null,"yj":null,"onlyCompany":null}],"gifts":[{"orderGoods":null,"goodsName":null,"gift":{"id":11848,"orderId":"20180511142322471000000000000032","giftId":"000001","quantity":2},"giftName":"小米手机7","score":null,"alone":null,"yj":null,"onlyCompany":null},{"orderGoods":null,"goodsName":null,"gift":{"id":11849,"orderId":"20180511142322471000000000000032","giftId":"00001","quantity":2},"giftName":"购物袋","score":null,"alone":null,"yj":null,"onlyCompany":null}],"isAgree":true,"info":{"id":8806,"type":"1","shxydm":"120117777303334","gsNsrsbh":"","dsNsrsbh":"","nsrmc":"kkkk","address":"的撒啊萨达大事的撒打算","zip":"123123","phone":"15902212707","contact":"联系人","wechatOpenid":"123","qqOpenid":null,"mobilePhone":"15902212707","vipLevel":1,"regTime":1510802155000,"modifyTime":1526266173757,"source":null,"jobs":"公司负责人","ukeyId":null,"djxh":null}}}').bean,
 
       }
     },
@@ -513,6 +485,9 @@
     // ..:::::..::........:::::..:::::..:::::..:::.......:::........::::......:::
     //方法
     methods: {
+      submits: function () {
+
+      },
       /**
        * 用于将外部数据转化为内部数据 
        * @returns 
@@ -540,6 +515,51 @@
         console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         console.log(giftResult);
         console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+
+        // TODO进行ajax操作
+        // 操作完成之后切换面板
+        $.ajax({
+          type: "POST",
+          url: "sales/order/asyncCheckOrder",
+          data: {
+            id: '8806',
+            phone: '15902212707',
+            gifts: '[{ "id":0,"giftId":"000001","quantity":2},{ "id":0,"giftId":"00001","quantity":2}]',
+            goods: '[{"id":0,"goodsId":"KC_20170830_4","quantity":1,"price":0.01,"amount":0.01,"printName":"浩天财税通-通用财务系统","sl":0.17,"spbm":"1060301029900000000"},{"id":0,"goodsId":"CSFW_360","quantity":1,"price":360.00,"amount":360.00,"printName":"技术服务费","sl":0.06,"spbm":"3040201990000000000"},{"id":0,"goodsId":"GE_PRINT","quantity":1,"price":2500.00,"amount":2500.00,"printName":"EPSON小型票据打印机","sl":0.17,"spbm":"1090511030000000000"}]',
+            cRegTime: '1515719459000',
+            orderId: '20180511142322471000000000000032',
+            Oamount: '2552.00',
+            point: '001',
+            gsNsrsbh: '',
+            dsNsrsbh: '',
+            shxydm: '120117777303334',
+            nsrmc: 'kkkk',
+            address: '的撒啊萨达大事的撒打算',
+            zip: '123123',
+            contact: '联系人',
+            mobilePhone: '15902212707',
+            wechatOpenid: '123',
+            jobs: '公司负责人',
+          }, //TODO 修改此时数据
+          dataType: "json",
+          success: function (data, textStatus, jqXHR) {
+            if (data != null && data != "") {
+              if (data.success) {
+                this.currentPanel = "order";
+              } else {
+                tool.alert("提示", "请求服务失败,请重试!");
+              }
+            } else {
+              tool.alert("提示", "未获取到数据!");
+            }
+          },
+          error: function (response) {
+            tool.alert("提示", "请求服务失败,请重试!");
+          }
+        });
+
+
+
       },
       /**
        * 获取公司信息 
@@ -1766,7 +1786,7 @@
       phoneArr() {
         this.companyInfo.phone = this.phoneArr.join(',');
       }
-    }　　　　　　　　　　　　　　　　　　　　　　　　　
+    }
   }
 </script>
 <style scoped>
@@ -1778,6 +1798,7 @@
   .lead {
     font-size: 21px;
   }
+
   .menuContent .menuSmellTitle {
     font-size: 14px;
     font-weight: bold;
@@ -1786,5 +1807,5 @@
     padding-left: 5px;
     border-bottom: 2px solid #ddd;
     margin-bottom: 10px;
-}
+  }
 </style>
