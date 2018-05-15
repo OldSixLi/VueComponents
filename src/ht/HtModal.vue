@@ -1,8 +1,8 @@
 <template >
   <!-- <div>  -->
   <transition name="fade">
-    <div class="modal fade" :class="{'in':isShow}" v-show="isShow">
-      <div class="modal-dialog">
+    <div class="modal fade" :class="{'in':isShow,'bs-example-modal-lg':isBig}" v-show="isShow">
+      <div class="modal-dialog" :class="{'modal-lg':isBig}">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close()">×</button>
@@ -36,10 +36,15 @@ export default {
       type: Boolean,
       default: false
     }
+    ,isBig:{
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     close: function() {
       this.$emit("states");
+      // this.isShow = !this.isShow;
     },
     toggleState: function() {
       alert("状态切换");

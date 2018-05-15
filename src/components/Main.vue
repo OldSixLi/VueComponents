@@ -135,7 +135,7 @@
                   </div>
                   <!-- Modal提示框 -->
                 </panel>
-                <ht-modal :is-show="showModal" @states="modalControl" title="提示框"> <img src="http://om6fr85l4.bkt.clouddn.com/usericon_2s.jpg" alt="" class="img-responsive"></ht-modal>
+                <ht-modal :is-show="showModal" @states="modalControl" :is-big="true" title="提示框"> <img src="http://om6fr85l4.bkt.clouddn.com/usericon_2s.jpg" alt="" class="img-responsive"></ht-modal>
                 <!-- 人物列表 -->
                 <panel title="动画效果" style="background-color: #ddd;">
                   <info-block img-src="http://om6fr85l4.bkt.clouddn.com/xun.jpg" title="陈奕迅" intro="Eason,歌手,演员" word="拦路雨偏似雪花饮泣的你冻吗这风褛我给你磨到有襟花连调了职也不怕怎么始终牵挂苦心选中今天想车你回家原谅我不再送花伤口应要结疤花瓣铺满心里坟场才害怕如若你非我不嫁彼此终必火化一生一世等一天需要代价谁都只得那双手靠拥抱亦难任你拥有要拥有必先懂失去怎接受曾沿着雪路浪游为何为好事泪流谁能凭爱意要富士山私有何不把悲哀感觉假设是来自你虚构试管里找不到它染污眼眸前尘硬化像石头随缘地抛下便逃走我绝不罕有往街里绕过一周我便化乌有"
@@ -258,7 +258,7 @@
               <panel title="人员列表">
                 <ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
                   <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"></column>
-                  <column slot name="性别" data-key="gender" align="center" filter="toGender"></column>
+                  <column slot name="性别" data-key="gender" align="right" filter="toGender"></column>
                   <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
                   <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
                   <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>

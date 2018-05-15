@@ -34,7 +34,8 @@
     </table>
     <!-- 加载动画区域 NOTE: 通过修改样式 .cssload-loader 相关参数可以更改动画-->
     <div v-show="showLoading" :style="{'height':loadingHeight+'px'}" class="relative">
-      <div class="cssload-loader"></div>
+      <!-- <div class="cssload-loader"></div> -->
+      <loading></loading>
     </div>
     <!-- 分页控件模块 -->
     <ht-page :param="pageOption" class="pull-right"></ht-page>
@@ -94,7 +95,7 @@
         var self = this;
         var params = new Object();
         params = self.searchData;
-        var pageindex = params.currentPage;
+        var pageindex = params.currentPage||1;
         self.loadingHeight = $(self.$el)
           .find("tbody")
           .height() ?
@@ -202,10 +203,10 @@
           }
           obj.class = child.data && child.data.staticClass ? child.data.staticClass : "";
           obj.style = child.data && child.data.staticStyle ? child.data.staticStyle : {};
-          if (child.data && child.data.staticStyle != undefined) {
+          // if (child.data && child.data.staticStyle != undefined) {
             obj.style.textAlign = obj.align;
             obj.style.width = obj.width;
-          }
+          // }
           _this.rule.push(obj);
         }
       });

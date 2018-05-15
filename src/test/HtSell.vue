@@ -73,7 +73,7 @@
                   <div class="col-xs-10">
                     <div class="col-xs-11" style="padding:0;">
                       <div class="input-group">
-                        <input type="text" class="form-control" id="shxydm" name="shxydm" v-model="shxydm" maxlength="50" placeholder="请输入统一社会信用代码信息">
+                        <input type="text" class="form-control" id="shxydm" name="shxydm" v-model="companyInfo.shxydm" maxlength="50" placeholder="请输入统一社会信用代码信息">
                         <span class="input-group-btn">
                           <button class="btn btn-primary" type="button" @click="getCompanyInfo()">
                             <span class="glyphicon glyphicon-search"></span>
@@ -82,7 +82,7 @@
                       </div>
                     </div>
                     <div class="col-xs-1" style="padding:2px 0 0 12px;">
-                      <a class="delbtn btn btn-sm btn-primary" onclick="toOrderList()" disabled="true">查询订单</a>
+                      <a class="delbtn btn btn-sm btn-primary" @click="modalControl()" >查询订单</a>
                     </div>
                   </div>
                 </div>
@@ -422,6 +422,11 @@
         </div>
       </div>
     </div>
+
+    <ht-modal :is-show="showModal" @states="modalControl" :is-big="true" title="订单查询">
+        <!-- current-order-id="" -->
+      <ht-order-list current-order-id.sync=""  que-state="2" :customer-shxydm="customerShxydm"></ht-order-list>
+    </ht-modal>
   </div>
 
 </template>
@@ -451,6 +456,8 @@
     data: function () {
       //组件内数据部分
       return {
+        customerShxydm:"",
+        showModal:true,
         isRead: false, //是否为详情
         giftList: [],
         goodsList: [],
@@ -461,7 +468,7 @@
         aloneNow: false, //是否允许存在独立产品
         selectedGifts: [], //用户选中的赠品
         companyInfo: {
-          phone: ""
+          phone: "",shxydm:"12010819710326251X31"
         }, //公司信息
         shxydm: "12010819710326251X31", //社会信用代码
         point: "009",
@@ -474,6 +481,7 @@
     },
     mounted: function () {
       //组件生成时调用
+      
     },
     // '##::::'##:'########:'########:'##::::'##::'#######::'########:::'######::
     //  ###::'###: ##.....::... ##..:: ##:::: ##:'##.... ##: ##.... ##:'##... ##:
@@ -485,6 +493,13 @@
     // ..:::::..::........:::::..:::::..:::::..:::.......:::........::::......:::
     //方法
     methods: {
+      
+      modalControl(){
+        //将社会信用代码赋值去查询
+        // alert('s')
+        this.customerShxydm=this.companyInfo.shxydm; 
+        this.showModal = !this.showModal;
+      },
       submits: function () {
 
       },
