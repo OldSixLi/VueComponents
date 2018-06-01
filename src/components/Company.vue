@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row">
           <div class="col-md-12 col-sm-12">
-            <ht-tabs active="销售列表组件">
+            <ht-tabs active="产品销售">
                 <ht-tab title="产品销售">
                     <ht-sell></ht-sell>
                 </ht-tab>
-                <ht-tab title="销售列表组件">
+                <!-- <ht-tab title="销售列表组件">
                   <ht-order-list></ht-order-list>
-                </ht-tab>
+                </ht-tab> -->
                 <ht-tab title="课程组件">
                     <ht-class :config="config" :data="classData" @result="result" @cancel="cancel"></ht-class>
                 </ht-tab>

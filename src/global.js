@@ -54,6 +54,7 @@ import './directive/randomImg.js';
 import './directive/popover.js';
 import './directive/btnDelay.js';
 import './directive/tooltip.js';
+import './directive/clickWord.js';
 
 Vue.use(VueRouter);
 

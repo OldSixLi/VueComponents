@@ -43,7 +43,7 @@ var vueBlock = new Vue({
   created() {
     console.log("结束Loading");
   }
-});
+})
 window.eventBus=new Vue();
 
 //声明HtmlFun

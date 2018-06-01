@@ -13,8 +13,6 @@
     <div class="row" v-show="currentPanel=='new'">
       <div class="col-md-12 col-sm-12">
         <h2 class="text-center">产品销售</h2>
-
-
         <form class="form-horizontal" method="post" role="form">
           <ht-tabss active="点位选择">
             <!--
@@ -34,7 +32,7 @@
                     <label for="teacherId" class="control-label">点位选择</label>
                   </div>
                   <div class="col-sm-10">
-                    {{point}}
+                    <!-- {{point}} -->
                     <ht-select name="sds" v-model="point">
                       <option value="">请选择</option>
                       <option v-for="x in points" :value="x.id">{{x.name}}</option>
@@ -228,7 +226,7 @@
                 <div>
                   <p style="padding: 15px;" class="text-danger lead text-center" v-show="messageWord!=''" id="backBuyMessage">{{messageWord}}</p>
                 </div>
-                {{selectedGoods}}
+                <!-- {{selectedGoods}} -->
               </panel>
             </ht-tab>
 
@@ -457,7 +455,7 @@
       //组件内数据部分
       return {
         customerShxydm:"",
-        showModal:true,
+        showModal:false,
         isRead: false, //是否为详情
         giftList: [],
         goodsList: [],
@@ -1753,7 +1751,7 @@
     // :......::::.......:::..:::::..::..::::::::::.......::::::..:::::........::........:::
     computed: {
       sumPrice() {
-        return this.selectedGoods.reduce((sum, ele) => sum + ele.price, 0);
+        return this.selectedGoods.reduce((sum, ele) => sum + ele.price, 0).toFixed(2);
       }
     },
 
@@ -1792,7 +1790,6 @@
                 return false;
               }
             }
-
             isHaveGoodsId && this.$alert("提示", "编号" + this.selectGood + "已存在,不可重复添加");
             !isHaveGoodsId && this.selectedGoods.push(items[0]);
           }
