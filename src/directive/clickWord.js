@@ -36,7 +36,7 @@ Vue.directive('clickWord', {
         index++;
       });
     };
-    fnTextPopup(binding.value || ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善'])
+    fnTextPopup(binding.value || ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善']);
   },
   //只调用一次，指令与元素解绑时调用。
   unbind: function (el) {
