@@ -31,9 +31,6 @@
     mounted: function() {
       //组件生成时调用
       this.dateDefind();
-      console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-      console.log(this.disabled);
-      console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     },
     methods: {
       dateDefind() {
