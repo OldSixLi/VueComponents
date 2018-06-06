@@ -41,5 +41,6 @@ Vue.directive('clickWord', {
   //只调用一次，指令与元素解绑时调用。
   unbind: function (el) {
     console.log('clickWordunbind');
+
   }
-});
+}); 
