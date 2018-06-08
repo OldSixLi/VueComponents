@@ -114,8 +114,7 @@
                             :......:::........::..::::..::........:::........:::........:::::..:::::..:::::..::....::........::
                             -->
                         <div v-if="detail.invoiceSendInfo.FLAG_INVOICE=='4'">
-                            <div v-if
-                                "detail.invoiceSendInfo.FPLXDM == '004' || detail.invoiceSendInfo.FPLXDM == '007' || detail.invoiceSendInfo.FPLXDM == '026'}">
+                            <div v-if="detail.invoiceSendInfo.FPLXDM == '004' || detail.invoiceSendInfo.FPLXDM == '007' || detail.invoiceSendInfo.FPLXDM == '026'">
                                 <div class="panel panel-default noPadding scroll-target">
                                     <div class="panel-heading">发票信息</div>
                                     <div class="panel-body">
