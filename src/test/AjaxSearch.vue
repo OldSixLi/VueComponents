@@ -5,7 +5,7 @@
     <!-- @blur="blurFn" 失去焦点时如何处理-->
     <!-- //AJAX部分 -->
     <transition name="panel">
-      <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="resultList&&resultList.length">
+      <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="(resultList&&resultList.length)||(authorList&&authorList.length)">
         <ul style="padding:0;">
           <li v-for="(x,index) in resultList" :key="index" :data-song-id="x.id" :data-song-name="x.name" @click="itemClick($event,x.id)">{{x.name+(x.artists[0]?' - '+x.artists[0].name:'')}}</li>
           <hr>
@@ -56,24 +56,21 @@
        */
       authorClick(event, authorId) {},
       handleInput(event) {
-        //ajax部分
-        // handleInput
         //NOTE:这个方法不能用中文参数
         var _self = this;
         $.ajax({
           type: "GET",
           url: "http://localhost:9999/search/suggest",
           data: {
-            keywords: event.target.value
+            keywords: event.target.value,
+            type:'1',
+            limit :10
           },
           dataType: "json",
-          // async:false,
           success: function(data) {
             if (data.code == 200) {
-              _self.resultList = data.result.songs; //歌曲列表
-              _self.authorList = data.result.artists;
+              _self.resultList = data.result.songs;
             } else {
-              //failed  do something
               _self.resultList = [];
             }
           },
@@ -81,12 +78,37 @@
             _self.resultList = [];
           }
         });
+
+
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:9999/search/suggest",
+          data: {
+            keywords: event.target.value,
+            type:'100',
+            limit :10
+          },
+          dataType: "json",
+          // async:false,
+          success: function(data) {
+            if (data.code == 200) {
+              _self.authorList = data.result.artists;
+            } else {
+              _self.authorList = [];
+            }
+          },
+          error: function(response) {
+            _self.authorList = [];
+          }
+        });
         var value = event.target.value;
         this.currentValue = event.target.value;
         this.$emit("input", value); //触发 input 事件，并传入新值
       },
+
       itemClick(event, id, user) {
         this.resultList = [];
+        this.authorList=[];
         let _self = this;
         let node = event.target;
         let dataObj = {};

@@ -48,33 +48,47 @@
                 <div class="col-md-3"><img v-random-img class="img-thumbnail"></div>
             </div>
         </panel>
+
+        <p>
+        
+        
+        
+        </p>
     </div>
 </template>
 <script>
-import store from "./../store/index";
-export default {
-  name: "Point",
-  store,
-  mounted: function() {
-    //组件生成时调用
-    store.commit("changeName");
-  },
-  methods: {
-    changeName() {
+  import store from "./../store/index";
+  import {
+    mapMutations
+  } from './../store/index';
+  export default {
+    name: "Point",
+    store,
+    mounted: function() {
+      //组件生成时调用
       store.commit("changeName");
+      //   this.changeName()
     },
-    btnClick() {
-      this.$notifyMessageLeft("点击倒计时后执行的事件！");
-      
+    methods: {
+      //   ...mapMutations({
+      //     changeName: 'changeName'
+      //   }),
+      //   changeName() {
+      //     store.commit("changeName");
+      //   },
+      btnClick() {
+        this.$notifyMessageLeft("点击倒计时后执行的事件！");
+
+      },
+      popShow() {
+        console.log("当前指令显示对话框回调事件");
+      },
+      popHide() {
+        console.log("当前指令关闭对话框移除事件");
+      }
     },
-    popShow() {
-      console.log("当前指令显示对话框回调事件");
-    },
-    popHide() {
-      console.log("当前指令关闭对话框移除事件");
-    }
-  }
-};
+
+  };
 </script>
 <style scoped>
 

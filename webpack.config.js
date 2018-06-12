@@ -10,6 +10,11 @@ module.exports = {
     filename: 'build.js',
     // assetsPublicPath: "./src/"
   },
+  // vue: {
+  //   loaders: {
+  //     js: 'babel?{"presets":["es2015"],"plugins": ["transform-object-rest-spread"]}'
+  //   }
+  // },
   module: {
     rules: [{
         test: /\.vue$/,
@@ -20,14 +25,14 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/,  
-        loader: 'babel-loader',
+        test: /\.js$/,
+        loader: 'babel-loader?{"presets":["env"],"plugins": ["transform-object-rest-spread"]}',
         exclude: /node_modules/
       },
       {
-          test: /\.scss$/,
-          include:"/src/",
-          loaders:  ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.scss$/,
+        include: "/src/",
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.css$/,
@@ -43,7 +48,8 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
+
     ]
   },
   resolve: {
@@ -68,7 +74,8 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      "windows.jQuery": "jquery"
+      "windows.jQuery": "jquery",
+
     })
   ]
 

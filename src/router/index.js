@@ -19,158 +19,196 @@ import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
 import WaterFall from './../components/WaterFall.vue';
 import Company from './../components/Company.vue';
+import Login from './../components/Login.vue';
+import IndexVue from './../components/Index.vue';
 
+
+
+import store from './../store/index.js';
 Vue.use(Router);
 
 let router = new Router({
-  // mode: "history",
+  mode: "history",
   routes: [{ //每一个链接都是一个对象
       path: '/', //链接路径
-      name: 'begin', //路由名称，
-      component: Begin //对应的组件模板
-    },
-    {
-      path: '/main',
-      name: 'main',
-      component: resolve => require(['./../components/Main.vue'], resolve)
-    },
-    {
-      path: "/welcome",
-      name: "welcome",
-      component: Welcome,
-      //此路由器单独使用此回调
-      beforeEnter: (to, from, next) => {
-        console.log(
-          new Date().getHours() +
-          ':' + new Date().getMinutes() +
-          ':' + new Date().getSeconds() + "的值是:" +
-          "开始beforeEnter");
-        next();
-      }
-    },
-    {
-      path: "/welcome/:name", //在页面中注入参数
-      name: "welcome",
-      component: Welcome
-    },
-    //网易云音乐APP 
-    // {
-    //   path: "/music",
-    //   name: "music",
-    //   component: Music
-    // },
-    {
-      path: "/water",
-      name: "water",
-      component: WaterFall
-    },
-    {
-      path: "/music",
-      name: "music",
-      component: Music,
+      // name: 'index', //路由名称，
+      component: IndexVue, //对应的组件模板
+      meta: { requireAuth: true },
       children: [{
-          path: '',
-          component: MusicSearch
+          path: '/',
+          name: 'begin',
+          component: Begin
         },
         {
-          path: 'user/:id',
-          component: MusicUser,
-          name: "musicuser"
-        }
-      ]
-    },
-    {
-      path: "/know",
-      name: "know",
-      meta: {
-        requireAuth: true
-      },
-      component: Know,
-    }, {
+          path: '/main',
+          name: 'main',
+          component: resolve => require(['./../components/Main.vue'], resolve)
+        }, {
+          path: "/welcome",
+          name: "welcome",
+          component: Welcome,
+          //此路由器单独使用此回调
+          beforeEnter: (to, from, next) => {
+            console.log(
+              new Date().getHours() +
+              ':' + new Date().getMinutes() +
+              ':' + new Date().getSeconds() + "的值是:" +
+              "开始beforeEnter");
+            next();
+          }
+        }, {
+          path: "/welcome/:name", //在页面中注入参数
+          name: "welcome",
+          component: Welcome
+        },
+        {
+          path: "/water",
+          name: "water",
+          component: WaterFall
+        },
+        {
+          path: "/music",
+          name: "music",
+          component: Music,
+          children: [{
+              path: '',
+              component: MusicSearch
+            },
+            {
+              path: 'user/:id',
+              component: MusicUser,
+              name: "musicuser"
+            }
+          ]
+        },
+        {
+          path: "/know",
+          name: "know",
+          meta: {
+            requireAuth: true
+          },
+          component: Know,
+        }, {
 
-      path: "/show",
-      name: "show",
-      component: Show,
-    },
-    {
-      path: "/point",
-      name: "point",
-      component: resolve => require(['./../components/Point.vue'], resolve),
-    },
-    {
-      path: "/user",
-      name: "user",
-      component: User,
-      children: [{
-          path: 'info/:id',
-          component: UserInfo,
-          name: "userinfo"
+          path: "/show",
+          name: "show",
+          component: Show,
         },
         {
-          path: 'list',
-          component: UserList,
-          name: "userlist"
+          path: "/point",
+          name: "point",
+          component: resolve => require(['./../components/Point.vue'], resolve),
+        },
+        {
+          path: "/user",
+          name: "user",
+          component: User,
+          children: [{
+              path: 'info/:id',
+              component: resolve => require(['./../components/UserInfo.vue'], resolve),
+              name: "userinfo"
+            },
+            {
+              path: 'list',
+              component: UserList,
+              name: "userlist"
+            }
+          ]
+        },
+        {
+          path: "/company",
+          name: "company",
+          component: resolve => require(['./../components/Company.vue'], resolve),
         }
       ]
     },
-    {
-      path: "/company",
-      name: "company",
-      component: resolve => require(['./../components/Company.vue'], resolve),
-    }
+    { //每一个链接都是一个对象
+      path: '/login', //链接路径
+      name: 'login', //路由名称，
+      component: Login //对应的组件模板
+    },
   ]
 });
+
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(m => m.meta.requireAuth)) {
+    if (store.state.login.isLogin) { // 已经登陆
+      next();
+    } else {
+      if (to.fullPath != '/') {
+        next({ path: '/login', query: { redirect: to.fullPath.substr(1) } })　
+      } else {
+        next({ path: '/login' });
+      }
+    }
+  } else {
+    next();
+  }
+});
+
 
 // //最先开始执行 全局前置守卫
 /**
  * 拦截功能 
  * @returns 
  */
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
 
-  if (to.matched.some(res => res.meta.requireAuth)) {
-    Vue.prototype.$confirm(
-      "提示",
-      '当前页面涉及到登陆拦截等功能,确定跳转吗?',
-      $content => {
-        //确定按钮
-        next()
-      },
-      $content => {
-        //取消按钮
-        //提示用户
-        Vue.prototype.$alert(
-          "提示",
-          "您将跳转到周杰伦页面",
-          $content => {
-            //点击确定按钮进行操作(YES)
-            next({
-              name: "userinfo",
-              params: {
-                id: 1
-              }
-            });
-          }
-        );
+//   if (to.matched.some(res => res.meta.requireAuth)) {
+//     Vue.prototype.$confirm(
+//       "提示",
+//       '当前页面涉及到登陆拦截等功能,确定跳转吗?',
+//       $content => {
+//         //确定按钮
+//         next()
+//       },
+//       $content => {
+//         //取消按钮
+//         //提示用户
+//         Vue.prototype.$alert(
+//           "提示",
+//           "您将跳转到周杰伦页面",
+//           $content => {
+//             //点击确定按钮进行操作(YES)
+//             next({
+//               name: "userinfo",
+//               params: {
+//                 id: 1
+//               }
+//             });
+//           }
+//         );
 
-      }
-    );
+//       }
+//     );
 
-  } else {
-    next()
-  }
-});
+//   } else {
+//     next()
+//   }
+// });
+
+
 // 和上个区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用。
 //全局解析守卫
 router.beforeResolve((to, from, next) => {
-  console.log("开始beforeResolve");
+  // console.log("开始beforeResolve");
   next();
 
 });
 // 全局后置钩子
 router.afterEach((to, from) => {
   // 不会接受 next 函数也不会改变导航本身
-  console.log("开始afterEach");
+  // console.log("开始afterEach");
 });
+
+
+router.redirect = (path) => {
+  if (path) {
+    router.push({
+      path: path
+    })
+  }
+}
 
 export default router;

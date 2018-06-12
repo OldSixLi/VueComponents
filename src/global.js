@@ -14,7 +14,7 @@ import AjaxSearch from './test/AjaxSearch.vue';
 import Al from './test/Al.vue';
 import TimeLine from './test/TimeLine.vue';
 import ImgIntroducePanel from './layout/ImgIntroducePanel.vue';
-import HtOrderList from './test/HtOrderList.vue'
+import HtOrderList from './test/HtOrderList.vue'; 
 
 //ht组件
 import HtModal from './ht/HtModal.vue';
@@ -48,6 +48,7 @@ import LoadBtn from './test/LoadBtn.vue';
 import OpenIcon from './test/OpenIcon.vue';
 import Skill from './test/Skill.vue';
 import Load from './layout/Load.vue';
+
 
 //NOTE 指令
 import './directive/randomImg.js';

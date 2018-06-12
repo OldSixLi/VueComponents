@@ -37,17 +37,24 @@
       trueLabel: [String, Number],
       falseLabel: [String, Number]
     },
-    data: function() {
+    data: function () {
       //组件内数据部分
       return {
         selfModel: false,
         focus: false
       };
     },
-    mounted: function() {
+    mounted: function () {
       //组件生成时调用
     },
-    methods: {
+    methods: { 
+      //当下点击
+      click: function click() {
+        this.$emit("click");
+      },
+      change: function change() {
+        this.$emit("change");
+      },
       addToStore() {
         if (
           //判断当前的模型是否为数组，并且
@@ -125,7 +132,7 @@
         return this._checkboxGroup ? this._checkboxGroup.value : this.value;
       }
     },
-    created: function() {
+    created: function () {
       this.checked && this.addToStore();
     }
   };
@@ -134,9 +141,8 @@
   .el-checkbox {
     margin-right: 15px;
   }
-  
+
   .el-checkbox+.el-checkbox {
-    /* margin-right: 15px; */
     margin-left: 0;
   }
 </style>

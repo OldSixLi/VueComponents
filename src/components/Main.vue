@@ -99,7 +99,7 @@
                 </panel>
                 <panel title="复选框组件">
                   <label v-for="x in PersonsList">
-                    <ht-checkbox v-model="totalPrice" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
+                    <ht-checkbox v-model="totalPrice" @change="checkBoxChange()" :label='x.price' name='cfWuqis'> {{x.name+'('+x.price+'元)　'}}</ht-checkbox>
                   </label>
                   <p> 总共花费了 {{arrSum(totalPrice)}}元</p>
                 </panel>
@@ -393,6 +393,9 @@
       }, 0);
     },
     methods: {
+      checkBoxChange(){
+        // alert('a')
+      },
       showTabFun(str) {
         this.$alert("提示", "当前显示的tab模块是:" + str);
       },
