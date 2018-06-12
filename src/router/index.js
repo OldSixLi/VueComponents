@@ -6,19 +6,19 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Welcome from './../components/Welcome.vue';
-import Main from './../components/Main.vue';
+// import Main from './../components/Main.vue';
 import Begin from './../components/Begin.vue';
 import Know from './../components/Know.vue';
 import Music from './../components/music/Music.vue';
 import MusicUser from './../components/music/MusicUser.vue';
 import MusicSearch from './../components/music/MusicSearch.vue';
-import Point from './../components/Point.vue';
+// import Point from './../components/Point.vue';
 import User from './../components/User.vue';
 import Show from './../components/Show.vue';
-import UserInfo from './../components/UserInfo.vue';
+// import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
 import WaterFall from './../components/WaterFall.vue';
-import Company from './../components/Company.vue';
+// import Company from './../components/Company.vue';
 import Login from './../components/Login.vue';
 import IndexVue from './../components/Index.vue';
 
