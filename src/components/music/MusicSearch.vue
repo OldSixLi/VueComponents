@@ -5,10 +5,7 @@
       <router-view></router-view>
     </transition>
     <div class="row">
-      <ht-tabs active="网易云搜索">
-        <!-- <ht-tab title="1">
-          <ht-class :config="config" :data="classData" @result="result" @cancel="cancel"></ht-class>
-        </ht-tab> -->
+      <ht-tabs active="网易云搜索"> 
         <ht-tab title="网易云搜索">
           <!-- 列表部分 -->
           <div class="col-md-9 col-sm-12 col-xs-12">
@@ -40,14 +37,17 @@
                         <a href="javascript:;" @click='songDetail(x.id)' :title="x.name">{{x.name}}</a>
                       </td>
                       <td>
-                        <a :href="x.artists[0].id" :title="x.artists[0].name">{{ x.artists[0].name }}</a>
+                        <!-- <a :href="x.artists[0].id" :title="x.artists[0].name">{{ x.artists[0].name }}</a> -->
+
+                        <!-- <router-view name="path"></router-view> -->
+                        <router-link :to="'/music/user/'+ x.artists[0].id" >{{ x.artists[0].name }}</router-link>
                       </td>
                       <td>
                         <a :href="x.album.id" :title="x.album.name">{{ x.album.name}}</a>
                       </td>
                       <!-- 此处是针对时长的计算 -->
                       <td class="text-center">
-                        {{ (Math.floor((Math.floor(x.duration/1000))/60)>9? Math.floor((Math.floor(x.duration/1000))/60): ('0'+Math.floor((Math.floor(x.duration/1000))/60))) +':'+ ((Math.floor(x.duration/1000)%60)>9? (Math.floor(x.duration/1000)%60): ('0'+(Math.floor(x.duration/1000)%60))) }}
+                        {{x.duration | songDuration}}
                       </td>
                     </tr>
                     <tr v-show="!songList.length">
@@ -63,7 +63,6 @@
           </div>
           <!-- 歌曲详情部分 -->
           <div class="col-md-3 col-sm-12 col-xs-12">
-
             <h2 class="text-center">详情</h2>
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -92,10 +91,8 @@
             </div>
           </div>
         </ht-tab>
-
       </ht-tabs>
     </div>
-
   </div>
 </template>
 <script>
@@ -106,143 +103,6 @@
     data: function() {
       //组件内数据部分
       return {
-        classData: {
-          // "wholeDisable": true, //全部文档禁用(只读)NOTE 此属性针对整个文档适用
-          "studentCount": 4510,
-          "feeType": "P",
-          "transVip": "",
-          "scoreRadio": "1",
-          "scoreKindRadio": "1",
-          "allowVip": ["allowVip", "allowAbsent", "vipBest", "vipfree", "allowAbandon"],
-          "useCourseTicket": "Y",
-          "name": "自定义名称课程",
-          "type": "D",
-          "lineType": "F",
-          "vipPrice": 0,
-          "transVipArr": ["not_vip_give", "trans_vip"],
-          "begin_time": "2018-04-10 17:33:13",
-          "end_time": "2018-04-26 17:30:15",
-          "mutiplySale": "M*N",
-          "mutiplDes": "单价乘以人数",
-          "courdetail": [{
-            "address": "线上",
-            "time": "2018-04-10 17:33:31"
-          }],
-          "teacherId": "3",
-          "singleCount": 123,
-          "nonVipPrice": 13,
-          "score": "123",
-          "phone": "312",
-          "introduction": "213213",
-          "name_err": "请填写相关姓名"
-        },
-
-        //配置项
-        config: {
-          //课程名称
-          name: {
-            disabled: false,
-            default: "默认课程名称",
-            show: true
-          },
-          // 任课教师
-          teacherId: {
-            default: ""
-          },
-          // 课程类型 D:单次课程 X:系列课程
-          type: {
-            default: "D"
-          },
-          // 听课方式 O:线上课程 F:线下课程
-          lineType: {
-            default: "F"
-          },
-          transVipArr: {
-            default: ["not_vip_give", "trans_vip"]
-          },
-          // 课程属性[checkbox以数组形式存储值] ["vipfree", "allowVip"]
-          allowVip: {
-            default: []
-          },
-          // 报名人数
-          studentCount: {
-            default: ""
-          }, // 单账户参加人数
-          singleCount: {
-            default: ""
-          }, // 报名开始时间
-          begin_time: {
-            default: ""
-          }, // 报名结束时间
-          end_time: {
-            default: ""
-          },
-          // [赠送标志]会员赠送 NOTE:只允许"" 和 "Y" 值
-          transVip: {
-            default: ""
-          },
-          // [赠送标志]非会员赠送 NOTE:只允许"" 和 "Y" 值
-          notVipGive: {
-            default: ""
-          },
-          // 会员赠送产品
-          vipGoodsId: {
-            default: ""
-          },
-          // 非会员赠送产品
-          notVipGoodsId: {
-            default: ""
-          },
-          // 收费类型 F:免费  P:收费
-          feeType: {
-            default: "F"
-          },
-          // 会员价格 与 非会员差价 NOTE 两者show属性必须保持一致
-          vipPrice: {
-            default: ""
-          },
-          nonVipPrice: {
-            default: ""
-          },
-          // 是否赠送积分 1:是 3:否
-
-          scoreRadio: {
-            default: ""
-          },
-          // 积分赠送方式  1:价格百分比 2:固定积分
-          scoreKindRadio: {
-            default: ""
-          },
-
-          // 积分计算规则 百分比或固定数值
-          score: {
-            default: ""
-          },
-          // 是否需使用听课券
-          useCourseTicket: {
-            default: ""
-          },
-          // 咨询电话
-          phone: {
-            default: ""
-          },
-          // 多人参加计费规则(一般设置为固定值)
-          mutiplySale: {
-            default: "M*N"
-          },
-          // 规则说明(一般设置为固定值)
-          courdetail: {
-            default: [],
-            show: false
-          },
-          mutiplDes: {
-            default: ""
-          },
-          // 课程介绍
-          introduction: {
-            default: ""
-          }
-        },
         songList: [],
         word: "二手玫瑰",
         pageOption: {
@@ -266,7 +126,11 @@
     },
     mounted: function() {
       this.getSongList(1);
-      console.log(JSON.parse('{"studentCount":4510,"feeType":"P","transVip":"","scoreRadio":"1","scoreKindRadio":"1","allowVip":["allowVip","allowAbsent","vipBest","vipfree","allowAbandon"],"useCourseTicket":"Y","name":"自定义名称课程","type":"D","lineType":"F","vipPrice":0,"transVipArr":["not_vip_give","trans_vip"],"begin_time":"2018-04-10 17:33:13","end_time":"2018-04-26 17:30:15","mutiplySale":"M*N","mutiplDes":"单价乘以人数","notVipGoodsId":"TEST-04","courdetail":[{"address":"线上","time":"2018-04-10 17:33:31"}],"vipGoodsId":"TEST-03","teacherId":"3","singleCount":123,"nonVipPrice":13,"score":"123","phone":"312","introduction":"213213","name_err":"请填写相关姓名"}'));
+    },
+    filters: {
+      songDuration(duration) {
+        return (Math.floor((Math.floor(duration / 1000)) / 60) > 9 ? Math.floor((Math.floor(duration / 1000)) / 60) : ('0' + Math.floor((Math.floor(duration / 1000)) / 60))) + ':' + ((Math.floor(duration / 1000) % 60) > 9 ? (Math.floor(duration / 1000) % 60) : ('0' + (Math.floor(duration / 1000) % 60)));
+      }
     },
     methods: {
       cancel() {

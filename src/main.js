@@ -1,6 +1,4 @@
 import Vue from 'vue';
-// import $ from 'jquery';
-import Vuex from 'vuex';
 
 //请求框架
 import Axios from 'axios';
@@ -9,9 +7,8 @@ import Axios from 'axios';
 
 //路由
 import router from './router/index.js';
+// vuex
 import store from './store/index';
-//引入全局组件和指令
-import globals from './global.js';
 
 //引入插件
 import pluginPopBar from './plugin/PopBar';
@@ -22,29 +19,26 @@ import './assets/css/bootstrap.min.css';
 import './assets/js/bootstrap.js';
 
 window.Vue = Vue;
-window.log = str => console.log(str);
-
 
 Vue.use(pluginPopBar);
 Vue.use(pluginNotice);
 Vue.prototype.$http = Axios;
-//注册插件 
-// console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-// console.log(router);
-// console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+
 var vueBlock = new Vue({
   el: '#app',
   router,
   store,
   template: '<app></app>',
   beforeCreate() {
-    console.log("Loading....");
+    // console.log("Loading....");
   },
   created() {
-    console.log("结束Loading");
+    // console.log("结束Loading");
   }
-})
-window.eventBus=new Vue();
+});
+
+//声明全局eventBus
+window.eventBus = new Vue();
 
 //声明HtmlFun
 /**

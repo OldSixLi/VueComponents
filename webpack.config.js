@@ -10,11 +10,6 @@ module.exports = {
     filename: 'build.js',
     // assetsPublicPath: "./src/"
   },
-  // vue: {
-  //   loaders: {
-  //     js: 'babel?{"presets":["es2015"],"plugins": ["transform-object-rest-spread"]}'
-  //   }
-  // },
   module: {
     rules: [{
         test: /\.vue$/,

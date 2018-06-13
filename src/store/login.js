@@ -8,7 +8,7 @@
 /* jshint esversion: 6 */
 
 import router from './../router/index';
-let storage = window.localStorage;
+let storage = window.sessionStorage;
 
 const loginModule = {
   state: {

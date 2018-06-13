@@ -56,127 +56,127 @@
               </div>
                <template v-if="$index%4==3">
                 <div style="clear:both;"></div>
-              </template>  
-            </template>
-          </div>
-        </ht-tab>
-        <ht-tab title="<b>歌手详情</b>">
-          <br>
-          <p>
-            <b>{{info.name}}简介</b>
-          </p>
-          <p class="p-word">{{detail.briefDesc}}</p>
-          <hr>
-          <template v-for="(x,$index) in detail.introduction">
+              </template>
+</template>
+</div>
+</ht-tab>
+<ht-tab title="<b>歌手详情</b>">
+  <br>
+  <p>
+    <b>{{info.name}}简介</b>
+  </p>
+  <p class="p-word">{{detail.briefDesc}}</p>
+  <hr>
+  <template v-for="(x,$index) in detail.introduction">
             <p>
               <b>{{x.ti}}</b>
             </p>
             <p class="p-word">{{x.txt}}</p>
           </template>
 
-        </ht-tab>
-      </ht-tabs>
-    </div>
-    <hr>
+</ht-tab>
+</ht-tabs>
+</div>
+<hr>
 
-  </div>
+</div>
 </template>
 <script>
-import router from "./../../router/index.js";
-export default {
-  name: "MusicUser",
-  router,
-  data: function() {
-    return {
-      userId: "",
-      // 歌手信息
-      info: {},
-      // 热门歌曲
-      hot: [],
-      // 相似歌手
-      similarList: [],
-      detail: {}
-    };
-  },
-  mounted: function() {
-    this.userId = this.$route.params.id;
-    this.getUser(this.userId);
-    this.getMV(this.userId);
-    this.getDetail(this.userId);
-  },
-  methods: {
-    result(data) {
-      console.log(JSON.stringify(data));
+  import router from "./../../router/index.js";
+  export default {
+    name: "MusicUser",
+    router,
+    data: function() {
+      return {
+        userId: "",
+        // 歌手信息
+        info: {},
+        // 热门歌曲
+        hot: [],
+        // 相似歌手
+        similarList: [],
+        detail: {}
+      };
     },
-    getUser(userId) {
-      let self = this;
-      $.ajax({
-        type: "GET",
-        url: "http://localhost:9999/artists",
-        data: {
-          id: userId
-        },
-        dataType: "json",
-        success: function(data, textStatus, jqXHR) {
-          if (data != null && data != "") {
-            if (data.code == 200) {
-              self.info = data.artist;
-              self.hot = data.hotSongs;
-            } else {
-            }
-          } else {
+    mounted: function() {
+      this.userId = this.$route.params.id;
+      this.getUser(this.userId);
+      this.getMV(this.userId);
+      this.getDetail(this.userId);
+    },
+    methods: {
+      result(data) {
+        console.log(JSON.stringify(data));
+      },
+      getUser(userId) {
+        let self = this;
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:9999/artists",
+          data: {
+            id: userId
+          },
+          dataType: "json",
+          success: function(data, textStatus, jqXHR) {
+            if (data != null && data != "") {
+              if (data.code == 200) {
+                self.info = data.artist;
+                self.hot = data.hotSongs;
+              } else {}
+            } else {}
           }
-        }
-      });
-    },
-    getMV(userId) {
-      let self = this;
-      $.ajax({
-        type: "GET",
-        url: "http://localhost:9999/artist/mv",
-        data: {
-          id: userId
-        },
-        dataType: "json",
-        success: function(data, textStatus, jqXHR) {
-          if (data != null && data != "") {
-            self.similarList = data.mvs;
-          }
-        }
-      });
-    },
-    getDetail(userId) {
-      let self = this;
-      $.ajax({
-        type: "GET",
-        url: "http://localhost:9999/artist/desc",
-        data: {
-          id: userId
-        },
-        dataType: "json",
-        success: function(data, textStatus, jqXHR) {
-          if (data != null && data != "") {
-            if (data.code == 200) {
-              self.detail = data;
+        });
+      },
+      getMV(userId) {
+        let self = this;
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:9999/artist/mv",
+          data: {
+            id: userId
+          },
+          dataType: "json",
+          success: function(data, textStatus, jqXHR) {
+            if (data != null && data != "") {
+              self.similarList = data.mvs;
             }
           }
-        }
-      });
+        });
+      },
+      getDetail(userId) {
+        let self = this;
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:9999/artist/desc",
+          data: {
+            id: userId
+          },
+          dataType: "json",
+          success: function(data, textStatus, jqXHR) {
+            if (data != null && data != "") {
+              if (data.code == 200) {
+                self.detail = data;
+              }
+            }
+          }
+        });
+      },
+      back() {
+        // router.push({
+        this.$router.back()
+          //   path: "/music"
+          // });
+      }
     },
-    back() {
-      router.push({
-        path: "/music"
-      });
+    beforeRouteEnter: (to, from, next) => {
+      const userid = to.params.id;
+      next();
     }
-  },
-  beforeRouteEnter: (to, from, next) => {
-    const userid = to.params.id;
-    next();
-  }
-};
+  };
 </script>
 <style scoped>
-.p-word{
-  line-height:28px;text-indent:2em;
-}
+  .p-word {
+    line-height: 28px;
+    text-indent: 2em;
+  }
 </style>

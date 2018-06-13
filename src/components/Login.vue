@@ -5,10 +5,10 @@
             <div class="inputBlock">
                 <ht-form ref="wuqiku" info-type="info" :horizontal="true">
                     <ht-form-group label="用户名：" label-width="20" name="username" :require="true" require-message="请输入用户名">
-                        <input type="text" name="username" v-model="username" class="form-control">
+                        <input type="text" name="username" v-model="username" class="form-control" @keypress.enter="login">
                     </ht-form-group>
                     <ht-form-group label="密码：" label-width="20" name="password" :require="true" require-message="请输入用户名">
-                        <input type="password" name="password" v-model="password" class="form-control">
+                        <input type="password" name="password" v-model="password" class="form-control"  @keypress.enter="login">
                     </ht-form-group>
                 </ht-form>
             </div>
@@ -19,15 +19,9 @@
     </div>
 </template>
 <script>
-  import router from "./../router/index.js";
   export default {
     name: "Login",
-    router,
-    props: {
-      //对外获取的数据
-    },
     data: function() {
-      //组件内数据部分
       return {
         username: "",
         password: ""
@@ -37,10 +31,6 @@
       isLogin() {
         return this.$store.state.isLogin;
       }
-    },
-    mounted: function() {
-      //组件生成时调用
-
     },
     methods: {
       login() {

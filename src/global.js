@@ -4,7 +4,6 @@
  */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
 
 //测试组件
 import App from './App.vue';
@@ -14,7 +13,7 @@ import AjaxSearch from './test/AjaxSearch.vue';
 import Al from './test/Al.vue';
 import TimeLine from './test/TimeLine.vue';
 import ImgIntroducePanel from './layout/ImgIntroducePanel.vue';
-import HtOrderList from './test/HtOrderList.vue'; 
+import HtOrderList from './test/HtOrderList.vue';
 
 //ht组件
 import HtModal from './ht/HtModal.vue';
@@ -98,4 +97,3 @@ Vue.component('ht-sell', HtSell);
 Vue.component('input-num', InputNum);
 Vue.component('skill', Skill);
 Vue.component('ht-order-list', HtOrderList);
-

@@ -22,16 +22,15 @@ import WaterFall from './../components/WaterFall.vue';
 import Login from './../components/Login.vue';
 import IndexVue from './../components/Index.vue';
 
-
-
+//Vuex
 import store from './../store/index.js';
 Vue.use(Router);
 
 let router = new Router({
   mode: "history",
-  routes: [{ //每一个链接都是一个对象
+  routes: [{
+      //每一个链接都是一个对象
       path: '/', //链接路径
-      // name: 'index', //路由名称，
       component: IndexVue, //对应的组件模板
       meta: { requireAuth: true },
       children: [{
@@ -39,11 +38,14 @@ let router = new Router({
           name: 'begin',
           component: Begin
         },
+        // main
         {
           path: '/main',
           name: 'main',
           component: resolve => require(['./../components/Main.vue'], resolve)
-        }, {
+        },
+        // welcome
+        {
           path: "/welcome",
           name: "welcome",
           component: Welcome,
@@ -56,31 +58,19 @@ let router = new Router({
               "开始beforeEnter");
             next();
           }
-        }, {
+        },
+        {
           path: "/welcome/:name", //在页面中注入参数
           name: "welcome",
           component: Welcome
         },
+        // water
         {
           path: "/water",
           name: "water",
           component: WaterFall
         },
-        {
-          path: "/music",
-          name: "music",
-          component: Music,
-          children: [{
-              path: '',
-              component: MusicSearch
-            },
-            {
-              path: 'user/:id',
-              component: MusicUser,
-              name: "musicuser"
-            }
-          ]
-        },
+        // know
         {
           path: "/know",
           name: "know",
@@ -88,17 +78,21 @@ let router = new Router({
             requireAuth: true
           },
           component: Know,
-        }, {
+        },
+        // show 
+        {
 
           path: "/show",
           name: "show",
           component: Show,
         },
+        // point
         {
           path: "/point",
           name: "point",
           component: resolve => require(['./../components/Point.vue'], resolve),
         },
+        // user
         {
           path: "/user",
           name: "user",
@@ -115,22 +109,48 @@ let router = new Router({
             }
           ]
         },
+        // company
         {
           path: "/company",
           name: "company",
           component: resolve => require(['./../components/Company.vue'], resolve),
+        },
+        // music
+        {
+          path: "/music",
+          name: "music",
+          component: Music,
+          children: [{
+              path: '/',
+              component: MusicSearch,
+              meta: {
+                keepAlive: true // 不需要被缓存
+              }
+            },
+            {
+              path: 'user/:id',
+              component: MusicUser,
+              name: "musicuser",
+              meta: {
+                keepAlive: false // 不需要被缓存
+              }
+            }
+          ]
         }
       ]
     },
-    { //每一个链接都是一个对象
-      path: '/login', //链接路径
-      name: 'login', //路由名称，
-      component: Login //对应的组件模板
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
   ]
 });
 
-
+/**
+ * 登陆权限校验 
+ * @returns 
+ */
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.requireAuth)) {
     if (store.state.login.isLogin) { // 已经登陆
@@ -202,7 +222,10 @@ router.afterEach((to, from) => {
   // console.log("开始afterEach");
 });
 
-
+/**
+ * 自定义方法 
+ * @returns 
+ */
 router.redirect = (path) => {
   if (path) {
     router.push({

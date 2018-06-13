@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
     <!-- //输入框部分 -->
-    <input type="text" class="form-control" :value="currentValue" @input="handleInput" @focus="handleInput" @keypress.enter="searchClick" :placeholder="placeholder">
+    <input type="text" class="form-control" :value="currentValue" @input="handleInput" @focus="handleInput" @keypress.enter="searchClick" :placeholder="placeholder" ref="inputs">
     <!-- @blur="blurFn" 失去焦点时如何处理-->
     <!-- //AJAX部分 -->
     <transition name="panel">
@@ -48,6 +48,7 @@
       searchClick: function() {
         this.resultList = [];
         this.authorList = [];
+        this.$refs.inputs.blur();
         this.$emit("search", this.value);
       },
       /**
@@ -57,58 +58,58 @@
       authorClick(event, authorId) {},
       handleInput(event) {
         //NOTE:这个方法不能用中文参数
-        var _self = this;
-        $.ajax({
-          type: "GET",
-          url: "http://localhost:9999/search/suggest",
-          data: {
-            keywords: event.target.value,
-            type:'1',
-            limit :10
-          },
-          dataType: "json",
-          success: function(data) {
-            if (data.code == 200) {
-              _self.resultList = data.result.songs;
+        let _self = this;
+        let value = event.target.value;
+        if (value) {
+          Promise.all([
+            _self.$ajax({
+              type: "GET",
+              url: "http://localhost:9999/search/suggest",
+              data: {
+                keywords: value,
+                type: '1',
+                limit: 10
+              }
+            }),
+            _self.$ajax({
+              type: "GET",
+              url: "http://localhost:9999/search/suggest",
+              data: {
+                keywords: value,
+                type: '100',
+                limit: 10
+              },
+            })
+          ]).then(arr => {
+            let data1 = arr[0];
+            let data2 = arr[1];
+            if (data1.code == 200) {
+              _self.resultList = (data1.result && data1.result.songs) || [];
             } else {
               _self.resultList = [];
             }
-          },
-          error: function(response) {
-            _self.resultList = [];
-          }
-        });
 
-
-        $.ajax({
-          type: "GET",
-          url: "http://localhost:9999/search/suggest",
-          data: {
-            keywords: event.target.value,
-            type:'100',
-            limit :10
-          },
-          dataType: "json",
-          // async:false,
-          success: function(data) {
-            if (data.code == 200) {
-              _self.authorList = data.result.artists;
+            if (data2.code == 200) {
+              _self.authorList = (data2.result && data2.result.artists) || [];
             } else {
               _self.authorList = [];
             }
-          },
-          error: function(response) {
+          }, err => {
+            _self.resultList = [];
             _self.authorList = [];
-          }
-        });
-        var value = event.target.value;
-        this.currentValue = event.target.value;
-        this.$emit("input", value); //触发 input 事件，并传入新值
+          })
+
+        } else {
+          _self.resultList = [];
+          _self.authorList = [];
+        }
+        this.currentValue = value;
+        this.$emit("input", value);
       },
 
       itemClick(event, id, user) {
         this.resultList = [];
-        this.authorList=[];
+        this.authorList = [];
         let _self = this;
         let node = event.target;
         let dataObj = {};
@@ -123,7 +124,7 @@
           //TODO 妈蛋 完犊子 这块不能用同步  得用promise
           //获取MP3链接 ②步 使用promise
           //NOTE promise的用法需要注意
-          var step1 = new Promise(function(resolve, reject) {
+          let step1 = new Promise(function(resolve, reject) {
             $.ajax({
               type: "GET",
               url: "http://localhost:9999/music/url",
@@ -158,7 +159,7 @@
             });
           });
           //获取歌曲详情 ①步 使用promise
-          var step2 = new Promise(function(resolve, reject) {
+          let step2 = new Promise(function(resolve, reject) {
             $.ajax({
               type: "GET",
               url: "http://localhost:9999/song/detail",
@@ -204,6 +205,7 @@
       },
       blurFn: function() {
         this.resultList = [];
+        this.authorList = [];
       },
       keyUp() {},
       keyDown() {}
@@ -216,6 +218,7 @@
         // console.log(this.$el.contains(e.target));
         if (!this.$el.contains(e.target)) {
           this.resultList = [];
+          this.authorList = [];
         }
       });
     }
@@ -279,4 +282,5 @@
     /* 隐藏缩短时间 */
     /* transition: all 0.01s ease; */
   }
+</style>
 </style>
