@@ -1,3 +1,5 @@
+<!-- 404页面 -->
+
 <template>
   <div class="fullScreen" id="fullScreen">
     <img class="rotating" :src="require('./../assets/img/spaceman.svg')">
@@ -10,8 +12,6 @@
   </div>
 </template>
 <script>
-  // import './../assets/js/404/hm.js';
-
   export default {
     name: "Error",
     mounted: function() {
