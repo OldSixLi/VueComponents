@@ -2,7 +2,7 @@
 
 <template>
   <div class="fullScreen" id="fullScreen">
-    <img class="rotating" :src="require('./../assets/img/spaceman.svg')">
+    <img class="rotating" src="http://om6fr85l4.bkt.clouddn.com/spaceman.svg">
     <div class="pagenotfound-text">
       <router-link to="/">
       <h1>Page lost in space</h1>
