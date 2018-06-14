@@ -9,6 +9,8 @@ import Axios from 'axios';
 import router from './router/index.js';
 // vuex
 import store from './store/index';
+//组件
+import globals from './global.js';
 
 //引入插件
 import pluginPopBar from './plugin/PopBar';
@@ -19,6 +21,7 @@ import './assets/css/bootstrap.min.css';
 import './assets/js/bootstrap.js';
 
 window.Vue = Vue;
+window.log = str => console.log(str);
 
 Vue.use(pluginPopBar);
 Vue.use(pluginNotice);
@@ -89,5 +92,5 @@ window.HtmlFun = {
       "提示",
       'id是' + id + '<br>名称是：' + name + '<br>问题是：' + problem
     );
-  }　　
+  }
 }

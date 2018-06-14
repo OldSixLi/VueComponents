@@ -8,6 +8,7 @@ import Router from 'vue-router';
 import Welcome from './../components/Welcome.vue';
 // import Main from './../components/Main.vue';
 import Begin from './../components/Begin.vue';
+import Error from './../components/Error.vue';
 import Know from './../components/Know.vue';
 import Music from './../components/music/Music.vue';
 import MusicUser from './../components/music/MusicUser.vue';
@@ -33,12 +34,13 @@ let router = new Router({
       path: '/', //链接路径
       component: IndexVue, //对应的组件模板
       meta: { requireAuth: true },
-      children: [{
+      children: [
+
+        {
           path: '/',
           name: 'begin',
           component: Begin
         },
-        // main
         {
           path: '/main',
           name: 'main',
@@ -136,7 +138,8 @@ let router = new Router({
               }
             }
           ]
-        }
+        },
+        // { path: '*', component: Error }
       ]
     },
     {
@@ -144,6 +147,11 @@ let router = new Router({
       name: 'login',
       component: Login
     },
+    {
+      path: '*',
+      component: Error,
+      // redirect: "/"
+    }
   ]
 });
 
