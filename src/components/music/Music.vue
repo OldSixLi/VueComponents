@@ -17,7 +17,7 @@
 </template>
 <script>
   export default {
-    name: "Music",
+    name: "Music"
   };
 </script>
 <style scoped>
