@@ -182,7 +182,6 @@
           "取消保存",
           function($content) {
             //点击确定按钮进行操作(YES)
-
           },
           function($content) {
             //提示框显示出来之后的操作(Ready)

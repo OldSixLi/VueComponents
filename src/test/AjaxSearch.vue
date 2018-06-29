@@ -5,7 +5,7 @@
     <!-- @blur="blurFn" 失去焦点时如何处理-->
     <!-- //AJAX部分 -->
     <transition name="panel">
-      <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="(resultList&&resultList.length)||(authorList&&authorList.length)">
+      <div class="resultPanel" :style="{'width':'50%'}" style="position:absolute;left:0;top:110%;background-color:#fff;box-shadow:0 0 7px 2px rgba(38,28,28,0.2);border-radius: 4px;" v-show="((resultList&&resultList.length)||(authorList&&authorList.length))&&isFocus">
         <ul style="padding:0;">
           <li v-for="(x,index) in resultList" :key="index" :data-song-id="x.id" :data-song-name="x.name" @click="itemClick($event,x.id)">{{x.name+(x.artists[0]?' - '+x.artists[0].name:'')}}</li>
           <hr>
@@ -41,11 +41,14 @@
       return {
         currentValue: this.value,
         resultList: [],
-        authorList: []
+        authorList: [],
+        isFocus: false
+
       };
     },
     methods: {
       searchClick: function() {
+        this.isFocus = false;
         this.resultList = [];
         this.authorList = [];
         this.$refs.inputs.blur();
@@ -60,6 +63,7 @@
         //NOTE:这个方法不能用中文参数
         let _self = this;
         let value = event.target.value;
+        this.isFocus = true;
         if (value) {
           Promise.all([
             _self.$ajax({
