@@ -11,7 +11,6 @@
           <hr>
           <li v-for="(y,i) in authorList" :key="i" :data-author-id="y.id" :data-song-name="y.name" @click="itemClick($event,y.id,'user')"><img :src="y.picUrl" alt="" class="img-author">{{" "+y.name}}</li>
         </ul>
-
       </div>
     </transition>
     <!-- //按钮部分 -->

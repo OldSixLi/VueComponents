@@ -5,20 +5,20 @@
       <div class="col-md-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation">
+          <li role="presentation" class="active">
             <a href="#home" aria-controls="home" role="tab" data-toggle="tab">表单</a>
           </li>
           <li role="presentation">
             <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">布局组件</a>
           </li>
-          <li role="presentation" class="active">
+          <li role="presentation">
             <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">其他组件</a>
           </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
           <!-- 第一个 -->
-          <div role="tabpanel" class="tab-pane " id="home">
+          <div role="tabpanel" class="tab-pane active" id="home">
             <div class="row">
               <div class="col-md-6">
                 <!-- 表单 -->
@@ -45,13 +45,29 @@
                       <input type="text" name="kuanglong" v-model="kuanglong" class="form-control" placeholder="请输入武器价格">
                     </ht-form-group>
                     <ht-form-group label="塞尔维亚M21：" label-width="20" name="weiya" :require="true" require-message="请选择您的武器">
-                      <ht-select class="form-control" name="weiya" v-model="sltValue">
+                      <!-- <ht-select class="form-control" name="weiya" v-model="sltValue">
                         <option value="">请选择</option>
                         <option value="FR-F2 寒冰">FR-F2 寒冰</option>
                         <option value="绿色烟雾弹">绿色烟雾弹</option>
                         <option value="金砖">金砖</option>
                         <option value="碳合金小刀">碳合金小刀</option>
-                      </ht-select>
+                      </ht-select> -->
+
+                      <ht-select v-model="sltValue" name="weiya">
+                          <option value="">请选择</option>
+                          <option value="1">终结者</option>
+                          <option value="2">幽灵猎手</option>
+                          <option value="3">疯狂宝贝</option>
+                          <option value="4">灵魂忍者</option>
+                          <option value="5">终结者</option>
+                          <option value="6">幽灵猎手</option>
+                          <option value="7">疯狂宝贝</option>
+                          <option value="8">灵魂忍者</option>
+                          <option value="9">终结者</option>
+                          <option value="10">幽灵猎手</option>
+                          <option value="11">疯狂宝贝</option>
+                          <option value="12">灵魂忍者</option>
+                        </ht-select>
                     </ht-form-group>
                     <ht-form-group label="购买人物：" label-width="20" name="cfWuqi" :require="true" require-message="请至少选择一个人物" min='2' min-message="请至少选择两位CF人物">
                       <template v-for="y in formPersonsList">
@@ -211,7 +227,7 @@
             </div>
           </div>
           <!-- 第三个 -->
-          <div role="tabpanel" class="tab-pane active" id="messages">
+          <div role="tabpanel" class="tab-pane " id="messages">
             <panel title="tab标签页组件">
               <ht-tabs>
                 <ht-tab title="第一个">
@@ -229,7 +245,6 @@
                 <ht-tab v-for="x in PersonsList" :title="x.name" :key="x.name">
                   <h1>{{x.name}}</h1>
                 </ht-tab>
-
               </ht-tabs>
 
             </panel>
@@ -243,11 +258,6 @@
               </skill>
             </panel>
 
-            <panel title="时间线组件">
-              <div style="height:1100px;position: relative;">
-                <time-line></time-line>
-              </div>
-            </panel>
 
             <panel title="表格组件">
               <span slot="header" class="pull-right">
@@ -255,8 +265,9 @@
               </span>
               <panel title="人员列表">
                 <ht-table slot="outer" ajaxurl="ma/users" :search-data="searchData" class="">
-                  <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"></column>
-                  <column slot name="性别" data-key="gender" align="right" filter="toGender"></column>
+                  <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"
+                    :sort="true"></column>
+                  <column slot name="性别" data-key="gender" align="center" filter="toGender" :sort="true"></column>
                   <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
                   <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
                   <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
@@ -269,6 +280,7 @@
               <p slot="footer">目前部分图标存在偏移的问题  待修改</p>
             </panel> -->
           </div>
+
         </div>
       </div>
     </div>
@@ -349,7 +361,7 @@
         }],
         formPersonsList: [],
         formTotalPrice: [19],
-        sltValue: "金砖"
+        sltValue: ""
       };
     },
     // beforeCreate(){
@@ -360,6 +372,8 @@
     // },
     mounted: function () {
       setTimeout(() => {
+        // this.searchData.currentPage = 4;
+        // alert('a')
         this.selectModel = "3";
       }, 3000);
       // this.getPerson();
@@ -393,7 +407,7 @@
       }, 0);
     },
     methods: {
-      checkBoxChange(){
+      checkBoxChange() {
         // alert('a')
       },
       showTabFun(str) {
@@ -406,9 +420,9 @@
           $content => {
             var val =
               $content
-                .find("#ainput")
-                .val()
-                .trim() || "您没有输入任何内容";
+              .find("#ainput")
+              .val()
+              .trim() || "您没有输入任何内容";
             this.$notifyMessage("您输入的值是<b>" + val + "</b>");
           },
           $content => {
@@ -424,9 +438,9 @@
           $content => {
             var val =
               $content
-                .find("#ainput")
-                .val()
-                .trim() || "您没有输入任何内容";
+              .find("#ainput")
+              .val()
+              .trim() || "您没有输入任何内容";
             this.$alert("提示", "您输入了<b>" + val + "</b>");
           },
           $content => {

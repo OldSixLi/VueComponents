@@ -1,43 +1,42 @@
 <template>
-<!-- 修复组件第二个slot不显示的问题 -->
+  <!-- 修复组件第二个slot不显示的问题 -->
   <div class="form-group" :class="{'has-error':validateError}" style="font-size:0;">
-      <!--根据横向或者纵向显示class与style -->
-      <label class="control-label" 
-        :class="{
+    <!--根据横向或者纵向显示class与style -->
+    <label class="control-label form-group-label" :class="{
           'text-right':isHorizontal,
           'text-left':!isHorizontal
-        }" 
-        :for="name" 
-        :style="{
+        }" :for="name" :style="{
           'width':isHorizontal?labelWidth+'%':'auto'
-        }" style="padding-top: 7px;font-size: 14px;">
+        }">
         {{label}}
       </label>
-      
-      <div 
-        :class="{'control-block':isHorizontal}" 
-        :style="{'width':(isHorizontal?(100-labelWidth):100)+'%'}">
-          <!--传入的内容 -->
-          <p :data-a="isHorizontal">
-            <slot></slot>
-          </p>
-          <transition name="errorinfo">
-            <span class="help-block" v-show="validateError">{{errorMessage}}</span>
-          </transition>
-      </div>
+
+    <div :class="{
+      'control-block':isHorizontal
+    }" :style="{
+      'width':(isHorizontal?(100-labelWidth):100)+'%'
+    }">
+      <!--传入的内容 -->
+      <p :data-a="isHorizontal">
+        <slot></slot>
+      </p>
+      <transition name="errorinfo">
+        <span class="help-block" v-show="validateError">{{errorMessage}}</span>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
   // NOTE 之前的版本中,有两处<slot>,利用v-if进行判断.这种写法,在development环境下可以正常显示,但是在compress之后,在网页端打开,却无法显示v-else时的<slot> 内容.关于此现象的原因暂未找到,只能将模板代码更改为只使用一处<slot>来解决此问题.
-  import Emitter from "./../mixins/emitter.js";
+  import Emitter from "./../../mixins/emitter.js";
   export default {
-    name: "HtFormGroup",
+    name: "MaFormGroup",
     mixins: [Emitter],
     props: {
       //对外获取的数据
       label: String,
-      labelWidth: String,
+      width: String,
       name: {
         type: String,
         required: true
@@ -47,7 +46,6 @@
         type: Boolean,
         default: false
       },
-      // 是否存在错误
       // 错误信息
       errorMessages: {
         type: String,
@@ -67,35 +65,33 @@
       maxlengthMessage: String,
       minlengthMessage: String
     },
-    data: function() {
+    data: function () {
       return {
         validateError: false,
         errorMessage: this.errorMessages,
         errorMessageList: [],
         isHorizontal: true,
-        inputType: ""
+        inputType: "",
+        labelWidth: this.width
       };
     },
-    mounted: function() {
-      // console.log("■■■■■■■■■■Group■■■■■■■■■■■■■■");
-      // console.log(this);
-      // console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    mounted: function () {
       //TODO  在此处就应该校验用户输入的规则
       //NOTE  特殊长度字符等相当于默认填写内容  需用到requireMessage进行显示
 
       //从父组件获取值horizontal,从而判断isHorizontal
-      console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-      console.log(this.$parent.$options.propsData["horizontal"]);
-      console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
       this.isHorizontal = this.$parent.$options.propsData["horizontal"];
-      this.$on("validate", function(infoType) {
+      //统一设置宽度
+      this.labelWidth = this.width || this.$parent.$options.propsData["labelWidth"];
+      this.$on("validate", function (infoType) {
         // console.log("表单[" + this.name + "]进行验证↓↓↓↓↓");
         this.validate(infoType);
       });
-      this.$on("clearValidate", function() {
+      this.$on("clearValidate", function () {
         this.clearValidate();
       });
     },
+
     methods: {
       dispatch(componentName, eventName, params) {
         var parent = this.$parent || this.$root;
@@ -111,8 +107,8 @@
         }
       },
       //清除校验状态
-      clearValidate: function() {
-        var _self = this;
+      clearValidate: function () {
+        let _self = this;
         _self.validateError = false;
       },
       /**
@@ -121,9 +117,9 @@
        * @returns
        */
       getDomValue(name) {
-        var _self = this;
-        var $modelDom = $(_self.$el).find("[name='" + name + "']");
-        var type = $modelDom.prop("type");
+        let _self = this;
+        let $modelDom = $(_self.$el).find("[name='" + name + "']");
+        let type = $modelDom.prop("type");
         _self.inputType = type;
         switch (type) {
           case "radio":
@@ -132,8 +128,8 @@
               .val();
             break;
           case "checkbox":
-            var item = [];
-            $('[name="' + name + '"]').each(function() {
+            let item = [];
+            $('[name="' + name + '"]').each(function () {
               if ($(this).is(":checked")) {
                 item.push($(this).val());
               }
@@ -145,17 +141,18 @@
             break;
         }
       },
+
       /**
        * 校验本字段
        * @returns
        */
-      validate: function(infoType) {
-        var _self = this;
+      validate: function (infoType) {
+        let _self = this;
         _self.validateError = false;
         _self.errorMessage = "";
         _self.errorMessageList = [];
-        var value = _self.getDomValue(_self.name); //获取值
-        console.log("[当前" + _self.name + "的值是]:" + value);
+        //获取值
+        let value = _self.getDomValue(_self.name);
         //验证非空输入
         if (_self.require) {
           if (!value || value.length == 0) {
@@ -172,8 +169,10 @@
               //如果不是checkbox类型
               if (!isNaN(value)) {
                 if (Number(value) < Number(_self.min)) {
+                  //添加错误信息
                   _self.validateError = true;
-                  _self.errorMessage = _self.minMessage ?
+                  _self.errorMessage =
+                    _self.minMessage ?
                     _self.minMessage :
                     "输入的值不能小于" + _self.min;
                   _self.errorMessageList.push(_self.errorMessage);
@@ -183,9 +182,11 @@
                 _self.errorMessageList.push("请输入数字");
               }
             } else {
+              // 如果是checkbox类型
               if (value == [] || value.length < Number(_self.min)) {
                 _self.validateError = true;
-                _self.errorMessage = _self.minMessage ?
+                _self.errorMessage =
+                  _self.minMessage ?
                   _self.minMessage :
                   "请至少选择" + _self.min + "项";
                 _self.errorMessageList.push(_self.errorMessage);
@@ -227,6 +228,7 @@
             return false;
           }
         }
+
         //验证长度
         if (_self.minlength) {
           if (!isNaN(_self.minlength)) {
@@ -239,9 +241,7 @@
               );
             }
           } else {
-            console.error(
-              "ERROR:[表单项目" + _self.name + "的minlength值需输入数字]"
-            );
+            console.error(`ERROR:[表单项目${_self.name }的minlength值需输入数字]`);
             return false;
           }
         }
@@ -258,14 +258,15 @@
             }
           } else {
             console.error(
-              "ERROR:[表单项目" + _self.name + "的maxlength值需输入数字]"
+              `ERROR:[表单项目${_self.name }的maxlength值需输入数字]`
             );
             return false;
           }
         }
+
         //正则表达式
         if (_self.pattern) {
-          var reg = new RegExp(_self.pattern);
+          let reg = new RegExp(_self.pattern);
           if (!reg.test(value)) {
             _self.validateError = true;
             _self.errorMessageList.push(
@@ -277,12 +278,12 @@
         }
         //处理错误
         _self.errorMessage = _self.errorMessageList[0] || "";
-        var checkResultObj = {
+        let checkResultObj = {
           itemName: _self.name,
           hasError: _self.validateError,
           errorMessage: _self.errorMessage
         };
-        var resultObj = {
+        let resultObj = {
           name: _self.name,
           value: value
         };
@@ -291,8 +292,9 @@
           _self.errorMessage = "";
           _self.validateError = false;
         }
+        // TODO 添加禁用或者readonly时  不校验的功能
         //向父组件通知
-        _self.dispatch("HtForm", "getresult", [checkResultObj, resultObj]);
+        _self.dispatch("MaForm", "getresult", [checkResultObj, resultObj]);
       }
     }
   };
@@ -366,4 +368,5 @@
   .control-block .el-checkbox, .control-block .el-radio{
     margin-top: 7px;
   }
+  
 </style>

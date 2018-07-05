@@ -604,299 +604,299 @@
         </div>
 </template>
 <script>
-    export default {
-        name: "HtOrderList",
-        props: {
-            currentOrderId: String, //查看详情时的OrderId
-            queState: String,
-            customerShxydm: String
-            //对外获取的数据
+  export default {
+    name: "HtOrderList",
+    props: {
+      currentOrderId: String, //查看详情时的OrderId
+      queState: String,
+      customerShxydm: String
+        //对外获取的数据
+    },
+    // '########:::::'###::::'########::::'###::::
+    //  ##.... ##:::'## ##:::... ##..::::'## ##:::
+    //  ##:::: ##::'##:. ##::::: ##:::::'##:. ##::
+    //  ##:::: ##:'##:::. ##:::: ##::::'##:::. ##:
+    //  ##:::: ##: #########:::: ##:::: #########:
+    //  ##:::: ##: ##.... ##:::: ##:::: ##.... ##:
+    //  ########:: ##:::: ##:::: ##:::: ##:::: ##:
+    // ........:::..:::::..:::::..:::::..:::::..::
+    data: function() {
+      //组件内数据部分
+      return {
+        // currentOrderId:"",
+        showLoading: false,
+        searchData: {
+          currentPage: 1,
+          customerShxydm: this.customerShxydm
         },
-        // '########:::::'###::::'########::::'###::::
-        //  ##.... ##:::'## ##:::... ##..::::'## ##:::
-        //  ##:::: ##::'##:. ##::::: ##:::::'##:. ##::
-        //  ##:::: ##:'##:::. ##:::: ##::::'##:::. ##:
-        //  ##:::: ##: #########:::: ##:::: #########:
-        //  ##:::: ##: ##.... ##:::: ##:::: ##.... ##:
-        //  ########:: ##:::: ##:::: ##:::: ##:::: ##:
-        // ........:::..:::::..:::::..:::::..:::::..::
-        data: function () {
-
-            //组件内数据部分
-            return {
-                // currentOrderId:"",
-                showLoading: false,
-                searchData: {
-                    currentPage: 1,
-                    customerShxydm: this.customerShxydm
-                },
-                locState: '2',
-                currentPanel: "list",
-                sellOrderDetail: {
-                    "point": "",
-                    "order": {},
-                    "items": [],
-                    "invoiceSendInfo": {},
-                    "goods": [],
-                    "gifts": null,
-                    "locState": 2,
-                    "agree": null,
-                    "orderId": "",
-                    "info": {}
-                },
-                detail: {
-                    "point": "",
-                    "order": {},
-                    "items": [],
-                    "invoiceSendInfo": {},
-                    "goods": [],
-                    "gifts": [],
-                    "locState": 2,
-                    "agree": null,
-                    "orderId": "",
-                    "info": {}
-                },
-            }
+        locState: '2',
+        currentPanel: "list",
+        sellOrderDetail: {
+          "point": "",
+          "order": {},
+          "items": [],
+          "invoiceSendInfo": {},
+          "goods": [],
+          "gifts": null,
+          "locState": 2,
+          "agree": null,
+          "orderId": "",
+          "info": {}
         },
-        // '##::::'##::'#######::'##::::'##:'##::: ##:'########:'########:'########::
-        //  ###::'###:'##.... ##: ##:::: ##: ###:: ##:... ##..:: ##.....:: ##.... ##:
-        //  ####'####: ##:::: ##: ##:::: ##: ####: ##:::: ##:::: ##::::::: ##:::: ##:
-        //  ## ### ##: ##:::: ##: ##:::: ##: ## ## ##:::: ##:::: ######::: ##:::: ##:
-        //  ##. #: ##: ##:::: ##: ##:::: ##: ##. ####:::: ##:::: ##...:::: ##:::: ##:
-        //  ##:.:: ##: ##:::: ##: ##:::: ##: ##:. ###:::: ##:::: ##::::::: ##:::: ##:
-        //  ##:::: ##:. #######::. #######:: ##::. ##:::: ##:::: ########: ########::
-        // ..:::::..:::.......::::.......:::..::::..:::::..:::::........::........:::
-        mounted: function () {
-            var self = this;
-            //组件生成时调用
-            eventBus.$on('newOrder', (id) => {
-                if (id) {
-                    self.currentOrderId = id;
-                }
-            });
-
-            eventBus.$on('init', (id) => {
-                if (!id) {
-                    self.currentOrderId = "";
-                    self.currentPanel = "list";
-                }
-            });
-
-
-            window.HtmlFun.extend({
-                sellOrderDetail: function (orderId) {
-                    eventBus.$emit('newOrder', orderId)
-                },
-                sellFun: function (id) {
-                    return '<a href="javascript:;" onclick="HtmlFun.sellOrderDetail(\'' + id +
-                        '\')">查看详情</a>';
-                },
-                invoiceState: function (state) {
-                    // <c:if test="${vt.flag_invoice eq '1' || empty vt.flag_invoice}">
-                    //                 <span class="text-danger">未开票</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.flag_invoice eq '2' }">
-                    //                 <span class="text-danger">已开票</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.flag_invoice eq '3' }">
-                    //                 <span class="text-success">已打印</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.flag_invoice eq '4' }">
-                    //                 <span>不需要发票</span>
-                    //               </c:if>
-
-                    switch (state) {
-                        case '':
-                            return '未开票';
-                            break;
-                        case '1':
-                            return '未开票';
-                            break;
-                        case '2':
-                            return '已开票';
-                            break;
-                        case '3':
-                            return '已打印';
-                            break;
-                        case '4':
-                            return '不需要发票';
-                            break;
-                        default:
-                            return '未开票';
-
-                    }
-                },
-                flagAgreement: function (state) {
-                    switch (state) {
-                        case '':
-                            return '不需要协议';
-                            break;
-                        case '1':
-                            return '不需要协议';
-                            break;
-                        case '2':
-                            return '已打印协议，未上传';
-                            break;
-                        case '3':
-                            return '已上传协议';
-                            break;
-                        default:
-                            return '不需要协议';
-                    }
-
-                    // <c:if test="${vt.pay_type eq '0' }">
-                    //                 <span>现金</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '1' }">
-                    //                 <span>支票</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '2' }">
-                    //                 <span>微信</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '3' }">
-                    //                 <span>线上支付</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '4' }">
-                    //                 <span>赠送</span>
-                    //               </c:if>
-                },
-                payTypeWord: function (state) {
-                    switch (state) {
-                        case '0':
-                            return '现金';
-                            break;
-                        case '1':
-                            return '支票';
-                            break;
-                        case '2':
-                            return '微信';
-                            break;
-                            case '3':
-                            return '线上支付';
-                            break;
-                            case '4':
-                            return '赠送';
-                            break;
-                        default:
-                            return '-';
-                    }
-
-                    // <c:if test="${vt.pay_type eq '0' }">
-                    //                 <span>现金</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '1' }">
-                    //                 <span>支票</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '2' }">
-                    //                 <span>微信</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '3' }">
-                    //                 <span>线上支付</span>
-                    //               </c:if>
-                    //               <c:if test="${vt.pay_type eq '4' }">
-                    //                 <span>赠送</span>
-                    //               </c:if>
-                }
-            })
+        detail: {
+          "point": "",
+          "order": {},
+          "items": [],
+          "invoiceSendInfo": {},
+          "goods": [],
+          "gifts": [],
+          "locState": 2,
+          "agree": null,
+          "orderId": "",
+          "info": {}
         },
-        computed: {},
-        filters: {
-            toNormalTime: function (val) {
-                function toNormalTime(shijianchuo) {
-                    var time = new Date(parseInt(shijianchuo));
-                    var y = time.getFullYear();
-                    var m = time.getMonth() + 1;
-                    var d = time.getDate();
-                    var h = time.getHours();
-                    var mm = time.getMinutes();
-                    var s = time.getSeconds();
-                    return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' +
-                        add0(s);
-                }
-
-                function add0(m) {
-                    return m < 10 ? '0' + m : m;
-                }
-                return toNormalTime(val);
-            }
-        },
-        // '##::::'##:'########:'########:'##::::'##::'#######::'########:::'######::
-        //  ###::'###: ##.....::... ##..:: ##:::: ##:'##.... ##: ##.... ##:'##... ##:
-        //  ####'####: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##:::: ##: ##:::..::
-        //  ## ### ##: ######:::::: ##:::: #########: ##:::: ##: ##:::: ##:. ######::
-        //  ##. #: ##: ##...::::::: ##:::: ##.... ##: ##:::: ##: ##:::: ##::..... ##:
-        //  ##:.:: ##: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:
-        //  ##:::: ##: ########:::: ##:::: ##:::: ##:. #######:: ########::. ######::
-        // ..:::::..::........:::::..:::::..:::::..:::.......:::........::::......:::
-        methods: {
-            back() {
-                this.currentPanel = "list";
-                this.detail = {
-                    "point": "",
-                    "order": {},
-                    "items": [],
-                    "invoiceSendInfo": {},
-                    "goods": [],
-                    "gifts": [],
-                    "locState": 2,
-                    "agree": null,
-                    "orderId": "",
-                    "info": {}
-                };
-                this.currentOrderId = "";
-            }
-        },
-        watch: {
-            currentOrderId: function () {
-
-                var self = this;
-                var id = self.currentOrderId;
-                console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-                console.log(id);
-                console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-                if (!id) {
-                    self.currentPanel = "list";
-                    return false;
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "ma/sales/ordermaintenance/asyncDetail",
-                    data: {
-                        orderId: id,
-                        locState: 2
-                    },
-                    beforeSend: function () {
-                        self.showLoading = true;
-                    },
-                    dataType: "json",
-                    success: function (data, textStatus, jqXHR) {
-                        if (data != null && data != "") {
-                            if (data.success) {
-                                self.detail = data.bean;
-                                self.currentPanel = "detail";
-                            } else {
-                                tool.alert("提示", "保存失败");
-                                self.currentPanel = "list";
-                            }
-                        } else {
-                            tool.alert("提示", "未获取到数据!");
-                            self.currentPanel = "list";
-                        }
-                    },
-                    error: function (response) {
-                        tool.alert("提示", "请求服务失败,请重试!");
-                        self.currentPanel = "list";
-                    },
-                    complete: function () {
-                        self.showLoading = false;
-                    }
-                });
-            },
-            customerShxydm() {
-                this.searchData.customerShxydm = this.customerShxydm;
-            }
+      }
+    },
+    // '##::::'##::'#######::'##::::'##:'##::: ##:'########:'########:'########::
+    //  ###::'###:'##.... ##: ##:::: ##: ###:: ##:... ##..:: ##.....:: ##.... ##:
+    //  ####'####: ##:::: ##: ##:::: ##: ####: ##:::: ##:::: ##::::::: ##:::: ##:
+    //  ## ### ##: ##:::: ##: ##:::: ##: ## ## ##:::: ##:::: ######::: ##:::: ##:
+    //  ##. #: ##: ##:::: ##: ##:::: ##: ##. ####:::: ##:::: ##...:::: ##:::: ##:
+    //  ##:.:: ##: ##:::: ##: ##:::: ##: ##:. ###:::: ##:::: ##::::::: ##:::: ##:
+    //  ##:::: ##:. #######::. #######:: ##::. ##:::: ##:::: ########: ########::
+    // ..:::::..:::.......::::.......:::..::::..:::::..:::::........::........:::
+    mounted: function() {
+      var self = this;
+      //组件生成时调用
+      eventBus.$on('newOrder', (id) => {
+        if (id) {
+          self.currentOrderId = id;
         }
+      });
+
+      eventBus.$on('init', (id) => {
+        if (!id) {
+          self.currentOrderId = "";
+          self.currentPanel = "list";
+        }
+      });
+
+
+      window.HtmlFun.extend({
+        sellOrderDetail: function(orderId) {
+          eventBus.$emit('newOrder', orderId)
+        },
+        sellFun: function(id) {
+          return '<a href="javascript:;" onclick="HtmlFun.sellOrderDetail(\'' + id +
+            '\')">查看详情</a>';
+        },
+        invoiceState: function(state) {
+          // <c:if test="${vt.flag_invoice eq '1' || empty vt.flag_invoice}">
+          //                 <span class="text-danger">未开票</span>
+          //               </c:if>
+          //               <c:if test="${vt.flag_invoice eq '2' }">
+          //                 <span class="text-danger">已开票</span>
+          //               </c:if>
+          //               <c:if test="${vt.flag_invoice eq '3' }">
+          //                 <span class="text-success">已打印</span>
+          //               </c:if>
+          //               <c:if test="${vt.flag_invoice eq '4' }">
+          //                 <span>不需要发票</span>
+          //               </c:if>
+
+          switch (state) {
+            case '':
+              return '未开票';
+              break;
+            case '1':
+              return '未开票';
+              break;
+            case '2':
+              return '已开票';
+              break;
+            case '3':
+              return '已打印';
+              break;
+            case '4':
+              return '不需要发票';
+              break;
+            default:
+              return '未开票';
+
+          }
+        },
+        flagAgreement: function(state) {
+          switch (state) {
+            case '':
+              return '不需要协议';
+              break;
+            case '1':
+              return '不需要协议';
+              break;
+            case '2':
+              return '已打印协议，未上传';
+              break;
+            case '3':
+              return '已上传协议';
+              break;
+            default:
+              return '不需要协议';
+          }
+
+          // <c:if test="${vt.pay_type eq '0' }">
+          //                 <span>现金</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '1' }">
+          //                 <span>支票</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '2' }">
+          //                 <span>微信</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '3' }">
+          //                 <span>线上支付</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '4' }">
+          //                 <span>赠送</span>
+          //               </c:if>
+        },
+        payTypeWord: function(state) {
+          switch (state) {
+            case '0':
+              return '现金';
+              break;
+            case '1':
+              return '支票';
+              break;
+            case '2':
+              return '微信';
+              break;
+            case '3':
+              return '线上支付';
+              break;
+            case '4':
+              return '赠送';
+              break;
+            default:
+              return '-';
+          }
+
+          // <c:if test="${vt.pay_type eq '0' }">
+          //                 <span>现金</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '1' }">
+          //                 <span>支票</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '2' }">
+          //                 <span>微信</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '3' }">
+          //                 <span>线上支付</span>
+          //               </c:if>
+          //               <c:if test="${vt.pay_type eq '4' }">
+          //                 <span>赠送</span>
+          //               </c:if>
+        }
+      })
+    },
+    computed: {},
+    filters: {
+      toNormalTime: function(val) {
+        function toNormalTime(shijianchuo) {
+          var time = new Date(parseInt(shijianchuo));
+          var y = time.getFullYear();
+          var m = time.getMonth() + 1;
+          var d = time.getDate();
+          var h = time.getHours();
+          var mm = time.getMinutes();
+          var s = time.getSeconds();
+          return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' +
+            add0(s);
+        }
+
+        function add0(m) {
+          return m < 10 ? '0' + m : m;
+        }
+        return toNormalTime(val);
+      }
+    },
+    // '##::::'##:'########:'########:'##::::'##::'#######::'########:::'######::
+    //  ###::'###: ##.....::... ##..:: ##:::: ##:'##.... ##: ##.... ##:'##... ##:
+    //  ####'####: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##:::: ##: ##:::..::
+    //  ## ### ##: ######:::::: ##:::: #########: ##:::: ##: ##:::: ##:. ######::
+    //  ##. #: ##: ##...::::::: ##:::: ##.... ##: ##:::: ##: ##:::: ##::..... ##:
+    //  ##:.:: ##: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:
+    //  ##:::: ##: ########:::: ##:::: ##:::: ##:. #######:: ########::. ######::
+    // ..:::::..::........:::::..:::::..:::::..:::.......:::........::::......:::
+    methods: {
+      back() {
+        this.currentPanel = "list";
+        this.detail = {
+          "point": "",
+          "order": {},
+          "items": [],
+          "invoiceSendInfo": {},
+          "goods": [],
+          "gifts": [],
+          "locState": 2,
+          "agree": null,
+          "orderId": "",
+          "info": {}
+        };
+        this.currentOrderId = "";
+      }
+    },
+    watch: {
+      currentOrderId: function() {
+
+        var self = this;
+        var id = self.currentOrderId;
+        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        console.log(id);
+        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        if (!id) {
+          self.currentPanel = "list";
+          return false;
+        }
+        $.ajax({
+          type: "POST",
+          url: "ma/sales/ordermaintenance/asyncDetail",
+          data: {
+            orderId: id,
+            locState: 2
+          },
+          beforeSend: function() {
+            self.showLoading = true;
+          },
+          dataType: "json",
+          success: function(data, textStatus, jqXHR) {
+            if (data != null && data != "") {
+              if (data.success) {
+                self.detail = data.bean;
+                self.currentPanel = "detail";
+              } else {
+                tool.alert("提示", "保存失败");
+                self.currentPanel = "list";
+              }
+            } else {
+              tool.alert("提示", "未获取到数据!");
+              self.currentPanel = "list";
+            }
+          },
+          error: function(response) {
+            tool.alert("提示", "请求服务失败,请重试!");
+            self.currentPanel = "list";
+          },
+          complete: function() {
+            self.showLoading = false;
+          }
+        });
+      },
+      customerShxydm() {
+        this.searchData.customerShxydm = this.customerShxydm;
+      }
     }
+  }
 </script>
 <style scoped>
+
 </style>

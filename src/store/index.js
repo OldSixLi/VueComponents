@@ -15,7 +15,6 @@ let states = {
     '陆云', '张傲雪', '剑无尘', '百灵', '瑶光', '虚无天尊', '慕容剑秋', '玄玉真人', '玄鬼真人', '黑暗尊主', '乾元真人', '紫阳真人', '风远扬', '李宏飞', '林云枫', '静月大师', '妖皇裂天', '水麒麟', '三眼龙狼', '黑煞虎王', '寒鹰', '万魔之王', '血界尊主', '煞血阎罗', '阴尸鬼王',
   ]
 }
-
 export default new Vuex.Store({
   modules: {
     login: loginModule, //登陆模块
@@ -29,7 +28,6 @@ export default new Vuex.Store({
   strict: true,
   /**
    * 所有修改store的方法都要通过commit实现,也就是说只能通过自身的方法修改自身的属性 不能在其他组件中 直接赋值修改
-   * @returns
    */
   mutations: {
     addNum(state) {

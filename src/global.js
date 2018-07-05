@@ -34,6 +34,9 @@ import HtTabs from './ht/HtTabs.vue';
 import HtClass from './test/HtClass.vue';
 import HtSell from './test/HtSell.vue';
 import InputNum from './ht/InputNum.vue'
+//2018年7月5日11:36:15 添加修改版本
+import MaFormGroup from './ht/form/MaFormGroup.vue';
+import MaForm from './ht/form/MaForm.vue';
 
 //布局组件
 import Panel from './layout/Panel.vue';
@@ -98,3 +101,5 @@ Vue.component('ht-sell', HtSell);
 Vue.component('input-num', InputNum);
 Vue.component('skill', Skill);
 Vue.component('ht-order-list', HtOrderList);
+Vue.component('ma-form-group',MaFormGroup);
+Vue.component('ma-form',MaForm);

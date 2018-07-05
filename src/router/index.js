@@ -34,9 +34,7 @@ let router = new Router({
       path: '/', //链接路径
       component: IndexVue, //对应的组件模板
       meta: { requireAuth: true },
-      children: [
-
-        {
+      children: [{
           path: '/',
           name: 'begin',
           component: Begin
@@ -139,7 +137,11 @@ let router = new Router({
             }
           ]
         },
-        // { path: '*', component: Error }
+        {
+          path: "/newform",
+          name: "newform",
+          component: resolve=>require(['./../test/NewForm.vue'],resolve) 
+        },
       ]
     },
     {
@@ -159,22 +161,22 @@ let router = new Router({
  * 登陆权限校验 
  * @returns 
  */
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(m => m.meta.requireAuth)) {
-    if (store.state.login.isLogin) { // 已经登陆
-      next();
-    } else {
-      if (to.fullPath != '/') {
-        next({ path: '/login', query: { redirect: to.fullPath.substr(1) } })　
-      } else {
-        next({ path: '/login' });
-      }
-    }
-  } else {
-    next();
-  }
-});
-
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(m => m.meta.requireAuth)) {
+//     if (store.state.login.isLogin) { // 已经登陆
+//       next();
+//     } else {
+//       if (to.fullPath != '/') {
+//         //处理此处的信息
+//         next({ path: '/login', query: { redirect: to.fullPath.substr(1) } })　
+//       } else {
+//         next({ path: '/login' });
+//       }
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 // //最先开始执行 全局前置守卫
 /**
@@ -210,7 +212,6 @@ router.beforeEach((to, from, next) => {
 
 //       }
 //     );
-
 //   } else {
 //     next()
 //   }
@@ -222,8 +223,8 @@ router.beforeEach((to, from, next) => {
 router.beforeResolve((to, from, next) => {
   // console.log("开始beforeResolve");
   next();
-
 });
+
 // 全局后置钩子
 router.afterEach((to, from) => {
   // 不会接受 next 函数也不会改变导航本身
@@ -236,9 +237,7 @@ router.afterEach((to, from) => {
  */
 router.redirect = (path) => {
   if (path) {
-    router.push({
-      path: path
-    })
+    router.push({ path: path });
   }
 }
 

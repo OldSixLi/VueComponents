@@ -1,5 +1,5 @@
 <template>
-  <select class="form-control" :vlaue="value">
+  <select class="form-control" :vlaue="value" :name="name">
     <slot></slot>
   </select>
 </template>
@@ -23,7 +23,8 @@
       search: {
         type: Boolean,
         default: false
-      }
+      },
+      name:String
     },
     mounted: function() {
       this.bindSelect();

@@ -145,4 +145,7 @@
   .el-checkbox+.el-checkbox {
     margin-left: 0;
   }
+  .el-checkbox__label{
+    vertical-align: middle;
+  }
 </style>

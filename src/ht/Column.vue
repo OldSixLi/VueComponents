@@ -22,6 +22,14 @@
       filter: [String, Array],
       style: String,
       width: String,
+      sort: {
+        type: [Boolean, String],
+        default: false
+      },
+      sortType: {
+        type: [String],
+        default: "string" //存在string,number,time三种常用数据格式
+      },
       action: [String, Array, Object]
     },
     data: function() {
@@ -32,6 +40,7 @@
       // console.log("↓↓↓↓↓↓↓↓↓↓↓↓cloumn的值是↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
       // console.log(this);
       // console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+
       var filter = this.filter;
       if (filter && !$.isPlainObject(filter)) {
         this.filter = this.parseText(filter);
