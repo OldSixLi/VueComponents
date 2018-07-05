@@ -32,7 +32,7 @@
     import Emitter from "./../mixins/emitter.js";
     export default {
       name: "HtFormGroup",
-      mixins: [Emitter],
+      // mixins: [Emitter],
       props: {
         //对外获取的数据
         label: String,

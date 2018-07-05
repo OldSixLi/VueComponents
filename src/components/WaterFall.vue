@@ -38,129 +38,173 @@
 
 </template>
 <script>
-//滚动条到底部的距离
-function getScrollBottomHeight() {
-  return getPageHeight() - getScrollTop() - getWindowHeight();
-}
-//页面高度
-function getPageHeight() {
-  return document.querySelector("html").scrollHeight;
-}
-//滚动条顶 高度
-function getScrollTop() {
-  var scrollTop = 0,
-    bodyScrollTop = 0,
-    documentScrollTop = 0;
-  if (document.body) {
-    bodyScrollTop = document.body.scrollTop;
+  //滚动条到底部的距离
+  function getScrollBottomHeight() {
+    return getPageHeight() - getScrollTop() - getWindowHeight();
   }
-  if (document.documentElement) {
-    documentScrollTop = document.documentElement.scrollTop;
+  //页面高度
+  function getPageHeight() {
+    return document.querySelector("html").scrollHeight;
   }
-  scrollTop =
-    bodyScrollTop - documentScrollTop > 0 ? bodyScrollTop : documentScrollTop;
-  return scrollTop;
-}
-function getWindowHeight() {
-  var windowHeight = 0;
-  if (document.compatMode == "CSS1Compat") {
-    windowHeight = document.documentElement.clientHeight;
-  } else {
-    windowHeight = document.body.clientHeight;
+  //滚动条顶 高度
+  function getScrollTop() {
+    var scrollTop = 0,
+      bodyScrollTop = 0,
+      documentScrollTop = 0;
+    if (document.body) {
+      bodyScrollTop = document.body.scrollTop;
+    }
+    if (document.documentElement) {
+      documentScrollTop = document.documentElement.scrollTop;
+    }
+    scrollTop =
+      bodyScrollTop - documentScrollTop > 0 ? bodyScrollTop : documentScrollTop;
+    return scrollTop;
   }
-  return windowHeight;
-}
 
-export default {
-  name: "WaterFall",
-  props: {
-    //对外获取的数据
-  },
-  data: function() {
-    //组件内数据部分
-    return {
-      Loading:true,
-      page: 1,
-      ImgList: [],
-      singleImgList: [[], [], [], [], [], []],
-      showLoad:false
-    };
-  },
-  mounted: function() {
-    let self = this;
-    //组件生成时调用
-    self.getImg(this.page);
+  function getWindowHeight() {
+    var windowHeight = 0;
+    if (document.compatMode == "CSS1Compat") {
+      windowHeight = document.documentElement.clientHeight;
+    } else {
+      windowHeight = document.body.clientHeight;
+    }
+    return windowHeight;
+  }
 
-    document.addEventListener("scroll", e => {
-      self.handleScroll();
-    });
+  //  function 
 
-    self.Loading=true;
-    setTimeout(() => {
-      self.Loading=false;
-    }, 5000);
-  },
-  methods: {
-    handleScroll() {
-      let self = this;
-      if (getScrollBottomHeight() <= 50) {
-        self.getImg(2);
-      }
+  export default {
+    name: "WaterFall",
+    props: {
+      //对外获取的数据
     },
-    getImg(page) {
+    data: function () {
+      //组件内数据部分
+      return {
+        Loading: true,
+        page: 1,
+        ImgList: [],
+        singleImgList: [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        showLoad: false
+      };
+    },
+    mounted: function () {
       let self = this;
-      //NOTE:这个方法不能用中文参数 
-      self.$http.get('/ma/musicUserList',{
-        params:{
+      //组件生成时调用
+      self.getImg(this.page);
+
+      // document.addEventListener("scroll", e => {
+      // });
+      $(window).scroll(self.loadMore());
+
+      self.Loading = true;
+      setTimeout(() => {
+        self.Loading = false;
+      }, 5000);
+    },
+    methods: {
+
+
+      loadMore() {
+        var _self = this;
+        var canRun = true;
+        return function () {
+          if (!canRun) {
+            return;
+          }
+          canRun = false;
+          setTimeout(function () {
+            console.log("执行滚动事件");
+            var docHeight = $(document).height();
+            var winHeight = $(window).innerHeight();
+            var scrollDistance = $(window).scrollTop();
+            if (docHeight - (winHeight + scrollDistance) <= 1000) {
+              _self.getImg(2)
+            }
+            canRun = true;
+          }, 1000);
+        }
+      },
+      /**
+       * 去抖函数 
+       * @returns 
+       */
+      debounce(method, delay) {
+        var timer = null;
+        return function () {
+          var context = this,
+            args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            method.apply(context, args);
+          }, delay);
+        }
+      },
+      handleScroll() {
+        this.getImg(2);
+      },
+
+      getImg(page) {
+        let self = this;
+        //NOTE:这个方法不能用中文参数 
+        self.$http.get('/ma/musicUserList', {
+          params: {
             pageindex: self.page
           }
-      }).then(response=>{ 
-      return  Promise.resolve(response.data);
-      }).then(data=>{
-        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        console.log(data.data);
-        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-      });
+        }).then(response => {
+          return Promise.resolve(response.data);
+        }).then(data => {
+          console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+          console.log(data.data);
+          console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        });
 
-      $.ajax({
-        type: "GET",
-        url: "/ma/musicUserList",
-        async: true,
-        data: {
-          pageindex: self.page
-        },
-        beforeSend:function(){
-          self.showLoad=true;
-        },
-        dataType: "json",
-        success: function(data) {
-          if (data != null && data != "") {
-            if (data.success) {
-              // self.ImgList.push.apply(self.ImgList,data.data);
-              self.resloveArr(data.data);
-              // self.showLoad=false;
-            } else {
-              self.$alert("提示", "获取信息失败");
+        $.ajax({
+          type: "GET",
+          url: "/ma/musicUserList",
+          async: true,
+          data: {
+            pageindex: self.page
+          },
+          beforeSend: function () {
+            self.showLoad = true;
+          },
+          dataType: "json",
+          success: function (data) {
+            if (data != null && data != "") {
+              if (data.success) {
+                // self.ImgList.push.apply(self.ImgList,data.data);
+                self.resloveArr(data.data);
+                // self.showLoad=false;
+              } else {
+                self.$alert("提示", "获取信息失败");
+              }
             }
+          },
+          error: function (response) {
+            self.$alert("提示", "请求服务失败,请重试!");
           }
-        },
-        error: function(response) {
-          self.$alert("提示", "请求服务失败,请重试!");
-        }
-      });
-    },
-    resloveArr(arr) {
-      let self = this;
-      arr.forEach((obj, i) => {
-        self.singleImgList[i % 6].push(arr[i]);
-      });
+        });
+      },
+      resloveArr(arr) {
+        let self = this;
+        arr.forEach((obj, i) => {
+          self.singleImgList[i % 6].push(arr[i]);
+        });
+      }
     }
-  }
-};
+  };
 </script>
 <style scoped>
-.img {
-  width: 100%;
-}
- 
+  .img {
+    width: 100%;
+  }
 </style>
