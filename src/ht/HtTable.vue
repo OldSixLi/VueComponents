@@ -7,19 +7,14 @@
         <tr>
           <!-- 展示序列号 -->
           <th v-show="!!showindex">#</th>
-          <th 
-          v-for="(x,index) in rule" 
-          :key="index" 
-          :class="x.class" 
-          :style="[{cursor:x.sort?'pointer':'default'},x.style]"
-          :data-issort="x.sort" @click="dataSort(x)">
+          <th v-for="(x,index) in rule" :key="index" :class="x.class" :style="[{cursor:x.sort?'pointer':'default'},x.style]" :data-issort="x.sort"
+            @click="dataSort(x)">
             {{x.name}}
-            <span class="glyphicon glyphicon-resize-vertical" :class="x.sortObj.active?'blue':''" 
-            v-if="x.sort&&x.sortObj.sortState==0" title="点击排序" ></span>
-            <span class="glyphicon glyphicon-chevron-down" :class="x.sortObj.active?'blue':''" 
-            v-if="x.sort&&x.sortObj.sortState==1" title="逆序" ></span>
-            <span class="glyphicon glyphicon-chevron-up" :class="x.sortObj.active?'blue':''" 
-            v-if="x.sort&&x.sortObj.sortState==2" title="正序" ></span>
+            <span class="glyphicon glyphicon-resize-vertical" :class="x.sortObj.active?'blue':''" v-if="x.sort&&x.sortObj.sortState==0"
+              title="点击排序"></span>
+            <span class="glyphicon glyphicon-chevron-down" :class="x.sortObj.active?'blue':''" v-if="x.sort&&x.sortObj.sortState==1"
+              title="逆序"></span>
+            <span class="glyphicon glyphicon-chevron-up" :class="x.sortObj.active?'blue':''" v-if="x.sort&&x.sortObj.sortState==2" title="正序"></span>
           </th>
         </tr>
       </thead>
@@ -29,11 +24,7 @@
           <td v-show="!!showindex">
             {{index+1}}
           </td>
-          <td v-for="y in rule" 
-          style="vertical-align: middle;" 
-          :class="y.class" 
-          :style="y.style"
-          >
+          <td v-for="y in rule" style="vertical-align: middle;" :class="y.class" :style="y.style">
             <span v-html="renderHtml(y.filter,y.dataKey,x)"></span>
             <!-- v-tooltip.top="'向上提示'" -->
           </td>
@@ -65,7 +56,7 @@
         required: true
       },
       searchData: {
-        default: function() {
+        default: function () {
           return {
             currentPage: 1
           };
@@ -75,7 +66,7 @@
         default: true
       }
     },
-    data: function() {
+    data: function () {
       return {
         valuelist: [],
         backUpValueList: [],
@@ -147,7 +138,7 @@
         });
       },
       //异步请求数据
-      getlist: function() {
+      getlist: function () {
         let self = this;
         let params = self.searchData;
         let pageindex = params.currentPage || 1;
@@ -159,12 +150,12 @@
         $.ajax({
           type: "POST",
           url: self.ajaxurl,
-          beforeSend: function(request) {
+          beforeSend: function (request) {
             self.showLoading = true;
           },
           data: params,
           dataType: "json",
-          success: function(data) {
+          success: function (data) {
             if (data != null && data != "") {
               try {
                 if (data.success) {
@@ -172,7 +163,7 @@
                   self.backUpValueList = self.copyValue(data.bean.data ? data.bean.data : []);
                   self.pageOption.currentPage = pageindex;
                   self.pageOption.totalPage = data.bean.pageCount;
-                  self.pageOption.click = function(index) {
+                  self.pageOption.click = function (index) {
                     self.searchData.currentPage = index;
                   };
                   //对外暴露事件对象
@@ -188,16 +179,16 @@
               }
             }
           },
-          error: function(response) {
+          error: function (response) {
             self.valuelist = [];
             self.showLoading = false;
           },
-          complete: function() {
+          complete: function () {
             self.showLoading = false;
           }
         });
       },
-      renderHtml: function(rule, keys, obj) {
+      renderHtml: function (rule, keys, obj) {
         let valArr = [];
         keys.split(",").forEach(element => {
           valArr.push(obj[element]);
@@ -213,16 +204,16 @@
       }
     },
     computed: {
-      searchDatas: function() {
+      searchDatas: function () {
         this.getlist(0);
         return this.searchData;
       }
     },
     //在组件加载完成后的钩子
-    mounted: function() {
+    mounted: function () {
       let _this = this;
       //遍历子组件
-      _this.$slots.default.forEach(function(child) {
+      _this.$slots.default.forEach(function (child) {
         if (child.tag) {
           let obj = new Object();
           // 获取prop数据
@@ -260,13 +251,17 @@
   .ht-table {
     margin-bottom: 0;
   }
-  
+
   .ht-table td img {
     width: 30px;
     height: 30px;
   }
-  
+
   .blue {
     color: blue;
+  }
+
+  .relative {
+    position: relative;
   }
 </style>

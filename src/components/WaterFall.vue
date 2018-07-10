@@ -48,7 +48,7 @@
   }
   //滚动条顶 高度
   function getScrollTop() {
-    var scrollTop = 0,
+    let scrollTop = 0,
       bodyScrollTop = 0,
       documentScrollTop = 0;
     if (document.body) {
@@ -63,7 +63,7 @@
   }
 
   function getWindowHeight() {
-    var windowHeight = 0;
+    let windowHeight = 0;
     if (document.compatMode == "CSS1Compat") {
       windowHeight = document.documentElement.clientHeight;
     } else {
@@ -100,22 +100,24 @@
       let self = this;
       //组件生成时调用
       self.getImg(this.page);
-
-      // document.addEventListener("scroll", e => {
-      // });
       $(window).scroll(self.loadMore());
-
+      $(window).scroll(self.debounce(self.al, 1000))
       self.Loading = true;
       setTimeout(() => {
         self.Loading = false;
       }, 5000);
     },
     methods: {
-
-
+      al() {
+        alert('1')
+      },
+      /**
+       * 加载更多时增加去抖函数 
+       * @returns 
+       */
       loadMore() {
-        var _self = this;
-        var canRun = true;
+        let _self = this;
+        let canRun = true;
         return function () {
           if (!canRun) {
             return;
@@ -123,11 +125,11 @@
           canRun = false;
           setTimeout(function () {
             console.log("执行滚动事件");
-            var docHeight = $(document).height();
-            var winHeight = $(window).innerHeight();
-            var scrollDistance = $(window).scrollTop();
-            if (docHeight - (winHeight + scrollDistance) <= 1000) {
-              _self.getImg(2)
+            // let docHeight = $(document).height();
+            // let winHeight = $(window).innerHeight();
+            // let scrollDistance = $(window).scrollTop();
+            if (getScrollBottomHeight() <= 1000) {
+              _self.getImg(2);
             }
             canRun = true;
           }, 1000);
@@ -138,9 +140,10 @@
        * @returns 
        */
       debounce(method, delay) {
-        var timer = null;
+        let timer = null;
+        let self = this;
         return function () {
-          var context = this,
+          let context = self,
             args = arguments;
           clearTimeout(timer);
           timer = setTimeout(function () {
@@ -151,7 +154,6 @@
       handleScroll() {
         this.getImg(2);
       },
-
       getImg(page) {
         let self = this;
         //NOTE:这个方法不能用中文参数 
@@ -166,7 +168,6 @@
           console.log(data.data);
           console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         });
-
         $.ajax({
           type: "GET",
           url: "/ma/musicUserList",

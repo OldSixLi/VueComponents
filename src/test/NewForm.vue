@@ -8,9 +8,8 @@
             <input type="text" name="userName" v-model="userName" placeholder="用户名称" class="form-control">
           </ht-form-group>
 
-          
           <ht-form-group name="dates" label="注册日期：" :require="true" require-message="请选择日期">
-            <ht-date min-date="today" placeholder="请选择日期" name="dates" required></ht-date>
+            <ht-date min-date="today" placeholder="请选择日期" name="dates" v-model="dateNow" ></ht-date>
           </ht-form-group>
 
           <ht-form-group name="word" label="自我介绍：" :require="true" require-message="请输入自我介绍内容">
@@ -34,12 +33,23 @@
           <ht-form-group name="sex" label="选择性别：" :require="true" require-message="请选择性别">
             <ht-radio v-model="sex" name="sex" label="M" :disabled="areas.length>2">男</ht-radio>
             <ht-radio v-model="sex" name="sex" label="W" :disabled="areas.length>2">女</ht-radio>
-          </ht-form-group> 
+          </ht-form-group>
 
           <ht-form-group name="advice" label="意见/建议：" :require="true" require-message="请对我们提出宝贵的建议">
             <textarea name="advice" cols="30" rows="10" v-model="advice" class="form-control"></textarea>
           </ht-form-group>
 
+          <ht-form-group name="major" label="选择专业：" :require="true" require-message="请选择您的专业">
+            <ht-select name="major" v-model="majorVal" ref="slt">
+              <option value="">请选择</option>
+              <option v-for="x in majorList" :value="x.id">{{x.name}}</option>
+            </ht-select>
+          </ht-form-group>
+
+          <ht-form-group name="age" label="年龄：" :require="true" require-message="年龄为必填项" min="18" max="80" min-message="未满十八岁不予注册"
+            max-message="超过八十岁不予注册">
+            <input type="text" name="age" placeholder="请输入年龄" class="form-control">
+          </ht-form-group>
           <div class="text-right">
             <button type="button" class="btn btn-default" @click="cancelCheckForm('userInfo')">取消</button>
             <button type="button" class="btn btn-large btn-primary" @click="submitForm('userInfo')">保存</button>
@@ -61,11 +71,32 @@
         userName: "",
         areas: [1, 2],
         sex: "",
-        advice: ""
+        advice: "",
+        majorList: [],
+        dateNow:"2018-08-08",
+        majorVal: "2"
       }
     },
     mounted: function () {
       //组件生成时调用
+      setTimeout(() => {
+        this.majorList = [{
+          id: 1,
+          name: "石油专业"
+        }, {
+          id: 2,
+          name: "土木专业"
+        }, {
+          id: 3,
+          name: "艺术专业"
+        }, {
+          id: 4,
+          name: "传媒专业"
+        }, {
+          id: 5,
+          name: "外语专业"
+        }]; 
+      }, 3000);
     },
     methods: {
       cancelCheckForm: function (formName) {
@@ -85,7 +116,7 @@
             this.$confirm(
               "<b>请修改您的输入内容</b>",
               errorList.join("<br>")
-            ); 
+            );
           }
         });
       },
