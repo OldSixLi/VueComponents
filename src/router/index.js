@@ -28,7 +28,7 @@ import store from './../store/index.js';
 Vue.use(Router);
 
 let router = new Router({
-  mode: "history",
+  // mode: "history",
   routes: [{
       //每一个链接都是一个对象
       path: '/', //链接路径
@@ -79,7 +79,7 @@ let router = new Router({
           },
           component: Know,
         },
-        // show 
+        // show
         {
 
           path: "/show",
@@ -153,6 +153,13 @@ let router = new Router({
       path: '*',
       component: Error,
       // redirect: "/"
+    }, // show 
+   
+    {
+
+      path: "/index",
+      name: "indexShow",
+      component: Show,
     }
   ]
 });
