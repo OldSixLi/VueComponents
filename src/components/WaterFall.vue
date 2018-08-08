@@ -5,27 +5,27 @@
 
     <div class="row">
       <div class="col-md-2">
-        <img v-for="(y,$yindex) in singleImgList[0]" :userid='y.userID' :src="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
+        <img v-for="(y,$yindex) in singleImgList[0]" :userid='y.userID' v-lazy="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
       </div>
 
       <div class="col-md-2">
-        <img v-for="(y,$yindex) in singleImgList[1]" :userid='y.userID' :src="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
+        <img v-for="(y,$yindex) in singleImgList[1]" :userid='y.userID' v-lazy="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
       </div>
 
       <div class="col-md-2">
-        <img v-for="(y,$yindex) in singleImgList[2]" :userid='y.userID' :src="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
+        <img v-for="(y,$yindex) in singleImgList[2]" :userid='y.userID' v-lazy="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
       </div>
 
       <div class="col-md-2">
-        <img v-for="(y,$yindex) in singleImgList[3]" :userid='y.userID' :src="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
+        <img v-for="(y,$yindex) in singleImgList[3]" :userid='y.userID' v-lazy="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
       </div>
 
       <div class="col-md-2">
-        <img v-for="(y,$yindex) in singleImgList[4]" :userid='y.userID' :src="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
+        <img v-for="(y,$yindex) in singleImgList[4]" :userid='y.userID' v-lazy="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
       </div>
 
       <div class="col-md-2">
-        <img v-for="(y,$yindex) in singleImgList[5]" :userid='y.userID' :src="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
+        <img v-for="(y,$yindex) in singleImgList[5]" :userid='y.userID' v-lazy="y.imgUrl" :alt='y.nickName' class='img-responsive img-thumbnail img'>
       </div>
 
     </div>

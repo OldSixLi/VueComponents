@@ -22,6 +22,12 @@ import './assets/js/bootstrap.js';
 
 window.Vue = Vue;
 window.log = str => console.log(str);
+//image 懒加载
+import VueLazyLoad from 'vue-lazyload';
+Vue.use(VueLazyLoad,{
+    error:require('@/assets/img/error.png'),
+    loading:require('@/assets/img/loading.png')
+});
 
 Vue.use(pluginPopBar);
 Vue.use(pluginNotice);
