@@ -6,25 +6,24 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Welcome from './../components/Welcome.vue';
-// import Main from './../components/Main.vue';
+import Main from './../components/Main.vue';
 import Begin from './../components/Begin.vue';
 import Error from './../components/Error.vue';
 import Know from './../components/Know.vue';
 import Music from './../components/music/Music.vue';
 import MusicUser from './../components/music/MusicUser.vue';
 import MusicSearch from './../components/music/MusicSearch.vue';
-// import Point from './../components/Point.vue';
+import Point from './../components/Point.vue';
 import User from './../components/User.vue';
 import Show from './../components/Show.vue';
-// import UserInfo from './../components/UserInfo.vue';
+import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
 import WaterFall from './../components/WaterFall.vue';
 // import Company from './../components/Company.vue';
 import Login from './../components/Login.vue';
 import IndexVue from './../components/Index.vue';
+import NewForm from './../test/NewForm.vue';
 
-//Vuex
-import store from './../store/index.js';
 Vue.use(Router);
 
 let router = new Router({
@@ -33,7 +32,9 @@ let router = new Router({
       //每一个链接都是一个对象
       path: '/', //链接路径
       component: IndexVue, //对应的组件模板
-      meta: { requireAuth: true },
+      meta: {
+        requireAuth: true
+      },
       children: [{
           path: '/',
           name: 'begin',
@@ -42,7 +43,7 @@ let router = new Router({
         {
           path: '/main',
           name: 'main',
-          component: resolve => require(['./../components/Main.vue'], resolve)
+          component: Main
         },
         // welcome
         {
@@ -90,7 +91,7 @@ let router = new Router({
         {
           path: "/point",
           name: "point",
-          component: resolve => require(['./../components/Point.vue'], resolve),
+          component: Point
         },
         // user
         {
@@ -99,7 +100,7 @@ let router = new Router({
           component: User,
           children: [{
               path: 'info/:id',
-              component: resolve => require(['./../components/UserInfo.vue'], resolve),
+              component: UserInfo,
               name: "userinfo"
             },
             {
@@ -110,11 +111,11 @@ let router = new Router({
           ]
         },
         // company
-        {
-          path: "/company",
-          name: "company",
-          component: resolve => require(['./../components/Company.vue'], resolve),
-        },
+        // {
+        //   path: "/company",
+        //   name: "company",
+        //   component: resolve => require(['./../components/Company.vue'], resolve),
+        // },
         // music
         {
           path: "/music",
@@ -140,7 +141,7 @@ let router = new Router({
         {
           path: "/newform",
           name: "newform",
-          component: resolve=>require(['./../test/NewForm.vue'],resolve) 
+          component: NewForm
         },
       ]
     },
@@ -154,7 +155,7 @@ let router = new Router({
       component: Error,
       // redirect: "/"
     }, // show 
-   
+
     {
 
       path: "/index",
@@ -244,7 +245,9 @@ router.afterEach((to, from) => {
  */
 router.redirect = (path) => {
   if (path) {
-    router.push({ path: path });
+    router.push({
+      path: path
+    });
   }
 }
 

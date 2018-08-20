@@ -1,5 +1,5 @@
 <template>
-  <input :type="type" class="form-control" :value="currentValue" @input="handleChange" @blur="blurMoney"/>
+  <input :type="type" class="form-control" :value="currentValue" @input="handleChange" @blur="blurMoney" />
 </template>
 <script>
   function isValueNumber(value) {
@@ -31,7 +31,7 @@
         default: "text"
       }
     },
-    data: function() {
+    data: function () {
       // Vue组件是单向数据流，无法直接修改prop中的值
       var currentValue = "";
       if (this.value > this.max) {
@@ -46,7 +46,7 @@
       };
     },
     methods: {
-      handleChange: function(event) {
+      handleChange: function (event) {
         var val = event.target.value.trim();
         if (val != "") {
           switch (this.type) {
@@ -103,7 +103,7 @@
 
     },
     watch: {
-      currentValue: function(val) {
+      currentValue: function (val) {
         this.$emit("input", val);
       },
       value() {
@@ -111,7 +111,4 @@
       }
     }
   };
-</script>
-<style scoped>
-
-</style>
+</script> 

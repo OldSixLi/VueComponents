@@ -268,7 +268,7 @@
                   <column slot name="名称" data-key=name width="15%" align="left" class="nameClass aaa" style="color:blue;text-align:right;font-weight:bold;"
                     :sort="true"></column>
                   <column slot name="性别" data-key="gender" align="center" filter="toGender" :sort="true"></column>
-                  <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime"></column>
+                  <column slot name="时间" data-key="Regtime" align="center" filter="toNormalTime" :sort="true" sort-type="time"></column>
                   <column slot name="头像" data-key="iconUrl" align="center" filter="toImg"></column>
                   <column slot name="编辑" data-key="ID,name,Regtime" align="center" filter="testMultiParams"></column>
                 </ht-table>

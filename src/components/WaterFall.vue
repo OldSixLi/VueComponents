@@ -73,6 +73,48 @@
   }
 
   //  function 
+  /**
+   * 函数节流 方法
+   * @returns 
+   */
+  function throttle() {
+    threshhold || (threshhold = 250);
+    var last,
+      timer;
+    return function () {
+      var context = scope || this;
+
+      var now = +new Date(),
+        args = arguments;
+      if (last && now - last + threshhold < 0) {
+        // hold on to it
+        clearTimeout(deferTimer);
+        timer = setTimeout(function () {
+          last = now;
+          fn.apply(context, args);
+        }, threshhold);
+      } else {
+        last = now;
+        fn.apply(context, args);
+      }
+    };
+  }
+
+  /**
+   * 函数去抖 
+   * @returns 
+   */
+  function debounce() {
+    let timer = null;
+    return function () {
+      let context = this,
+        args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        method.apply(context, args);
+      }, delay);
+    }
+  }
 
   export default {
     name: "WaterFall",
@@ -100,8 +142,8 @@
       let self = this;
       //组件生成时调用
       self.getImg(this.page);
-      $(window).scroll(self.loadMore());
-      $(window).scroll(self.debounce(self.al, 1000))
+      // $(window).scroll(self.loadMore());
+      $(window).scroll(self.debounce(self.loadMore(), 300))
       self.Loading = true;
       setTimeout(() => {
         self.Loading = false;
@@ -128,7 +170,7 @@
             // let docHeight = $(document).height();
             // let winHeight = $(window).innerHeight();
             // let scrollDistance = $(window).scrollTop();
-            if (getScrollBottomHeight() <= 1000) {
+            if (getScrollBottomHeight() <= 300) {
               _self.getImg(2);
             }
             canRun = true;
@@ -151,23 +193,27 @@
           }, delay);
         }
       },
+
       handleScroll() {
         this.getImg(2);
       },
       getImg(page) {
         let self = this;
         //NOTE:这个方法不能用中文参数 
-        self.$http.get('/ma/musicUserList', {
-          params: {
-            pageindex: self.page
-          }
-        }).then(response => {
-          return Promise.resolve(response.data);
-        }).then(data => {
-          console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-          console.log(data.data);
-          console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        });
+        // self.$http.get('/ma/musicUserList', {
+        //   params: {
+        //     pageindex: self.page
+        //   }
+        // })
+        // .then(response => {
+        //   return Promise.resolve(response.data);
+        // })
+        // .then(data => {
+        //   console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        //   console.log(data.data);
+        //   console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        // });
+
         $.ajax({
           type: "GET",
           url: "/ma/musicUserList",

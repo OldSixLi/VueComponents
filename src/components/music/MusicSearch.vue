@@ -78,9 +78,9 @@
                       <a :href="dataObj.url" class="btn btn-default" role="button" v-show="dataObj.name" target="_blank">
                         <span class="glyphicon glyphicon-headphones"></span> 点此试听
                       </a>
-                      <a :href="dataObj.url" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name+'.mp3'">
+                      <a target="_blank" :href="'http://music.163.com/song/media/outer/url?id='+dataObj.id+'.mp3'" class="btn btn-primary" role="button" v-show="dataObj.name" :download="dataObj.name+'.mp3'">
                         <span class="glyphicon glyphicon-save"></span> 点此下载
-                      </a>
+                      </a> 
                     </p>
                   </div>
                 </div>

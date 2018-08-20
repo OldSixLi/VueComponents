@@ -1,4 +1,7 @@
-// 说明:数据列表组件:HtTable // 时间:2017年11月6日09:34:48
+<!-- 
+  NOTE 
+  说明:数据列表组件:HtTable 
+  时间:2017年11月6日09:34:48 -->
 
 <template>
   <div>
@@ -18,7 +21,9 @@
           </th>
         </tr>
       </thead>
+
       <tbody>
+
         <!-- 搜索结果进行处理 -->
         <tr v-for="(x,index) in valuelist" v-show="!showLoading&&valuelist!=null&&valuelist.length>0">
           <td v-show="!!showindex">
@@ -26,21 +31,23 @@
           </td>
           <td v-for="y in rule" style="vertical-align: middle;" :class="y.class" :style="y.style">
             <span v-html="renderHtml(y.filter,y.dataKey,x)"></span>
-            <!-- v-tooltip.top="'向上提示'" -->
           </td>
         </tr>
+
         <!-- 当前搜索结果为空时，提示没有搜索结果 -->
         <tr v-show="!showLoading&&(valuelist==null||valuelist.length==0)">
           <td colspan="100">
-            <h2 class="text-center" style="color:#a78989;">{{errorInfo}}</h2>
+            <h2 class="text-center errinfo">{{errorInfo}}</h2>
           </td>
         </tr>
       </tbody>
     </table>
+
     <!-- 加载动画区域 NOTE: 通过修改样式 .cssload-loader 相关参数可以更改动画-->
     <div v-show="showLoading" :style="{'height':loadingHeight+'px'}" class="relative">
-      <loading></loading>
+      <loading/>
     </div>
+
     <!-- 分页控件模块 -->
     <ht-page :param="pageOption" class="pull-right"></ht-page>
     <!-- 搜索参数 -->
@@ -88,6 +95,7 @@
       copyValue(data) {
         return JSON.parse(JSON.stringify(data));
       },
+
       /**
        *  获取排序
        *  @x 单列的rule
@@ -112,19 +120,52 @@
           x.sortObj.sortState = x.sortObj.sortState == 3 ? 0 : x.sortObj.sortState; //状态在0 1 2 中重复
 
           // 排序具体方法
-          // TODO 后期添加根据字段类型排序
           if (x.sortObj.sortState === 0) {
-            //该字段取消排序
+            // 该字段取消排序
             this.valuelist = this.copyValue(this.backUpValueList);
           } else {
-            this.valuelist.sort((a, b) => {
-              return x.sortObj.sortState == 1 ?
-                a[x.dataKey].localeCompare(b[x.dataKey], 'zh') :
-                b[x.dataKey].localeCompare(a[x.dataKey], 'zh');
-            })
+            // 根据类型不同的区分逻辑
+            switch (x.sortObj.sortType) {
+              // 时间类型
+              case "time":
+                this.valuelist.sort((a, b) => {
+                  // 差值
+                  let timeChrageValue = String(a[x.dataKey]).replace(/[^0-9]+/g, "") - String(b[x.dataKey]).replace(
+                    /[^0-9]+/g, "");
+                  return x.sortObj.sortState == 1 ? timeChrageValue <= 0 : timeChrageValue >= 0;
+                })
+                break;
+                // 数字类型
+              case "number":
+                let errorNum = 0;
+                this.valuelist.sort((a, b) => {
+                  // 差值
+                  let chargeValue = Number(a[x.dataKey]) - Number(b[x.dataKey]);
+                  if (chargeValue != "NaN") {
+                    return x.sortObj.sortState == 1 ? chargeValue >= 0 : chargeValue <= 0;
+                  } else {
+                    errorNum++;
+                  }
+                });
+                if (errorNum > 0) {
+                  console.error(`【${x.dataKey}】列包含非数字类型数据,停止启用排序功能`);
+                  x.sortObj.sortState = 0;
+                  this.valuelist = this.copyValue(this.backUpValueList);
+                }
+                break;
+                // sortType 是 "string" 或其他默认类型
+              default:
+                this.valuelist.sort((a, b) => {
+                  return x.sortObj.sortState == 1 ?
+                    a[x.dataKey].localeCompare(b[x.dataKey], 'zh') :
+                    b[x.dataKey].localeCompare(a[x.dataKey], 'zh');
+                });
+                break;
+            }
           }
         }
       },
+     
       /**
        * 每次分页时 重置排序规则 
        * @returns 
@@ -137,7 +178,11 @@
           }
         });
       },
-      //异步请求数据
+
+      /**
+       * 异步请求数据 
+       * @returns 
+       */
       getlist: function () {
         let self = this;
         let params = self.searchData;
@@ -188,29 +233,32 @@
           }
         });
       },
-      renderHtml: function (rule, keys, obj) {
+      
+      /**
+       * 多个字段转换为HTML显示 
+       * @returns 
+       */
+      renderHtml(rule, keys, obj) {
         let valArr = [];
         keys.split(",").forEach(element => {
           valArr.push(obj[element]);
         });
-        let fns = this.fns;
         // NOTE 在 2017年12月18日15:45:34 终于从html中循环生成改成了在方法中生成具体数据
         // 原来的形式 需要在表格中生成很多的空span标签  现在直接获取到多参数数据  然后返回数据
         // 避免了Vue的无限循环的提醒,就是在循环中修改循环对象
         // 我有时候就在想 是不是我太菜了  为什么改个BUG就叫超级大BUG   - -!
-
-        return window.HtmlFun && window.HtmlFun[rule] ?
-          window.HtmlFun[rule].apply(HtmlFun, valArr) : valArr.join(",");
+        return window.HtmlFun && window.HtmlFun[rule] ? window.HtmlFun[rule].apply(HtmlFun, valArr) : valArr.join(",");
       }
     },
     computed: {
+      // 用户搜索数据
       searchDatas: function () {
         this.getlist(0);
         return this.searchData;
       }
     },
     //在组件加载完成后的钩子
-    mounted: function () {
+    mounted() {
       let _this = this;
       //遍历子组件
       _this.$slots.default.forEach(function (child) {
@@ -235,7 +283,11 @@
             } else {
               obj.sortObj = {
                 active: false,
-                sortState: 0 //0正常字段,1正序,2逆序
+                sortState: 0, //0正常字段,1正序,2逆序
+                sortType: "string"
+              }
+              if (obj.sortType) {
+                obj.sortObj.sortType = obj.sortType;
               }
             }
           }
@@ -243,7 +295,6 @@
           _this.rule.push(obj);
         }
       });
-
     }
   };
 </script>
@@ -263,5 +314,9 @@
 
   .relative {
     position: relative;
+  }
+
+  h2.errinfo {
+    color: #a78989;
   }
 </style>

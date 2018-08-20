@@ -31,8 +31,8 @@ import HtSelect from './ht/HtSelect.vue';
 import HtOption from './ht/HtOption.vue';
 import HtTab from './ht/HtTab.vue';
 import HtTabs from './ht/HtTabs.vue';
-import HtClass from './test/HtClass.vue';
-import HtSell from './test/HtSell.vue';
+// import HtClass from './test/HtClass.vue';
+// import HtSell from './test/HtSell.vue';
 import InputNum from './ht/InputNum.vue'
 //2018年7月5日11:36:15 添加修改版本
 import MaFormGroup from './ht/form/MaFormGroup.vue';
@@ -96,8 +96,8 @@ Vue.component('img-introduce', ImgIntroducePanel);
 //时间轴组件
 Vue.component('time-line', TimeLine);
 Vue.component('load', Load);
-Vue.component('ht-class', HtClass);
-Vue.component('ht-sell', HtSell);
+// Vue.component('ht-class', HtClass);
+// Vue.component('ht-sell', HtSell);
 Vue.component('input-num', InputNum);
 Vue.component('skill', Skill);
 Vue.component('ht-order-list', HtOrderList);

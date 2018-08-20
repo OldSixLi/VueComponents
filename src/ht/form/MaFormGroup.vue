@@ -300,9 +300,10 @@
   };
 </script>
 <style scoped>
-  .form-group *{
+  .form-group * {
     font-size: 14px;
   }
+
   /* 完成状态 */
 
   .errorinfo-enter-active,
@@ -349,7 +350,8 @@
   .has-error .el-checkbox {
     color: #a94442;
   }
-  .has-error .el-radio{
+
+  .has-error .el-radio {
     color: #a94442;
   }
 
@@ -365,8 +367,9 @@
     padding-top: 7px;
     /* vertical-align: baseline; */
   }
-  .control-block .el-checkbox, .control-block .el-radio{
+
+  .control-block .el-checkbox,
+  .control-block .el-radio {
     margin-top: 7px;
   }
-  
 </style>
