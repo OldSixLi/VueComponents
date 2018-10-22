@@ -3,6 +3,12 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: './src/main.js',
+  externals:{
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'element-ui': 'ELEMENT',
+    "axios":"axios"
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     // publicPath: path.resolve(__dirname, './dist/') + '/',
@@ -70,7 +76,6 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
       "windows.jQuery": "jquery",
-
     })
   ]
 

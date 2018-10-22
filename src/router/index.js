@@ -18,7 +18,6 @@ import User from './../components/User.vue';
 import Show from './../components/Show.vue';
 import UserInfo from './../components/UserInfo.vue';
 import UserList from './../components/UserList.vue';
-import WaterFall from './../components/WaterFall.vue';
 // import Company from './../components/Company.vue';
 import Login from './../components/Login.vue';
 import IndexVue from './../components/Index.vue';
@@ -26,8 +25,11 @@ import NewForm from './../test/NewForm.vue';
 
 Vue.use(Router);
 
+// 如何把router拆分到各个模块
+import water from './water.js';
+
 let router = new Router({
-  // mode: "history",
+  mode: "history",
   routes: [{
       //每一个链接都是一个对象
       path: '/', //链接路径
@@ -35,7 +37,9 @@ let router = new Router({
       meta: {
         requireAuth: true
       },
-      children: [{
+      children: [
+        ...water,
+        {
           path: '/',
           name: 'begin',
           component: Begin
@@ -65,13 +69,7 @@ let router = new Router({
           name: "welcome",
           component: Welcome
         },
-        // water
-        {
-          path: "/water",
-          name: "water",
-          component: WaterFall
-        },
-        // know
+        
         {
           path: "/know",
           name: "know",
@@ -109,14 +107,7 @@ let router = new Router({
               name: "userlist"
             }
           ]
-        },
-        // company
-        // {
-        //   path: "/company",
-        //   name: "company",
-        //   component: resolve => require(['./../components/Company.vue'], resolve),
-        // },
-        // music
+        }, 
         {
           path: "/music",
           name: "music",

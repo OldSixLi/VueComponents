@@ -275,10 +275,10 @@
               </panel>
             </panel>
 
-            <!-- <panel title="展开图标">
+           <panel title="展开图标">
               <open-icon></open-icon> 
               <p slot="footer">目前部分图标存在偏移的问题  待修改</p>
-            </panel> -->
+            </panel>  
           </div>
 
         </div>
