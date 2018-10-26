@@ -40,14 +40,14 @@ let router = new Router({
       children: [
         ...water,
         {
-          path: '/',
+          path: '/show',
           name: 'begin',
           component: Begin
         },
         {
           path: '/main',
           name: 'main',
-          component: Main
+          component: resolve => require(['./../components/Main.vue'], resolve)
         },
         // welcome
         {
@@ -67,7 +67,7 @@ let router = new Router({
         {
           path: "/welcome/:name", //在页面中注入参数
           name: "welcome",
-          component: Welcome
+          component:  resolve => require(['./../components/Welcome.vue'], resolve)
         },
         
         {
@@ -81,7 +81,7 @@ let router = new Router({
         // show
         {
 
-          path: "/show",
+          path: "/",
           name: "show",
           component: Show,
         },

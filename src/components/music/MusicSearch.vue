@@ -173,7 +173,7 @@
         var step1 = new Promise(function(resolve, reject) {
           $.ajax({
             type: "GET",
-            url: "http://localhost:9999/music/url",
+            url: "http://dev-ws.htyfw.com.cn:18888/music/url",
             data: {
               id: id,
               timestamp: Date.parse(new Date())
@@ -202,7 +202,7 @@
         var step2 = new Promise(function(resolve, reject) {
           $.ajax({
             type: "GET",
-            url: "http://localhost:9999/song/detail",
+            url: "http://dev-ws.htyfw.com.cn:18888/song/detail",
             data: {
               ids: id,
               timestamp: Date.parse(new Date())
@@ -249,7 +249,7 @@
         var _self = this;
         $.ajax({
           type: "GET",
-          url: "http://localhost:9999/search",
+          url: "http://dev-ws.htyfw.com.cn:18888/search",
           data: {
             keywords: _self.word,
             limit: 30,

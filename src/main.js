@@ -1,10 +1,8 @@
 import Vue from 'vue';
 
 //请求框架
-import Axios from 'axios';
-
+// import Axios from 'axios';
 // import VueAxios from 'vue-axios';
-
 //路由
 import router from './router/index.js';
 // vuex
@@ -31,7 +29,7 @@ Vue.use(VueLazyLoad,{
 
 Vue.use(pluginPopBar);
 Vue.use(pluginNotice);
-Vue.prototype.$http = Axios;
+// Vue.prototype.$http = Axios;
 
 var vueBlock = new Vue({
   el: '#app',

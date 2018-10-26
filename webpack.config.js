@@ -4,9 +4,9 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main.js',
   externals:{
-    'vue': 'Vue',
-    'vue-router': 'VueRouter',
-    'element-ui': 'ELEMENT',
+    // 'vue': 'Vue',
+    // 'vue-router': 'VueRouter',
+    // 'element-ui': 'ELEMENT',
     "axios":"axios"
   },
   output: {
@@ -92,7 +92,7 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.optimize.UglifyJsPlugin({
       //NOTE 此处待处理
-      sourceMap: false,
+      sourceMap: true,
       compress: {
         warnings: false
       }

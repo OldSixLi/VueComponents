@@ -112,7 +112,7 @@
         let self = this;
         $.ajax({
           type: "GET",
-          url: "http://localhost:9999/artists",
+          url: "http://dev-ws.htyfw.com.cn:18888/artists",
           data: {
             id: userId
           },
@@ -131,7 +131,7 @@
         let self = this;
         $.ajax({
           type: "GET",
-          url: "http://localhost:9999/artist/mv",
+          url: "http://dev-ws.htyfw.com.cn:18888/artist/mv",
           data: {
             id: userId
           },
@@ -147,7 +147,7 @@
         let self = this;
         $.ajax({
           type: "GET",
-          url: "http://localhost:9999/artist/desc",
+          url: "http://dev-ws.htyfw.com.cn:18888/artist/desc",
           data: {
             id: userId
           },
