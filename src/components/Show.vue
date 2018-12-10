@@ -8,7 +8,7 @@
         <div class="cover" v-show="showCover"></div>
       </transition>
       <!-- OLDSIXLI -->
-      <img src='http://om6fr85l4.bkt.clouddn.com/oldsix.png' class="img-name" :class="imgClass" alt="OldSix.Li">
+      <img src='https://i.loli.net/2018/12/10/5c0e11c694de9.png' class="img-name" :class="imgClass" alt="OldSix.Li">
       <h3 class='h-welcome' :class="h3Class">
         Welcome To My Homepage.</h3>
     </div>
@@ -22,23 +22,23 @@
       </div>
       <!-- 项目主要内容 -->
       <div class="row">
-        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="http://om6fr85l4.bkt.clouddn.com/hor4.jpg" title="时间任务调度框架" content="一个基于C#的定时任务调度框架"
+        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="https://i.loli.net/2018/12/10/5c0e1232773b5.jpg" title="时间任务调度框架" content="一个基于C#的定时任务调度框架"
           href="https://github.com/OldSixLi/TimerSwitch"></img-an>
 
-        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="http://om6fr85l4.bkt.clouddn.com/hor5.jpg" title="后台管理网站" content="基于Angularjs的后台管理网站"
+        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="https://i.loli.net/2018/12/10/5c0e127489107.jpg" title="后台管理网站" content="基于Angularjs的后台管理网站"
           href="https://github.com/OldSixLi/Nodes"></img-an>
 
-        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="http://om6fr85l4.bkt.clouddn.com/hor6.jpg" title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片"
+        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="https://i.loli.net/2018/12/10/5c0e1273c7d7a.jpg" title="爬虫项目" content="基于nodejs的爬虫,下载知乎高质量回答下的图片"
           href="https://github.com/OldSixLi/NodeAngular"></img-an>
       </div>
       <div class="row" style="margin-top: 20px;">
-        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="http://om6fr85l4.bkt.clouddn.com/hor1.jpg" title="Vue组件编写" content="Vue的学习以及一些组件的封装"
+        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="https://i.loli.net/2018/12/10/5c0e129f796f6.jpg" title="Vue组件编写" content="Vue的学习以及一些组件的封装"
           href="https://github.com/OldSixLi/VueComponents"></img-an>
 
-        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="http://om6fr85l4.bkt.clouddn.com/hor2.jpg" title="浩天智慧财税" content="上线的网站项目"
+        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="https://i.loli.net/2018/12/10/5c0e12b725691.jpg" title="浩天智慧财税" content="上线的网站项目"
           href="http://www.htyfw.com.cn/"></img-an>
 
-        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="http://om6fr85l4.bkt.clouddn.com/hor3.jpg" title="服务支撑平台" content="后台管理项目,已上线"
+        <img-an class="col-md-4 col-xs-4 col-sm-4 " src="https://i.loli.net/2018/12/10/5c0e12b7dae57.jpg" title="服务支撑平台" content="后台管理项目,已上线"
           href="http://www.htyfw.com.cn/csfwpt_console/login"></img-an>
       </div>
     </div>
@@ -53,7 +53,7 @@
 
 
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s1.jpg" title="HTML">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288eae119.jpg" title="HTML">
               <ul class="lists">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -62,7 +62,7 @@
             </skill>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s2.jpg" title="CSS">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f5a3e3.jpg" title="CSS">
               <ul class="lists">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -71,7 +71,7 @@
             </skill>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s3.jpg" title="JS">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f842f3.jpg" title="JS">
               <ul class="JS">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -80,7 +80,7 @@
             </skill>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s4.jpg" title="NODE">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f85ef1.jpg" title="NODE">
               <ul class="NODE">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -92,7 +92,7 @@
 
         <div class="row" style="margin-top:30px;">
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s5.jpg" title="C#">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f87ac1.jpg" title="C#">
               <ul class="NODE">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -101,7 +101,7 @@
             </skill>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s6.jpg" title="SQL">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f90797.jpg" title="SQL">
               <ul class="NODE">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -110,7 +110,7 @@
             </skill>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s7.jpg" title="IFRAME">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f8ec99.jpg" title="IFRAME">
               <ul class="NODE">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -119,7 +119,7 @@
             </skill>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <skill imgsrc="http://om6fr85l4.bkt.clouddn.com/per-s8.jpg" title="OTHER">
+            <skill imgsrc="https://i.loli.net/2018/12/10/5c0e288f9208d.jpg" title="OTHER">
               <ul class="NODE">
                 <li>熟练使用HTML构建页面功能</li>
                 <li>熟悉HTML5新功能和相关特性</li>
@@ -153,41 +153,41 @@
         <div class="row">
           <!-- 士兵突击 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img='http://om6fr85l4.bkt.clouddn.com/soldier.jpg' title="士兵突击" word="三多和成才就像一张纸的正反面，走过不同的路后都在成长。希望永远怀揣一颗赤子之心。"
+            <img-introduce img='https://i.loli.net/2018/12/10/5c0e15488eaa6.jpg' title="士兵突击" word="三多和成才就像一张纸的正反面，走过不同的路后都在成长。希望永远怀揣一颗赤子之心。"
             />
           </div>
           <!-- 釜山行 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/chumen.jpg" title="楚门的世界" word="就算你能摄影我的一切也无法在我脑内安装摄影机" />
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e154ac70f8.jpg" title="楚门的世界" word="就算你能摄影我的一切也无法在我脑内安装摄影机" />
           </div>
           <!-- 活着 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/live.jpg" title="活着" word="活着" />
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e15494e4ca.jpg" title="活着" word="活着" />
           </div>
           <!-- 鬼子来了 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/devil.jpg" title="鬼子来了" word="可能比大部分抗日剧都接地气的多" />
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e1549506ca.jpg" title="鬼子来了" word="可能比大部分抗日剧都接地气的多" />
           </div>
         </div>
         <br>
         <div class="row">
           <!-- 烈日灼心 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/hot.jpg" title="烈日灼心" word="烈日灼心" />
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e157fb413a.jpg" title="烈日灼心" word="烈日灼心" />
           </div>
           <!-- 阳光灿烂的日子 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/day.jpg" title="阳光灿烂的日子" word="阳光灿烂的日子" />
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e158b7d874.jpg" title="阳光灿烂的日子" word="阳光灿烂的日子" />
 
           </div>
           <!-- 十二公民 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/twelve.jpg" title="十二公民" word="言语的力量" />
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e15993d604.jpg" title="十二公民" word="言语的力量" />
 
           </div>
           <!-- 美国队长 -->
           <div class="col-md-3 col-sm-3 col-xs-3">
-            <img-introduce img="http://om6fr85l4.bkt.clouddn.com/capation.jpg" title="美国队长" word="永远为了自由与公正" /> </div>
+            <img-introduce img="https://i.loli.net/2018/12/10/5c0e15a60d135.jpg" title="美国队长" word="永远为了自由与公正" /> </div>
         </div>
       </div>
     </div>
@@ -242,10 +242,11 @@
       let self = this;
       //保证首屏可以完整显示
       Promise.all([
-        self.imgLoad("http://om6fr85l4.bkt.clouddn.com/back-1.jpg"),
-        self.imgLoad("http://om6fr85l4.bkt.clouddn.com/oldsix.png"),
-        self.imgLoad("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"),
-        self.imgLoad("http://om6fr85l4.bkt.clouddn.com/a1.png")
+        self.imgLoad("https://i.loli.net/2018/12/10/5c0e114c96c2b.jpg"),
+        
+        self.imgLoad("https://i.loli.net/2018/12/10/5c0e11c694de9.png"),
+        // self.imgLoad("https://i.loli.net/2018/12/10/5c0e2983ef861.png"),
+        self.imgLoad("https://i.loli.net/2018/12/10/5c0e0e7e6df47.png")
       ]).then(
         str => {
           self.imgClass = "img-logo";
@@ -292,7 +293,7 @@
     font: normal 18px/normal "brush-script-std", Helvetica, sans-serif;
     height: 800px;
     background-attachment: scroll, scroll, fixed;
-    background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-1.jpg");
+    background-image: url("https://i.loli.net/2018/12/10/5c0e2983ef861.png"), url("https://i.loli.net/2018/12/10/5c0e0e7e6df47.png"), url("https://i.loli.net/2018/12/10/5c0e114c96c2b.jpg");
     background-position: bottom center, top left, center center;
     background-repeat: repeat-x, repeat, no-repeat;
     background-size: 3200px 460px, auto, cover;
@@ -366,7 +367,7 @@
 
   .section-two {
     min-height: 1200px;
-    background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-3.jpg");
+    background-image: url("https://i.loli.net/2018/12/10/5c0e2983ef861.png"), url("https://i.loli.net/2018/12/10/5c0e29e83363f.png"), url("https://i.loli.net/2018/12/10/5c0e0e7e6df47.png"), url("https://i.loli.net/2018/12/10/5c0e15f1113ac.jpg");
     background-attachment: scroll, scroll, scroll, fixed;
     background-position: bottom center, top center, top left, center center;
     background-repeat: repeat-x, repeat-x, repeat, no-repeat;
@@ -374,7 +375,7 @@
 
   .section-four {
     min-height: 1200px;
-    background-image: url("http://om6fr85l4.bkt.clouddn.com/top-3200.svg"), url("http://om6fr85l4.bkt.clouddn.com/top-back.svg"), url("http://om6fr85l4.bkt.clouddn.com/a1.png"), url("http://om6fr85l4.bkt.clouddn.com/back-7.jpg");
+    background-image: url("https://i.loli.net/2018/12/10/5c0e2983ef861.png"), url("https://i.loli.net/2018/12/10/5c0e29e83363f.png"), url("https://i.loli.net/2018/12/10/5c0e0e7e6df47.png"), url("https://i.loli.net/2018/12/10/5c0e1620de39d.jpg");
     background-attachment: scroll, scroll, scroll, fixed;
     background-position: bottom center, top center, top left, center center;
     background-repeat: repeat-x, repeat-x, repeat, no-repeat;
@@ -398,7 +399,6 @@
   }
 
   .footer {
-    /* background: url('http://om6fr85l4.bkt.clouddn.com/showfooter.png'); */
     background-repeat: no-repeat;
     background-size: 103% 100%;
     background-color: #2d3237;

@@ -37,32 +37,32 @@ export default {
         1: {
           name: "周杰伦",
           age: "35",
-          src: "http://om6fr85l4.bkt.clouddn.com/singer/zhoujielun.jpg"
+          src: "https://i.loli.net/2018/12/10/5c0e3520b485d.jpg"
         },
         2: {
           name: "蔡依林",
           age: "30",
-          src: "http://om6fr85l4.bkt.clouddn.com/singer/caiyilin.jpg"
+          src: "https://i.loli.net/2018/12/10/5c0e34e74540e.jpg"
         },
         3: {
           name: "刘德华",
           age: "55",
-          src: "http://om6fr85l4.bkt.clouddn.com/singer/liudehua.jpg"
+          src: "https://i.loli.net/2018/12/10/5c0e34f285b7f.jpg"
         },
         4: {
           name: "倪妮",
           age: "18",
-          src: "http://om6fr85l4.bkt.clouddn.com/singer/niniimg.jpg"
+          src: "https://i.loli.net/2018/12/10/5c0e3500b119d.jpg"
         },
         5: {
           name: "苏阳",
           age: "43",
-          src: "http://om6fr85l4.bkt.clouddn.com/singer/suyang.jpg"
+          src: "https://i.loli.net/2018/12/10/5c0e3512c9c01.jpg"
         },
         155: {
           name: "纵贯线",
           age: "200",
-          src: "http://om6fr85l4.bkt.clouddn.com/singer/zongguanxian.jpg"
+          src: "https://i.loli.net/2018/12/10/5c0e3530569c9.jpg"
         }
       };
       const userid = this.$route.params.id;
