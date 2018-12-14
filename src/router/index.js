@@ -9,7 +9,7 @@ import Welcome from './../components/Welcome.vue';
 import Main from './../components/Main.vue';
 import Begin from './../components/Begin.vue';
 import Error from './../components/Error.vue';
-import Know from './../components/Know.vue';
+// import Know from './../components/Know.vue';
 import Music from './../components/music/Music.vue';
 import MusicUser from './../components/music/MusicUser.vue';
 import MusicSearch from './../components/music/MusicSearch.vue';
@@ -25,6 +25,8 @@ import NewForm from './../test/NewForm.vue';
 
 Vue.use(Router);
 
+const Know = () => Promise.resolve('./../components/Know.vue')
+// () => Promise.resolve({ /* 组件定义对象 */ })
 // 如何把router拆分到各个模块
 import water from './water.js';
 
@@ -76,7 +78,8 @@ let router = new Router({
           meta: {
             requireAuth: true
           },
-          component: Know,
+          component:resolve => require(['./../components/Welcome.vue'], resolve),
+          //   () => import("./../components/Know.vue"),
         },
         // show
         {
