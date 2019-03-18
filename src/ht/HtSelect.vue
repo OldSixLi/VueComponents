@@ -90,9 +90,6 @@
     updated: function () {
       //检测slot是否有变化
       if (this.testSlotChange()) {
-        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        console.log(this.$slots.default);
-        console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         this.currentSlot = this.$slots.default;
         this.$nextTick(function () {
           this.bindSelect();

@@ -287,7 +287,7 @@
     }
   };
 </script>
-<style scope>
+<style scoped>
   html,
   body {
     overflow: hidden;
